@@ -99,3 +99,14 @@ https://svelte.dev/e/a11y_invalid_attribute
 https://svelte.dev/e/a11y_invalid_attribute
 7:03:47 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
+7:22:07 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Vault.svelte
+7:22:07 PM [vite] (ssr) page reload src/lib/supabaseClient.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:22:26 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
