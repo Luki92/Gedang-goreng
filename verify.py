@@ -7,6 +7,9 @@ def run():
         page = browser.new_page()
         page.set_viewport_size({"width": 1280, "height": 720})
 
+        page.on("console", lambda msg: print(f"CONSOLE: {msg.text}"))
+        page.on("pageerror", lambda exc: print(f"PAGE ERROR: {exc}"))
+
         # Navigate
         print("Navigating...")
         try:
@@ -26,21 +29,21 @@ def run():
         # Click Top Left (Identity)
         print("Opening Identity...")
         page.locator("#c-tl").click()
-        time.sleep(1) # wait for transition
+        time.sleep(2) # increased wait for transition
         page.screenshot(path="verification_identity.png")
         print("Identity screenshot taken.")
 
         # Click Top Right (Vault)
         print("Opening Vault...")
         page.locator("#c-tr").click()
-        time.sleep(1)
+        time.sleep(2)
         page.screenshot(path="verification_vault.png")
         print("Vault screenshot taken.")
 
         # Trigger Ghost Admin (Shift+L)
         print("Triggering Ghost Admin...")
         page.keyboard.press("Shift+L")
-        time.sleep(0.5)
+        time.sleep(1)
         page.screenshot(path="verification_admin.png")
         print("Admin screenshot taken.")
 

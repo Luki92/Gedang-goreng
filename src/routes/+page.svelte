@@ -7,47 +7,10 @@
     import Vault from '$lib/components/Vault.svelte';
     import Playlist from '$lib/components/Playlist.svelte';
     import Portal from '$lib/components/Portal.svelte';
-    import { musicState } from '$lib/stores';
-
-    // --- Debris Logic ---
-    let debrisContainer;
-    const allItems = [
-        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1 },
-        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2 },
-        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1 },
-        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2 },
-        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5 },
-    ];
-    let actors = [];
-    let mouseX = 0, mouseY = 0;
-
-    class Actor {
-        constructor(data) {
-            this.element = document.createElement('div');
-            this.element.innerHTML = data.char;
-            this.element.className = 'debris-item';
-            this.element.style.fontSize = `${2 * data.scale}rem`;
-            this.x = Math.random() * window.innerWidth;
-            this.y = Math.random() * window.innerHeight;
-            this.vx = (Math.random() - 0.5) * 1;
-            this.vy = (Math.random() - 0.5) * 1;
-            this.rotation = Math.random() * 360;
-            this.rotSpeed = (Math.random() - 0.5) * 2;
-            if (debrisContainer) debrisContainer.appendChild(this.element);
-        }
-        update(mX, mY) {
-            this.x += this.vx; this.y += this.vy; this.rotation += this.rotSpeed;
-            if (this.x > window.innerWidth + 50) this.x = -50;
-            if (this.x < -50) this.x = window.innerWidth + 50;
-            if (this.y > window.innerHeight + 50) this.y = -50;
-            if (this.y < -50) this.y = window.innerHeight + 50;
-
-            const dx = (mX - window.innerWidth/2) / window.innerWidth;
-            const dy = (mY - window.innerHeight/2) / window.innerHeight;
-
-            this.element.style.transform = `translate(${this.x + dx * -30}px, ${this.y + dy * -30}px) rotate(${this.rotation}deg)`;
-        }
-    }
+    import Window from '$lib/components/Window.svelte';
+    import DebrisLayer from '$lib/components/DebrisLayer.svelte';
+    import TerminalAuth from '$lib/components/TerminalAuth.svelte';
+    import { musicState, windows } from '$lib/stores';
 
     // --- Text Animation ---
     let welcomeContainer;
@@ -99,18 +62,6 @@
     }
 
     onMount(() => {
-        // Init Debris
-        actors = allItems.map(item => new Actor(item));
-
-        const loop = () => {
-             actors.forEach(obj => obj.update(mouseX, mouseY));
-             requestAnimationFrame(loop);
-        };
-        const animFrame = requestAnimationFrame(loop);
-
-        const mm = (e) => { mouseX = e.clientX; mouseY = e.clientY; };
-        window.addEventListener('mousemove', mm);
-
         // Init Text Animation
         runAnimationLoop();
 
@@ -124,8 +75,6 @@
         });
 
         return () => {
-            cancelAnimationFrame(animFrame);
-            window.removeEventListener('mousemove', mm);
             unsubMusic();
             clearInterval(lyricInterval);
             if (mobileMenuActive) document.body.classList.remove('mobile-menu-active');
@@ -234,8 +183,8 @@
 </script>
 
 <SpaceBackground />
+<DebrisLayer />
 
-<div bind:this={debrisContainer} id="debris-layer" class="debris-container"></div>
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
 <main class="header-container">
@@ -251,26 +200,39 @@
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
     {/snippet}
-    <Identity />
 </HUDCorner>
 
 <HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
     {#snippet buttonContent()}
         <span class="label">WORKS <i class="ph ph-safe"></i></span>
     {/snippet}
-    <Vault />
 </HUDCorner>
 
 <HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
     {/snippet}
-    <Playlist />
 </HUDCorner>
 
 <HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
     {#snippet buttonContent()}
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
-    <Portal />
 </HUDCorner>
+
+<TerminalAuth />
+
+{#each $windows as win (win.id)}
+    <Window
+        id={win.id}
+        title={win.title}
+        x={win.x} y={win.y}
+        w={win.w} h={win.h}
+        z={win.z}
+    >
+        {#if win.id === 'c-tl'} <Identity /> {/if}
+        {#if win.id === 'c-tr'} <Vault /> {/if}
+        {#if win.id === 'c-bl'} <Playlist /> {/if}
+        {#if win.id === 'c-br'} <Portal /> {/if}
+    </Window>
+{/each}

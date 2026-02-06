@@ -6,16 +6,7 @@
     let works = $state([]);
     let showUpload = $state(false);
 
-    // Ghost Admin Logic
-    function handleKeydown(e) {
-        if (e.shiftKey && e.key === 'L') {
-            $isAdmin = !$isAdmin;
-        }
-    }
-
     onMount(async () => {
-        window.addEventListener('keydown', handleKeydown);
-
         // Fetch works
         const { data, error } = await supabase.from('works').select('*').order('date', { ascending: false });
         if (data && data.length > 0) works = data;
@@ -27,9 +18,6 @@
              ];
         }
 
-        return () => {
-            window.removeEventListener('keydown', handleKeydown);
-        };
     });
 
     // Upload Form Handlers

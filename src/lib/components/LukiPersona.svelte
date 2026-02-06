@@ -1,8 +1,12 @@
 <script>
-    import { activeCorner } from '$lib/stores';
+    import { windows } from '$lib/stores';
+
+    // Check if Identity window (c-tl) is open
+    // Note: $windows is an array.
+    let identityOpen = $derived($windows.some(w => w.id === 'c-tl'));
 </script>
 
-<div id="oc-luki" class:in-profile={$activeCorner === 'c-tl'}>🐺</div>
+<div id="oc-luki" class:exiting={identityOpen}>🐺</div>
 
 <style>
     #oc-luki {
@@ -12,21 +16,18 @@
         z-index: 60;
         filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
         animation: breathe 4s ease-in-out infinite;
-        transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        transition: transform 1s cubic-bezier(0.55, 0.055, 0.675, 0.19);
         pointer-events: none;
+        transform-origin: center bottom;
     }
     @keyframes breathe { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.02) translateY(-10px); } }
 
-    #oc-luki.in-profile {
-        bottom: unset; right: unset;
-        top: 25vh; left: 18vw;
-        font-size: 6rem;
-        z-index: 101;
-        filter: drop-shadow(0 0 30px var(--accent-color));
+    #oc-luki.exiting {
+        transform: translateY(100vh) scale(0.8) !important;
+        animation: none;
     }
 
     @media (max-width: 768px) {
         #oc-luki { font-size: 5rem; right: -20px; }
-        #oc-luki.in-profile { top: 18vh; left: 50%; transform: translateX(-50%); }
     }
 </style>
