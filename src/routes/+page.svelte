@@ -10,7 +10,23 @@
     import Window from '$lib/components/Window.svelte';
     import DebrisLayer from '$lib/components/DebrisLayer.svelte';
     import TerminalAuth from '$lib/components/TerminalAuth.svelte';
-    import { musicState, windows } from '$lib/stores';
+    import AdminPanel from '$lib/components/AdminPanel.svelte'; // New Import
+    import { musicState, windows, isAdmin, openWindow, adminContent } from '$lib/stores';
+
+    // --- Admin Auto-Open ---
+    $effect(() => {
+        if ($isAdmin) {
+             const exists = $windows.find(w => w.id === 'admin-panel');
+             if (!exists) {
+                 openWindow({
+                     id: 'admin-panel',
+                     title: 'ADMIN_CONTROL_PANEL',
+                     origin: 'center',
+                     x: 0, y: 0, w: 700, h: 500,
+                 });
+             }
+        }
+    });
 
     // --- Text Animation ---
     let welcomeContainer;
@@ -114,7 +130,7 @@
             if (Math.random() < 0.4) {
                 titleEl.innerHTML = 'TS<span class="split-cursor"></span>';
                 const eggCursor = titleEl.querySelector('.split-cursor');
-                const eggText = " PMO ICL🥀";
+                const eggText = " " + $adminContent.easterEggText + "🥀";
 
                 for(let char of eggText) {
                     eggCursor.insertAdjacentText('beforebegin', char);
@@ -122,7 +138,7 @@
                 }
                 await sleep(300);
 
-                titleEl.innerHTML = 'TS<span class="glitch-selection"> PMO ICL🥀</span><span class="split-cursor"></span>';
+                titleEl.innerHTML = `TS<span class="glitch-selection"> ${$adminContent.easterEggText}🥀</span><span class="split-cursor"></span>`;
                 await sleep(500);
 
                 titleEl.innerHTML = 'TS<span class="split-cursor"></span>';
@@ -142,8 +158,19 @@
             const left = document.getElementById('ts-left');
             const right = document.getElementById('ts-right');
 
-            const word1 = "hinking";
-            const word2 = "pace";
+            // Dynamic Text Logic
+            // We assume Title is 2 words for the split effect "T... S..."
+            // If not, we just show the full text.
+            const fullTitle = $adminContent.welcomeTitle;
+            const parts = fullTitle.split(' ');
+            let word1 = "hinking";
+            let word2 = "pace";
+
+            if (parts.length >= 2) {
+                word1 = parts[0].substring(1); // Remove first char "T"
+                word2 = parts[1].substring(1); // Remove first char "S"
+            }
+
             const maxLen = Math.max(word1.length, word2.length);
 
             setTimeout(() => { if (wrapper) wrapper.classList.add('expanded'); }, 50);
@@ -151,16 +178,16 @@
             for (let i = 1; i <= maxLen; i++) {
                 const sub1 = i <= word1.length ? word1.substring(0, i) : word1;
                 const sub2 = i <= word2.length ? word2.substring(0, i) : word2;
-                if (left) left.innerHTML = `T${sub1}<span class="split-cursor"></span>`;
-                if (right) right.innerHTML = `S${sub2}<span class="split-cursor"></span>`;
+                if (left) left.innerHTML = `${parts[0][0] || 'T'}${sub1}<span class="split-cursor"></span>`;
+                if (right) right.innerHTML = `${parts[1] ? parts[1][0] : 'S'}${sub2}<span class="split-cursor"></span>`;
                 await sleep(80);
             }
 
             await sleep(500);
-            titleEl.innerHTML = 'Thinking Space<span class="split-cursor"></span>';
+            titleEl.innerHTML = `${fullTitle}<span class="split-cursor"></span>`;
             await sleep(5000);
 
-            const tsText = "Thinking Space";
+            const tsText = fullTitle;
             for(let i=0; i<tsText.length; i++) {
                 titleEl.innerHTML = tsText.substring(0, tsText.length - 1 - i) + '<span class="split-cursor"></span>';
                 await sleep(20);
@@ -226,6 +253,7 @@
     <Window
         id={win.id}
         title={win.title}
+        origin={win.origin}
         x={win.x} y={win.y}
         w={win.w} h={win.h}
         z={win.z}
@@ -234,5 +262,7 @@
         {#if win.id === 'c-tr'} <Vault /> {/if}
         {#if win.id === 'c-bl'} <Playlist /> {/if}
         {#if win.id === 'c-br'} <Portal /> {/if}
+
+        {#if win.id === 'admin-panel'} <AdminPanel /> {/if}
     </Window>
 {/each}

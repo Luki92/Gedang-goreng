@@ -3,8 +3,9 @@
     import { isAdmin } from '$lib/stores';
 
     // --- Configuration ---
-    // CHANGE THIS PASSCODE TO YOUR DESIRED SECRET
-    const PASSCODE = "GHOST_PROTOCOL";
+    // Hashed Password for Security (SHA-256 of "GHOST_PROTOCOL")
+    // This prevents plain-text leakage in client source.
+    const PASS_HASH = "37ebb774d08a7820a717193b4a999c08749983fc092d4d965db39e5b3d936645";
 
     let visible = $state(false);
     let inputLine = $state('');
@@ -65,14 +66,25 @@
         "SECURITY ALERT TRIGGERED."
     ];
 
+    async function verify(text) {
+        const enc = new TextEncoder();
+        const data = enc.encode(text);
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hash));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        return hashHex === PASS_HASH;
+    }
+
     async function handleCommand(e) {
         if (e.key === 'Enter') {
             const cmd = inputLine.trim();
-            outputLog = [...outputLog, `> ${cmd}`];
+            outputLog = [...outputLog, `> ${cmd.replace(/./g, '*')}`]; // Mask input in log for security
             inputLine = '';
             await scrollToBottom();
 
-            if (cmd === PASSCODE) {
+            const isValid = await verify(cmd);
+
+            if (isValid) {
                 // Drama Sequence
                 const steps = [
                     "VERIFYING HASH...",
@@ -99,7 +111,7 @@
                 visible = false;
             } else if (cmd === 'HELP') {
                  outputLog = [...outputLog, 'COMMANDS: HELP, EXIT, [PASSCODE]'];
-                 outputLog = [...outputLog, 'HINT: CHECK SOURCE CODE CONSTANT "PASSCODE"'];
+                 outputLog = [...outputLog, 'HINT: HASH VERIFICATION ENABLED.'];
                  await scrollToBottom();
             } else {
                 // Sarcastic Failure

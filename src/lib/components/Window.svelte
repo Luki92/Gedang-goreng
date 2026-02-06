@@ -1,29 +1,33 @@
 <script>
-    import { closeWindow, focusWindow } from '$lib/stores';
+    import { closeWindow, focusWindow, updateWindow } from '$lib/stores';
     import { fly } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
 
-    let { id, title, x = 100, y = 100, w = 500, h = 400, z = 50, children } = $props();
+    // Added origin prop
+    let { id, title, origin = 'tl', x = 100, y = 100, w = 500, h = 400, z = 50, children } = $props();
 
     let dragging = $state(false);
     let resizing = $state(false);
-    let resizeDir = ''; // nw, ne, sw, se, n, s, e, w
+    let resizeDir = '';
     let dragOffX = 0, dragOffY = 0;
 
-    // Local state for smooth interaction
+    // Local state
     let posX = $state(x);
     let posY = $state(y);
     let width = $state(w);
     let height = $state(h);
 
-    // Sync with props (Auto-Layout)
-    // Only update if NOT currently interacting to prevent fighting
+    // Sync props -> local (One way, unless interacting)
     $effect(() => {
+        // If we are NOT interacting, and the PROPS changed significantly (layout update), sync local.
         if (!dragging && !resizing) {
-            posX = x;
-            posY = y;
-            width = w;
-            height = h;
+            // Check if props actually differ to avoid loop (though Svelte 5 is smart)
+            if (x !== posX || y !== posY || w !== width || h !== height) {
+                posX = x;
+                posY = y;
+                width = w;
+                height = h;
+            }
         }
     });
 
@@ -42,7 +46,7 @@
     function startResize(e, dir) {
         resizing = true;
         resizeDir = dir;
-        e.stopPropagation(); // Prevent drag start
+        e.stopPropagation();
         focusWindow(id);
     }
 
@@ -55,30 +59,26 @@
             const minW = 300;
             const minH = 200;
 
-            if (resizeDir.includes('e')) {
-                width = Math.max(minW, e.clientX - posX);
-            }
-            if (resizeDir.includes('s')) {
-                height = Math.max(minH, e.clientY - posY);
-            }
+            if (resizeDir.includes('e')) width = Math.max(minW, e.clientX - posX);
+            if (resizeDir.includes('s')) height = Math.max(minH, e.clientY - posY);
             if (resizeDir.includes('w')) {
                 const newW = Math.max(minW, posX + width - e.clientX);
-                if (newW !== width) {
-                    posX = e.clientX;
-                    width = newW;
-                }
+                if (newW !== width) { posX = e.clientX; width = newW; }
             }
             if (resizeDir.includes('n')) {
                 const newH = Math.max(minH, posY + height - e.clientY);
-                if (newH !== height) {
-                    posY = e.clientY;
-                    height = newH;
-                }
+                if (newH !== height) { posY = e.clientY; height = newH; }
             }
         }
     }
 
     function onMouseUp() {
+        if (dragging || resizing) {
+            // FIX: Sync back to store so the "props" match the "local" state.
+            // This prevents the "yank back" because the store will update,
+            // then props update, matching local state.
+            updateWindow(id, { x: posX, y: posY, w: width, h: height });
+        }
         dragging = false;
         resizing = false;
         resizeDir = '';
@@ -86,6 +86,21 @@
 
     function close() {
         closeWindow(id);
+    }
+
+    // Dynamic Transition based on Origin
+    function flyOrigin(node, { duration }) {
+        let x = 0; let y = 0;
+        const dist = 1000;
+
+        if (origin.includes('l')) x = -dist;
+        if (origin.includes('r')) x = dist;
+        if (origin.includes('t')) y = -dist;
+        if (origin.includes('b')) y = dist;
+
+        // If it's a corner, do diagonal?
+        // Let's rely on standard fly but huge distance
+        return fly(node, { x, y, duration, easing: quintOut, opacity: 0 });
     }
 </script>
 
@@ -102,13 +117,22 @@
     style:height="{height}px"
     style:z-index={z}
     onmousedown={onMouseDown}
-    transition:fly={{ y: 20, duration: 400, easing: quintOut }}
+    transition:flyOrigin={{ duration: 600 }}
 >
+    <!-- Cyberpunk Decoration lines -->
+    <div class="deco-corner tl"></div>
+    <div class="deco-corner tr"></div>
+    <div class="deco-corner bl"></div>
+    <div class="deco-corner br"></div>
+
     <div class="window-header" onmousedown={startDrag}>
-        <span class="win-title">// {title}</span>
+        <div class="flex items-center gap-2">
+            <span class="status-dot"></span>
+            <span class="win-title"> // {title}</span>
+        </div>
         <div class="controls">
             <button class="win-btn close-btn" onclick={close} aria-label="Close">
-                <i class="ph ph-caret-down"></i>
+                <i class="ph ph-x"></i>
             </button>
         </div>
     </div>
@@ -131,14 +155,12 @@
 <style>
     .window-frame {
         position: fixed;
-        background-color: var(--panel-bg, rgba(10, 10, 12, 0.9));
-        border: 1px solid var(--border-color, #333);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+        background-color: rgba(5, 5, 8, 0.95);
+        border: 1px solid #333;
+        box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
         display: flex;
         flex-direction: column;
-        overflow: hidden;
-        border-radius: 4px;
+        overflow: visible; /* For decoration */
         will-change: left, top, width, height;
         color: #eee;
         min-width: 300px;
@@ -150,32 +172,37 @@
                     height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Disable transition during drag/resize for responsiveness */
-    .window-frame.interacting {
-        transition: none;
-    }
+    .window-frame.interacting { transition: none; }
 
-    .window-frame:focus-within, .window-frame:hover {
-        border-color: rgba(255,255,255,0.2);
-    }
+    /* Decoration */
+    .deco-corner { position: absolute; width: 10px; height: 10px; border: 2px solid var(--accent-color); pointer-events: none; transition: all 0.3s; opacity: 0.5; }
+    .window-frame:focus-within .deco-corner, .window-frame:hover .deco-corner { opacity: 1; box-shadow: 0 0 10px var(--accent-color); }
+    .tl { top: -1px; left: -1px; border-bottom: none; border-right: none; }
+    .tr { top: -1px; right: -1px; border-bottom: none; border-left: none; }
+    .bl { bottom: -1px; left: -1px; border-top: none; border-right: none; }
+    .br { bottom: -1px; right: -1px; border-top: none; border-left: none; }
 
     .window-header {
-        height: 36px;
-        background: rgba(255,255,255,0.03);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        height: 40px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 12px;
+        padding: 0 16px;
         cursor: grab;
         user-select: none;
     }
     .window-header:active { cursor: grabbing; }
 
+    .status-dot { width: 8px; height: 8px; background: var(--accent-color); border-radius: 50%; display: inline-block; box-shadow: 0 0 5px var(--accent-color); }
+
     .win-title {
-        font-family: 'VT323', monospace;
-        color: #888;
-        font-size: 1.1rem;
+        font-family: 'Space Mono', monospace;
+        color: #aaa;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-transform: uppercase;
         letter-spacing: 1px;
     }
 
@@ -184,27 +211,29 @@
         padding: 4px; border-radius: 4px; transition: all 0.2s;
         display: flex; align-items: center; justify-content: center;
     }
-    .win-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
-    .close-btn:hover { color: var(--accent-color, #5555ff); transform: translateY(2px); }
+    .win-btn:hover { color: #fff; transform: scale(1.1); }
+    .close-btn:hover { color: #ff5555; text-shadow: 0 0 10px red; }
 
     .window-content {
         flex: 1;
         overflow-y: auto;
-        padding: 1rem;
+        overflow-x: hidden; /* Prevent horiz scroll */
+        padding: 0;
         position: relative;
+        background: radial-gradient(circle at top right, rgba(20,20,30,0.5), transparent);
     }
 
     /* Resize Handles */
     .resize-handle { position: absolute; z-index: 10; }
-    .n { top: 0; left: 0; width: 100%; height: 5px; cursor: ns-resize; }
-    .s { bottom: 0; left: 0; width: 100%; height: 5px; cursor: ns-resize; }
-    .e { top: 0; right: 0; width: 5px; height: 100%; cursor: ew-resize; }
-    .w { top: 0; left: 0; width: 5px; height: 100%; cursor: ew-resize; }
+    .n { top: -5px; left: 0; width: 100%; height: 10px; cursor: ns-resize; }
+    .s { bottom: -5px; left: 0; width: 100%; height: 10px; cursor: ns-resize; }
+    .e { top: 0; right: -5px; width: 10px; height: 100%; cursor: ew-resize; }
+    .w { top: 0; left: -5px; width: 10px; height: 100%; cursor: ew-resize; }
 
-    .ne { top: 0; right: 0; width: 15px; height: 15px; cursor: nesw-resize; z-index: 11; }
-    .nw { top: 0; left: 0; width: 15px; height: 15px; cursor: nwse-resize; z-index: 11; }
-    .se { bottom: 0; right: 0; width: 15px; height: 15px; cursor: nwse-resize; z-index: 11; background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.3) 50%); }
-    .sw { bottom: 0; left: 0; width: 15px; height: 15px; cursor: nesw-resize; z-index: 11; }
+    .ne { top: -5px; right: -5px; width: 20px; height: 20px; cursor: nesw-resize; z-index: 11; }
+    .nw { top: -5px; left: -5px; width: 20px; height: 20px; cursor: nwse-resize; z-index: 11; }
+    .se { bottom: -5px; right: -5px; width: 20px; height: 20px; cursor: nwse-resize; z-index: 11; }
+    .sw { bottom: -5px; left: -5px; width: 20px; height: 20px; cursor: nesw-resize; z-index: 11; }
 
     /* Scrollbar */
     .custom-scrollbar::-webkit-scrollbar { width: 6px; }
