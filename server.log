@@ -81,3 +81,55 @@ https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
 11:04:26 AM [vite] (ssr) page reload src/lib/stores.js
 11:05:00 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
 11:05:00 AM [vite] (ssr) page reload src/lib/stores.js
+11:31:07 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
+11:31:07 AM [vite] (ssr) page reload src/lib/stores.js
+11:31:22 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:31:22 AM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/app.css
+11:31:22 AM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite] (client) hmr update /src/lib/components/Window.svelte, /src/lib/components/Window.svelte?svelte&type=style&lang.css, /src/app.css
+11:32:02 AM [vite] (ssr) page reload src/lib/components/Window.svelte
+11:32:50 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:32:50 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:32:50 AM [vite] (client) hmr update /src/lib/components/TerminalAuth.svelte, /src/lib/components/TerminalAuth.svelte?svelte&type=style&lang.css, /src/app.css
+11:32:50 AM [vite] (ssr) page reload src/lib/components/TerminalAuth.svelte
+11:33:45 AM [vite] (client) hmr update /src/app.css
+11:33:45 AM [vite] (ssr) page reload src/app.css
+11:34:22 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:24 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:34:25 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally

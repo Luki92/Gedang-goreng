@@ -1,43 +1,49 @@
 <script>
-    import { windows } from '$lib/stores';
-    import { fly, fade } from 'svelte/transition';
+    import { closeWindow, focusWindow } from '$lib/stores';
+    import { fly } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
 
     let { id, title, x = 100, y = 100, w = 500, h = 400, z = 50, children } = $props();
 
-    let dragging = false;
-    let resizing = false;
+    let dragging = $state(false);
+    let resizing = $state(false);
+    let resizeDir = ''; // nw, ne, sw, se, n, s, e, w
     let dragOffX = 0, dragOffY = 0;
 
-    // State for position/size (local to component for performance, synced to store if needed or just local)
-    // Since we destroy the component on close, local state is fine until we want persistence.
-    // But if we want to support "minimize" later, store sync is better.
-    // For now, local is faster.
+    // Local state for smooth interaction
     let posX = $state(x);
     let posY = $state(y);
     let width = $state(w);
     let height = $state(h);
 
-    function focus() {
-        // Bring to front
-        windows.update(list => {
-            const maxZ = Math.max(...list.map(w => w.z), 50);
-            return list.map(w => w.id === id ? { ...w, z: maxZ + 1 } : w);
-        });
+    // Sync with props (Auto-Layout)
+    // Only update if NOT currently interacting to prevent fighting
+    $effect(() => {
+        if (!dragging && !resizing) {
+            posX = x;
+            posY = y;
+            width = w;
+            height = h;
+        }
+    });
+
+    function onMouseDown(e) {
+        focusWindow(id);
     }
 
     function startDrag(e) {
-        if (e.target.closest('button')) return; // Don't drag if clicking buttons
+        if (e.target.closest('button')) return;
         dragging = true;
         dragOffX = e.clientX - posX;
         dragOffY = e.clientY - posY;
-        focus();
+        focusWindow(id);
     }
 
-    function startResize(e) {
+    function startResize(e, dir) {
         resizing = true;
-        e.stopPropagation();
-        focus();
+        resizeDir = dir;
+        e.stopPropagation(); // Prevent drag start
+        focusWindow(id);
     }
 
     function onMouseMove(e) {
@@ -46,18 +52,40 @@
             posY = e.clientY - dragOffY;
         }
         if (resizing) {
-            width = Math.max(300, e.clientX - posX);
-            height = Math.max(200, e.clientY - posY);
+            const minW = 300;
+            const minH = 200;
+
+            if (resizeDir.includes('e')) {
+                width = Math.max(minW, e.clientX - posX);
+            }
+            if (resizeDir.includes('s')) {
+                height = Math.max(minH, e.clientY - posY);
+            }
+            if (resizeDir.includes('w')) {
+                const newW = Math.max(minW, posX + width - e.clientX);
+                if (newW !== width) {
+                    posX = e.clientX;
+                    width = newW;
+                }
+            }
+            if (resizeDir.includes('n')) {
+                const newH = Math.max(minH, posY + height - e.clientY);
+                if (newH !== height) {
+                    posY = e.clientY;
+                    height = newH;
+                }
+            }
         }
     }
 
     function onMouseUp() {
         dragging = false;
         resizing = false;
+        resizeDir = '';
     }
 
     function close() {
-        windows.update(list => list.filter(w => w.id !== id));
+        closeWindow(id);
     }
 </script>
 
@@ -67,12 +95,13 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
     class="window-frame"
+    class:interacting={dragging || resizing}
     style:left="{posX}px"
     style:top="{posY}px"
     style:width="{width}px"
     style:height="{height}px"
     style:z-index={z}
-    onmousedown={focus}
+    onmousedown={onMouseDown}
     transition:fly={{ y: 20, duration: 400, easing: quintOut }}
 >
     <div class="window-header" onmousedown={startDrag}>
@@ -88,7 +117,15 @@
         {@render children()}
     </div>
 
-    <div class="resize-handle" onmousedown={startResize}></div>
+    <!-- Resize Handles -->
+    <div class="resize-handle n" onmousedown={(e) => startResize(e, 'n')}></div>
+    <div class="resize-handle s" onmousedown={(e) => startResize(e, 's')}></div>
+    <div class="resize-handle e" onmousedown={(e) => startResize(e, 'e')}></div>
+    <div class="resize-handle w" onmousedown={(e) => startResize(e, 'w')}></div>
+    <div class="resize-handle ne" onmousedown={(e) => startResize(e, 'ne')}></div>
+    <div class="resize-handle nw" onmousedown={(e) => startResize(e, 'nw')}></div>
+    <div class="resize-handle se" onmousedown={(e) => startResize(e, 'se')}></div>
+    <div class="resize-handle sw" onmousedown={(e) => startResize(e, 'sw')}></div>
 </div>
 
 <style>
@@ -102,10 +139,20 @@
         flex-direction: column;
         overflow: hidden;
         border-radius: 4px;
-        will-change: transform, width, height;
+        will-change: left, top, width, height;
         color: #eee;
         min-width: 300px;
         min-height: 200px;
+        /* Smooth auto-layout transition */
+        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Disable transition during drag/resize for responsiveness */
+    .window-frame.interacting {
+        transition: none;
     }
 
     .window-frame:focus-within, .window-frame:hover {
@@ -147,12 +194,17 @@
         position: relative;
     }
 
-    .resize-handle {
-        position: absolute; bottom: 0; right: 0;
-        width: 15px; height: 15px;
-        cursor: nwse-resize;
-        background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.3) 50%);
-    }
+    /* Resize Handles */
+    .resize-handle { position: absolute; z-index: 10; }
+    .n { top: 0; left: 0; width: 100%; height: 5px; cursor: ns-resize; }
+    .s { bottom: 0; left: 0; width: 100%; height: 5px; cursor: ns-resize; }
+    .e { top: 0; right: 0; width: 5px; height: 100%; cursor: ew-resize; }
+    .w { top: 0; left: 0; width: 5px; height: 100%; cursor: ew-resize; }
+
+    .ne { top: 0; right: 0; width: 15px; height: 15px; cursor: nesw-resize; z-index: 11; }
+    .nw { top: 0; left: 0; width: 15px; height: 15px; cursor: nwse-resize; z-index: 11; }
+    .se { bottom: 0; right: 0; width: 15px; height: 15px; cursor: nwse-resize; z-index: 11; background: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.3) 50%); }
+    .sw { bottom: 0; left: 0; width: 15px; height: 15px; cursor: nesw-resize; z-index: 11; }
 
     /* Scrollbar */
     .custom-scrollbar::-webkit-scrollbar { width: 6px; }
