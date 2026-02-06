@@ -37,6 +37,9 @@ export const adminContent = writable({
     docContent: "# ADMIN GUIDE\n\n1. Use the tabs to edit content.\n2. Changes are session-only in this demo.\n3. See OWNER_GUIDE.md in repo."
 });
 
+// Vault Data Store (Shared between Vault and Admin)
+export const vaultWorks = writable([]);
+
 // Layout Constants
 const MARGIN = 80;
 const GAP = 20;
@@ -111,68 +114,82 @@ function recalculateLayout(currentWindows) {
             x = (screenW - w) / 2;
             y = (screenH - h) / 2;
 
-        } else if (count === 2) {
-            // 2: Split Vertical (Left / Right) normally.
-            // But we must respect origin.
-
-            const wHalf = (safeW - GAP) / 2;
-
-            if (isRight(win)) {
-                x = startX + wHalf + GAP;
-                w = wHalf;
-                h = safeH;
-                y = startY;
-            } else {
-                x = startX;
-                w = wHalf;
-                h = safeH;
-                y = startY;
-            }
-
-            // Edge case: 2 Right windows? Stack them?
-            // If we have 2 windows, and both are 'right', we should split vertically on the right side?
-            // Or just force them into the Left/Right slots to fill screen?
-            // "halving with the second".
-            // Let's simply assign slots based on index if collisions, but prefer origin.
-
-            // Simple approach: Sort by Left/Right preference.
-            const rights = currentWindows.filter(isRight).length;
-            const lefts = currentWindows.filter(w => !isRight(w)).length;
-
-            if (rights === 2) {
-                 // Both Right -> Split Top/Bottom on Right? Or Left/Right?
-                 // Let's do Left/Right for symmetry.
-                 const idx = currentWindows.indexOf(win);
-                 x = startX + (idx * (wHalf + GAP));
-                 w = wHalf; h = safeH; y = startY;
-            } else if (lefts === 2) {
-                 const idx = currentWindows.indexOf(win);
-                 x = startX + (idx * (wHalf + GAP));
-                 w = wHalf; h = safeH; y = startY;
-            }
-            // Logic handled above covers standard L/R split.
-
         } else {
-            // 3 or 4: Grid 2x2
+            // 2, 3, 4+ Windows: Columnar Layout
+            // "If three windows... lone window occupy same half as if there is 2."
+
+            // 1. Sort into Columns based on Origin
+            // We want to group L/R
             const wHalf = (safeW - GAP) / 2;
-            const hHalf = (safeH - GAP) / 2;
 
-            // Slot logic:
-            // TL (0,0) | TR (1,0)
-            // BL (0,1) | BR (1,1)
+            // Determine if this window belongs to Left or Right Column
+            // If we have 3 windows: 2L, 1R -> Right gets Full Height.
+            // If we have 2 windows: 1L, 1R -> Both Full Height.
 
-            // Map origin to ideal slot
-            let col = isRight(win) ? 1 : 0;
-            let row = isBottom(win) ? 1 : 0;
+            // Get all windows sorted/grouped
+            const lefts = currentWindows.filter(w => !isRight(w));
+            const rights = currentWindows.filter(isRight);
 
-            // Collision resolution?
-            // For now, if 4 windows (all unique corners), they fit perfectly.
-            // If 3 windows, they take their corners.
+            // Fallback: If 3 Lefts and 0 Rights, force one to Right?
+            // "reposition itself automatically"
+            // Let's distribute evenly if unbalanced?
+            // Actually, strictly respecting origin is safer for UX predictability unless user wants auto-balance.
+            // Requirement implies: "lone window from a side". So we respect the side.
 
-            x = startX + (col * (wHalf + GAP));
-            y = startY + (row * (hHalf + GAP));
-            w = wHalf;
-            h = hHalf;
+            let myCol = isRight(win) ? 'right' : 'left';
+            let myGroup = myCol === 'right' ? rights : lefts;
+            let myIndex = myGroup.indexOf(win);
+            let groupSize = myGroup.length;
+
+            // Calculate Slot Height
+            // If 1 item in group -> Full Height
+            // If 2 items -> Half Height
+            // If 3 items -> Third Height
+
+            let myH = (safeH - (GAP * (groupSize - 1))) / groupSize;
+            let myY = startY + (myIndex * (myH + GAP));
+
+            // X Pos
+            let myX = (myCol === 'left') ? startX : (startX + wHalf + GAP);
+            let myW = wHalf;
+
+            // Edge Case Handling:
+            // If we have 0 items in one column and X in other, do we expand width?
+            // "occupy same half" implies width is fixed to 50%.
+
+            // Special Case: 2 Windows total, both Left.
+            // Should we move one to Right?
+            // Original logic: "halving with the second".
+            // If I open Identity (TL) and Audio (BL), do they stack on Left or Split L/R?
+            // "halving with the second" implies Split Screen usually.
+            // Let's stick to the "Side" rule:
+            // "if the button is on the right side, it will be always on the right side"
+            // So: TL + BL = Stacked on Left. Empty Right.
+            // TL + Vault (TR) = Split L/R.
+
+            // Wait, previous code forced L/R split for 2 windows if they were L and L?
+            // "Simple approach: Sort by Left/Right preference."
+
+            // Let's improve balancing for count=2 only?
+            // "If three windows... lone window from a side will occupy same half as if there is 2."
+            // This implies the standard state for 2 windows is Left/Right split.
+
+            // Let's force balancing if count <= 4 and one column is empty?
+            if (count <= 2) {
+                 if (lefts.length === 2 && rights.length === 0) {
+                     // Force second one to Right?
+                     if (myIndex === 1) { myX = startX + wHalf + GAP; myY = startY; myH = safeH; }
+                     else { myH = safeH; }
+                 } else if (rights.length === 2 && lefts.length === 0) {
+                     if (myIndex === 0) { myX = startX; myY = startY; myH = safeH; } // Move first to Left?
+                     else { myY = startY; myH = safeH; }
+                 }
+            }
+
+            x = myX;
+            y = myY;
+            w = myW;
+            h = myH;
         }
 
         return { ...win, x, y, w, h };

@@ -17,10 +17,15 @@
         });
     }
 
-    // Determine fly direction for button exit
+    // Determine fly direction for button exit (Fly OUT of frame)
     let flyY = 0;
-    if (position.includes('t')) flyY = -50;
-    if (position.includes('b')) flyY = 50;
+    let flyX = 0;
+    const dist = 100;
+
+    if (position.includes('t')) flyY = -dist;
+    if (position.includes('b')) flyY = dist;
+    if (position.includes('l')) flyX = -dist;
+    if (position.includes('r')) flyX = dist;
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -32,9 +37,9 @@
     role="button"
     class:pointer-events-none={isOpen}
 >
-    <!-- We animate the INNER button out, keeping the Nav/Hitbox but making it inert -->
+    <!-- We animate the INNER button out -->
     {#if !isOpen}
-        <div class="btn-wrapper" transition:fly={{ y: flyY, duration: 400 }}>
+        <div class="btn-wrapper" transition:fly={{ x: flyX, y: flyY, duration: 500, opacity: 1 }}>
             <button class="hud-btn">
                 <span class="code">{code}</span>
                 {@render buttonContent()}
@@ -44,26 +49,21 @@
 </nav>
 
 <style>
-    /*
-       FIX: The invisible square issue.
-       The .hud-corner has fixed width/height.
-       We ensure it doesn't block clicks unless there is content.
-       Actually, standard behavior is fine if the dimensions match the visual.
-       The user said "highlights an entire invisible square".
-       If width is large but button is small?
-       Let's optimize hit area.
-    */
     .hud-corner {
         position: fixed; z-index: 50;
-        /* Adjusted dimensions to wrap content better */
+        /* Remove strict min-sizes that created the "invisible box" */
         width: auto; height: auto;
-        min-width: 140px; min-height: 100px;
-        padding: 2rem;
-        /* Remove background unless hovering */
+        padding: 1rem;
         background: transparent;
-        transition: all 0.3s ease;
+        transition: opacity 0.3s ease;
         pointer-events: auto; display: flex; flex-direction: column;
+        /* Clip path to follow L-shape roughly if needed, but reducing padding helps most */
     }
+
+    /* Ensure only the content triggers interactions if possible,
+       but for L-shape visual we usually rely on the element itself.
+       We'll rely on the button styling which is usually the visual part.
+    */
 
     /* Only show corner brackets on hover or always?
        Previous CSS had them on pseudo elements of .hud-corner.

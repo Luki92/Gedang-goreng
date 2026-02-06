@@ -1,6 +1,6 @@
 <script>
     import { closeWindow, focusWindow, updateWindow } from '$lib/stores';
-    import { fly } from 'svelte/transition';
+    import { scale } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
 
     // Added origin prop
@@ -52,8 +52,24 @@
 
     function onMouseMove(e) {
         if (dragging) {
-            posX = e.clientX - dragOffX;
-            posY = e.clientY - dragOffY;
+            let nextX = e.clientX - dragOffX;
+            let nextY = e.clientY - dragOffY;
+
+            // Snap Assist (Edges)
+            const SNAP = 20;
+            if (typeof window !== 'undefined') {
+                 // Left
+                 if (Math.abs(nextX) < SNAP) nextX = 0;
+                 // Right
+                 if (Math.abs(nextX + width - window.innerWidth) < SNAP) nextX = window.innerWidth - width;
+                 // Top
+                 if (Math.abs(nextY) < SNAP) nextY = 0;
+                 // Bottom
+                 if (Math.abs(nextY + height - window.innerHeight) < SNAP) nextY = window.innerHeight - height;
+            }
+
+            posX = nextX;
+            posY = nextY;
         }
         if (resizing) {
             const minW = 300;
@@ -88,20 +104,17 @@
         closeWindow(id);
     }
 
-    // Dynamic Transition based on Origin
-    function flyOrigin(node, { duration }) {
-        let x = 0; let y = 0;
-        const dist = 1000;
+    // Calculate Transform Origin for Scale
+    let tOrigin = $derived.by(() => {
+        let v = 'center'; let h = 'center';
+        if (origin === 'center') return 'center center';
+        if (origin.includes('t')) v = 'top';
+        if (origin.includes('b')) v = 'bottom';
+        if (origin.includes('l')) h = 'left';
+        if (origin.includes('r')) h = 'right';
+        return `${v} ${h}`;
+    });
 
-        if (origin.includes('l')) x = -dist;
-        if (origin.includes('r')) x = dist;
-        if (origin.includes('t')) y = -dist;
-        if (origin.includes('b')) y = dist;
-
-        // If it's a corner, do diagonal?
-        // Let's rely on standard fly but huge distance
-        return fly(node, { x, y, duration, easing: quintOut, opacity: 0 });
-    }
 </script>
 
 <svelte:window onmousemove={onMouseMove} onmouseup={onMouseUp} />
@@ -116,8 +129,9 @@
     style:width="{width}px"
     style:height="{height}px"
     style:z-index={z}
+    style:transform-origin={tOrigin}
     onmousedown={onMouseDown}
-    transition:flyOrigin={{ duration: 600 }}
+    transition:scale={{ duration: 400, start: 0, easing: quintOut }}
 >
     <!-- Cyberpunk Decoration lines -->
     <div class="deco-corner tl"></div>

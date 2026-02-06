@@ -1,6 +1,7 @@
 <script>
     import { onMount, tick } from 'svelte';
-    import { isAdmin } from '$lib/stores';
+    import { isAdmin, openWindow, focusWindow, windows } from '$lib/stores';
+    import { get } from 'svelte/store';
 
     // --- Configuration ---
     // Hashed Password for Security (SHA-256 of "GHOST_PROTOCOL")
@@ -26,9 +27,31 @@
     let dragOffX = 0, dragOffY = 0;
     let resizeDir = '';
 
+    function openAdminPanel() {
+        // Check if exists
+        const exists = get(windows).find(w => w.id === 'admin-panel');
+        if (exists) {
+            focusWindow('admin-panel');
+        } else {
+             openWindow({
+                 id: 'admin-panel',
+                 title: 'ADMIN_CONTROL_PANEL',
+                 origin: 'center',
+                 x: 0, y: 0, w: 700, h: 500,
+             });
+        }
+    }
+
     function handleGlobalKeydown(e) {
         if (e.shiftKey && e.key === 'L') {
             e.preventDefault();
+
+            // If already authenticated, just toggle the panel
+            if ($isAdmin) {
+                openAdminPanel();
+                return;
+            }
+
             visible = !visible;
             if (visible) {
                 // Center on open if not set
@@ -106,6 +129,7 @@
                 await scrollToBottom();
                 await new Promise(r => setTimeout(r, 1000));
                 visible = false;
+                openAdminPanel();
 
             } else if (cmd === 'EXIT') {
                 visible = false;

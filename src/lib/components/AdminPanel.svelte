@@ -1,32 +1,54 @@
 <script>
-    import { isAdmin, musicState, windows, openWindow, adminContent } from '$lib/stores';
+    import { isAdmin, musicState, windows, openWindow, adminContent, vaultWorks } from '$lib/stores';
     import { fade, fly } from 'svelte/transition';
     import Window from './Window.svelte';
 
     // Admin state
     let activeTab = $state('general'); // general | identity | vault | audio | docs
 
-    // Bind to Store
+    // General Tab
     let thinkingText = $state($adminContent.welcomeTitle);
     let easterEggText = $state($adminContent.easterEggText);
 
+    // Vault Tab
+    let newWorkTitle = $state("");
+    let newWorkType = $state("writing");
+    let newWorkContent = $state("");
+
+    // Audio Tab
     let newTrackUrl = $state("");
     let newTrackTitle = $state("");
+
+    // Docs Tab
     let docsContent = $state($adminContent.docContent);
 
-    async function loadDocs() {
-        // In a real app, fetch from DB
-        docsContent = $adminContent.docContent;
-    }
-
     function saveGeneral() {
-        // Update the global store
         adminContent.update(c => ({
             ...c,
             welcomeTitle: thinkingText,
             easterEggText: easterEggText
         }));
         alert(`SAVED SESSION CHANGES`);
+    }
+
+    function addWork() {
+        if (!newWorkTitle) return;
+        const newItem = {
+            type: newWorkType,
+            title: newWorkTitle,
+            date: new Date().toISOString().slice(0, 7).replace('-', '.'),
+            content: newWorkContent,
+            src: '', // Image logic omitted for brevity
+            caption: ''
+        };
+        vaultWorks.update(list => [newItem, ...list]);
+        alert("ADDED TO VAULT (SESSION ONLY)");
+        newWorkTitle = "";
+        newWorkContent = "";
+    }
+
+    function removeWork(work) {
+        vaultWorks.update(list => list.filter(i => i !== work));
     }
 
     function addTrack() {
@@ -91,7 +113,33 @@
         {/if}
 
         <!-- Other tabs placeholders -->
-        {#if activeTab === 'identity' || activeTab === 'vault'}
+        {#if activeTab === 'vault'}
+            <div class="section">
+                <h3>ADD NEW WORK</h3>
+                <div class="row">
+                    <select bind:value={newWorkType} class="admin-input">
+                        <option value="writing">WRITING</option>
+                        <option value="image">IMAGE</option>
+                    </select>
+                    <input type="text" placeholder="Title" bind:value={newWorkTitle} class="admin-input flex-1" />
+                </div>
+                <textarea placeholder="Content / Caption" bind:value={newWorkContent} class="admin-input" rows="3"></textarea>
+                <button class="action-btn" onclick={addWork}>PUBLISH TO VAULT</button>
+
+                <hr class="divider"/>
+                <h3>ARCHIVE ENTRIES ({$vaultWorks.length})</h3>
+                <div class="list">
+                    {#each $vaultWorks as work}
+                        <div class="item">
+                            <span>[{work.type.toUpperCase()}] {work.title}</span>
+                            <button class="sm-btn" onclick={() => removeWork(work)}>DEL</button>
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        {/if}
+
+        {#if activeTab === 'identity'}
             <div class="section center">
                 <p>MODULE UNDER CONSTRUCTION</p>
                 <i class="ph ph-wrench"></i>
@@ -135,7 +183,9 @@
     .docs-view { background: #111; padding: 10px; border: 1px solid #333; white-space: pre-wrap; font-size: 0.8rem; }
 
     .divider { border: 0; border-top: 1px dashed #333; margin: 20px 0; }
-    .item { display: flex; justify-content: space-between; background: #111; padding: 5px 10px; }
+    .item { display: flex; justify-content: space-between; background: #111; padding: 5px 10px; margin-bottom: 5px; }
     .sm-btn { background: #333; color: #fff; border: none; cursor: pointer; font-size: 0.7rem; padding: 2px 5px; }
     .sm-btn:hover { background: red; }
+    .row { display: flex; gap: 10px; }
+    .flex-1 { flex: 1; }
 </style>

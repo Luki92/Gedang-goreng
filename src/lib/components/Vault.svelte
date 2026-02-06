@@ -1,9 +1,9 @@
 <script>
     import { onMount } from 'svelte';
     import { supabase } from '$lib/supabaseClient';
+    import { vaultWorks } from '$lib/stores';
 
     let activeTab = $state('writing'); // 'writing' | 'image'
-    let works = $state([]);
     let loading = $state(true);
     let error = $state(null);
 
@@ -15,6 +15,12 @@
     ];
 
     onMount(async () => {
+        // If store is empty, fetch. If not, use store.
+        if ($vaultWorks.length > 0) {
+            loading = false;
+            return;
+        }
+
         try {
             // Restore Supabase Integration
             const { data, error: err } = await supabase.from('works').select('*');
@@ -22,21 +28,21 @@
             if (err) throw err;
 
             if (data && data.length > 0) {
-                works = data;
+                $vaultWorks = data;
             } else {
                 console.log("Vault: No data in DB, using mock fallback.");
-                works = MOCK_DATA;
+                $vaultWorks = MOCK_DATA;
             }
         } catch (e) {
             console.error("Vault Error:", e.message);
             error = e.message;
-            works = MOCK_DATA; // graceful degradation
+            $vaultWorks = MOCK_DATA; // graceful degradation
         } finally {
             loading = false;
         }
     });
 
-    let filteredWorks = $derived(works.filter(w => w.type === activeTab));
+    let filteredWorks = $derived($vaultWorks.filter(w => w.type === activeTab));
 </script>
 
 <div class="vault-container">

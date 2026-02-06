@@ -13,21 +13,6 @@
     import AdminPanel from '$lib/components/AdminPanel.svelte'; // New Import
     import { musicState, windows, isAdmin, openWindow, adminContent } from '$lib/stores';
 
-    // --- Admin Auto-Open ---
-    $effect(() => {
-        if ($isAdmin) {
-             const exists = $windows.find(w => w.id === 'admin-panel');
-             if (!exists) {
-                 openWindow({
-                     id: 'admin-panel',
-                     title: 'ADMIN_CONTROL_PANEL',
-                     origin: 'center',
-                     x: 0, y: 0, w: 700, h: 500,
-                 });
-             }
-        }
-    });
-
     // --- Text Animation ---
     let welcomeContainer;
     let titleEl;

@@ -166,7 +166,11 @@ body {
     background: linear-gradient(90deg, var(--accent-color), transparent);
     opacity: 0.3; pointer-events: none; transition: width 0.4s ease;
 }
-.hud-corner:hover::before { border-color: #fff; width: 30px; height: 30px; box-shadow: 0 0 15px rgba(85,85,255,0.4); }
+/* Use drop-shadow to highlight ONLY the L-shape border, not the box */
+.hud-corner:hover::before {
+    border-color: #fff; width: 30px; height: 30px;
+    filter: drop-shadow(0 0 5px rgba(85,85,255,0.8));
+}
 .hud-corner:hover::after { width: 15vw; opacity: 0.8; }
 
 /* Positions */
