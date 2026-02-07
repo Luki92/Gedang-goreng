@@ -8,12 +8,15 @@
 
     let isVisible = $state(false);
     let inputVal = $state('');
+    /** @type {{ type: string, text: string }[]} */
     let output = $state([
         { type: 'info', text: 'LUKI.OS v2.0.4 [Authorized Personnel Only]' },
         { type: 'info', text: 'Type "help" for available commands.' }
     ]);
-    let inputRef;
+    /** @type {HTMLInputElement | null} */
+    let inputRef = $state(null);
 
+    /** @param {string} string */
     async function hash(string) {
         const utf8 = new TextEncoder().encode(string);
         const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
@@ -80,6 +83,7 @@
         }, 10);
     }
 
+    /** @param {KeyboardEvent} e */
     function handleKeydown(e) {
         // Toggle: Ctrl + Shift + L
         if (e.ctrlKey && e.shiftKey && (e.key === 'L' || e.key === 'l')) {

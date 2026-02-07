@@ -3,12 +3,16 @@
     import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
 
+    /** @type {string} */
     let activeTab = $state('WORKS');
+    /** @type {any[]} */
     let works = $state([]);
+    /** @type {any[]} */
     let guestbookEntries = $state([]);
     let loading = $state(false);
 
     // --- WORKS STATE ---
+    /** @type {any} */
     let workForm = $state({
         id: null,
         title: '',
@@ -144,6 +148,8 @@
                                     <option value="SKETCH">SKETCH</option>
                                     <option value="PROJECT">PROJECT</option>
                                     <option value="MUSIC">MUSIC</option>
+                                    <option value="ART">ART</option>
+                                    <option value="POST">POST</option>
                                 </select>
                             </div>
                             <div>

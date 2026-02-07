@@ -4,7 +4,7 @@ create table public.works (
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   title text not null,
   description text,
-  type text not null check (type in ('ESSAY', 'SKETCH', 'PROJECT', 'MUSIC')),
+  type text not null check (type in ('ESSAY', 'SKETCH', 'PROJECT', 'MUSIC', 'ART', 'POST')),
   date text, -- e.g. "2024.01"
   content_url text, -- optional link to external content
   image_url text -- optional cover image
@@ -50,9 +50,6 @@ create policy "Public guestbook entries are viewable by everyone."
   using ( is_approved = true );
 
 -- Allow Admin (via Anon Key + Client Logic) to see ALL entries (for moderation) and update/delete
--- Note: This technically overlaps with the select policy above, but for Admin, we need to see unapproved ones.
--- Since the public select policy filters by `is_approved = true`, we need a separate policy for Admin or
--- rely on the fact that RLS is additive. However, `using (true)` overrides specific filters.
 create policy "Enable all access for guestbook management"
   on public.guestbook for all
   using ( true )
