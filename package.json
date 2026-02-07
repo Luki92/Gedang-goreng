@@ -27,6 +27,8 @@
 	},
 	"dependencies": {
 		"@phosphor-icons/web": "^2.1.2",
-		"@supabase/supabase-js": "^2.90.1"
+		"@playwright/test": "^1.58.2",
+		"@supabase/supabase-js": "^2.90.1",
+		"playwright": "^1.58.2"
 	}
 }

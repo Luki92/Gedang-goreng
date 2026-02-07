@@ -9,7 +9,9 @@
     import Portal from '$lib/components/Portal.svelte';
     import TerminalAuth from '$lib/components/TerminalAuth.svelte';
     import AdminPanel from '$lib/components/AdminPanel.svelte';
+    import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import { musicState } from '$lib/stores';
+    import { windowManager } from '$lib/stores/windowManager';
 
     // --- Debris Logic ---
     let debrisContainer;
@@ -101,6 +103,12 @@
     }
 
     onMount(() => {
+        // Init Windows
+        windowManager.register({ id: 'c-tl', title: 'USER_PROFILE_LUKI', component: Identity, origin: 'tl' });
+        windowManager.register({ id: 'c-tr', title: 'ARCHIVE_DATABASE', component: Vault, origin: 'tr' });
+        windowManager.register({ id: 'c-bl', title: 'SONIC_EMITTER', component: Playlist, origin: 'bl' });
+        windowManager.register({ id: 'c-br', title: 'COMM_CHANNELS', component: Portal, origin: 'br' });
+
         // Init Debris
         actors = allItems.map(item => new Actor(item));
 
@@ -249,33 +257,30 @@
 
 <button id="mobile-reactor" onclick={toggleMobileMenu} style:transform={mobileMenuActive ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%) scale(1)'}></button>
 
-<HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
+<HUDCorner id="c-tl" position="tl" code="> 001_SYS">
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
     {/snippet}
-    <Identity />
 </HUDCorner>
 
-<HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
+<HUDCorner id="c-tr" position="tr" code="> 002_VAULT">
     {#snippet buttonContent()}
         <span class="label">WORKS <i class="ph ph-safe"></i></span>
     {/snippet}
-    <Vault />
 </HUDCorner>
 
-<HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
+<HUDCorner id="c-bl" position="bl" code="> 003_AUDIO">
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
     {/snippet}
-    <Playlist />
 </HUDCorner>
 
-<HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
+<HUDCorner id="c-br" position="br" code="> 004_LINK">
     {#snippet buttonContent()}
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
-    <Portal />
 </HUDCorner>
 
+<TilingWindowManager />
 <TerminalAuth />
 <AdminPanel />
