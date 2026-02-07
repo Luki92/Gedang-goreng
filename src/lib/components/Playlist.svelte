@@ -8,10 +8,22 @@
         { id: '4xDzrJKXOOY', title: 'synthwave radio', artist: 'Lofi Girl' }
     ];
 
+    // Initial deterministic state for SSR/Hydration match
+    let bars = Array(20).fill(0).map((_, i) => ({
+        duration: 1.0 + (i * 0.05),
+        delay: 0
+    }));
+
     let player;
     let loaded = false;
 
     onMount(() => {
+        // Randomize visualizer on client mount to look organic
+        bars = bars.map(() => ({
+            duration: 0.7 + Math.random() * 0.8,
+            delay: Math.random() * -1.0
+        }));
+
         // Load YouTube API if not already loaded
         if (!window.YT) {
             var tag = document.createElement('script');
@@ -75,14 +87,20 @@
     }
 </script>
 
-<div class="h-full flex flex-col justify-center items-center relative overflow-hidden">
+<div class="h-full flex flex-col justify-center items-center relative overflow-hidden group">
     <!-- Visualizer Mockup -->
-    <div class="flex items-end gap-1 h-16 mb-6">
-        <div class="w-2 bg-blue-500 animate-[bounce_1s_infinite]"></div>
-        <div class="w-2 bg-purple-500 animate-[bounce_1.2s_infinite]"></div>
-        <div class="w-2 bg-pink-500 animate-[bounce_0.8s_infinite]"></div>
-        <div class="w-2 bg-blue-500 animate-[bounce_1.5s_infinite]"></div>
-        <div class="w-2 bg-white animate-[bounce_0.5s_infinite]"></div>
+    <div class="flex items-end justify-center gap-1 h-32 w-full mb-6 px-8">
+        {#each bars as bar}
+            <div
+                class="w-1.5 bg-[#5555ff] opacity-60 group-hover:opacity-100 transition-opacity duration-300 rounded-t-sm shadow-[0_0_5px_rgba(85,85,255,0.5)]"
+                style="
+                    height: 10%;
+                    animation: equalizer {bar.duration}s ease-in-out infinite alternate;
+                    animation-delay: {bar.delay}s;
+                    animation-play-state: {$musicState.isPlaying ? 'running' : 'paused'};
+                "
+            ></div>
+        {/each}
     </div>
 
     <!-- Song Info -->
@@ -103,3 +121,10 @@
     <!-- Hidden Youtube Container -->
     <div id="yt-player" class="absolute pointer-events-none opacity-0 h-0 w-0"></div>
 </div>
+
+<style>
+    @keyframes equalizer {
+        0% { height: 10%; }
+        100% { height: 90%; }
+    }
+</style>
