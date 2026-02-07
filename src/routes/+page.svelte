@@ -7,6 +7,8 @@
     import Vault from '$lib/components/Vault.svelte';
     import Playlist from '$lib/components/Playlist.svelte';
     import Portal from '$lib/components/Portal.svelte';
+    import TerminalAuth from '$lib/components/TerminalAuth.svelte';
+    import AdminPanel from '$lib/components/AdminPanel.svelte';
     import { musicState } from '$lib/stores';
 
     // --- Debris Logic ---
@@ -274,3 +276,6 @@
     {/snippet}
     <Portal />
 </HUDCorner>
+
+<TerminalAuth />
+<AdminPanel />
