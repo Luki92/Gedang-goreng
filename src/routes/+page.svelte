@@ -10,6 +10,8 @@
     import TerminalAuth from '$lib/components/TerminalAuth.svelte';
     import AdminPanel from '$lib/components/AdminPanel.svelte';
     import { musicState } from '$lib/stores';
+    import { windowManager } from '$lib/windowManager.svelte.js';
+    import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
 
     // --- Debris Logic ---
     let debrisContainer;
@@ -98,6 +100,19 @@
         mobileMenuActive = !mobileMenuActive;
         if (mobileMenuActive) document.body.classList.add('mobile-menu-active');
         else document.body.classList.remove('mobile-menu-active');
+    }
+
+    function openIdentity() {
+        windowManager.toggle('c-tl', Identity, { title: 'USER_PROFILE_LUKI' }, 'tl');
+    }
+    function openVault() {
+        windowManager.toggle('c-tr', Vault, { title: 'ARCHIVE_DATABASE' }, 'tr');
+    }
+    function openPlaylist() {
+        windowManager.toggle('c-bl', Playlist, { title: 'SONIC_EMITTER' }, 'bl');
+    }
+    function openPortal() {
+        windowManager.toggle('c-br', Portal, { title: 'COMM_CHANNELS' }, 'br');
     }
 
     onMount(() => {
@@ -249,32 +264,30 @@
 
 <button id="mobile-reactor" onclick={toggleMobileMenu} style:transform={mobileMenuActive ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%) scale(1)'}></button>
 
-<HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
+<TilingWindowManager />
+
+<HUDCorner id="c-tl" position="tl" code="> 001_SYS" onclick={openIdentity}>
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
     {/snippet}
-    <Identity />
 </HUDCorner>
 
-<HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
+<HUDCorner id="c-tr" position="tr" code="> 002_VAULT" onclick={openVault}>
     {#snippet buttonContent()}
         <span class="label">WORKS <i class="ph ph-safe"></i></span>
     {/snippet}
-    <Vault />
 </HUDCorner>
 
-<HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
+<HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" onclick={openPlaylist}>
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
     {/snippet}
-    <Playlist />
 </HUDCorner>
 
-<HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
+<HUDCorner id="c-br" position="br" code="> 004_LINK" onclick={openPortal}>
     {#snippet buttonContent()}
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
-    <Portal />
 </HUDCorner>
 
 <TerminalAuth />
