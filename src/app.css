@@ -119,7 +119,7 @@ body {
 
 /* --- 4. HUD CORNERS (Enhanced) --- */
 .hud-corner {
-    position: fixed; z-index: 50;
+    position: fixed; z-index: 70;
     width: 140px; height: 100px;
     padding: 2rem; background: rgba(0,0,0,0.01);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);

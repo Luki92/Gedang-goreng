@@ -118,7 +118,7 @@
 </script>
 
 {#if $isAdmin}
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-4xl h-[80vh] bg-[#0a0a0a] border border-red-500/50 shadow-[0_0_50px_rgba(255,0,0,0.1)] z-50 flex flex-col font-mono text-sm overflow-hidden rounded-lg">
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-4xl h-[80vh] bg-[#0a0a0a] border border-red-500/50 shadow-[0_0_50px_rgba(255,0,0,0.1)] z-[80] flex flex-col font-mono text-sm overflow-hidden rounded-lg">
         <!-- Header -->
         <div class="bg-red-900/20 border-b border-red-900/50 p-2 flex justify-between items-center text-red-500 font-bold">
             <span>[ADMIN_PANEL_V1]</span>
