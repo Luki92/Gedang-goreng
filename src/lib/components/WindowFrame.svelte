@@ -84,18 +84,6 @@
         });
     });
 
-    const closePos = $derived.by(() => {
-        if (!win.originRect) return 'tr';
-        const cx = win.originRect.left + (win.originRect.width / 2);
-        const cy = win.originRect.top + (win.originRect.height / 2);
-        const sw = typeof window !== 'undefined' ? window.innerWidth : 1000;
-        const sh = typeof window !== 'undefined' ? window.innerHeight : 1000;
-
-        const y = cy < sh / 2 ? 't' : 'b';
-        const x = cx < sw / 2 ? 'l' : 'r';
-        return y + x;
-    });
-
     /** @param {MouseEvent} e */
     function handleMouseDown(e) {
         // @ts-ignore
@@ -242,11 +230,11 @@
     style={currentStyle}
     onmousedown={handleMouseDown}
 >
-    <!-- Close Button (L-Shape) -->
-    <button class="close-btn {closePos}" onclick={closeWindow} aria-label="Close" type="button">
-        <svg viewBox="0 0 40 40" class="l-shape">
-            <path d="M5,35 L5,5 L35,5" fill="none" stroke="currentColor" stroke-width="4" vector-effect="non-scaling-stroke" />
-            <path d="M5,35 L5,5 L35,5" fill="none" stroke="transparent" stroke-width="20" vector-effect="non-scaling-stroke" />
+    <!-- Close Button (Standard X) -->
+    <button class="close-btn" onclick={closeWindow} aria-label="Close" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
     </button>
 
@@ -318,39 +306,29 @@
 
     .close-btn {
         position: absolute;
-        width: 60px;
-        height: 60px;
+        top: 0; right: 0;
+        width: 40px; height: 40px;
         background: transparent;
         border: none;
-        color: var(--accent-color, #55f);
+        color: rgba(255, 255, 255, 0.5);
         z-index: 102;
         padding: 0;
-        pointer-events: none;
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: color 0.2s, transform 0.2s;
     }
 
-    .l-shape {
-        width: 100%; height: 100%;
-        pointer-events: none;
-    }
-
-    .l-shape path {
-        pointer-events: stroke;
-        cursor: pointer;
-        transition: stroke 0.2s;
-    }
-
-    .l-shape path:hover {
-        stroke: #fff;
+    .close-btn:hover {
+        color: #fff;
+        transform: scale(1.1);
         filter: drop-shadow(0 0 5px var(--accent-color));
     }
 
-    .close-btn.tl { top: 0; left: 0; transform: rotate(0deg); }
-    .close-btn.tr { top: 0; right: 0; transform: rotate(90deg); }
-    .close-btn.br { bottom: 0; right: 0; transform: rotate(180deg); }
-    .close-btn.bl { bottom: 0; left: 0; transform: rotate(270deg); }
+    .close-btn:active {
+        transform: scale(0.95);
+    }
 
     /* New Minimal Edge Indicators - Refined */
     .edge-glow {
