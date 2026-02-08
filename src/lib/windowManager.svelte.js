@@ -195,7 +195,10 @@ class WindowManager {
 
         const stackWs = tiledWindows.filter(w => w.id !== masterW.id);
 
-        const totalGapW = this.outerGap * 2 + (stackWs.length > 0 ? this.innerGap : 0);
+        // Scale down the grid when 2+ windows are open to reveal HUD
+        const currentOuterGap = (stackWs.length > 0) ? 100 : this.outerGap;
+
+        const totalGapW = currentOuterGap * 2 + (stackWs.length > 0 ? this.innerGap : 0);
         const availableW = screenW - totalGapW;
 
         // If stack exists, master takes 60%, else 100% (but handled by single window case mostly)
@@ -205,9 +208,9 @@ class WindowManager {
         const masterWidth = stackWs.length > 0 ? availableW * 0.6 : availableW;
         const stackWidth = stackWs.length > 0 ? availableW * 0.4 : 0;
 
-        const masterX = this.outerGap;
-        const masterY = this.outerGap;
-        const masterH = screenH - (this.outerGap * 2);
+        const masterX = currentOuterGap;
+        const masterY = currentOuterGap;
+        const masterH = screenH - (currentOuterGap * 2);
 
         // Update Master
         masterW.x = masterX;
@@ -222,14 +225,14 @@ class WindowManager {
             // Total available height for stack items
             // Subtract outer gaps (top/bottom) and inner gaps between items
             const totalStackGapH = (stackWs.length - 1) * this.innerGap;
-            const availableStackH = (screenH - (this.outerGap * 2)) - totalStackGapH;
+            const availableStackH = (screenH - (currentOuterGap * 2)) - totalStackGapH;
 
             // Height per item
             const stackItemH = availableStackH / stackWs.length;
 
             stackWs.forEach((sw, i) => {
                 sw.x = stackX;
-                sw.y = this.outerGap + (i * (stackItemH + this.innerGap));
+                sw.y = currentOuterGap + (i * (stackItemH + this.innerGap));
                 sw.width = stackWidth;
                 sw.height = stackItemH;
             });
