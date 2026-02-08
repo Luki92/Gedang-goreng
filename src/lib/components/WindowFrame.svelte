@@ -255,7 +255,7 @@
         <div class="window-content">
             {#if win.component}
                 {@const Component = win.component}
-                <Component />
+                <Component {...win.props} />
             {/if}
         </div>
     </div>
