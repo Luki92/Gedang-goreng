@@ -13,14 +13,11 @@
     let frameEl;
     let isClosing = $state(false);
 
-    // Animation state: 'initial' (at origin), 'animating' (moving to target), 'steady' (at target)
     let animationState = $state('initial');
 
-    // Drop Zone Highlighting (Local state, or check windowManager.isDragging globally?)
-    // We want to detect if THIS window is being dragged over a zone.
+    // Drop Zone Highlighting (Local state)
     let dropZone = $state(null); // 'master', 'stack', or null
 
-    // Apply styles based on state
     let currentStyle = $derived.by(() => {
         if (isDragging || isResizing) {
             return `
@@ -34,7 +31,6 @@
         }
 
         if (win.state === 'closing') {
-             // Animate back to origin
              if (win.originRect) {
                  return `
                     left: ${win.originRect.left}px;
@@ -63,7 +59,6 @@
             `;
         }
 
-        // Normal 'open' state or animating to it
         return `
             left: ${win.x}px;
             top: ${win.y}px;
@@ -82,13 +77,11 @@
     });
 
     onMount(() => {
-        // Trigger animation from origin to target
         requestAnimationFrame(() => {
             animationState = 'animating';
         });
     });
 
-    // Determine close button position based on origin
     const closePos = $derived.by(() => {
         if (!win.originRect) return 'tr';
         const cx = win.originRect.left + (win.originRect.width / 2);
@@ -128,16 +121,15 @@
         win.x = startLeft + dx;
         win.y = startTop + dy;
 
-        // Detect zones
+        // Revised Zone Logic: Only trigger if very close to edges (< 50px)
         const screenW = window.innerWidth;
         const mouseX = e.clientX;
 
-        // Simple zone logic: Left 20% = Master, Right 20% = Stack
-        if (mouseX < screenW * 0.2) {
+        if (mouseX < 50) {
              // @ts-ignore
              dropZone = 'master';
         }
-        else if (mouseX > screenW * 0.8) {
+        else if (mouseX > screenW - 50) {
              // @ts-ignore
              dropZone = 'stack';
         }
@@ -162,7 +154,7 @@
      */
     function initResize(e, dir) {
         e.stopPropagation();
-        e.preventDefault(); // Prevent text selection
+        e.preventDefault();
         isResizing = true;
         resizeDir = dir;
         startX = e.clientX;
@@ -223,7 +215,7 @@
         isResizing = false;
         window.removeEventListener('mousemove', handleResize);
         window.removeEventListener('mouseup', stopResize);
-        windowManager.stopDrag(); // Ensure drag state is cleared
+        windowManager.stopDrag();
     }
 
     /** @param {MouseEvent} e */
@@ -233,17 +225,10 @@
     }
 </script>
 
-<!-- Drop Zone Indicators (Global or Local?) -->
-<!-- Since WindowFrame moves with window, we can't render fixed zones inside it easily unless we use fixed pos. -->
-<!-- But only THIS window is dragging. So we can show indicators if isDragging is true. -->
-
+<!-- Minimal Edge Indicators -->
 {#if isDragging}
-    <div class="drop-indicator master" class:active={dropZone === 'master'}>
-        <span class="label">MASTER</span>
-    </div>
-    <div class="drop-indicator stack" class:active={dropZone === 'stack'}>
-        <span class="label">STACK</span>
-    </div>
+    <div class="edge-glow left" class:active={dropZone === 'master'}></div>
+    <div class="edge-glow right" class:active={dropZone === 'stack'}></div>
 {/if}
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -365,38 +350,23 @@
     .close-btn.br { bottom: 0; right: 0; transform: rotate(180deg); }
     .close-btn.bl { bottom: 0; left: 0; transform: rotate(270deg); }
 
-    /* Drop Zones */
-    .drop-indicator {
+    /* New Minimal Edge Indicators */
+    .edge-glow {
         position: fixed;
-        top: 32px; bottom: 32px;
-        width: 20%;
-        background: rgba(85, 85, 255, 0.1);
-        border: 2px dashed rgba(85, 85, 255, 0.3);
+        top: 0; bottom: 0;
+        width: 50px;
+        background: linear-gradient(90deg, rgba(85,85,255,0.3), transparent);
         z-index: 900;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         pointer-events: none;
-        transition: all 0.3s;
-        opacity: 0.5;
+        opacity: 0;
+        transition: opacity 0.3s;
     }
 
-    .drop-indicator.active {
-        background: rgba(85, 85, 255, 0.2);
-        border-color: #fff;
+    .edge-glow.left { left: 0; background: linear-gradient(90deg, rgba(85,85,255,0.3), transparent); }
+    .edge-glow.right { right: 0; background: linear-gradient(-90deg, rgba(85,85,255,0.3), transparent); }
+
+    .edge-glow.active {
         opacity: 1;
-        box-shadow: 0 0 30px rgba(85, 85, 255, 0.3);
+        box-shadow: 0 0 50px rgba(85,85,255,0.2);
     }
-
-    .drop-indicator.master { left: 32px; }
-    .drop-indicator.stack { right: 32px; }
-
-    .label {
-        font-family: 'Space Mono';
-        color: #fff;
-        background: #000;
-        padding: 4px 8px;
-        border: 1px solid #555;
-    }
-
 </style>
