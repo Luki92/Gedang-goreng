@@ -1,6 +1,7 @@
 <script>
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { fade } from 'svelte/transition';
+    import { onMount } from 'svelte';
 
     let { win } = $props();
 
@@ -8,6 +9,84 @@
     let isResizing = $state(false);
     let resizeDir = '';
     let startX = 0, startY = 0, startLeft = 0, startTop = 0, startWidth = 0, startHeight = 0;
+
+    let frameEl;
+    let isClosing = $state(false);
+
+    // Animation state: 'initial' (at origin), 'animating' (moving to target), 'steady' (at target)
+    let animationState = $state('initial');
+
+    // Drop Zone Highlighting (Local state, or check windowManager.isDragging globally?)
+    // We want to detect if THIS window is being dragged over a zone.
+    let dropZone = $state(null); // 'master', 'stack', or null
+
+    // Apply styles based on state
+    let currentStyle = $derived.by(() => {
+        if (isDragging || isResizing) {
+            return `
+                left: ${win.x}px;
+                top: {win.y}px;
+                width: {win.width}px;
+                height: {win.height}px;
+                z-index: {win.zIndex};
+                transition: none;
+            `;
+        }
+
+        if (win.state === 'closing') {
+             // Animate back to origin
+             if (win.originRect) {
+                 return `
+                    left: ${win.originRect.left}px;
+                    top: ${win.originRect.top}px;
+                    width: ${win.originRect.width}px;
+                    height: ${win.originRect.height}px;
+                    z-index: ${win.zIndex};
+                    opacity: 0;
+                    transform: scale(0.5);
+                    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+                 `;
+             }
+             return `opacity: 0; transition: opacity 0.3s;`;
+        }
+
+        if (animationState === 'initial' && win.originRect) {
+            return `
+                left: ${win.originRect.left}px;
+                top: ${win.originRect.top}px;
+                width: ${win.originRect.width}px;
+                height: ${win.originRect.height}px;
+                z-index: ${win.zIndex};
+                opacity: 0;
+                transform: scale(0.8);
+                transition: none;
+            `;
+        }
+
+        // Normal 'open' state or animating to it
+        return `
+            left: ${win.x}px;
+            top: ${win.y}px;
+            width: ${win.width}px;
+            height: ${win.height}px;
+            z-index: ${win.zIndex};
+            opacity: 1;
+            transform: scale(1);
+            transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                        top 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                        width 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                        height 0.5s cubic-bezier(0.19, 1, 0.22, 1),
+                        opacity 0.3s ease,
+                        transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        `;
+    });
+
+    onMount(() => {
+        // Trigger animation from origin to target
+        requestAnimationFrame(() => {
+            animationState = 'animating';
+        });
+    });
 
     // Determine close button position based on origin
     const closePos = $derived.by(() => {
@@ -24,8 +103,6 @@
 
     /** @param {MouseEvent} e */
     function handleMouseDown(e) {
-        // Prevent drag if clicking buttons or interactive elements
-        // Also check if target is the SVG path (which has pointer-events: stroke)
         // @ts-ignore
         if (e.target.closest('button') || e.target.closest('.resize-handle') || e.target.closest('input') || e.target.closest('a') || e.target.tagName === 'path') return;
 
@@ -50,12 +127,33 @@
 
         win.x = startLeft + dx;
         win.y = startTop + dy;
+
+        // Detect zones
+        const screenW = window.innerWidth;
+        const mouseX = e.clientX;
+
+        // Simple zone logic: Left 20% = Master, Right 20% = Stack
+        if (mouseX < screenW * 0.2) {
+             // @ts-ignore
+             dropZone = 'master';
+        }
+        else if (mouseX > screenW * 0.8) {
+             // @ts-ignore
+             dropZone = 'stack';
+        }
+        else dropZone = null;
     }
 
     function stopDrag() {
         isDragging = false;
         window.removeEventListener('mousemove', handleDrag);
         window.removeEventListener('mouseup', stopDrag);
+        windowManager.stopDrag();
+
+        if (dropZone) {
+            windowManager.snap(win.id, dropZone);
+            dropZone = null;
+        }
     }
 
     /**
@@ -125,6 +223,7 @@
         isResizing = false;
         window.removeEventListener('mousemove', handleResize);
         window.removeEventListener('mouseup', stopResize);
+        windowManager.stopDrag(); // Ensure drag state is cleared
     }
 
     /** @param {MouseEvent} e */
@@ -134,34 +233,37 @@
     }
 </script>
 
+<!-- Drop Zone Indicators (Global or Local?) -->
+<!-- Since WindowFrame moves with window, we can't render fixed zones inside it easily unless we use fixed pos. -->
+<!-- But only THIS window is dragging. So we can show indicators if isDragging is true. -->
+
+{#if isDragging}
+    <div class="drop-indicator master" class:active={dropZone === 'master'}>
+        <span class="label">MASTER</span>
+    </div>
+    <div class="drop-indicator stack" class:active={dropZone === 'stack'}>
+        <span class="label">STACK</span>
+    </div>
+{/if}
+
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
+    bind:this={frameEl}
     class="window-frame {win.state}"
     class:dragging={isDragging}
     class:resizing={isResizing}
-    style="
-        left: {win.x}px;
-        top: {win.y}px;
-        width: {win.width}px;
-        height: {win.height}px;
-        z-index: {win.zIndex};
-    "
+    style={currentStyle}
     onmousedown={handleMouseDown}
 >
     <!-- Close Button (L-Shape) -->
-    <!-- pointer-events: none on wrapper, stroke on path. Events bubble to onclick. -->
     <button class="close-btn {closePos}" onclick={closeWindow} aria-label="Close" type="button">
         <svg viewBox="0 0 40 40" class="l-shape">
             <path d="M5,35 L5,5 L35,5" fill="none" stroke="currentColor" stroke-width="4" vector-effect="non-scaling-stroke" />
-            <!-- Hitbox Helper: Transparent thicker stroke -->
-            <!-- svelte-ignore a11y_click_events_have_key_events -->
-            <!-- svelte-ignore a11y_no_static_element_interactions -->
             <path d="M5,35 L5,5 L35,5" fill="none" stroke="transparent" stroke-width="20" vector-effect="non-scaling-stroke" />
         </svg>
     </button>
 
     <!-- Content -->
-    <!-- Content Wrapper to prevent scrollbar/resize conflict -->
     <div class="content-wrapper">
         <div class="window-content">
             {#if win.component}
@@ -192,25 +294,12 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        /* Smooth transitions for tiling */
-        transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                    top 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                    width 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                    height 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                    opacity 0.3s ease;
-        opacity: 0;
         pointer-events: auto;
     }
 
-    .window-frame.open {
-        opacity: 1;
-    }
-
-    /* Disable transitions when manually interacting */
     .window-frame.dragging,
     .window-frame.resizing {
-        transition: none !important;
-        box-shadow: 0 20px 50px rgba(85, 85, 255, 0.3); /* Glow when dragging */
+        box-shadow: 0 20px 50px rgba(85, 85, 255, 0.3);
         z-index: 1000 !important;
     }
 
@@ -220,7 +309,7 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        pointer-events: auto; /* Ensure content is interactive */
+        pointer-events: auto;
     }
 
     .window-content {
@@ -230,7 +319,6 @@
         padding: 1rem;
     }
 
-    /* Resize Handles */
     .resize-handle { position: absolute; z-index: 100; outline: none; }
     .n { top: 0; left: 0; right: 0; height: 8px; cursor: ns-resize; }
     .s { bottom: 0; left: 0; right: 0; height: 8px; cursor: ns-resize; }
@@ -241,17 +329,16 @@
     .se { bottom: 0; right: 0; width: 16px; height: 16px; cursor: se-resize; z-index: 101; }
     .sw { bottom: 0; left: 0; width: 16px; height: 16px; cursor: sw-resize; z-index: 101; }
 
-    /* Close Button */
     .close-btn {
         position: absolute;
-        width: 60px; /* Larger tap area container */
+        width: 60px;
         height: 60px;
         background: transparent;
         border: none;
         color: var(--accent-color, #55f);
         z-index: 102;
         padding: 0;
-        pointer-events: none; /* Let SVG path handle events */
+        pointer-events: none;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -263,7 +350,7 @@
     }
 
     .l-shape path {
-        pointer-events: stroke; /* Hitbox defined by stroke */
+        pointer-events: stroke;
         cursor: pointer;
         transition: stroke 0.2s;
     }
@@ -273,10 +360,43 @@
         filter: drop-shadow(0 0 5px var(--accent-color));
     }
 
-    /* Position and Rotation of L-shape based on corner */
     .close-btn.tl { top: 0; left: 0; transform: rotate(0deg); }
     .close-btn.tr { top: 0; right: 0; transform: rotate(90deg); }
     .close-btn.br { bottom: 0; right: 0; transform: rotate(180deg); }
     .close-btn.bl { bottom: 0; left: 0; transform: rotate(270deg); }
+
+    /* Drop Zones */
+    .drop-indicator {
+        position: fixed;
+        top: 32px; bottom: 32px;
+        width: 20%;
+        background: rgba(85, 85, 255, 0.1);
+        border: 2px dashed rgba(85, 85, 255, 0.3);
+        z-index: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        transition: all 0.3s;
+        opacity: 0.5;
+    }
+
+    .drop-indicator.active {
+        background: rgba(85, 85, 255, 0.2);
+        border-color: #fff;
+        opacity: 1;
+        box-shadow: 0 0 30px rgba(85, 85, 255, 0.3);
+    }
+
+    .drop-indicator.master { left: 32px; }
+    .drop-indicator.stack { right: 32px; }
+
+    .label {
+        font-family: 'Space Mono';
+        color: #fff;
+        background: #000;
+        padding: 4px 8px;
+        border: 1px solid #555;
+    }
 
 </style>

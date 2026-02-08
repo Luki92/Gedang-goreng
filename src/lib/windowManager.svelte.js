@@ -9,6 +9,9 @@ class WindowManager {
     innerGap = $state(16);
     outerGap = $state(32);
 
+    // Global Drag State
+    isDragging = $state(false);
+
     registry = new Map();
 
     constructor() {
@@ -33,8 +36,6 @@ class WindowManager {
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
             this.focus(id);
-            // If it was minimized or hidden, restore it?
-            // Current requirements don't mention minimize.
             return;
         }
 
@@ -76,14 +77,6 @@ class WindowManager {
         const w = this.windows[index];
         w.state = 'closing';
 
-        // Revert to origin rect for closing animation
-        if (w.originRect) {
-             w.x = w.originRect.left;
-             w.y = w.originRect.top;
-             w.width = w.originRect.width;
-             w.height = w.originRect.height;
-        }
-
         // Wait for animation then remove
         setTimeout(() => {
             const wasMaster = (this.masterWindowId === id);
@@ -123,21 +116,44 @@ class WindowManager {
         }
     }
 
-    updateWindow(id, updates) {
-        const w = this.windows.find(w => w.id === id);
-        if (w) {
-            Object.assign(w, updates);
-            // If position/size changed manually, untile it
-            if ('x' in updates || 'y' in updates || 'width' in updates || 'height' in updates) {
-                w.isTiled = false;
-            }
-        }
-    }
-
     // Called by WindowFrame when user starts dragging/resizing
     untile(id) {
         const w = this.windows.find(w => w.id === id);
-        if (w) w.isTiled = false;
+        if (w && w.isTiled) {
+             w.isTiled = false;
+        }
+        this.isDragging = true;
+    }
+
+    stopDrag() {
+        this.isDragging = false;
+    }
+
+    snap(id, zone) {
+        const w = this.windows.find(w => w.id === id);
+        if (!w) return;
+
+        w.isTiled = true;
+
+        // If snapped to 'master' zone (left), make it master
+        if (zone === 'master') {
+            this.masterWindowId = id;
+        }
+        // If snapped to 'stack' (right), just ensure it is not master
+        else if (zone === 'stack') {
+            if (this.masterWindowId === id) {
+                // Find another master
+                const other = this.windows.find(win => win.id !== id && win.isTiled);
+                if (other) this.masterWindowId = other.id;
+                else {
+                    // Stay master if alone, or swap with first stack item
+                    const firstStack = this.windows.find(win => win.id !== id && win.isTiled);
+                    if (firstStack) this.masterWindowId = firstStack.id;
+                }
+            }
+        }
+
+        this.recalculateLayout();
     }
 
     // Called to re-tile everything
@@ -182,6 +198,10 @@ class WindowManager {
         const totalGapW = this.outerGap * 2 + (stackWs.length > 0 ? this.innerGap : 0);
         const availableW = screenW - totalGapW;
 
+        // If stack exists, master takes 60%, else 100% (but handled by single window case mostly)
+        // Wait, if 2 windows, 1 master 1 stack.
+        // If stackWs.length > 0
+
         const masterWidth = stackWs.length > 0 ? availableW * 0.6 : availableW;
         const stackWidth = stackWs.length > 0 ? availableW * 0.4 : 0;
 
@@ -198,8 +218,13 @@ class WindowManager {
         // Update Stack
         if (stackWs.length > 0) {
             const stackX = masterX + masterWidth + this.innerGap;
+
+            // Total available height for stack items
+            // Subtract outer gaps (top/bottom) and inner gaps between items
             const totalStackGapH = (stackWs.length - 1) * this.innerGap;
             const availableStackH = (screenH - (this.outerGap * 2)) - totalStackGapH;
+
+            // Height per item
             const stackItemH = availableStackH / stackWs.length;
 
             stackWs.forEach((sw, i) => {
