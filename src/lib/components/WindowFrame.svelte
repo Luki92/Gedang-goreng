@@ -22,10 +22,12 @@
         if (isDragging || isResizing) {
             return `
                 left: ${win.x}px;
-                top: {win.y}px;
+                top: ${win.y}px;
                 width: {win.width}px;
                 height: {win.height}px;
                 z-index: {win.zIndex};
+                opacity: 1;
+                transform: none;
                 transition: none;
             `;
         }
@@ -350,23 +352,24 @@
     .close-btn.br { bottom: 0; right: 0; transform: rotate(180deg); }
     .close-btn.bl { bottom: 0; left: 0; transform: rotate(270deg); }
 
-    /* New Minimal Edge Indicators */
+    /* New Minimal Edge Indicators - Refined */
     .edge-glow {
         position: fixed;
-        top: 0; bottom: 0;
-        width: 50px;
-        background: linear-gradient(90deg, rgba(85,85,255,0.3), transparent);
+        top: 10vh; bottom: 10vh; /* Don't cover full height */
+        width: 100px;
+        background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%);
         z-index: 900;
         pointer-events: none;
         opacity: 0;
-        transition: opacity 0.3s;
+        transition: opacity 0.5s ease-in-out;
+        filter: blur(20px); /* Diffuse it */
     }
 
-    .edge-glow.left { left: 0; background: linear-gradient(90deg, rgba(85,85,255,0.3), transparent); }
-    .edge-glow.right { right: 0; background: linear-gradient(-90deg, rgba(85,85,255,0.3), transparent); }
+    .edge-glow.left { left: 0; background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%); }
+    .edge-glow.right { right: 0; background: radial-gradient(ellipse at center right, rgba(85,85,255,0.15) 0%, transparent 70%); }
 
     .edge-glow.active {
         opacity: 1;
-        box-shadow: 0 0 50px rgba(85,85,255,0.2);
+        /* box-shadow removed, relying on gradient and blur for softness */
     }
 </style>
