@@ -45,20 +45,42 @@
                     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
                  `;
              }
-             return `opacity: 0; transition: opacity 0.3s;`;
-        }
-
-        if (animationState === 'initial' && win.originRect) {
-            return `
-                left: ${win.originRect.left}px;
-                top: ${win.originRect.top}px;
-                width: ${win.originRect.width}px;
-                height: ${win.originRect.height}px;
+             return `
+                left: ${win.x}px;
+                top: ${win.y}px;
+                width: ${win.width}px;
+                height: ${win.height}px;
                 z-index: ${win.zIndex};
                 opacity: 0;
-                transform: scale(0.8);
-                transition: none;
-            `;
+                transform: scale(0.95);
+                transition: opacity 0.3s, transform 0.3s;
+             `;
+        }
+
+        if (animationState === 'initial') {
+            if (win.originRect) {
+                return `
+                    left: ${win.originRect.left}px;
+                    top: ${win.originRect.top}px;
+                    width: ${win.originRect.width}px;
+                    height: ${win.originRect.height}px;
+                    z-index: ${win.zIndex};
+                    opacity: 0;
+                    transform: scale(0.8);
+                    transition: none;
+                `;
+            } else {
+                 return `
+                    left: ${win.x}px;
+                    top: ${win.y}px;
+                    width: ${win.width}px;
+                    height: ${win.height}px;
+                    z-index: ${win.zIndex};
+                    opacity: 0;
+                    transform: scale(0.9);
+                    transition: none;
+                `;
+            }
         }
 
         return `
@@ -243,7 +265,7 @@
         <div class="window-content">
             {#if win.component}
                 {@const Component = win.component}
-                <Component />
+                <Component {...(win.props || {})} />
             {/if}
         </div>
     </div>

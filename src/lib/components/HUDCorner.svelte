@@ -20,7 +20,7 @@
             height: rect.height
         };
 
-        windowManager.toggle(id, originRect);
+        windowManager.toggle(id, { originRect });
     }
 </script>
 

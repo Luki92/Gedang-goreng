@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { supabase } from '$lib/supabaseClient';
+    import { windowManager } from '$lib/windowManager.svelte.js';
 
     /** @type {any[]} */
     let works = $state([]);
@@ -32,7 +33,7 @@
     function loadMockData() {
         works = [
             { id: 1, type: 'ESSAY', date: '2024.01', title: 'The Psychology of Pixel Art', description: 'Analyzing why low-res makes us feel high-emotion.', color: 'text-green-400' },
-            { id: 2, type: 'SKETCH', date: '2023.12', title: 'Void Walker Concept', description: 'Character design draft for Project Nebula.', color: 'text-purple-400' },
+            { id: 2, type: 'SKETCH', date: '2023.12', title: 'Void Walker Concept', description: 'Character design draft for Project Nebula.', color: 'text-purple-400', image_url: '🎨' },
             { id: 3, type: 'ART', date: '2024.02', title: 'Cyber Sunset', description: 'Digital painting.', image_url: '🎨' },
             { id: 4, type: 'POST', date: '2024.03', title: 'Thinking about Svelte 5', description: 'Runes are a game changer for reactivity. The simplicity is refreshing.' },
             { id: 5, type: 'ART', date: '2023.11', title: 'Glitch Portrait', description: 'Experimenting with datamoshing.', image_url: '👾' },
@@ -64,6 +65,11 @@
             return true;
         });
     });
+
+    /** @param {any} item */
+    function openFile(item) {
+        windowManager.open('file-viewer', { props: { item } });
+    }
 </script>
 
 <div class="h-full overflow-y-auto relative custom-scrollbar pr-2">
@@ -82,60 +88,57 @@
         </div>
     {/if}
 
-    {#if activeFilter === 'ART'}
-        <!-- Grid Layout for ART -->
-        <div class="grid grid-cols-2 gap-3 pb-4">
-            {#each filteredWorks as item}
-                <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <!-- svelte-ignore a11y_no_static_element_interactions -->
-                <div class="aspect-square border border-[#333] bg-[#080808] relative overflow-hidden group hover:border-white transition-colors cursor-pointer">
-                    <!-- Image / Placeholder -->
-                    <div class="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-500">
-                        {#if item.image_url && item.image_url.startsWith('http')}
-                            <img src={item.image_url} alt={item.title} class="w-full h-full object-cover" />
-                        {:else}
-                            <span>{item.image_url || '🖼️'}</span>
-                        {/if}
-                    </div>
+    <!-- Masonry Layout for All Items -->
+    <div class="columns-2 md:columns-3 gap-4 pb-4 px-2">
+        {#each filteredWorks as item}
+            <div
+                class="relative mb-4 break-inside-avoid group cursor-pointer overflow-hidden border border-[#333] bg-[#080808] hover:border-white transition-all duration-300 shadow-lg"
+                onclick={() => openFile(item)}
+                onkeydown={(e) => e.key === 'Enter' && openFile(item)}
+                role="button"
+                tabindex="0"
+            >
+                <!-- Card Content -->
+                <div class="relative w-full">
+                    <!-- Visual aspect -->
+                    {#if item.image_url && item.image_url.startsWith('http')}
+                         <!-- Actual Image -->
+                         <img src={item.image_url} alt={item.title} class="w-full h-auto object-cover block" />
+                    {:else if ['ART', 'SKETCH'].includes(item.type)}
+                         <!-- Art Placeholder -->
+                         <div class="w-full aspect-[4/5] flex items-center justify-center text-6xl bg-[#111] text-gray-700">
+                             {item.image_url || '🎨'}
+                         </div>
+                    {:else}
+                         <!-- Text Placeholder / Abstract Vis -->
+                         <div class="w-full aspect-video flex flex-col p-4 bg-[#111] border-b border-[#222]">
+                             <div class="w-full h-full border border-dashed border-[#333] flex items-center justify-center text-gray-700 font-mono text-xs">
+                                 {item.type}_FILE
+                             </div>
+                         </div>
+                    {/if}
 
-                    <!-- Hover Overlay -->
-                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-2 text-center">
-                        <!-- We use translateY animation on hover via CSS classes in app.css or inline -->
-                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center">
-                            <span class="text-[10px] text-yellow-400 font-[VT323]">{item.date}</span>
-                            <h4 class="text-white font-bold text-sm leading-tight">{item.title}</h4>
+                    <!-- Text Overlay (Glides up) -->
+                    <!-- Position absolute at bottom, initially translated down -->
+                    <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent translate-y-[20%] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex flex-col justify-end min-h-[50%]">
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[9px] font-mono px-1 border border-white/30 text-white/70 uppercase">{item.type}</span>
+                                <span class="text-[9px] font-mono text-gray-400">{item.date}</span>
+                            </div>
+                            <h3 class="text-white font-bold text-sm leading-snug drop-shadow-md group-hover:text-blue-300 transition-colors mb-1">{item.title}</h3>
+                            {#if item.description}
+                                <p class="text-[10px] text-gray-400 line-clamp-2 leading-tight">{item.description}</p>
+                            {/if}
                         </div>
                     </div>
                 </div>
-            {/each}
-        </div>
-    {:else}
-        <!-- List Layout for Writing/Posts -->
-        <div class="grid grid-cols-1 gap-2 pb-4">
-            {#each filteredWorks as item}
-                <a href={item.content_url || '#'} target={item.content_url ? '_blank' : ''} class="block p-4 border border-[#222] bg-[#080808] hover:bg-[#111] hover:border-white transition-all cursor-pointer group relative overflow-hidden">
-                    <!-- Glitch Hover Effect Overlay -->
-                    <div class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none"></div>
 
-                    <div class="flex justify-between items-center mb-2 relative z-10">
-                        <span class="{getTypeColor(item.type)} text-xs font-[VT323] border border-current px-1 opacity-80">[{item.type}]</span>
-                        <span class="text-gray-600 text-xs font-mono group-hover:text-gray-400 transition-colors">{item.date}</span>
-                    </div>
-
-                    <h3 class="text-white font-bold group-hover:text-blue-400 transition-colors relative z-10 flex items-center gap-2">
-                        {item.title}
-                        {#if item.content_url}
-                            <i class="ph ph-arrow-up-right text-xs opacity-50"></i>
-                        {/if}
-                    </h3>
-
-                    {#if item.description}
-                        <p class="text-xs text-gray-500 mt-1 relative z-10 group-hover:text-gray-400 max-w-[90%] leading-relaxed">{item.description}</p>
-                    {/if}
-                </a>
-            {/each}
-        </div>
-    {/if}
+                <!-- Hover Border Glow Effect -->
+                <div class="absolute inset-0 border border-white/0 group-hover:border-white/50 pointer-events-none transition-colors duration-300"></div>
+            </div>
+        {/each}
+    </div>
 
     {#if filteredWorks.length === 0 && !loading}
             <div class="text-center py-10 border border-dashed border-[#333] text-gray-600 font-mono text-xs">
