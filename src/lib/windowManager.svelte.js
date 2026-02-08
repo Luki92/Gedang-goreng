@@ -61,6 +61,7 @@ class WindowManager {
         }
 
         this.focus(id);
+        this.resolveCollisions(id);
         this.recalculateLayout();
 
         // Animation delay to allow CSS transition from origin to calculated pos
@@ -129,6 +130,33 @@ class WindowManager {
         this.isDragging = false;
     }
 
+    /** @param {string} newId */
+    resolveCollisions(newId) {
+        if (typeof window === 'undefined') return;
+        const screenW = window.innerWidth;
+        const untiled = this.windows.filter(w => !w.isTiled && w.id !== newId && w.state !== 'closing');
+        if (untiled.length === 0) return;
+
+        const gap = 100; // Assume large gap mode
+
+        untiled.forEach(w => {
+            const cx = w.x + w.width / 2;
+            const screenMid = screenW / 2;
+
+            // If window is roughly centered (within 15% of center), push it
+            if (Math.abs(cx - screenMid) < screenW * 0.15) {
+                const distLeft = w.x;
+                const distRight = screenW - (w.x + w.width);
+
+                if (distLeft < distRight) {
+                    w.x = gap;
+                } else {
+                    w.x = screenW - w.width - gap;
+                }
+            }
+        });
+    }
+
     snap(id, zone) {
         const w = this.windows.find(w => w.id === id);
         if (!w) return;
@@ -170,23 +198,64 @@ class WindowManager {
         const screenH = window.innerHeight;
 
         const tiledWindows = this.windows.filter(w => w.isTiled && w.state !== 'closing');
-
         if (tiledWindows.length === 0) return;
 
-        // 1. Single Window Center
+        const untiledWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing');
+        const hasUntiled = untiledWindows.length > 0;
+        const totalWindows = tiledWindows.length + untiledWindows.length;
+        const currentOuterGap = (totalWindows > 1) ? 100 : this.outerGap;
+
+        // 1. Single Tiled Window (Hybrid Check)
         if (tiledWindows.length === 1) {
             const w = tiledWindows[0];
-            const targetW = Math.min(screenW * 0.6, 1200);
-            const targetH = Math.min(screenH * 0.7, 900);
 
-            w.x = (screenW - targetW) / 2;
-            w.y = (screenH - targetH) / 2;
-            w.width = targetW;
-            w.height = targetH;
+            if (hasUntiled) {
+                // Check if Untiled windows occupy the Left (Master) side
+                let leftOccupied = false;
+                const masterLimit = screenW * 0.6; // Boundary between Master/Stack
+
+                untiledWindows.forEach(u => {
+                    const uc = u.x + u.width / 2;
+                    if (uc < masterLimit) leftOccupied = true;
+                });
+
+                // Prepare geometries
+                const totalGapW = currentOuterGap * 2 + this.innerGap;
+                const availableW = screenW - totalGapW;
+                const masterWidth = availableW * 0.6;
+                const stackWidth = availableW * 0.4;
+
+                const masterX = currentOuterGap;
+                const stackX = masterX + masterWidth + this.innerGap;
+                const h = screenH - (currentOuterGap * 2);
+
+                if (leftOccupied) {
+                    // Untiled is Left -> Place Tiled in Stack (Right)
+                    w.x = stackX;
+                    w.y = currentOuterGap;
+                    w.width = stackWidth;
+                    w.height = h;
+                } else {
+                    // Untiled is Right (or unknown) -> Place Tiled in Master (Left)
+                    w.x = masterX;
+                    w.y = currentOuterGap;
+                    w.width = masterWidth;
+                    w.height = h;
+                }
+            } else {
+                // Standard Single Center
+                const targetW = Math.min(screenW * 0.6, 1200);
+                const targetH = Math.min(screenH * 0.7, 900);
+
+                w.x = (screenW - targetW) / 2;
+                w.y = (screenH - targetH) / 2;
+                w.width = targetW;
+                w.height = targetH;
+            }
             return;
         }
 
-        // 2. Master + Stack
+        // 2. Master + Stack (2+ Tiled Windows)
         let masterW = tiledWindows.find(w => w.id === this.masterWindowId);
         if (!masterW) {
              masterW = tiledWindows[0];
@@ -195,15 +264,10 @@ class WindowManager {
 
         const stackWs = tiledWindows.filter(w => w.id !== masterW.id);
 
-        // Scale down the grid when 2+ windows are open to reveal HUD
-        const currentOuterGap = (stackWs.length > 0) ? 100 : this.outerGap;
+        // Gap is already calculated above as currentOuterGap
 
         const totalGapW = currentOuterGap * 2 + (stackWs.length > 0 ? this.innerGap : 0);
         const availableW = screenW - totalGapW;
-
-        // If stack exists, master takes 60%, else 100% (but handled by single window case mostly)
-        // Wait, if 2 windows, 1 master 1 stack.
-        // If stackWs.length > 0
 
         const masterWidth = stackWs.length > 0 ? availableW * 0.6 : availableW;
         const stackWidth = stackWs.length > 0 ? availableW * 0.4 : 0;
