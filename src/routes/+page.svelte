@@ -11,6 +11,7 @@
     import TerminalAuth from '$lib/components/TerminalAuth.svelte';
     import AdminPanel from '$lib/components/AdminPanel.svelte';
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
+    import FileViewer from '$lib/components/FileViewer.svelte';
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { musicState } from '$lib/stores';
 
@@ -109,6 +110,7 @@
         windowManager.register('c-tr', Vault);
         windowManager.register('c-bl', Playlist);
         windowManager.register('c-br', Portal);
+        windowManager.register('file-viewer', FileViewer);
     }
 
     onMount(() => {

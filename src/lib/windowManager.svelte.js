@@ -26,15 +26,33 @@ class WindowManager {
         this.registry.set(id, component);
     }
 
-    open(id, originRect) {
+    /**
+     * @param {string} id
+     * @param {Object} options
+     * @param {Object} [options.originRect]
+     * @param {Object} [options.props]
+     */
+    open(id, options = {}) {
         const component = this.registry.get(id);
         if (!component) {
             console.error(`Component for ${id} not found.`);
             return;
         }
 
+        // Handle legacy usage: open(id, originRect) where originRect has 'left' property
+        let originRect = options.originRect;
+        let props = options.props || {};
+
+        if (!originRect && options.left !== undefined) {
+            originRect = options;
+        }
+
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
+            // Update props if provided
+            if (Object.keys(props).length > 0) {
+                existing.props = props;
+            }
             this.focus(id);
             return;
         }
@@ -43,7 +61,8 @@ class WindowManager {
         const newWindow = {
             id,
             component,
-            originRect: originRect || { left: 0, top: 0, width: 0, height: 0 },
+            props,
+            originRect: originRect || null,
             x: originRect?.left || 0,
             y: originRect?.top || 0,
             width: originRect?.width || 300,
@@ -108,12 +127,16 @@ class WindowManager {
         }
     }
 
-    toggle(id, originRect) {
+    /**
+     * @param {string} id
+     * @param {Object} options
+     */
+    toggle(id, options = {}) {
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
             this.close(id);
         } else {
-            this.open(id, originRect);
+            this.open(id, options);
         }
     }
 
