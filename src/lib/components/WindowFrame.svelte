@@ -25,10 +25,10 @@
                 top: ${win.y}px;
                 width: {win.width}px;
                 height: {win.height}px;
-                z-index: {win.zIndex};
-                opacity: 1;
-                transform: none;
-                transition: none;
+                z-index: ${win.zIndex};
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
             `;
         }
 
