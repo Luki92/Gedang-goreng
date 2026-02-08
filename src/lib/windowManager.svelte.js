@@ -26,11 +26,15 @@ class WindowManager {
         this.registry.set(id, component);
     }
 
-    open(id, originRect) {
-        const component = this.registry.get(id);
+    open(id, originRect, options = {}) {
+        let component = this.registry.get(id);
         if (!component) {
-            console.error(`Component for ${id} not found.`);
-            return;
+            if (options.component) {
+                component = options.component;
+            } else {
+                console.error(`Component for ${id} not found.`);
+                return;
+            }
         }
 
         const existing = this.windows.find(w => w.id === id);
@@ -43,6 +47,7 @@ class WindowManager {
         const newWindow = {
             id,
             component,
+            props: options.props || {},
             originRect: originRect || { left: 0, top: 0, width: 0, height: 0 },
             x: originRect?.left || 0,
             y: originRect?.top || 0,

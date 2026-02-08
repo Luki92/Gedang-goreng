@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte';
     import { supabase } from '$lib/supabaseClient';
+    import { windowManager } from '$lib/windowManager.svelte.js';
+    import FileViewer from './FileViewer.svelte';
 
     /** @type {any[]} */
     let works = $state([]);
@@ -17,12 +19,9 @@
             if (error) {
                 console.error('Vault Access Error:', error);
                 errorState = true;
-                // Fallback to mock data on error (likely no DB connection)
                 loadMockData();
             } else {
-                // Success (even if empty)
                 works = data || [];
-                // If empty from DB, maybe load mock just to show something?
                 if (works.length === 0) loadMockData();
                 loading = false;
             }
@@ -31,12 +30,14 @@
 
     function loadMockData() {
         works = [
-            { id: 1, type: 'ESSAY', date: '2024.01', title: 'The Psychology of Pixel Art', description: 'Analyzing why low-res makes us feel high-emotion.', color: 'text-green-400' },
-            { id: 2, type: 'SKETCH', date: '2023.12', title: 'Void Walker Concept', description: 'Character design draft for Project Nebula.', color: 'text-purple-400' },
-            { id: 3, type: 'ART', date: '2024.02', title: 'Cyber Sunset', description: 'Digital painting.', image_url: '🎨' },
-            { id: 4, type: 'POST', date: '2024.03', title: 'Thinking about Svelte 5', description: 'Runes are a game changer for reactivity. The simplicity is refreshing.' },
-            { id: 5, type: 'ART', date: '2023.11', title: 'Glitch Portrait', description: 'Experimenting with datamoshing.', image_url: '👾' },
-            { id: 6, type: 'POST', date: '2024.03', title: 'Coffee Break', description: 'Sometimes you just need to stare at the void.' }
+            { id: 1, type: 'ESSAY', date: '2024.01', title: 'The Psychology of Pixel Art', description: 'Analyzing why low-res makes us feel high-emotion.', color: 'text-green-400', content: "<p>We live in a high-fidelity world. 4K screens, 120Hz refresh rates, photorealistic rendering. Yet, pixel art remains distinctively emotional. Why?</p><p>Perhaps it is the <strong>abstraction</strong>. By removing detail, the mind is forced to fill in the gaps. It is a collaborative act of imagination between the artist and the viewer.</p><h3>The Nostalgia Factor</h3><p>For many, it triggers memories of simpler times. But even for those who never grew up with a SNES, there is a certain 'digital warmth' to chunky pixels.</p>" },
+            { id: 2, type: 'SKETCH', date: '2023.12', title: 'Void Walker Concept', description: 'Character design draft for Project Nebula.', color: 'text-purple-400', image_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop' },
+            { id: 3, type: 'ART', date: '2024.02', title: 'Cyber Sunset', description: 'Digital painting.', image_url: 'https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1000&auto=format&fit=crop' },
+            { id: 4, type: 'POST', date: '2024.03', title: 'Thinking about Svelte 5', description: 'Runes are a game changer for reactivity. The simplicity is refreshing.', content: "<p>Svelte 5 introduces <code>$state</code> and <code>$derived</code> runes. This moves reactivity away from the component compiler magic and into standard JavaScript semantics.</p><p>It feels much more like writing normal code. No more quirky top-level let exports or $ labels that behave unexpectedly.</p>" },
+            { id: 5, type: 'ART', date: '2023.11', title: 'Glitch Portrait', description: 'Experimenting with datamoshing.', image_url: 'https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?q=80&w=1000&auto=format&fit=crop' },
+            { id: 6, type: 'POST', date: '2024.03', title: 'Coffee Break', description: 'Sometimes you just need to stare at the void.', content: "<p>Taking a break is productive work. The brain needs downtime to consolidate information. Go touch grass.</p>" },
+            { id: 7, type: 'ESSAY', date: '2023.10', title: 'Digital Gardening', description: 'Why you should own your own data.', content: "<p>Social media is a rented apartment. A personal website is a home you own. Tend to it, let it grow wild, and don't worry about the algorithm.</p>" },
+             { id: 8, type: 'ART', date: '2023.09', title: 'Neon Rain', description: 'Blender 3D render.', image_url: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=1000&auto=format&fit=crop' }
         ];
         loading = false;
     }
@@ -64,6 +65,26 @@
             return true;
         });
     });
+
+    /**
+     * @param {MouseEvent} e
+     * @param {any} item
+     */
+    function openFile(e, item) {
+        // Calculate origin rect for animation
+        const rect = e.currentTarget.getBoundingClientRect();
+        const origin = {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height
+        };
+
+        windowManager.open('file-' + item.id, origin, {
+            component: FileViewer,
+            props: item
+        });
+    }
 </script>
 
 <div class="h-full overflow-y-auto relative custom-scrollbar pr-2">
@@ -82,60 +103,43 @@
         </div>
     {/if}
 
-    {#if activeFilter === 'ART'}
-        <!-- Grid Layout for ART -->
-        <div class="grid grid-cols-2 gap-3 pb-4">
-            {#each filteredWorks as item}
-                <!-- svelte-ignore a11y_click_events_have_key_events -->
-                <!-- svelte-ignore a11y_no_static_element_interactions -->
-                <div class="aspect-square border border-[#333] bg-[#080808] relative overflow-hidden group hover:border-white transition-colors cursor-pointer">
-                    <!-- Image / Placeholder -->
-                    <div class="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition-transform duration-500">
-                        {#if item.image_url && item.image_url.startsWith('http')}
-                            <img src={item.image_url} alt={item.title} class="w-full h-full object-cover" />
-                        {:else}
-                            <span>{item.image_url || '🖼️'}</span>
-                        {/if}
-                    </div>
-
-                    <!-- Hover Overlay -->
-                    <div class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-2 text-center">
-                        <!-- We use translateY animation on hover via CSS classes in app.css or inline -->
-                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center">
-                            <span class="text-[10px] text-yellow-400 font-[VT323]">{item.date}</span>
-                            <h4 class="text-white font-bold text-sm leading-tight">{item.title}</h4>
-                        </div>
-                    </div>
-                </div>
-            {/each}
-        </div>
-    {:else}
-        <!-- List Layout for Writing/Posts -->
-        <div class="grid grid-cols-1 gap-2 pb-4">
-            {#each filteredWorks as item}
-                <a href={item.content_url || '#'} target={item.content_url ? '_blank' : ''} class="block p-4 border border-[#222] bg-[#080808] hover:bg-[#111] hover:border-white transition-all cursor-pointer group relative overflow-hidden">
-                    <!-- Glitch Hover Effect Overlay -->
-                    <div class="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none"></div>
-
-                    <div class="flex justify-between items-center mb-2 relative z-10">
-                        <span class="{getTypeColor(item.type)} text-xs font-[VT323] border border-current px-1 opacity-80">[{item.type}]</span>
-                        <span class="text-gray-600 text-xs font-mono group-hover:text-gray-400 transition-colors">{item.date}</span>
-                    </div>
-
-                    <h3 class="text-white font-bold group-hover:text-blue-400 transition-colors relative z-10 flex items-center gap-2">
-                        {item.title}
-                        {#if item.content_url}
-                            <i class="ph ph-arrow-up-right text-xs opacity-50"></i>
-                        {/if}
-                    </h3>
-
-                    {#if item.description}
-                        <p class="text-xs text-gray-500 mt-1 relative z-10 group-hover:text-gray-400 max-w-[90%] leading-relaxed">{item.description}</p>
+    <!-- Masonry Layout for ALL -->
+    <div class="masonry-grid pb-4">
+        {#each filteredWorks as item}
+            <!-- svelte-ignore a11y_click_events_have_key_events -->
+            <!-- svelte-ignore a11y_no_static_element_interactions -->
+            <div
+                class="masonry-item mb-4 bg-[#080808] border border-[#222] hover:border-white transition-colors cursor-pointer relative group overflow-hidden break-inside-avoid"
+                onclick={(e) => openFile(e, item)}
+            >
+                <div class="item-content relative transform transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
+                    <!-- Image or Placeholder -->
+                    {#if item.image_url && item.image_url.startsWith('http')}
+                         <img src={item.image_url} alt={item.title} class="w-full h-auto object-cover block" />
+                    {:else if item.image_url}
+                         <div class="w-full aspect-square flex items-center justify-center text-4xl bg-[#111]">
+                             {item.image_url}
+                         </div>
+                    {:else}
+                         <!-- Text Only Card -->
+                         <div class="p-6 min-h-[150px] flex flex-col justify-between">
+                            <span class="{getTypeColor(item.type)} text-xs font-[VT323] border border-current px-1 self-start opacity-70 mb-2">[{item.type}]</span>
+                            <h3 class="text-white text-lg font-bold leading-tight mb-2">{item.title}</h3>
+                            <p class="text-gray-500 text-xs line-clamp-3">{item.description}</p>
+                         </div>
                     {/if}
-                </a>
-            {/each}
-        </div>
-    {/if}
+                </div>
+
+                <!-- Hover Info (Gliding from bottom) -->
+                {#if item.image_url}
+                    <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-col items-start justify-end h-24 pointer-events-none">
+                        <span class="{getTypeColor(item.type)} text-[10px] font-mono mb-1">{item.type} // {item.date}</span>
+                        <h4 class="text-white font-bold text-sm leading-tight">{item.title}</h4>
+                    </div>
+                {/if}
+            </div>
+        {/each}
+    </div>
 
     {#if filteredWorks.length === 0 && !loading}
             <div class="text-center py-10 border border-dashed border-[#333] text-gray-600 font-mono text-xs">
@@ -143,3 +147,13 @@
             </div>
     {/if}
 </div>
+
+<style>
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 1rem;
+    }
+    .masonry-item {
+        break-inside: avoid;
+    }
+</style>
