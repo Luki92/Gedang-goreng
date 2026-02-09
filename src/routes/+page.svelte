@@ -19,6 +19,7 @@
     import AdminProfile from '$lib/components/admin/AdminProfile.svelte';
     import AdminPlaylist from '$lib/components/admin/AdminPlaylist.svelte';
     import AdminGuestbook from '$lib/components/admin/AdminGuestbook.svelte';
+    import AdminDocs from '$lib/components/admin/AdminDocs.svelte';
 
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { musicState } from '$lib/stores';
@@ -134,6 +135,7 @@
         windowManager.register('admin-profile', AdminProfile);
         windowManager.register('admin-playlist', AdminPlaylist);
         windowManager.register('admin-guestbook', AdminGuestbook);
+        windowManager.register('admin-docs', AdminDocs);
     }
 
     onMount(() => {

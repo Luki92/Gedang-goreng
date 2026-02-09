@@ -54,9 +54,14 @@
                 <span class="text-xs text-gray-400 group-hover:text-white">AUDIO_DB</span>
             </button>
 
-            <button onclick={() => open('admin-guestbook')} class="col-span-2 group relative p-6 border border-[#333] hover:border-yellow-500 bg-[#111] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-guestbook')} class="group relative p-6 border border-[#333] hover:border-yellow-500 bg-[#111] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-envelope-open text-3xl text-gray-500 group-hover:text-yellow-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">MODERATION_QUEUE</span>
+            </button>
+
+            <button onclick={() => open('admin-docs')} class="group relative p-6 border border-[#333] hover:border-purple-500 bg-[#111] transition-all flex flex-col items-center gap-2">
+                <i class="ph ph-book-bookmark text-3xl text-gray-500 group-hover:text-purple-500 transition-colors"></i>
+                <span class="text-xs text-gray-400 group-hover:text-white">DOCS_&_MANUAL</span>
             </button>
         </div>
     </div>
