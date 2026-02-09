@@ -31,6 +31,7 @@ class WindowManager {
      * @param {Object} options
      * @param {Object} [options.originRect]
      * @param {Object} [options.props]
+     * @param {boolean} [options.isTiled]
      */
     open(id, options = {}) {
         const component = this.registry.get(id);
@@ -57,31 +58,58 @@ class WindowManager {
             return;
         }
 
+        let width = originRect?.width || 800; // Default size for floating
+        let height = originRect?.height || 600;
+        let x = originRect?.left || 0;
+        let y = originRect?.top || 0;
+        let isTiled = options.isTiled !== undefined ? options.isTiled : true;
+
+        // Smart Cascade for Floating Windows
+        if (!isTiled && !originRect && typeof window !== 'undefined') {
+             const floatingWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing');
+             if (floatingWindows.length > 0) {
+                 const last = floatingWindows[floatingWindows.length - 1];
+                 x = last.x + 40;
+                 y = last.y + 40;
+
+                 // Bounds Check
+                 if (x + width > window.innerWidth - 20) x = 40;
+                 if (y + height > window.innerHeight - 20) y = 40;
+             } else {
+                 // Center if first floating window
+                 x = (window.innerWidth - width) / 2;
+                 y = (window.innerHeight - height) / 2;
+             }
+        }
+
         // Create new window object
         const newWindow = {
             id,
             component,
             props,
             originRect: originRect || null,
-            x: originRect?.left || 0,
-            y: originRect?.top || 0,
-            width: originRect?.width || 300,
-            height: originRect?.height || 200,
+            x,
+            y,
+            width,
+            height,
             zIndex: 10,
             state: 'opening', // opening, open, closing
-            isTiled: true,
+            isTiled,
         };
 
         this.windows.push(newWindow);
 
         // Determine Master/Stack
-        if (!this.masterWindowId) {
+        if (!this.masterWindowId && isTiled) {
             this.masterWindowId = id;
         }
 
         this.focus(id);
-        this.resolveCollisions(id);
-        this.recalculateLayout();
+
+        if (isTiled) {
+            this.resolveCollisions(id);
+            this.recalculateLayout();
+        }
 
         // Animation delay to allow CSS transition from origin to calculated pos
         setTimeout(() => {
@@ -108,7 +136,9 @@ class WindowManager {
             if (wasMaster) {
                 // Promote next window to master
                 if (this.windows.length > 0) {
-                    this.masterWindowId = this.windows[0].id;
+                    const nextMaster = this.windows.find(win => win.isTiled);
+                    if (nextMaster) this.masterWindowId = nextMaster.id;
+                    else this.masterWindowId = null;
                 } else {
                     this.masterWindowId = null;
                 }
@@ -145,8 +175,11 @@ class WindowManager {
         const w = this.windows.find(w => w.id === id);
         if (w && w.isTiled) {
              w.isTiled = false;
+             // When untiled, give it current dimensions explicitly to prevent layout jump
+             // (Though x/y/width/height are reactive, so they should be fine)
         }
         this.isDragging = true;
+        this.recalculateLayout(); // Re-layout remaining tiled windows
     }
 
     stopDrag() {
@@ -225,8 +258,8 @@ class WindowManager {
 
         const untiledWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing');
         const hasUntiled = untiledWindows.length > 0;
-        const totalWindows = tiledWindows.length + untiledWindows.length;
-        const currentOuterGap = (totalWindows > 1) ? 100 : this.outerGap;
+        const totalWindows = tiledWindows.length + untiledWindows.length; // Approximate "density"
+        const currentOuterGap = (tiledWindows.length > 1 || hasUntiled) ? 100 : this.outerGap;
 
         // 1. Single Tiled Window (Hybrid Check)
         if (tiledWindows.length === 1) {

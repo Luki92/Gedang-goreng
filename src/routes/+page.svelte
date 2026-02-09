@@ -8,12 +8,12 @@
     import Vault from '$lib/components/Vault.svelte';
     import Playlist from '$lib/components/Playlist.svelte';
     import Portal from '$lib/components/Portal.svelte';
-    import TerminalAuth from '$lib/components/TerminalAuth.svelte';
-    import AdminPanel from '$lib/components/AdminPanel.svelte';
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import FileViewer from '$lib/components/FileViewer.svelte';
+    import Terminal from '$lib/components/Terminal.svelte';
 
     // Admin Components
+    import ControlCenter from '$lib/components/admin/ControlCenter.svelte';
     import AdminVault from '$lib/components/admin/AdminVault.svelte';
     import AdminPortal from '$lib/components/admin/AdminPortal.svelte';
     import AdminProfile from '$lib/components/admin/AdminProfile.svelte';
@@ -128,8 +128,10 @@
         windowManager.register('c-bl', Playlist);
         windowManager.register('c-br', Portal);
         windowManager.register('file-viewer', FileViewer);
+        windowManager.register('terminal', Terminal);
 
         // Admin
+        windowManager.register('control-center', ControlCenter);
         windowManager.register('admin-vault', AdminVault);
         windowManager.register('admin-portal', AdminPortal);
         windowManager.register('admin-profile', AdminProfile);
@@ -138,7 +140,17 @@
         windowManager.register('admin-docs', AdminDocs);
     }
 
+    function handleGlobalKeydown(e) {
+        // Toggle Terminal: Ctrl + Shift + L
+        if (e.ctrlKey && e.shiftKey && (e.key === 'L' || e.key === 'l')) {
+            e.preventDefault();
+            windowManager.toggle('terminal', { isTiled: false, width: 700, height: 500 });
+        }
+    }
+
     onMount(() => {
+        window.addEventListener('keydown', handleGlobalKeydown);
+
         // Init Debris
         actors = allItems.map(item => new Actor(item));
 
@@ -164,6 +176,7 @@
         });
 
         return () => {
+            window.removeEventListener('keydown', handleGlobalKeydown);
             cancelAnimationFrame(animFrame);
             window.removeEventListener('mousemove', mm);
             unsubMusic();
@@ -281,13 +294,15 @@
 <TilingWindowManager />
 
 <main class="header-container">
+    <!-- svelte-ignore a11y_missing_content -->
     <div bind:this={welcomeContainer} id="welcome-target" class="welcome-line">Welcome<span class="cursor-marker cursor-active"></span></div>
+    <!-- svelte-ignore a11y_missing_content -->
     <h1 bind:this={titleEl} id="title-target" class="main-title"></h1>
 </main>
 
 <LukiPersona />
 
-<button id="mobile-reactor" onclick={toggleMobileMenu} style:transform={mobileMenuActive ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%) scale(1)'}></button>
+<button id="mobile-reactor" onclick={toggleMobileMenu} aria-label="Toggle Mobile Menu" style:transform={mobileMenuActive ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%) scale(1)'}></button>
 
 <HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
     {#snippet buttonContent()}
@@ -312,6 +327,3 @@
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
 </HUDCorner>
-
-<TerminalAuth />
-<AdminPanel />
