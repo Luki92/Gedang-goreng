@@ -12,6 +12,14 @@
     import AdminPanel from '$lib/components/AdminPanel.svelte';
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import FileViewer from '$lib/components/FileViewer.svelte';
+
+    // Admin Components
+    import AdminVault from '$lib/components/admin/AdminVault.svelte';
+    import AdminPortal from '$lib/components/admin/AdminPortal.svelte';
+    import AdminProfile from '$lib/components/admin/AdminProfile.svelte';
+    import AdminPlaylist from '$lib/components/admin/AdminPlaylist.svelte';
+    import AdminGuestbook from '$lib/components/admin/AdminGuestbook.svelte';
+
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { musicState } from '$lib/stores';
 
@@ -85,8 +93,16 @@
         if (lyricInterval) return;
         lyricInterval = setInterval(() => {
             if (!lyricsContainer) return;
+
+            // Mix in current song title if playing
+            const pool = [...words];
+            if ($musicState.title && $musicState.title !== 'LOFI_STATION_1') {
+                pool.push($musicState.title.toUpperCase());
+                pool.push($musicState.artist.toUpperCase());
+            }
+
             const el = document.createElement('div');
-            el.innerText = words[Math.floor(Math.random() * words.length)];
+            el.innerText = pool[Math.floor(Math.random() * pool.length)];
             el.className = 'lyric-float';
             el.style.left = Math.random() * 80 + 10 + '%';
             el.style.top = '100%';
@@ -111,6 +127,13 @@
         windowManager.register('c-bl', Playlist);
         windowManager.register('c-br', Portal);
         windowManager.register('file-viewer', FileViewer);
+
+        // Admin
+        windowManager.register('admin-vault', AdminVault);
+        windowManager.register('admin-portal', AdminPortal);
+        windowManager.register('admin-profile', AdminProfile);
+        windowManager.register('admin-playlist', AdminPlaylist);
+        windowManager.register('admin-guestbook', AdminGuestbook);
     }
 
     onMount(() => {
