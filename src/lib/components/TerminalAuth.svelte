@@ -1,37 +1,30 @@
 <script>
     import { onMount } from 'svelte';
     import { isAdmin } from '$lib/stores';
-
-    // Default Hash for "admin"
-    // 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-    const ADMIN_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+    import { supabase } from '$lib/supabaseClient';
 
     let isVisible = $state(false);
     let inputVal = $state('');
     /** @type {{ type: string, text: string }[]} */
     let output = $state([
-        { type: 'info', text: 'LUKI.OS v2.0.4 [Authorized Personnel Only]' },
+        { type: 'info', text: 'LUKI.OS v3.0.0 [Authorized Personnel Only]' },
         { type: 'info', text: 'Type "help" for available commands.' }
     ]);
     /** @type {HTMLInputElement | null} */
     let inputRef = $state(null);
 
-    /** @param {string} string */
-    async function hash(string) {
-        const utf8 = new TextEncoder().encode(string);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-        return hashHex;
-    }
-
     async function handleCommand() {
         const cmd = inputVal.trim();
         if (!cmd) return;
 
-        output = [...output, { type: 'user', text: `> ${cmd}` }];
+        // Mask password in output if command is login
+        const isLogin = cmd.toLowerCase().startsWith('login ');
+        const displayCmd = isLogin ? 'login ********' : cmd;
+
+        output = [...output, { type: 'user', text: `> ${displayCmd}` }];
         inputVal = '';
 
+        // Simple parser that respects quotes could be better, but split by space is enough for now
         const args = cmd.split(' ');
         const command = args[0].toLowerCase();
 
@@ -39,37 +32,48 @@
             case 'help':
                 output = [...output,
                     { type: 'info', text: 'AVAILABLE COMMANDS:' },
-                    { type: 'info', text: '  login <password>  - Elevate privileges' },
-                    { type: 'info', text: '  logout            - Drop privileges' },
-                    { type: 'info', text: '  clear             - Clear terminal' },
-                    { type: 'info', text: '  whoami            - Display current user' },
-                    { type: 'info', text: '  exit              - Close terminal' }
+                    { type: 'info', text: '  login <email> <password>  - Authenticate via Supabase' },
+                    { type: 'info', text: '  logout                    - End session' },
+                    { type: 'info', text: '  clear                     - Clear terminal' },
+                    { type: 'info', text: '  whoami                    - Display current user' },
+                    { type: 'info', text: '  exit                      - Close terminal' }
                 ];
                 break;
             case 'clear':
                 output = [];
                 break;
             case 'whoami':
-                output = [...output, { type: 'info', text: $isAdmin ? 'root (ADMIN)' : 'guest (VISITOR)' }];
+                if ($isAdmin) {
+                    const { data } = await supabase.auth.getUser();
+                    output = [...output, { type: 'info', text: `root (ADMIN) - ${data.user?.email}` }];
+                } else {
+                    output = [...output, { type: 'info', text: 'guest (VISITOR)' }];
+                }
                 break;
             case 'exit':
                 isVisible = false;
                 break;
             case 'logout':
+                await supabase.auth.signOut();
                 $isAdmin = false;
-                output = [...output, { type: 'warn', text: 'Privileges dropped.' }];
+                output = [...output, { type: 'warn', text: 'Session terminated.' }];
                 break;
             case 'login':
-                if (args[1]) {
-                    const h = await hash(args[1]);
-                    if (h === ADMIN_HASH) {
+                if (args[1] && args[2]) {
+                    output = [...output, { type: 'info', text: 'Authenticating...' }];
+                    const { data, error } = await supabase.auth.signInWithPassword({
+                        email: args[1],
+                        password: args[2]
+                    });
+
+                    if (error) {
+                        output = [...output, { type: 'error', text: `ACCESS DENIED: ${error.message}` }];
+                    } else {
                         $isAdmin = true;
                         output = [...output, { type: 'success', text: 'ACCESS GRANTED. WELCOME BACK, OPERATOR.' }];
-                    } else {
-                        output = [...output, { type: 'error', text: 'ACCESS DENIED. INVALID CREDENTIALS.' }];
                     }
                 } else {
-                    output = [...output, { type: 'error', text: 'Usage: login <password>' }];
+                    output = [...output, { type: 'error', text: 'Usage: login <email> <password>' }];
                 }
                 break;
             default:
@@ -102,12 +106,31 @@
 
     onMount(() => {
         window.addEventListener('keydown', handleKeydown);
-        return () => window.removeEventListener('keydown', handleKeydown);
+
+        // Check initial session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            $isAdmin = !!session;
+            if (session) {
+                 output = [...output, { type: 'success', text: `Session restored: ${session.user.email}` }];
+            }
+        });
+
+        // Listen for changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            $isAdmin = !!session;
+        });
+
+        return () => {
+            window.removeEventListener('keydown', handleKeydown);
+            subscription.unsubscribe();
+        };
     });
 </script>
 
 {#if isVisible}
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick={() => isVisible = false}>
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick={() => isVisible = false} role="dialog" aria-modal="true">
         <div class="w-full max-w-2xl bg-[#050505] border border-green-900 shadow-[0_0_30px_rgba(0,255,0,0.2)] font-mono rounded overflow-hidden" onclick={(e) => e.stopPropagation()}>
             <!-- Header -->
             <div class="bg-green-900/20 border-b border-green-900 p-2 flex justify-between items-center text-xs text-green-500">
