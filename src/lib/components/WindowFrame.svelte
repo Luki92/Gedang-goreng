@@ -108,8 +108,15 @@
 
     /** @param {MouseEvent} e */
     function handleMouseDown(e) {
+        /** @type {HTMLElement} */
         // @ts-ignore
-        if (e.target.closest('button') || e.target.closest('.resize-handle') || e.target.closest('input') || e.target.closest('a') || e.target.tagName === 'path') return;
+        const target = e.target;
+
+        // Prevent drag on interactive elements
+        const ignoreTags = ['BUTTON', 'INPUT', 'TEXTAREA', 'A', 'SELECT', 'OPTION', 'PRE', 'CODE', 'TABLE'];
+        if (target.closest('button') || target.closest('.resize-handle') || ignoreTags.includes(target.tagName) || target.closest('.selectable') || target.closest('.no-drag') || target.tagName === 'path') {
+            return;
+        }
 
         isDragging = true;
         startX = e.clientX;

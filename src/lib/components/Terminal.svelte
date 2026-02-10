@@ -81,7 +81,7 @@
 ║|\  \     |\  \|\  \|\  \|\  \ |\  \|\   __  \|\   ____\     ║
 ║\ \  \    \ \  \\  \ \  \/  /|\ \  \ \  \|\  \ \  \___|_    ║
 ║ \ \  \    \ \  \\  \ \   ___  \ \  \ \  \\  \ \_____  \   ║
-║  \ \  \____\ \  \\  \ \  \ \  \ \  \ \  \ \  \\  \|____|\  \  ║
+║  \ \  \____\ \  \\  \ \  \ \  \ \  \ \  \\  \|____|\  \  ║
 ║   \ \_______\ \_______\ \__\ \__\ \__\ \_______\____\_\  \ ║
 ║    \|_______|\|_______|\|__| \|__|\|__|\|_______|\_________\║
 ║                                                 \|_________|║
@@ -153,7 +153,6 @@
 
             case 'clear':
                 terminalStore.clear();
-                // Re-print MOTD? Maybe just clear.
                 break;
 
             case 'apt':
@@ -342,9 +341,6 @@
             const matches = commands.filter(c => c.startsWith(currentWord));
             if (matches.length === 1) {
                 inputVal = matches[0] + ' ';
-            } else if (matches.length > 1) {
-                // print matches? For now just cycle logic isn't there, so maybe print
-                // But simplified: just complete if unique
             }
         }
 
@@ -368,7 +364,7 @@
                  class:text-red-500={line.type === 'error'}
                  class:text-yellow-400={line.type === 'warn'}
                  class:text-blue-400={line.type === 'success'}
-                 class="whitespace-pre-wrap leading-tight">
+                 class="whitespace-pre-wrap leading-tight selectable">
                  {#if line.type === 'user'}
                     <span class="opacity-50 mr-2">➜</span>
                  {/if}

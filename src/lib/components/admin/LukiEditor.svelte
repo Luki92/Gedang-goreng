@@ -87,7 +87,7 @@
         </div>
 
         <!-- Preview Pane -->
-        <div class="flex-1 h-full bg-[#080808] border-l border-[#333] overflow-y-auto custom-scrollbar p-6"
+        <div class="flex-1 h-full bg-[#080808] border-l border-[#333] overflow-y-auto custom-scrollbar p-6 selectable"
              class:hidden={activeTab === 'edit'}
              class:md:block={activeTab === 'split'}
         >

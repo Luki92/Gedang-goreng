@@ -1,6 +1,12 @@
 <script>
+    import LukiRenderer from '$lib/components/renderer/LukiRenderer.svelte';
+    import { parser } from '$lib/utils/luki-parser.js';
+
     /** @type {{ item?: { title: string, date: string, type: string, description: string, image_url?: string } }} */
     let { item = undefined } = $props();
+
+    // Use LukiRenderer for description if it's text-heavy
+    let ast = $derived(item ? parser.parse(item.description) : []);
 </script>
 
 <div class="file-viewer h-full w-full bg-[#050505] text-white flex flex-col p-6 overflow-hidden">
@@ -14,10 +20,10 @@
                  <span class="px-2 py-0.5 border border-[#333] text-[10px] text-gray-400 font-mono tracking-widest uppercase">{item.type}</span>
                  <span class="text-xs text-gray-500 font-mono tracking-wider">DATE: {item.date}</span>
              </div>
-             <h1 class="text-3xl md:text-5xl font-bold mb-2 leading-tight tracking-tight text-white">{item.title}</h1>
+             <h1 class="text-3xl md:text-5xl font-bold mb-2 leading-tight tracking-tight text-white selectable">{item.title}</h1>
         </div>
 
-        <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-2">
+        <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-2 selectable">
              {#if ['ART', 'SKETCH'].includes(item.type)}
                  <div class="w-full flex flex-col items-center gap-6">
                      <div class="w-full flex items-center justify-center bg-[#080808] border border-[#222] p-2 md:p-8 relative group">
@@ -33,15 +39,17 @@
                          {/if}
                      </div>
                      {#if item.description}
-                         <p class="text-sm md:text-base text-gray-400 max-w-3xl leading-relaxed text-center font-serif italic border-l-2 border-gray-700 pl-4">
+                         <div class="text-sm md:text-base text-gray-400 max-w-3xl leading-relaxed text-center font-serif italic border-l-2 border-gray-700 pl-4 selectable">
                              {item.description}
-                         </p>
+                         </div>
                      {/if}
                  </div>
              {:else}
                  <!-- Text Content (Essay/Post) -->
-                 <div class="prose prose-invert prose-sm md:prose-lg max-w-3xl mx-auto py-4 font-serif">
-                     <p class="leading-relaxed text-gray-300 whitespace-pre-line">{item.description}</p>
+                 <div class="prose prose-invert prose-sm md:prose-lg max-w-3xl mx-auto py-4 font-serif selectable">
+                     <!-- Use LukiRenderer here too for consistency, or keep whitespace-pre-line? -->
+                     <!-- Let's switch to LukiRenderer for rich text support in Essays -->
+                     <LukiRenderer {ast} />
 
                      <div class="mt-12 pt-8 border-t border-[#222] flex justify-between items-center text-xs text-gray-600 font-mono">
                          <span>END_OF_FILE</span>
