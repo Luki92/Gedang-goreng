@@ -5,19 +5,23 @@
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { dataStore } from '$lib/stores/data.svelte.js';
     import { terminalStore } from '$lib/stores/terminal.svelte.js';
+    import TerminalBoot from './terminal/TerminalBoot.svelte';
+    import TerminalNeofetch from './terminal/TerminalNeofetch.svelte';
 
-    let inputVal = $state('');
+    /** @type {HTMLInputElement | null} */
     let inputRef = $state(null);
+    let inputVal = $state('');
     let currentPath = $state('~/');
     let user = $state('guest');
+    let isBooting = $state(true);
 
-    // Virtual File System
+    /** @type {Record<string, { type: string, children: Record<string, any> }>} */
     const fileSystem = {
         '~/': {
             type: 'dir',
             children: {
                 'readme.txt': { type: 'file', content: 'Welcome to LukiOS.\nThis is a portfolio system mimicking a Tiling Window Manager.' },
-                'projects': { type: 'dir', children: {} }, // Will populate from dataStore
+                'projects': { type: 'dir', children: {} },
                 'system': { type: 'dir', children: {
                     'config': { type: 'file', content: 'Display: 1920x1080\nTheme: Dark' },
                     'logs': { type: 'file', content: 'System initialized...' }
@@ -26,29 +30,22 @@
         }
     };
 
-    // Command List for Tab Completion
     const commands = [
         'cat', 'cd', 'clear', 'echo', 'exit', 'grep', 'help', 'history',
         'login', 'ls', 'logout', 'man', 'neofetch', 'open', 'rm', 'sudo',
-        'top', 'uname', 'whoami', 'coffee', 'apt', 'apt-get', 'yum', 'pacman'
+        'top', 'uname', 'whoami', 'coffee', 'apt', 'apt-get', 'yum', 'pacman',
+        'nix-shell', 'nixos-rebuild'
     ];
 
+    /** @type {string[]} */
     let commandHistory = $state([]);
     let historyIndex = $state(-1);
 
     onMount(() => {
         if (inputRef) inputRef.focus();
 
-        // Initial MOTD
-        if (terminalStore.history.length <= 2) { // Only if fresh
-             terminalStore.clear();
-             printMOTD();
-        }
-
-        // Sync user state
         if ($isAdmin) user = 'root';
 
-        // Listen for global auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             user = session ? 'root' : 'guest';
             $isAdmin = !!session;
@@ -57,64 +54,42 @@
             }
         });
 
-        // Listen for system logs (Deployment events)
-        const handleLog = (e) => {
+        const handleLog = (/** @type {CustomEvent} */ e) => {
             print(e.detail.text, e.detail.type || 'info');
         };
+        // @ts-ignore
         window.addEventListener('terminal-log', handleLog);
 
         return () => {
             subscription.unsubscribe();
+            // @ts-ignore
             window.removeEventListener('terminal-log', handleLog);
         }
     });
 
+    function handleBootComplete() {
+        isBooting = false;
+        terminalStore.clear();
+        showNeofetch();
+        tick().then(() => inputRef?.focus());
+    }
+
+    /**
+     * @param {string | null} text
+     * @param {string} [type]
+     */
     function print(text, type = 'text') {
         terminalStore.add(text, type);
     }
 
-    function printMOTD() {
-        const now = new Date();
-        const dateStr = now.toUTCString();
-        const motd = `╔═════════════════════════════════════════════════════════════╗
-║ ___       ___  ___  ___  __    ___  ________  ________      ║
-║|\  \     |\  \|\  \|\  \|\  \ |\  \|\   __  \|\   ____\     ║
-║\ \  \    \ \  \\  \ \  \/  /|\ \  \ \  \|\  \ \  \___|_    ║
-║ \ \  \    \ \  \\  \ \   ___  \ \  \ \  \\  \ \_____  \   ║
-║  \ \  \____\ \  \\  \ \  \ \  \ \  \ \  \\  \|____|\  \  ║
-║   \ \_______\ \_______\ \__\ \__\ \__\ \_______\____\_\  \ ║
-║    \|_______|\|_______|\|__| \|__|\|__|\|_______|\_________\║
-║                                                 \|_________|║
-╚═════════════════════════════════════════════════════════════╝
-
- Welcome to LukiOS 2.0.4-stable (NixOS 25.11 "Caffeinated")
-
- * Documentation:  Try 'man luck' (Manual page not found)
- * Support:        Life is suffering. Submit a ticket to the void.
- * Performance:    Aggregating existential dread for Q1 deliverables.
- * System Status:  All systems nominal. Developer status: Critical.
-
- System Data:
-   CPU Usage:      12% (Idle, like my career goals)
-   Memory Usage:   64% (Leaking memory and patience)
-   Disk Usage:     89% (Mostly unread 'To-Do' lists)
-   Uptime:         4 days, 12 hours, 31 minutes
-
- Current Strategy: Leveraging cross-functional synergy to automate
- being tired. Do not run 'rm -rf /' unless you really mean it.
-
- There are 42 pending security updates. None of them solve the
- underlying structural issues of the universe.
-
- Last login: ${dateStr} from 127.0.0.1`;
-
-        print(motd, 'info');
+    function showNeofetch() {
+        terminalStore.add(null, 'neofetch');
     }
 
+    /** @param {string} cmdStr */
     async function execute(cmdStr) {
         if (!cmdStr.trim()) return;
 
-        // Add to command history
         commandHistory.push(cmdStr);
         historyIndex = commandHistory.length;
 
@@ -122,7 +97,6 @@
         const cmd = parts[0].toLowerCase();
         const args = parts.slice(1);
 
-        // Print prompt line
         print(`${user}@lukios:${currentPath}$ ${cmdStr}`, 'user');
 
         switch (cmd) {
@@ -130,29 +104,29 @@
                 print('LukiOS Shell, version 5.2.15(1)-release (x86_64-pc-linux-gnu)', 'info');
                 print('These shell commands are defined internally. Type `help\' to see this list.', 'info');
                 print('', 'info');
-                print('  cat [FILE]             Dump file contents. Useful for seeing exactly where it all went wrong.', 'info');
-                print('  cd [DIR]               Change directory. Use it to navigate the labyrinth of your own folders.', 'info');
-                print('  clear                  Wipe the screen of your failures. Does not work on personal history.', 'info');
-                print('  echo [TEXT]            Repeat words back to me. Excellent for echoing corporate platitudes.', 'info');
-                print('  exit                   Terminate the session. Return to the waking world. Life is suffering.', 'info');
-                print('  grep [PATTERN]         Search for meaning in a sea of strings. Usually returns 0 results.', 'info');
-                print('  help                   Display this list. For when you inevitably lose the plot.', 'info');
-                print('  history                A chronological list of every mistake you have made this session.', 'info');
-                print('  login [USR] [PWD]      Attempt to gain entry. Security is just a vibe we maintain for legal.', 'info');
-                print('  ls [DIR]               List directory contents. If it is empty, it is probably a metaphor.', 'info');
-                print('  logout                 Destroy session tokens. Go back to being a guest in your own house.', 'info');
-                print('  man [CMD]              Read the manual. It is long, dry, and provides no actual comfort.', 'info');
-                print('  neofetch               Display system specs. Essential for proving you actually use NixOS.', 'info');
-                print('  open [APP]             Launch subsystem (vault, portal). High latency, questionable ROI.', 'info');
-                print('  rm [FILE]              Delete a file. Finally, a way to actually get rid of something.', 'info');
-                print('  sudo admin             Demand higher privileges. Results vary based on caffeine levels.', 'info');
-                print('  top                    Monitor processes. Mostly just watching the CPU struggle to exist.', 'info');
-                print('  uname -a               Confirm that yes, we are still running on a NixOS derivation.', 'info');
-                print('  whoami                 Print current user ID. Useful for identity crises during late-night builds.', 'info');
+                print('  cat [FILE]             Dump file contents.', 'info');
+                print('  cd [DIR]               Change directory.', 'info');
+                print('  clear                  Wipe screen and show system info.', 'info');
+                print('  echo [TEXT]            Repeat words back to me.', 'info');
+                print('  exit                   Terminate session.', 'info');
+                print('  help                   Display this list.', 'info');
+                print('  login [USR] [PWD]      Authenticate.', 'info');
+                print('  ls [DIR]               List directory contents.', 'info');
+                print('  man [CMD]              Read manual.', 'info');
+                print('  neofetch               Display system specs.', 'info');
+                print('  nix-shell              Enter a pure shell (mock).', 'info');
+                print('  nixos-rebuild          Rebuild system (mock).', 'info');
+                print('  open [APP]             Launch subsystem.', 'info');
+                print('  rm [FILE]              Delete a file.', 'info');
+                print('  sudo admin             Demand higher privileges.', 'info');
+                print('  top                    Monitor processes.', 'info');
+                print('  uname -a               System info.', 'info');
+                print('  whoami                 Current user ID.', 'info');
                 break;
 
             case 'clear':
                 terminalStore.clear();
+                showNeofetch();
                 break;
 
             case 'apt':
@@ -160,7 +134,19 @@
             case 'yum':
             case 'pacman':
             case 'dnf':
-                print(`error: '${cmd}' is not found. This is NixOS. We use 'nix-shell' or we suffer in the purity of our declarative derivations. Please read a book. Nor that would actually do anything...`, 'error');
+                print(`error: '${cmd}' is not found. This is NixOS. We use 'nix-shell' or we suffer in the purity of our declarative derivations. Please read a book.`, 'error');
+                break;
+
+            case 'nix-shell':
+                print('entering pure shell... (just kidding, you exist in the void)', 'info');
+                break;
+
+            case 'nixos-rebuild':
+                if (args[0] === 'switch') {
+                     print('building Nix... error: infinite recursion encountered at "meaning_of_life"', 'error');
+                } else {
+                     print('usage: nixos-rebuild switch', 'info');
+                }
                 break;
 
             case 'coffee':
@@ -173,26 +159,7 @@
                 break;
 
             case 'neofetch':
-                const neofetch = `
-       .  .
-      |  |
-  ___|  |___
- /          \   ${user}@LukiOS
-|  --.  .--  |  ----------
-|   |    |   |  OS: NixOS 25.11 (Caffeinated) x86_64
-|   |    |   |  Kernel: 6.1.72-nixos
- \  |    |  /   Uptime: 4d 12h 31m
-  \ |    | /    Shell: bash 5.2.15
-   \|____|/     Resolution: 1920x1080
-                DE: TWM (Svelte-based)
-                WM: LukiWM
-                Theme: Void Dark [GTK2/3]
-                Icons: Phosphor [GTK2/3]
-                Terminal: LukiTerm 3.0.0
-                CPU: Silicon Heart (12% Load)
-                Memory: 64% / 100% (Leaking)
-`;
-                print(neofetch, 'info');
+                showNeofetch();
                 break;
 
             case 'echo':
@@ -208,7 +175,6 @@
                 break;
 
             case 'ls':
-                // Simple mock ls for now
                 if (currentPath === '~/') {
                     print('readme.txt  projects/  system/', 'info');
                 } else {
@@ -218,6 +184,7 @@
 
             case 'cat':
                 if (args[0] === 'readme.txt') {
+                    // @ts-ignore
                     print(fileSystem['~/'].children['readme.txt'].content);
                 } else {
                     print(`cat: ${args[0]}: No such file or directory`, 'error');
@@ -245,6 +212,7 @@
 
             case 'open':
                 const app = args[0]?.toLowerCase();
+                /** @type {Record<string, string>} */
                 const apps = {
                     'vault': 'c-tr',
                     'guestbook': 'admin-guestbook',
@@ -268,10 +236,12 @@
                          print('sudo: permission denied (are you root?)', 'error');
                      } else {
                          print('Starting Control Center...', 'success');
-                         windowManager.open('control-center', { isTiled: false, width: 900, height: 600 });
+                         // Fix: pass width/height inside originRect or correctly as per logic
+                         // windowManager.open(id, options) -> options can be originRect
+                         windowManager.open('control-center', { isTiled: false, originRect: { width: 900, height: 600, top: 100, left: 100 } });
                      }
                 } else {
-                    print('error: Incorrect password. This incident will be reported to the Bureau of Lukian Oversight.', 'error');
+                    print('error: Incorrect password.', 'error');
                 }
                 break;
 
@@ -304,6 +274,7 @@
         inputVal = '';
     }
 
+    /** @param {KeyboardEvent} e */
     function handleKeydown(e) {
         if (e.key === 'Enter') {
             execute(inputVal);
@@ -330,22 +301,16 @@
 
     function handleTabCompletion() {
         if (!inputVal) return;
-
         const parts = inputVal.split(' ');
         const currentWord = parts[parts.length - 1];
-
         if (!currentWord) return;
 
-        // Command completion (if first word)
         if (parts.length === 1) {
             const matches = commands.filter(c => c.startsWith(currentWord));
             if (matches.length === 1) {
                 inputVal = matches[0] + ' ';
             }
-        }
-
-        // File completion (simple mock)
-        if (parts.length > 1) {
+        } else if (parts.length > 1) {
              const files = ['readme.txt', 'projects/', 'system/'];
              const matches = files.filter(f => f.startsWith(currentWord));
              if (matches.length === 1) {
@@ -356,33 +321,43 @@
     }
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div class="h-full bg-black font-mono text-sm p-2 flex flex-col overflow-hidden" onclick={() => inputRef?.focus()}>
-    <div id="terminal-scroll" class="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
-        {#each terminalStore.history as line}
-            <div class:text-green-500={line.type === 'info'}
-                 class:text-white={line.type === 'user'}
-                 class:text-red-500={line.type === 'error'}
-                 class:text-yellow-400={line.type === 'warn'}
-                 class:text-blue-400={line.type === 'success'}
-                 class="whitespace-pre-wrap leading-tight selectable-text select-text">
-                 {#if line.type === 'user'}
-                    <span class="opacity-50 mr-2">➜</span>
-                 {/if}
-                 {line.text}
-            </div>
-        {/each}
+    {#if isBooting}
+        <TerminalBoot on:complete={handleBootComplete} />
+    {:else}
+        <div id="terminal-scroll" class="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
+            {#each terminalStore.history as line}
+                {#if line.type === 'neofetch'}
+                    <TerminalNeofetch />
+                {:else}
+                    <div class:text-green-500={line.type === 'info'}
+                         class:text-white={line.type === 'user'}
+                         class:text-red-500={line.type === 'error'}
+                         class:text-yellow-400={line.type === 'warn'}
+                         class:text-blue-400={line.type === 'success'}
+                         class="whitespace-pre-wrap leading-tight selectable-text select-text">
+                         {#if line.type === 'user'}
+                            <span class="opacity-50 mr-2">➜</span>
+                         {/if}
+                         {line.text}
+                    </div>
+                {/if}
+            {/each}
 
-        <div class="flex items-center text-gray-300 mt-2">
-            <span class="text-green-500 mr-2 shrink-0">{user}@lukios:{currentPath}$</span>
-            <input
-                bind:this={inputRef}
-                type="text"
-                bind:value={inputVal}
-                onkeydown={handleKeydown}
-                class="bg-transparent border-none outline-none flex-1 text-white caret-white min-w-0"
-                spellcheck="false"
-                autocomplete="off"
-            />
+            <div class="flex items-center text-gray-300 mt-2">
+                <span class="text-green-500 mr-2 shrink-0">{user}@lukios:{currentPath}$</span>
+                <input
+                    bind:this={inputRef}
+                    type="text"
+                    bind:value={inputVal}
+                    onkeydown={handleKeydown}
+                    class="bg-transparent border-none outline-none flex-1 text-white caret-white min-w-0"
+                    spellcheck="false"
+                    autocomplete="off"
+                />
+            </div>
         </div>
-    </div>
+    {/if}
 </div>
