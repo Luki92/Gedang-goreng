@@ -17,7 +17,7 @@
         "[  OK  ] Started NixOS System Configuration.",
         "[  OK  ] Mounting /dev/sda1 (Coffee Partition)...",
         "[  OK  ] Mounted /dev/sda1.",
-        "[  OK  ] Started LukiWM (Svelte-based Tiling Window Manager).",
+        "[  OK  ] Started LukiWM.",
         "[  OK  ] Reached target Graphical Interface.",
         "[  OK  ] Started Update UTMP about System Runlevel Changes.",
         "Welcome to NixOS 25.11 (Caffeinated)!"
