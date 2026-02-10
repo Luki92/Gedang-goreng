@@ -58,8 +58,8 @@ class WindowManager {
             return;
         }
 
-        let width = originRect?.width || 800; // Default size for floating
-        let height = originRect?.height || 600;
+        let width = originRect?.width || Math.min(window.innerWidth * 0.8, 600); // Default size for floating
+        let height = originRect?.height || Math.min(window.innerHeight * 0.8, 450);
         let x = originRect?.left || 0;
         let y = originRect?.top || 0;
         let isTiled = options.isTiled !== undefined ? options.isTiled : true;
@@ -259,7 +259,7 @@ class WindowManager {
         const untiledWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing');
         const hasUntiled = untiledWindows.length > 0;
         const totalWindows = tiledWindows.length + untiledWindows.length; // Approximate "density"
-        const currentOuterGap = (tiledWindows.length > 1 || hasUntiled) ? 100 : this.outerGap;
+        const currentOuterGap = (tiledWindows.length > 1 || hasUntiled) ? 60 : this.outerGap;
 
         // 1. Single Tiled Window (Hybrid Check)
         if (tiledWindows.length === 1) {
@@ -347,8 +347,9 @@ class WindowManager {
             const totalStackGapH = (stackWs.length - 1) * this.innerGap;
             const availableStackH = (screenH - (currentOuterGap * 2)) - totalStackGapH;
 
-            // Height per item
-            const stackItemH = availableStackH / stackWs.length;
+            // Height per item (with minimum height constraint)
+            const minStackH = 150;
+            const stackItemH = Math.max(availableStackH / stackWs.length, minStackH);
 
             stackWs.forEach((sw, i) => {
                 sw.x = stackX;

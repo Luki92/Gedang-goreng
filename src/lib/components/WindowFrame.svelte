@@ -114,7 +114,11 @@
 
         // Prevent drag on interactive elements
         const ignoreTags = ['BUTTON', 'INPUT', 'TEXTAREA', 'A', 'SELECT', 'OPTION', 'PRE', 'CODE', 'TABLE'];
-        if (target.closest('button') || target.closest('.resize-handle') || ignoreTags.includes(target.tagName) || target.closest('.selectable') || target.closest('.no-drag') || target.tagName === 'path') {
+
+        // Also ignore text elements to allow selection
+        const isText = target.matches('p, p *, span, span *, h1, h2, h3, h4, h5, h6, li, li *, .selectable-text, .selectable-text *');
+
+        if (target.closest('button') || target.closest('.resize-handle') || ignoreTags.includes(target.tagName) || target.closest('.selectable') || target.closest('.no-drag') || target.tagName === 'path' || isText) {
             return;
         }
 
@@ -137,8 +141,18 @@
         const dx = e.clientX - startX;
         const dy = e.clientY - startY;
 
-        win.x = startLeft + dx;
-        win.y = startTop + dy;
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        let newX = startLeft + dx;
+        let newY = startTop + dy;
+
+        // Clamp to screen boundaries
+        newX = Math.max(0, Math.min(newX, screenW - win.width));
+        newY = Math.max(0, Math.min(newY, screenH - win.height));
+
+        win.x = newX;
+        win.y = newY;
 
         // Revised Zone Logic: Only trigger if very close to edges (< 50px)
         const screenW = window.innerWidth;
@@ -309,7 +323,7 @@
 
     .content-wrapper {
         position: absolute;
-        top: 12px; left: 12px; right: 12px; bottom: 12px;
+        top: 24px; left: 0; right: 0; bottom: 0;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -320,7 +334,7 @@
         flex: 1;
         overflow: auto;
         position: relative;
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
     .resize-handle { position: absolute; z-index: 100; outline: none; }
@@ -336,7 +350,7 @@
     .close-btn {
         position: absolute;
         top: 0; right: 0;
-        width: 40px; height: 40px;
+        width: 24px; height: 24px;
         background: transparent;
         border: none;
         color: rgba(255, 255, 255, 0.5);
