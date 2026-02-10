@@ -155,7 +155,6 @@
         win.y = newY;
 
         // Revised Zone Logic: Only trigger if very close to edges (< 50px)
-        const screenW = window.innerWidth;
         const mouseX = e.clientX;
 
         if (mouseX < 50) {
