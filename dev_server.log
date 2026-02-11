@@ -120,3 +120,18 @@ https://svelte.dev/e/svelte_self_deprecated
 https://svelte.dev/e/svelte_self_deprecated
 11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
+1:02:52 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
+1:02:52 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+1:03:42 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
+1:03:42 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:04:16 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:04:55 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:05:40 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
+1:05:40 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:09:49 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:10:19 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
+1:10:19 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+1:10:56 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
+1:10:56 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+1:11:34 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+1:11:34 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte

@@ -26,7 +26,7 @@
             'br': 'bottom right',
             'bc': 'bottom center'
         };
-        const transformOrigin = originMap[win.originType] || 'center center';
+        const transformOrigin = originMap[/** @type {keyof typeof originMap} */ (win.originType)] || 'center center';
 
         if (isDragging || isResizing) {
             return `
@@ -327,10 +327,12 @@
 <style>
     .window-frame {
         position: absolute;
-        background: rgba(10, 10, 12, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        background: linear-gradient(rgba(10, 10, 12, 0.4), rgba(5, 5, 7, 0.5)) padding-box,
+                    linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)) border-box;
+        border: 1px solid transparent;
+        backdrop-filter: blur(40px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
+                    inset 0 0 60px rgba(0, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -346,7 +348,7 @@
 
     .content-wrapper {
         position: absolute;
-        top: 24px; left: 0; right: 0; bottom: 0;
+        top: 14px; left: 0; right: 0; bottom: 0;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -372,29 +374,35 @@
 
     .close-btn {
         position: absolute;
-        top: 0; right: 0;
-        width: 24px; height: 24px;
-        background: transparent;
-        border: none;
-        color: rgba(255, 255, 255, 0.5);
+        top: 2px; right: 2px;
+        width: 20px; height: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        color: rgba(255, 255, 255, 0.2);
         z-index: 102;
         padding: 0;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: color 0.2s, transform 0.2s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .close-btn svg {
+        width: 14px;
+        height: 14px;
     }
 
     .close-btn:hover {
-        color: #fff;
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 5px var(--accent-color));
+        background: rgba(255, 50, 50, 0.2);
+        border-color: rgba(255, 50, 50, 0.4);
+        color: #ff5555;
+        transform: none;
+        filter: drop-shadow(0 0 8px rgba(255, 85, 85, 0.4));
     }
 
-    .close-btn:active {
-        transform: scale(0.95);
-    }
+
 
     /* New Minimal Edge Indicators - Refined */
     .edge-glow {
