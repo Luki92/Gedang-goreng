@@ -70,9 +70,9 @@
     </h3>
 
     <!-- Form -->
-    <div class="bg-[#111] p-4 border border-[#333] mb-6 relative overflow-hidden group">
+    <div class="bg-transparent p-4 border border-[#333] mb-6 relative overflow-hidden group">
         {#if sending}
-            <div class="absolute inset-0 bg-black/80 flex items-center justify-center z-10">
+            <div class="absolute inset-0 bg-transparent/80 flex items-center justify-center z-10">
                 <span class="text-green-500 font-mono animate-pulse">UPLOADING...</span>
             </div>
         {/if}
@@ -85,7 +85,7 @@
                 disabled={hasSigned}
                 placeholder="CALLSIGN"
                 maxlength="20"
-                class="w-full bg-black border border-[#333] text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full bg-transparent border border-[#333] text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
             >
         </div>
         <div class="mb-2">
@@ -94,10 +94,10 @@
                 placeholder="TRANSMIT MESSAGE..."
                 rows="2"
                 maxlength="140"
-                class="w-full bg-black border border-[#333] text-gray-300 p-2 font-mono focus:border-green-500 outline-none resize-none"
+                class="w-full bg-transparent border border-[#333] text-gray-300 p-2 font-mono focus:border-green-500 outline-none resize-none"
             ></textarea>
         </div>
-        <button onclick={signGuestbook} disabled={!name || !message} class="w-full bg-[#222] text-gray-400 py-2 text-xs hover:bg-green-900 hover:text-green-400 transition-colors disabled:opacity-30">
+        <button onclick={signGuestbook} disabled={!name || !message} class="w-full bg-white/5 text-gray-400 py-2 text-xs hover:bg-green-900 hover:text-green-400 transition-colors disabled:opacity-30">
             [SEND_TRANSMISSION]
         </button>
     </div>
@@ -110,7 +110,7 @@
             <div class="text-center text-xs text-gray-600 border border-dashed border-[#333] py-4">NO_SIGNALS_DETECTED</div>
         {:else}
             {#each messages as msg}
-                <div class="p-3 bg-[#080808] border-l-2 border-green-900 hover:border-green-500 transition-colors">
+                <div class="p-3 bg-transparent border-l-2 border-green-900 hover:border-green-500 transition-colors">
                     <div class="flex justify-between items-baseline mb-1">
                         <span class="text-green-500 font-bold text-sm">{msg.name}</span>
                         <span class="text-[10px] text-gray-700">{new Date(msg.created_at).toLocaleDateString()}</span>

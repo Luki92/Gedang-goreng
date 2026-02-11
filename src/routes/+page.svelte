@@ -144,7 +144,7 @@
         // Toggle Terminal: Ctrl + Shift + L
         if (e.ctrlKey && e.shiftKey && (e.key === 'L' || e.key === 'l')) {
             e.preventDefault();
-            windowManager.toggle('terminal', { isTiled: false, width: 950, height: 650, originType: 'bc' });
+            windowManager.toggle('terminal', { isTiled: false, width: 950, height: 650, originType: 'bc', title: 'TERMINAL' });
         }
     }
 

@@ -42,7 +42,7 @@
 
 <div class="h-full overflow-y-auto relative custom-scrollbar pr-2">
     <!-- Filter Header -->
-    <div class="sticky top-0 bg-[#050505] z-20 flex gap-4 mb-4 border-b border-[#333] pb-2 text-sm pt-1">
+    <div class="sticky top-0 bg-transparent z-20 flex gap-4 mb-4 border-b border-[#333] pb-2 text-sm pt-1">
         <button onclick={() => activeFilter = 'ALL'} class="text-gray-500 hover:text-white border-b-2 transition-colors {activeFilter === 'ALL' ? 'text-white border-white' : 'border-transparent'}">ALL</button>
         <button onclick={() => activeFilter = 'WRITING'} class="text-gray-500 hover:text-white border-b-2 transition-colors {activeFilter === 'WRITING' ? 'text-white border-white' : 'border-transparent'}">WRITING</button>
         <button onclick={() => activeFilter = 'ART'} class="text-gray-500 hover:text-white border-b-2 transition-colors {activeFilter === 'ART' ? 'text-white border-white' : 'border-transparent'}">ART</button>
@@ -50,7 +50,7 @@
     </div>
 
     {#if dataStore.loading && dataStore.works.length === 0}
-        <div class="absolute inset-0 flex flex-col items-center justify-center space-y-2 bg-[#050505]/80 z-20">
+        <div class="absolute inset-0 flex flex-col items-center justify-center space-y-2 bg-transparent/80 z-20">
             <div class="w-8 h-8 border-2 border-t-transparent border-white rounded-full animate-spin"></div>
             <p class="text-xs text-green-500 font-mono animate-pulse">DECRYPTING_VAULT...</p>
         </div>
@@ -62,7 +62,7 @@
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <!-- svelte-ignore a11y_interactive_supports_focus -->
             <div
-                class="relative mb-4 break-inside-avoid group cursor-pointer overflow-hidden border border-[#333] rounded-lg bg-[#080808] rounded-lg hover:border-white transition-all duration-300 shadow-lg"
+                class="relative mb-4 break-inside-avoid group cursor-pointer overflow-hidden border border-[#333] rounded-lg bg-transparent rounded-lg hover:border-white transition-all duration-300 shadow-lg"
                 onclick={() => openFile(item)}
                 onkeydown={(e) => e.key === 'Enter' && openFile(item)}
                 role="button"
@@ -75,12 +75,12 @@
                          <img src={item.image_url} alt={item.title} class="w-full h-auto object-cover block" />
                     {:else if ['ART', 'SKETCH'].includes(item.type)}
                          <!-- Art Placeholder -->
-                         <div class="w-full aspect-[4/5] flex items-center justify-center text-6xl bg-[#111] text-gray-700">
+                         <div class="w-full aspect-[4/5] flex items-center justify-center text-6xl bg-transparent text-gray-700">
                              {item.image_url || '🎨'}
                          </div>
                     {:else}
                          <!-- Text Placeholder / Abstract Vis -->
-                         <div class="w-full aspect-video flex flex-col p-4 bg-[#111] border-b border-[#222]">
+                         <div class="w-full aspect-video flex flex-col p-4 bg-transparent border-b border-[#222]">
                              <div class="w-full h-full border border-dashed border-[#333] flex items-center justify-center text-gray-700 font-mono text-xs">
                                  {item.type}_FILE
                              </div>

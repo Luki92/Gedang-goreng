@@ -323,7 +323,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<div class="h-full bg-black font-mono text-sm p-2 flex flex-col overflow-hidden" onclick={() => inputRef?.focus()}>
+<div class="h-full bg-transparent font-mono text-sm p-2 flex flex-col overflow-hidden" onclick={() => inputRef?.focus()}>
     {#if isBooting}
         <TerminalBoot on:complete={handleBootComplete} />
     {:else}

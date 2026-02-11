@@ -17,6 +17,7 @@
 
     // Drop Zone Highlighting (Local state)
     let dropZone = $state(null); // 'master', 'stack', or null
+    let borderRadius = $derived(win.isTiled ? '6px' : '10px');
 
         let currentStyle = $derived.by(() => {
         const originMap = {
@@ -33,7 +34,7 @@
                 left: ${win.x}px;
                 top: ${win.y}px;
                 width: ${win.width}px;
-                height: ${win.height}px;
+                height: ${win.height}px; border-radius: ${borderRadius};
                 z-index: ${win.zIndex};
                 opacity: 1 !important;
                 transform: none !important;
@@ -60,7 +61,7 @@
                 left: ${win.x}px;
                 top: ${win.y}px;
                 width: ${win.width}px;
-                height: ${win.height}px;
+                height: ${win.height}px; border-radius: ${borderRadius};
                 z-index: ${win.zIndex};
                 opacity: 0;
                 transform: scale(0.9);
@@ -95,7 +96,7 @@
                     left: ${startX}px;
                     top: ${startY}px;
                     width: ${win.width}px;
-                    height: ${win.height}px;
+                    height: ${win.height}px; border-radius: ${borderRadius};
                     z-index: ${win.zIndex};
                     opacity: 0;
                     transform: scale(0.1);
@@ -109,7 +110,7 @@
             left: ${win.x}px;
             top: ${win.y}px;
             width: ${win.width}px;
-            height: ${win.height}px;
+            height: ${win.height}px; border-radius: ${borderRadius};
             z-index: ${win.zIndex};
             opacity: 1;
             transform: scale(1);
@@ -287,7 +288,12 @@
 {/if}
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div
+<!-- Window Title -->
+    <div class="window-title-bar">
+        {win.title || 'SYSTEM_PROCESS'}
+    </div>
+
+    <div
     bind:this={frameEl}
     class="window-frame {win.state}"
     class:dragging={isDragging}
@@ -327,28 +333,30 @@
 <style>
     .window-frame {
         position: absolute;
-        background: linear-gradient(rgba(10, 10, 12, 0.4), rgba(5, 5, 7, 0.5)) padding-box,
-                    linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)) border-box;
-        border: 1px solid transparent;
-        backdrop-filter: blur(40px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                    inset 0 0 60px rgba(0, 0, 0, 0.5);
+        background: rgba(10, 10, 15, 0.75);
+        border: 1px solid var(--accent-color);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
         display: flex;
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
-        border-radius: 12px;
+        transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-radius 0.3s ease;
     }
 
     .window-frame.dragging,
     .window-frame.resizing {
-        box-shadow: 0 20px 50px rgba(85, 85, 255, 0.3);
+        box-shadow: 0 0 20px var(--accent-color);
         z-index: 1000 !important;
     }
 
     .content-wrapper {
         position: absolute;
-        top: 14px; left: 0; right: 0; bottom: 0;
+        top: 10px; left: 0; right: 0; bottom: 0;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -372,13 +380,30 @@
     .se { bottom: 0; right: 0; width: 16px; height: 16px; cursor: se-resize; z-index: 101; }
     .sw { bottom: 0; left: 0; width: 16px; height: 16px; cursor: sw-resize; z-index: 101; }
 
+
+    .window-title-bar {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 10px;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        font-family: 'VT323', monospace;
+        font-size: 9px;
+        color: var(--accent-color);
+        opacity: 0.5;
+        pointer-events: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 101;
+    }
+
     .close-btn {
         position: absolute;
-        top: 2px; right: 2px;
-        width: 20px; height: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+        top: 0px; right: 0px;
+        width: 18px; height: 18px;
+        background: transparent;
+        border: none;
         color: rgba(255, 255, 255, 0.2);
         z-index: 102;
         padding: 0;
@@ -386,20 +411,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
     }
 
     .close-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 10px;
+        height: 10px;
     }
 
     .close-btn:hover {
-        background: rgba(255, 50, 50, 0.2);
-        border-color: rgba(255, 50, 50, 0.4);
         color: #ff5555;
-        transform: none;
-        filter: drop-shadow(0 0 8px rgba(255, 85, 85, 0.4));
+        filter: drop-shadow(0 0 5px rgba(255, 85, 85, 0.8));
     }
 
 
