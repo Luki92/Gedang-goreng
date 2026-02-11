@@ -12,7 +12,7 @@
     });
 
     function open(id) {
-        windowManager.toggle(id, {
+        windowManager.toggle(id, { originType: 'bc',
             width: 800,
             height: 600
         });

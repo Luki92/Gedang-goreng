@@ -32,6 +32,7 @@ class WindowManager {
      * @param {Object} [options.originRect]
      * @param {Object} [options.props]
      * @param {boolean} [options.isTiled]
+     * @param {string} [options.originType] // tl, tr, bl, br, bc
      */
     open(id, options = {}) {
         const component = this.registry.get(id);
@@ -43,6 +44,7 @@ class WindowManager {
         // Handle legacy usage: open(id, originRect) where originRect has 'left' property
         let originRect = options.originRect;
         let props = options.props || {};
+        let originType = options.originType || 'bc'; // Default to bottom-center
 
         if (!originRect && options.left !== undefined) {
             originRect = options;
@@ -58,8 +60,12 @@ class WindowManager {
             return;
         }
 
-        let width = originRect?.width || Math.min(window.innerWidth * 0.8, 600); // Default size for floating
-        let height = originRect?.height || Math.min(window.innerHeight * 0.8, 450);
+        // Increased default sizes for specific windows like Terminal
+        const defaultWidth = id === 'terminal' ? 950 : 600;
+        const defaultHeight = id === 'terminal' ? 650 : 450;
+
+        let width = options.width || originRect?.width || Math.min(window.innerWidth * 0.9, defaultWidth);
+        let height = options.height || originRect?.height || Math.min(window.innerHeight * 0.9, defaultHeight);
         let x = originRect?.left || 0;
         let y = originRect?.top || 0;
         let isTiled = options.isTiled !== undefined ? options.isTiled : true;
@@ -88,6 +94,7 @@ class WindowManager {
             component,
             props,
             originRect: originRect || null,
+            originType,
             x,
             y,
             width,

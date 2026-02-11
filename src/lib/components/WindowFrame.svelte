@@ -18,7 +18,16 @@
     // Drop Zone Highlighting (Local state)
     let dropZone = $state(null); // 'master', 'stack', or null
 
-    let currentStyle = $derived.by(() => {
+        let currentStyle = $derived.by(() => {
+        const originMap = {
+            'tl': 'top left',
+            'tr': 'top right',
+            'bl': 'bottom left',
+            'br': 'bottom right',
+            'bc': 'bottom center'
+        };
+        const transformOrigin = originMap[win.originType] || 'center center';
+
         if (isDragging || isResizing) {
             return `
                 left: ${win.x}px;
@@ -29,6 +38,7 @@
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
+                transform-origin: ${transformOrigin};
             `;
         }
 
@@ -41,8 +51,9 @@
                     height: ${win.originRect.height}px;
                     z-index: ${win.zIndex};
                     opacity: 0;
-                    transform: scale(0.5);
-                    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+                    transform: scale(0.1);
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    transform-origin: ${transformOrigin};
                  `;
              }
              return `
@@ -52,8 +63,9 @@
                 height: ${win.height}px;
                 z-index: ${win.zIndex};
                 opacity: 0;
-                transform: scale(0.95);
-                transition: opacity 0.3s, transform 0.3s;
+                transform: scale(0.9);
+                transition: opacity 0.2s, transform 0.2s;
+                transform-origin: ${transformOrigin};
              `;
         }
 
@@ -66,19 +78,29 @@
                     height: ${win.originRect.height}px;
                     z-index: ${win.zIndex};
                     opacity: 0;
-                    transform: scale(0.8);
+                    transform: scale(0.1);
                     transition: none;
+                    transform-origin: ${transformOrigin};
                 `;
             } else {
+                 // For bc (bottom center) or others without originRect
+                 let startX = win.x;
+                 let startY = win.y;
+                 if (win.originType === 'bc') {
+                     startX = window.innerWidth / 2 - win.width / 2;
+                     startY = window.innerHeight;
+                 }
+
                  return `
-                    left: ${win.x}px;
-                    top: ${win.y}px;
+                    left: ${startX}px;
+                    top: ${startY}px;
                     width: ${win.width}px;
                     height: ${win.height}px;
                     z-index: ${win.zIndex};
                     opacity: 0;
-                    transform: scale(0.9);
+                    transform: scale(0.1);
                     transition: none;
+                    transform-origin: ${transformOrigin};
                 `;
             }
         }
@@ -91,12 +113,13 @@
             z-index: ${win.zIndex};
             opacity: 1;
             transform: scale(1);
-            transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                        top 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                        width 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                        height 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-                        opacity 0.3s ease,
-                        transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transform-origin: ${transformOrigin};
+            transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                        top 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                        width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                        height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                        opacity 0.2s ease,
+                        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         `;
     });
 
@@ -304,14 +327,15 @@
 <style>
     .window-frame {
         position: absolute;
-        background: rgba(10, 10, 12, 0.95);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        background: rgba(10, 10, 12, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         display: flex;
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
+        border-radius: 12px;
     }
 
     .window-frame.dragging,
