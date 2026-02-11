@@ -6,8 +6,8 @@ class WindowManager {
     masterWindowId = $state(null);
 
     // Layout Configuration
-    innerGap = $state(0);
-    outerGap = $state(0);
+    innerGap = $state(15);
+    outerGap = $derived(this.windows.length > 1 ? 100 : 40);
 
     // Global Drag State
     isDragging = $state(false);

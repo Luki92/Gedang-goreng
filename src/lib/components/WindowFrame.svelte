@@ -17,7 +17,7 @@
 
     // Drop Zone Highlighting (Local state)
     let dropZone = $state(null); // 'master', 'stack', or null
-    let borderRadius = $derived(win.isTiled ? '6px' : '10px');
+    let borderRadius = $derived(win.isTiled ? "4px" : "12px");
 
         let currentStyle = $derived.by(() => {
         const originMap = {
@@ -401,10 +401,10 @@
     .close-btn {
         position: absolute;
         top: 0px; right: 0px;
-        width: 18px; height: 18px;
+        width: 28px; height: 28px;
         background: transparent;
         border: none;
-        color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.4);
         z-index: 102;
         padding: 0;
         cursor: pointer;
@@ -430,8 +430,8 @@
     .edge-glow {
         position: fixed;
         top: 10vh; bottom: 10vh; /* Don't cover full height */
-        width: 100px;
-        background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%);
+        width: 40px;
+        background: radial-gradient(ellipse at center left, rgba(85,85,255,0.1) 0%, transparent 70%);
         z-index: 900;
         pointer-events: none;
         opacity: 0;
@@ -439,8 +439,8 @@
         filter: blur(20px); /* Diffuse it */
     }
 
-    .edge-glow.left { left: 0; background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%); }
-    .edge-glow.right { right: 0; background: radial-gradient(ellipse at center right, rgba(85,85,255,0.15) 0%, transparent 70%); }
+    .edge-glow.left { left: 0; background: radial-gradient(ellipse at center left, rgba(85,85,255,0.1) 0%, transparent 70%); }
+    .edge-glow.right { right: 0; background: radial-gradient(ellipse at center right, rgba(85,85,255,0.1) 0%, transparent 70%); }
 
     .edge-glow.active {
         opacity: 1;
