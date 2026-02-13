@@ -1,9 +1,10 @@
 <script>
   import { editorStore } from '$lib/stores/editorStore.svelte';
-  import { parseLukiScript } from '$lib/utils/luki-parser';
+  import { parser } from '$lib/utils/luki-parser';
+  import LukiRenderer from '$lib/components/renderer/LukiRenderer.svelte';
   
-  const previewContent = $derived(
-    editorStore.currentFile?.content ? parseLukiScript(editorStore.currentFile.content) : ''
+  const previewAst = $derived(
+    editorStore.currentFile?.content ? parser.parse(editorStore.currentFile.content) : []
   );
 </script>
 
@@ -37,7 +38,7 @@
       </div>
       
       <div class="preview-content">
-        {@html previewContent}
+        <LukiRenderer ast={previewAst} />
       </div>
     </div>
   </div>
