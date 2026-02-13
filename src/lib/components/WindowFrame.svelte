@@ -288,10 +288,7 @@
 {/if}
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<!-- Window Title -->
-    <div class="window-title-bar">
-        {win.title || 'SYSTEM_PROCESS'}
-    </div>
+
 
     <div
     bind:this={frameEl}
@@ -301,6 +298,10 @@
     style={currentStyle}
     onmousedown={handleMouseDown}
 >
+    <div class="window-title-bar">
+        {win.title || "SYSTEM_PROCESS"}
+    </div>
+
     <!-- Close Button (Standard X) -->
     <button class="close-btn" onclick={closeWindow} aria-label="Close" type="button">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -401,7 +402,7 @@
     .close-btn {
         position: absolute;
         top: 0px; right: 0px;
-        width: 28px; height: 28px;
+        width: 32px; height: 32px;
         background: transparent;
         border: none;
         color: rgba(255, 255, 255, 0.4);
@@ -415,8 +416,8 @@
     }
 
     .close-btn svg {
-        width: 10px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 
     .close-btn:hover {
