@@ -68,17 +68,6 @@
     });
 </script>
 
-<div class="vignette-overlay"></div>
-<canvas bind:this={cNebula} id="nebula-canvas" class="canvas-layer"></canvas>
-<canvas bind:this={cStar} id="starfield" class="canvas-layer"></canvas>
-
-<style>
-    .canvas-layer { position: absolute; inset: 0; pointer-events: none; }
-    #nebula-canvas { z-index: -3; opacity: 0.6; mix-blend-mode: screen; }
-    #starfield { z-index: -2; opacity: 0.9; }
-
-    .vignette-overlay {
-        position: absolute; inset: 0; pointer-events: none; z-index: -1;
-        background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
-    }
-</style>
+<div class="absolute inset-0 pointer-events-none -z-10 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]"></div>
+<canvas bind:this={cNebula} id="nebula-canvas" class="absolute inset-0 pointer-events-none -z-30 opacity-60 mix-blend-screen"></canvas>
+<canvas bind:this={cStar} id="starfield" class="absolute inset-0 pointer-events-none -z-20 opacity-90"></canvas>
