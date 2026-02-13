@@ -20,11 +20,11 @@
             height: rect.height
         };
 
-        windowManager.toggle(id, { originRect, originType: position });
+        windowManager.toggle(id, { originRect, originType: position, title: headerTitle });
     }
 </script>
 
-<div class="hud-corner {position}" class:active={isActive} bind:this={containerEl}>
+<div id={id} class="hud-corner {position}" class:active={isActive} bind:this={containerEl}>
     <button class="hud-btn" bind:this={btnEl} onclick={handleClick}>
         <span class="code">{code}</span>
         {@render buttonContent()}

@@ -356,7 +356,7 @@
 
     .content-wrapper {
         position: absolute;
-        top: 10px; left: 0; right: 0; bottom: 0;
+        top: 20px; left: 0; right: 0; bottom: 0;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -384,12 +384,12 @@
     .window-title-bar {
         position: absolute;
         top: 0; left: 0; right: 0;
-        height: 10px;
+        height: 20px;
         display: flex;
         align-items: center;
         padding: 0 8px;
         font-family: 'VT323', monospace;
-        font-size: 9px;
+        font-size: 11px;
         color: var(--accent-color);
         opacity: 0.5;
         pointer-events: none;
@@ -416,7 +416,7 @@
 
     .close-btn svg {
         width: 10px;
-        height: 10px;
+        height: 20px;
     }
 
     .close-btn:hover {

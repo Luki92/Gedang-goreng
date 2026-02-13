@@ -131,10 +131,10 @@
         aria-modal="true"
         tabindex="-1"
     >
-        <div class="w-full max-w-2xl bg-[#0a0a0a] border border-gray-800 shadow-xl font-mono rounded-lg overflow-hidden" onclick={(e) => e.stopPropagation()} role="document">
+        <div class="w-full max-w-2xl bg-[rgba(10,10,15,0.75)] backdrop-blur-[8px] border border-[#5555ff] shadow-xl font-mono rounded-lg overflow-hidden" onclick={(e) => e.stopPropagation()} role="document">
             <!-- Header -->
-            <div class="bg-gray-900 border-b border-gray-800 p-2 flex justify-between items-center text-xs text-gray-400 select-none">
-                <span>TERMINAL_SESSION_01 [Admin]</span>
+            <div class="bg-transparent border-b border-[#5555ff] p-2 flex justify-between items-center text-xs text-gray-400 select-none">
+                <span>RESTRICTED_ACCESS_GATEWAY</span>
                 <button onclick={() => isVisible = false} class="hover:text-white transition-colors">[X]</button>
             </div>
 

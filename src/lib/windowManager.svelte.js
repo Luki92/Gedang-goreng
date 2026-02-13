@@ -35,6 +35,7 @@ class WindowManager {
      * @param {Object} [options.props]
      * @param {Object} [options.originRect]
      * @param {string} [options.originType]
+     * @param {string} [options.title]
      */
     open(id, options = {}) {
         const component = this.registry.get(id);
@@ -96,7 +97,7 @@ class WindowManager {
             component,
             props,
             originRect: originRect || null,
-            originType,
+            originType, title: options.title || "",
             x,
             y,
             width,
@@ -175,6 +176,7 @@ class WindowManager {
      * @param {Object} [options.props]
      * @param {Object} [options.originRect]
      * @param {string} [options.originType]
+     * @param {string} [options.title]
      */
     toggle(id, options = {}) {
         const existing = this.windows.find(w => w.id === id);

@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="h-full flex flex-col bg-[#0a0a0a] text-xs font-mono p-4">
+<div class="h-full flex flex-col bg-transparent text-xs font-mono p-4">
     <div class="border-b border-[#333] pb-2 mb-4 flex justify-between items-center">
         <h2 class="text-yellow-400 font-bold">MODERATION_QUEUE</h2>
         <button onclick={() => dataStore.fetchGuestbook()} class="text-gray-500 hover:text-white">[REFRESH]</button>
@@ -27,7 +27,7 @@
             <div class="text-center py-8 text-gray-600">NO_DATA_FOUND</div>
          {:else}
             {#each dataStore.guestbook as entry}
-                <div class="p-4 border border-[#333] bg-[#080808] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between group">
+                <div class="p-4 border border-[#333] bg-[rgba(10,10,15,0.2)] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between group">
                     <div class="flex-1">
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-white font-bold">{entry.name}</span>

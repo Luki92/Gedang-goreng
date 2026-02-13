@@ -36,7 +36,7 @@
 
     /** @param {any} item */
     function openFile(item) {
-        windowManager.open('file-viewer', { props: { item }, originType: 'bc' });
+        windowManager.open('file-viewer', { props: { item }, originType: 'bc', title: item.title });
     }
 </script>
 
