@@ -11,6 +11,7 @@
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import FileViewer from '$lib/components/FileViewer.svelte';
     import Terminal from '$lib/components/Terminal.svelte';
+import AdminPanel from '$lib/components/AdminPanel.svelte';
 
     // Admin Components
     import ControlCenter from '$lib/components/admin/ControlCenter.svelte';
@@ -18,11 +19,15 @@
     import AdminPortal from '$lib/components/admin/AdminPortal.svelte';
     import AdminProfile from '$lib/components/admin/AdminProfile.svelte';
     import AdminPlaylist from '$lib/components/admin/AdminPlaylist.svelte';
+import VaultList from '$lib/components/admin/VaultList.svelte';
+import PortalList from '$lib/components/admin/PortalList.svelte';
+import ProfileList from '$lib/components/admin/ProfileList.svelte';
+import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
     import AdminGuestbook from '$lib/components/admin/AdminGuestbook.svelte';
     import AdminDocs from '$lib/components/admin/AdminDocs.svelte';
 
     import { windowManager } from '$lib/windowManager.svelte.js';
-    import { musicState } from '$lib/stores';
+    import { musicState, isAdmin } from '$lib/stores';
 
     // --- Debris Logic ---
     let debrisContainer;
@@ -132,9 +137,13 @@
 
         // Admin
         windowManager.register('control-center', ControlCenter);
+        windowManager.register('admin-vault-list', VaultList);
         windowManager.register('admin-vault', AdminVault);
+        windowManager.register('admin-portal-list', PortalList);
         windowManager.register('admin-portal', AdminPortal);
+        windowManager.register('admin-profile-list', ProfileList);
         windowManager.register('admin-profile', AdminProfile);
+        windowManager.register('admin-playlist-list', PlaylistList);
         windowManager.register('admin-playlist', AdminPlaylist);
         windowManager.register('admin-guestbook', AdminGuestbook);
         windowManager.register('admin-docs', AdminDocs);
@@ -292,6 +301,9 @@
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
 <TilingWindowManager />
+{#if $isAdmin}
+    <AdminPanel />
+{/if}
 
 <main class="header-container">
     <!-- svelte-ignore a11y_missing_content -->

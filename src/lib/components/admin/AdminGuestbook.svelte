@@ -3,6 +3,7 @@
     import { supabase } from '$lib/supabaseClient';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
 
+    /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
     function showSaveAnimation(isSuccess, message, commands) {
@@ -45,27 +46,27 @@
     }
 </script>
 
-<div class="h-full flex flex-col bg-gradient-to-b from-gray-50 to-gray-100">
+<div class="h-full flex flex-col bg-transparent">
     <!-- Header -->
-    <div class="shrink-0 border-b border-gray-200 bg-white px-6 py-3 flex items-center justify-between">
+    <div class="shrink-0 border-b border-white/10 bg-transparent px-6 py-3 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <h1 class="text-lg font-semibold text-gray-900">Moderation Queue</h1>
-            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+            <h1 class="text-lg font-semibold text-white">Moderation Queue</h1>
+            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium">
                 {getPendingCount()} pending
             </span>
         </div>
         <button
             onclick={() => dataStore.fetchGuestbook()}
-            class="px-4 py-2 rounded text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+            class="px-4 py-2 rounded text-sm font-medium text-white/70 hover:bg-white/5 transition-colors"
         >
             <i class="ph ph-arrows-clockwise"></i> Refresh
         </button>
     </div>
 
     <!-- Messages -->
-    <div class="flex-1 overflow-y-auto divide-y divide-gray-200">
+    <div class="flex-1 overflow-y-auto divide-y divide-white/10">
         {#if dataStore.guestbook.length === 0}
-            <div class="flex items-center justify-center h-full text-gray-500">
+            <div class="flex items-center justify-center h-full text-white/40">
                 <div class="text-center">
                     <i class="ph ph-envelope text-4xl mb-2 opacity-50"></i>
                     <p>No messages</p>
@@ -73,24 +74,24 @@
             </div>
         {:else}
             {#each dataStore.guestbook as entry}
-                <div class="p-6 hover:bg-gray-50 transition-colors group {!entry.is_approved ? 'bg-yellow-50' : ''}">
+                <div class="p-6 hover:bg-transparent transition-colors group {!entry.is_approved ? 'bg-yellow-500/10' : ''}">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-2 flex-wrap">
-                                <h3 class="font-semibold text-gray-900">{entry.name}</h3>
-                                <span class="text-xs text-gray-500">{new Date(entry.created_at).toLocaleString()}</span>
+                                <h3 class="font-semibold text-white">{entry.name}</h3>
+                                <span class="text-xs text-white/40">{new Date(entry.created_at).toLocaleString()}</span>
                                 {#if entry.is_approved}
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
                                         <i class="ph ph-check-circle"></i> Approved
                                     </span>
                                 {:else}
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 animate-pulse">
+                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-400 animate-pulse">
                                         <i class="ph ph-clock"></i> Pending
                                     </span>
                                 {/if}
                             </div>
-                            <p class="text-gray-700 leading-relaxed mb-2">{entry.message}</p>
-                            <p class="text-xs text-gray-500">ID: {entry.visitor_id.slice(0, 12)}...</p>
+                            <p class="text-white/70 leading-relaxed mb-2">{entry.message}</p>
+                            <p class="text-xs text-white/40">ID: {entry.visitor_id.slice(0, 12)}...</p>
                         </div>
                         <div class="flex gap-2 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                             {#if !entry.is_approved}
@@ -103,7 +104,7 @@
                             {/if}
                             <button
                                 onclick={() => remove(entry.id)}
-                                class="px-4 py-2 rounded border border-gray-300 text-red-600 text-sm font-medium hover:bg-red-50 transition-colors"
+                                class="px-4 py-2 rounded border border-white/10 text-red-600 text-sm font-medium hover:bg-red-500/10 transition-colors"
                             >
                                 <i class="ph ph-trash"></i>
                             </button>

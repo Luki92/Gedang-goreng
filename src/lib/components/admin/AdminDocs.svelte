@@ -24,19 +24,19 @@
         </h2>
         <div class="flex gap-1 bg-[rgba(0,0,0,0.3)] p-1 rounded border border-[#222]">
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'syntax' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'syntax' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-white/40 hover:text-gray-300'}"
                 onclick={() => activeTab = 'syntax'}
             >
                 SYNTAX
             </button>
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'reference' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'reference' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-white/40 hover:text-gray-300'}"
                 onclick={() => activeTab = 'reference'}
             >
                 REFERENCE
             </button>
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'examples' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'examples' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-white/40 hover:text-gray-300'}"
                 onclick={() => activeTab = 'examples'}
             >
                 EXAMPLES

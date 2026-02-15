@@ -36,9 +36,11 @@ class WindowManager {
      * @param {Object} [options.originRect]
      * @param {string} [options.originType]
      * @param {string} [options.title]
+     * @param {string} [options.componentId]
+     * @param {string} [options.componentId]
      */
     open(id, options = {}) {
-        const component = this.registry.get(id);
+        const component = this.registry.get(options.componentId || id);
         if (!component) {
             console.error(`Component for ${id} not found.`);
             return;
@@ -177,6 +179,8 @@ class WindowManager {
      * @param {Object} [options.originRect]
      * @param {string} [options.originType]
      * @param {string} [options.title]
+     * @param {string} [options.componentId]
+     * @param {string} [options.componentId]
      */
     toggle(id, options = {}) {
         const existing = this.windows.find(w => w.id === id);
