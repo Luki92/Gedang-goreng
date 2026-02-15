@@ -1,11 +1,17 @@
 <script>
     import { dataStore } from '$lib/stores/data.svelte.js';
     import { supabase } from '$lib/supabaseClient';
+    import { isAdmin } from '$lib/stores';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
 
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
+    /**
+     * @param {boolean} isSuccess
+     * @param {string} message
+     * @param {string[]} commands
+     */
     function showSaveAnimation(isSuccess, message, commands) {
         saveState = {
             isVisible: true,
@@ -18,17 +24,19 @@
         }, 4000);
     }
 
+    /** @param {any} id */
     async function approve(id) {
         const sqlCommands = [`UPDATE guestbook SET is_approved = true WHERE id = ${id};`];
         const { error } = await supabase.from('guestbook').update({ is_approved: true }).eq('id', id);
         if (error) {
-            showSaveAnimation(false, `Error: ${error.message}`, sqlCommands);
+            showSaveAnimation(false, `Approval failed: ${error.message}`, sqlCommands);
         } else {
             showSaveAnimation(true, 'Message approved', sqlCommands);
             dataStore.fetchGuestbook();
         }
     }
 
+    /** @param {any} id */
     async function remove(id) {
         if (!confirm('Delete this message?')) return;
         const sqlCommands = [`DELETE FROM guestbook WHERE id = ${id};`];
@@ -40,79 +48,37 @@
             dataStore.fetchGuestbook();
         }
     }
-
-    function getPendingCount() {
-        return dataStore.guestbook.filter(e => !e.is_approved).length;
-    }
 </script>
 
-<div class="h-full flex flex-col bg-transparent">
-    <!-- Header -->
-    <div class="shrink-0 border-b border-white/10 bg-transparent px-6 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <h1 class="text-lg font-semibold text-white">Moderation Queue</h1>
-            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm font-medium">
-                {getPendingCount()} pending
-            </span>
-        </div>
-        <button
-            onclick={() => dataStore.fetchGuestbook()}
-            class="px-4 py-2 rounded text-sm font-medium text-white/70 hover:bg-white/5 transition-colors"
-        >
-            <i class="ph ph-arrows-clockwise"></i> Refresh
-        </button>
+<div class="h-full flex flex-col bg-transparent text-white">
+    <div class="shrink-0 border-b border-white/10 bg-black/40 px-6 py-3">
+        <h1 class="text-lg font-semibold">GUESTBOOK_MODERATION</h1>
     </div>
 
-    <!-- Messages -->
-    <div class="flex-1 overflow-y-auto divide-y divide-white/10">
-        {#if dataStore.guestbook.length === 0}
-            <div class="flex items-center justify-center h-full text-white/40">
-                <div class="text-center">
-                    <i class="ph ph-envelope text-4xl mb-2 opacity-50"></i>
-                    <p>No messages</p>
-                </div>
-            </div>
-        {:else}
-            {#each dataStore.guestbook as entry}
-                <div class="p-6 hover:bg-transparent transition-colors group {!entry.is_approved ? 'bg-yellow-500/10' : ''}">
-                    <div class="flex items-start justify-between gap-4">
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-2 mb-2 flex-wrap">
-                                <h3 class="font-semibold text-white">{entry.name}</h3>
-                                <span class="text-xs text-white/40">{new Date(entry.created_at).toLocaleString()}</span>
-                                {#if entry.is_approved}
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
-                                        <i class="ph ph-check-circle"></i> Approved
-                                    </span>
-                                {:else}
-                                    <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-400 animate-pulse">
-                                        <i class="ph ph-clock"></i> Pending
-                                    </span>
-                                {/if}
-                            </div>
-                            <p class="text-white/70 leading-relaxed mb-2">{entry.message}</p>
-                            <p class="text-xs text-white/40">ID: {entry.visitor_id.slice(0, 12)}...</p>
+    <div class="flex-1 overflow-y-auto p-4">
+        <div class="space-y-4">
+            {#each dataStore.guestbook as msg}
+                <div class="p-4 bg-black/40 border border-white/10 rounded-lg {msg.is_approved ? 'opacity-60' : 'border-blue-500/50 bg-blue-500/5'}">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="font-bold text-white">{msg.author || 'Anonymous'}</span>
+                            <span class="text-[10px] text-white/40 ml-2 font-mono">{new Date(msg.created_at).toLocaleString()}</span>
                         </div>
-                        <div class="flex gap-2 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                            {#if !entry.is_approved}
-                                <button
-                                    onclick={() => approve(entry.id)}
-                                    class="px-4 py-2 rounded bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors"
-                                >
-                                    <i class="ph ph-check"></i> Approve
+                        <div class="flex gap-2">
+                            {#if !msg.is_approved}
+                                <button onclick={() => approve(msg.id)} class="p-1.5 bg-green-600/20 text-green-400 border border-green-500/30 rounded hover:bg-green-600/40 transition-colors" title="Approve">
+                                    <i class="ph ph-check-circle"></i>
                                 </button>
                             {/if}
-                            <button
-                                onclick={() => remove(entry.id)}
-                                class="px-4 py-2 rounded border border-white/10 text-red-600 text-sm font-medium hover:bg-red-500/10 transition-colors"
-                            >
+                            <button onclick={() => remove(msg.id)} class="p-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded hover:bg-red-600/40 transition-colors" title="Delete">
                                 <i class="ph ph-trash"></i>
                             </button>
                         </div>
                     </div>
+                    <p class="text-sm text-white/80 whitespace-pre-wrap">{msg.content}</p>
                 </div>
             {/each}
-        {/if}
+        </div>
     </div>
 </div>
 

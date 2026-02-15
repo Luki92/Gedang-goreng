@@ -2,6 +2,7 @@
     import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
     import { dataStore } from '$lib/stores/data.svelte.js';
+    import { windowManager } from '$lib/windowManager.svelte.js';
     import EditorLayout from '$lib/components/editor/EditorLayout.svelte';
     import ContentSettings from '$lib/components/editor/ContentSettings.svelte';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
@@ -15,10 +16,10 @@
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
-    // Using local constant to satisfy svelte-check warning about initial prop capture
     const initial = initialWork || {};
 
-    let workForm = $state({
+    // Unified reactive object for form and live preview
+    let work = $state({
         id: initial.id || null,
         title: initial.title || '',
         description: initial.description || '',
@@ -28,10 +29,9 @@
         image_url: initial.image_url || '',
         status: initial.status || 'published',
         tags: initial.tags ? (Array.isArray(initial.tags) ? initial.tags.join(', ') : initial.tags) : '',
-        featured: initial.featured || false
+        featured: initial.featured || false,
+        content: initial.content || ''
     });
-
-    let content = $state(initial.content || '');
 
     /**
      * @param {boolean} isSuccess
@@ -52,34 +52,36 @@
 
     async function save() {
         if (!$isAdmin) return;
-        if (!workForm.title) return alert('Title required');
+        if (!work.title) return alert('Title required');
 
         const payload = {
-            ...workForm,
-            content,
-            tags: workForm.tags.split(',').map(/** @param {string} t */ (t) => t.trim()).filter(Boolean)
+            ...work,
+            tags: work.tags.split(',').map(/** @param {string} t */ (t) => t.trim()).filter(Boolean)
         };
         delete payload.id;
 
         let error;
         let sqlCommands = [];
 
-        if (isEditing && workForm.id) {
+        if (isEditing && work.id) {
             const updateFields = Object.entries(payload)
-                .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v}`)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v}`)
                 .join(', ');
-            sqlCommands = [`UPDATE works SET ${updateFields} WHERE id = ${workForm.id};`];
-            const res = await supabase.from('works').update(payload).eq('id', workForm.id);
+            sqlCommands = [`UPDATE works SET ${updateFields} WHERE id = ${work.id};`];
+            const res = await supabase.from('works').update(payload).eq('id', work.id);
             error = res.error;
         } else {
             const columns = Object.keys(payload).join(', ');
             const values = Object.values(payload)
-                .map(v => typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v)
+                .map(v => typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v)
                 .join(', ');
             sqlCommands = [`INSERT INTO works (${columns}) VALUES (${values});`];
-            const res = await supabase.from('works').insert(payload);
+            const res = await supabase.from('works').insert(payload).select().single();
             error = res.error;
-            if (!error) isEditing = true;
+            if (!error && res.data) {
+                work.id = res.data.id;
+                isEditing = true;
+            }
         }
 
         if (error) {
@@ -91,16 +93,29 @@
     }
 
     async function remove() {
-        if (!workForm.id || !$isAdmin) return;
+        if (!work.id || !$isAdmin) return;
         if (!confirm('Delete this work?')) return;
-        const sqlCommands = [`DELETE FROM works WHERE id = ${workForm.id};`];
-        const { error } = await supabase.from('works').delete().eq('id', workForm.id);
+        const sqlCommands = [`DELETE FROM works WHERE id = ${work.id};`];
+        const { error } = await supabase.from('works').delete().eq('id', work.id);
         if (error) {
             showSaveAnimation(false, `Delete failed: ${error.message}`, sqlCommands);
         } else {
             showSaveAnimation(true, 'Work deleted successfully', sqlCommands);
             dataStore.fetchWorks();
         }
+    }
+
+    function openPreview() {
+        // Use a unique ID for this specific preview to allow multiple previews
+        const previewId = `vault-preview-${work.id || 'new'}`;
+        windowManager.open(previewId, {
+            componentId: 'file-viewer',
+            title: `PREVIEW: ${work.title || 'Untitled'}`,
+            props: { item: work }, // Passing the reactive $state object
+            width: 900,
+            height: 700,
+            originType: 'bc'
+        });
     }
 
     const settingsSections = [
@@ -113,7 +128,10 @@
                     { value: 'ESSAY', label: 'Essay' },
                     { value: 'WRITING', label: 'Writing' },
                     { value: 'ART', label: 'Art' },
-                    { value: 'POST', label: 'Post' }
+                    { value: 'POST', label: 'Post' },
+                    { value: 'SKETCH', label: 'Sketch' },
+                    { value: 'PROJECT', label: 'Project' },
+                    { value: 'MUSIC', label: 'Music' }
                 ]},
                 { key: 'date', label: 'Date', type: 'text', placeholder: 'YYYY.MM' }
             ]
@@ -139,8 +157,12 @@
     ];
 </script>
 
-<EditorLayout title={isEditing ? `EDITING: ${workForm.title}` : 'NEW_WORK'}>
+<EditorLayout title={isEditing ? `EDITING: ${work.title}` : 'NEW_WORK'}>
     <svelte:fragment slot="toolbar">
+        <button onclick={openPreview} class="editor-toolbar-button">
+            <i class="ph ph-eye"></i> Preview
+        </button>
+        <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button
             onclick={() => showSettings = !showSettings}
             class="editor-toolbar-button"
@@ -162,13 +184,13 @@
     <div class="flex h-full gap-4 p-4 overflow-hidden">
         <!-- Editor -->
         <div class="flex-1 flex flex-col min-w-0">
-            <LukiEditor bind:content />
+            <LukiEditor bind:content={work.content} />
         </div>
 
         <!-- Settings Panel -->
         {#if showSettings}
             <ContentSettings
-                bind:data={workForm}
+                bind:data={work}
                 sections={settingsSections}
                 onChange={() => {}}
             />

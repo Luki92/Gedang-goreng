@@ -76,8 +76,12 @@
                         </div>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick={() => openEditor(item)} class="p-2 hover:bg-white/10 rounded"><i class="ph ph-pencil" aria-label="Edit"></i></button>
-                        <button onclick={() => remove(item.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded"><i class="ph ph-trash" aria-label="Delete"></i></button>
+                        <button onclick={() => openEditor(item)} class="p-2 hover:bg-white/10 rounded" title="Edit" aria-label="Edit">
+                            <i class="ph ph-pencil"></i>
+                        </button>
+                        <button onclick={() => remove(item.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded" title="Delete" aria-label="Delete">
+                            <i class="ph ph-trash"></i>
+                        </button>
                     </div>
                 </div>
             {/each}

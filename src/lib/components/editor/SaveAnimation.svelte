@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	let { isVisible = false, isSuccess = false, message = '', sqlCommands = [] } = $props();
-	let displayedCommands = $state([]);
+	let /** @type {string[]} */ displayedCommands = $state([]);
 	let displayedMessage = $state('');
 	let commandIndex = $state(0);
 

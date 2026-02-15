@@ -2,6 +2,7 @@
     import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
     import { dataStore } from '$lib/stores/data.svelte.js';
+    import { windowManager } from '$lib/windowManager.svelte.js';
     import EditorLayout from '$lib/components/editor/EditorLayout.svelte';
     import ContentSettings from '$lib/components/editor/ContentSettings.svelte';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
@@ -9,6 +10,7 @@
     /** @type {{initialItem?: any}} */
     let { initialItem = null } = $props();
 
+    const instanceId = Math.random().toString(36).substring(2, 9);
     let isEditing = $state(!!initialItem);
     let showSettings = $state(false);
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
@@ -23,7 +25,8 @@
         icon: initial.icon || 'ph-link',
         description: initial.description || '',
         sort_order: initial.sort_order || 0,
-        color: initial.color || '#ffffff'
+        color: initial.color || '#ffffff',
+        is_visible: initial.is_visible ?? true
     });
 
     /**
@@ -55,7 +58,7 @@
 
         if (isEditing && form.id) {
             const updateFields = Object.entries(payload)
-                .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v}`)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v}`)
                 .join(', ');
             sqlCommands = [`UPDATE portal SET ${updateFields} WHERE id = ${form.id};`];
             const res = await supabase.from('portal').update(payload).eq('id', form.id);
@@ -63,12 +66,15 @@
         } else {
             const columns = Object.keys(payload).join(', ');
             const values = Object.values(payload)
-                .map(v => typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v)
+                .map(v => typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v)
                 .join(', ');
             sqlCommands = [`INSERT INTO portal (${columns}) VALUES (${values});`];
-            const res = await supabase.from('portal').insert(payload);
+            const res = await supabase.from('portal').insert(payload).select().single();
             error = res.error;
-            if (!error) isEditing = true;
+            if (!error && res.data) {
+                form.id = res.data.id;
+                isEditing = true;
+            }
         }
 
         if (error) {
@@ -92,6 +98,18 @@
         }
     }
 
+    function openPreview() {
+        const previewId = `portal-preview-${form.id || 'new'}`;
+        windowManager.open(previewId, {
+            componentId: 'c-br',
+            title: `PREVIEW: ${form.label || 'Portal Item'}`,
+            props: { previewItem: form },
+            width: 450,
+            height: 600,
+            originType: 'br'
+        });
+    }
+
     const settingsSections = [
         {
             title: 'Basic Info',
@@ -106,7 +124,8 @@
             fields: [
                 { key: 'description', label: 'Description', type: 'textarea' },
                 { key: 'color', label: 'Accent Color', type: 'text' },
-                { key: 'sort_order', label: 'Order', type: 'number' }
+                { key: 'sort_order', label: 'Order', type: 'number' },
+                { key: 'is_visible', label: 'Visible in HUD', type: 'checkbox' }
             ]
         }
     ];
@@ -114,6 +133,10 @@
 
 <EditorLayout title={isEditing ? `EDITING: ${form.label}` : 'NEW_PORTAL_ITEM'}>
     <svelte:fragment slot="toolbar">
+        <button onclick={openPreview} class="editor-toolbar-button">
+            <i class="ph ph-eye"></i> Preview
+        </button>
+        <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button
             onclick={() => showSettings = !showSettings}
             class="editor-toolbar-button"
@@ -136,16 +159,16 @@
         <div class="flex-1 bg-black/20 border border-white/10 rounded p-6 overflow-y-auto">
             <div class="space-y-4 max-w-xl">
                 <div>
-                    <label class="editor-label">Label</label>
-                    <input type="text" bind:value={form.label} class="editor-input" />
+                    <label class="editor-label" for="label-{instanceId}">Label</label>
+                    <input id="label-{instanceId}" type="text" bind:value={form.label} class="editor-input" />
                 </div>
                 <div>
-                    <label class="editor-label">URL</label>
-                    <input type="text" bind:value={form.url} class="editor-input" />
+                    <label class="editor-label" for="url-{instanceId}">URL</label>
+                    <input id="url-{instanceId}" type="text" bind:value={form.url} class="editor-input" />
                 </div>
                 <div>
-                    <label class="editor-label">Description</label>
-                    <textarea bind:value={form.description} class="editor-textarea" rows="4"></textarea>
+                    <label class="editor-label" for="desc-{instanceId}">Description</label>
+                    <textarea id="desc-{instanceId}" bind:value={form.description} class="editor-textarea" rows="4"></textarea>
                 </div>
             </div>
         </div>

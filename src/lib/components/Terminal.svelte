@@ -212,8 +212,7 @@
 
             case 'open':
                 const app = args[0]?.toLowerCase();
-                /** @type {Record<string, {id: string, origin: string}>} */
-                const apps = {
+                /** @type {Record<string, {id: string, origin: string, title: string}>} */ const apps = {
                     'vault': { id: 'c-tr', origin: 'tr', title: 'ARCHIVE_VAULT' },
                     'guestbook': { id: 'admin-guestbook', origin: 'bc', title: 'GUESTBOOK_MOD' },
                     'portal': { id: 'c-br', origin: 'br', title: 'LINK_PORTAL' },

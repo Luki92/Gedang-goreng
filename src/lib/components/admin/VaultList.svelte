@@ -63,7 +63,7 @@
             <span class="text-xs text-white/40 font-mono">[{dataStore.works.length} FILES]</span>
         </div>
         <div class="flex items-center gap-2">
-            <button onclick={() => dataStore.fetchWorks()} class="p-2 hover:bg-white/10 rounded transition-colors" title="Refresh">
+            <button onclick={() => dataStore.fetchWorks()} class="p-2 hover:bg-white/10 rounded transition-colors" title="Refresh" aria-label="Refresh">
                 <i class="ph ph-arrows-clockwise"></i>
             </button>
             <button onclick={() => openEditor()} class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium transition-colors flex items-center gap-2">
@@ -97,10 +97,10 @@
                         <div class="flex items-center justify-between pt-4 border-t border-white/5">
                             <span class="text-[10px] font-mono text-white/20">ID: {w.id}</span>
                             <div class="flex gap-2">
-                                <button onclick={() => openEditor(w)} class="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded transition-colors" title="Edit">
+                                <button onclick={() => openEditor(w)} class="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded transition-colors" title="Edit" aria-label="Edit">
                                     <i class="ph ph-pencil-simple text-lg"></i>
                                 </button>
-                                <button onclick={() => deleteWork(w.id)} class="p-1.5 hover:bg-red-500/20 text-red-400 rounded transition-colors" title="Delete">
+                                <button onclick={() => deleteWork(w.id)} class="p-1.5 hover:bg-red-500/20 text-red-400 rounded transition-colors" title="Delete" aria-label="Delete">
                                     <i class="ph ph-trash text-lg"></i>
                                 </button>
                             </div>
