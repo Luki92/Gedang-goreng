@@ -1,28 +1,41 @@
 <script>
+    import { onMount } from 'svelte';
     import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
     import { dataStore } from '$lib/stores/data.svelte.js';
+    import { windowManager } from '$lib/windowManager.svelte.js';
     import EditorLayout from '$lib/components/editor/EditorLayout.svelte';
     import ContentSettings from '$lib/components/editor/ContentSettings.svelte';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
 
-    /** @type {{initialProfile?: any}} */
-    let { initialProfile = null } = $props();
-
-    let isEditing = $state(!!initialProfile);
-    let showSettings = $state(false);
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
-    const initial = initialProfile || {};
-
+    // Local state for the form, initialized from dataStore
+    /** @type {{id: number | null, full_name: string, bio: string, status: string, location: string, email: string, avatar_url: string}} */
     let form = $state({
-        id: initial.id || null,
-        key: initial.key || '',
-        value: initial.value || '',
-        category: initial.category || 'general',
-        description: initial.description || '',
-        is_public: initial.is_public !== undefined ? initial.is_public : true
+        id: null,
+        full_name: '',
+        bio: '',
+        status: '',
+        location: '',
+        email: '',
+        avatar_url: ''
+    });
+
+    onMount(async () => {
+        await dataStore.fetchProfile();
+        // Initialize form from store
+        if (dataStore.profile) {
+            Object.assign(form, dataStore.profile);
+        }
+    });
+
+    // Real-time sync to dataStore.profile for preview
+    $effect(() => {
+        // We want to update the store whenever the form changes
+        // so that any preview window (Identity.svelte) reacts immediately
+        dataStore.profile = { ...dataStore.profile, ...form };
     });
 
     /**
@@ -44,106 +57,115 @@
 
     async function save() {
         if (!$isAdmin) return;
-        if (!form.key || !form.value) return alert('Key and Value required');
 
+        /** @type {any} */
         const payload = { ...form };
+        const id = payload.id;
         delete payload.id;
 
         let error;
+        /** @type {string[]} */
         let sqlCommands = [];
 
-        if (isEditing && form.id) {
+        if (id) {
             const updateFields = Object.entries(payload)
-                .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v}`)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${String(v).replace(/'/g, "''")}'` : v}`)
                 .join(', ');
-            sqlCommands = [`UPDATE profile_data SET ${updateFields} WHERE id = ${form.id};`];
-            const res = await supabase.from('profile_data').update(payload).eq('id', form.id);
+            sqlCommands = [`UPDATE profile SET ${updateFields} WHERE id = ${id};`];
+            const res = await supabase.from('profile').update(payload).eq('id', id);
             error = res.error;
         } else {
             const columns = Object.keys(payload).join(', ');
             const values = Object.values(payload)
-                .map(v => typeof v === 'string' ? `'${v.replace(/'/g, "''")}'` : v)
+                .map(v => typeof v === 'string' ? `'${String(v).replace(/'/g, "''")}'` : v)
                 .join(', ');
-            sqlCommands = [`INSERT INTO profile_data (${columns}) VALUES (${values});`];
-            const res = await supabase.from('profile_data').insert(payload);
+            sqlCommands = [`INSERT INTO profile (${columns}) VALUES (${values});`];
+            const res = await supabase.from('profile').insert(payload).select().single();
             error = res.error;
-            if (!error) isEditing = true;
+            if (!error && res.data) {
+                form.id = res.data.id;
+            }
         }
 
         if (error) {
             showSaveAnimation(false, `Error: ${error.message}`, sqlCommands);
         } else {
-            showSaveAnimation(true, 'Profile entry saved successfully', sqlCommands);
+            showSaveAnimation(true, 'Profile saved successfully', sqlCommands);
             dataStore.fetchProfile();
         }
     }
 
-    async function remove() {
-        if (!form.id || !$isAdmin) return;
-        if (!confirm('Delete this profile entry?')) return;
-        const sqlCommands = [`DELETE FROM profile_data WHERE id = ${form.id};`];
-        const { error } = await supabase.from('profile_data').delete().eq('id', form.id);
-        if (error) {
-            showSaveAnimation(false, `Delete failed: ${error.message}`, sqlCommands);
-        } else {
-            showSaveAnimation(true, 'Profile entry deleted successfully', sqlCommands);
-            dataStore.fetchProfile();
-        }
+    function openPreview() {
+        windowManager.open('profile-preview', {
+            componentId: 'c-tl', title: 'IDENTITY_PREVIEW',
+            width: 800,
+            height: 600,
+            originType: 'bc'
+        });
     }
 
     const settingsSections = [
         {
-            title: 'Entry Meta',
+            title: 'Appearance',
             fields: [
-                { key: 'category', label: 'Category', type: 'text' },
-                { key: 'is_public', label: 'Publicly Visible', type: 'checkbox' },
-                { key: 'description', label: 'Notes', type: 'textarea' }
+                { key: 'avatar_url', label: 'Avatar URL', type: 'text' },
+                { key: 'status', label: 'Online Status', type: 'text' }
+            ]
+        },
+        {
+            title: 'Contact',
+            fields: [
+                { key: 'location', label: 'Location', type: 'text' },
+                { key: 'email', label: 'Email', type: 'text' }
             ]
         }
     ];
 </script>
 
-<EditorLayout title={isEditing ? `EDITING: ${form.key}` : 'NEW_PROFILE_ENTRY'}>
+<EditorLayout title="IDENTITY_MATRIX_EDITOR">
     <svelte:fragment slot="toolbar">
-        <button
-            onclick={() => showSettings = !showSettings}
-            class="editor-toolbar-button"
-            class:active={showSettings}
-        >
-            <i class="ph ph-gear"></i> Settings
+        <button onclick={openPreview} class="editor-toolbar-button">
+            <i class="ph ph-eye"></i> Preview
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button onclick={save} class="px-4 py-2 bg-green-600 text-white rounded font-medium hover:bg-green-700 transition-colors">
-            <i class="ph ph-check-circle"></i> Save
+            <i class="ph ph-check-circle"></i> Save Profile
         </button>
-        {#if isEditing}
-            <button onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
-                <i class="ph ph-trash"></i> Delete
-            </button>
-        {/if}
     </svelte:fragment>
 
     <div class="flex h-full gap-4 p-4 overflow-hidden">
+        <!-- Main Form -->
         <div class="flex-1 bg-black/20 border border-white/10 rounded p-6 overflow-y-auto">
-            <div class="space-y-4 max-w-xl">
+            <div class="max-w-2xl space-y-6">
                 <div>
-                    <label class="editor-label">Key</label>
-                    <input type="text" bind:value={form.key} class="editor-input" placeholder="e.g. location" />
+                    <label for="full_name" class="editor-label">Full Name</label>
+                    <input id="full_name" type="text" bind:value={form.full_name} class="editor-input text-xl font-bold" />
                 </div>
+
                 <div>
-                    <label class="editor-label">Value</label>
-                    <textarea bind:value={form.value} class="editor-textarea" rows="6" placeholder="Value..."></textarea>
+                    <label for="bio" class="editor-label">Bio / Description</label>
+                    <textarea id="bio" bind:value={form.bio} class="editor-textarea text-base" rows="8" placeholder="Tell your story..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="status" class="editor-label">Status</label>
+                        <input id="status" type="text" bind:value={form.status} class="editor-input" />
+                    </div>
+                    <div>
+                        <label for="location" class="editor-label">Location</label>
+                        <input id="location" type="text" bind:value={form.location} class="editor-input" />
+                    </div>
                 </div>
             </div>
         </div>
 
-        {#if showSettings}
-            <ContentSettings
-                bind:data={form}
-                sections={settingsSections}
-                onChange={() => {}}
-            />
-        {/if}
+        <!-- Settings Panel -->
+        <ContentSettings
+            bind:data={form}
+            sections={settingsSections}
+            onChange={() => {}}
+        />
     </div>
 </EditorLayout>
 

@@ -46,7 +46,7 @@
                 <span class="text-xs text-gray-400 group-hover:text-white">PORTAL_MANAGER</span>
             </button>
 
-            <button onclick={() => open('admin-profile-list', 'IDENTITY_MANAGER')} class="group relative p-6 border border-[#333] hover:border-green-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-profile', 'IDENTITY_MATRIX')} class="group relative p-6 border border-[#333] hover:border-green-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-fingerprint text-3xl text-gray-500 group-hover:text-green-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">IDENTITY_MATRIX</span>
             </button>

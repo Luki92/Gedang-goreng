@@ -65,7 +65,7 @@
             </button>
 
             <!-- Identity Manager -->
-            <button onclick={() => openApp('admin-profile-list', 'IDENTITY_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-green-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+            <button onclick={() => openApp('admin-profile', 'IDENTITY_MATRIX')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-green-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-green-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 <i class="ph ph-fingerprint text-3xl text-white/40 group-hover:text-green-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
