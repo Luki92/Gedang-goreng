@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, untrack } from 'svelte';
     import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
     import { dataStore } from '$lib/stores/data.svelte.js';
@@ -35,7 +35,7 @@
     $effect(() => {
         // We want to update the store whenever the form changes
         // so that any preview window (Identity.svelte) reacts immediately
-        dataStore.profile = { ...dataStore.profile, ...form };
+        dataStore.profile = { ...untrack(() => dataStore.profile), ...form };
     });
 
     /**
