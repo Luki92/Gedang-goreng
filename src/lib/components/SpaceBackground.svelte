@@ -21,7 +21,9 @@
             /** @type {number} */
             this.y = 0;
             /** @type {number} */
-            this.size = 0;
+            this.sizeX = 0;
+            /** @type {number} */
+            this.sizeY = 0;
             /** @type {string} */
             this.color = '';
             /** @type {number} */
@@ -32,6 +34,8 @@
             this.pulseSpeed = 0;
             /** @type {number} */
             this.pulseOffset = 0;
+            /** @type {number} */
+            this.rotation = 0;
             this.reset(w, h);
         }
         /**
@@ -41,19 +45,21 @@
         reset(w, h) {
             this.x = Math.random() * w;
             this.y = Math.random() * h;
-            this.size = Math.random() * 600 + 400;
+            this.sizeX = Math.random() * 800 + 400;
+            this.sizeY = this.sizeX * (0.3 + Math.random() * 0.4);
             const colors = [
-                'rgba(60, 20, 100, 0.2)',   // Deep Purple
-                'rgba(20, 60, 150, 0.15)',  // Deep Blue
-                'rgba(0, 100, 120, 0.12)',  // Teal
-                'rgba(100, 20, 150, 0.1)',  // Violet
-                'rgba(40, 0, 100, 0.15)'    // Indigo
+                'rgba(100, 40, 200, 0.2)',
+                'rgba(40, 80, 220, 0.18)',
+                'rgba(0, 150, 180, 0.15)',
+                'rgba(150, 50, 200, 0.12)',
+                'rgba(60, 20, 180, 0.18)'
             ];
             this.color = colors[Math.floor(Math.random() * colors.length)] || colors[0];
-            this.driftX = (Math.random() - 0.5) * 0.15;
-            this.driftY = (Math.random() - 0.5) * 0.15;
+            this.driftX = (Math.random() - 0.5) * 0.1;
+            this.driftY = (Math.random() - 0.5) * 0.1;
             this.pulseSpeed = 0.0001 + Math.random() * 0.0002;
             this.pulseOffset = Math.random() * Math.PI * 2;
+            this.rotation = Math.random() * Math.PI * 2;
         }
         /**
          * @param {number} w
@@ -62,10 +68,11 @@
         update(w, h) {
             this.x += this.driftX;
             this.y += this.driftY;
-            if (this.x < -this.size) this.x = w + this.size;
-            if (this.x > w + this.size) this.x = -this.size;
-            if (this.y < -this.size) this.y = h + this.size;
-            if (this.y > h + this.size) this.y = -this.size;
+            const margin = Math.max(this.sizeX, this.sizeY);
+            if (this.x < -margin) this.x = w + margin;
+            if (this.x > w + margin) this.x = -margin;
+            if (this.y < -margin) this.y = h + margin;
+            if (this.y > h + margin) this.y = -margin;
         }
         /**
          * @param {CanvasRenderingContext2D} ctx
@@ -76,19 +83,25 @@
          * @param {number} h
          */
         draw(ctx, time, mouseX, mouseY, w, h) {
-            const dx = (mouseX - w/2) / w * -60;
-            const dy = (mouseY - h/2) / h * -60;
-            const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.15 + 0.85;
-            const currentSize = this.size * pulse;
+            const dx = (mouseX - w/2) / w * -80;
+            const dy = (mouseY - h/2) / h * -80;
+            const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.2 + 0.8;
 
-            const grad = ctx.createRadialGradient(
-                this.x + dx, this.y + dy, 0,
-                this.x + dx, this.y + dy, currentSize
-            );
+            ctx.save();
+            ctx.translate(this.x + dx, this.y + dy);
+            ctx.rotate(this.rotation);
+            ctx.scale(pulse, pulse);
+
+            const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.sizeX);
             grad.addColorStop(0, this.color);
+            grad.addColorStop(0.6, this.color.replace(/0\.\d+/, '0.05'));
             grad.addColorStop(1, 'transparent');
+
             ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, this.sizeX, this.sizeY, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
         }
     }
 
@@ -112,6 +125,8 @@
             this.alpha = 0;
             /** @type {number} */
             this.parallaxFactor = 0;
+            /** @type {string} */
+            this.color = '';
             this.reset(w, h);
         }
         /**
@@ -121,10 +136,13 @@
         reset(w, h) {
             this.x = Math.random() * w;
             this.y = Math.random() * h;
-            this.size = ([0.4, 0.9, 1.8][this.layer] || 1) + Math.random() * 0.4;
-            this.speed = ([0.03, 0.1, 0.3][this.layer] || 0.1) * (0.8 + Math.random() * 0.4);
-            this.alpha = 0.2 + Math.random() * 0.8;
-            this.parallaxFactor = ([8, 20, 45][this.layer] || 10);
+            this.size = ([0.6, 1.4, 2.8][this.layer] || 1) + Math.random() * 0.5;
+            this.speed = ([0.02, 0.08, 0.25][this.layer] || 0.1) * (0.8 + Math.random() * 0.4);
+            this.alpha = 0.4 + Math.random() * 0.6;
+            this.parallaxFactor = ([15, 30, 70][this.layer] || 20);
+
+            const starColors = ['#ffffff', '#ffffff', '#e0f0ff', '#fff0e0', '#fff8e0', '#f8e0ff'];
+            this.color = starColors[Math.floor(Math.random() * starColors.length)] || '#ffffff';
         }
         /**
          * @param {number} h
@@ -144,16 +162,24 @@
             const dx = (mouseX - w/2) / w * -this.parallaxFactor;
             const dy = (mouseY - h/2) / h * -this.parallaxFactor;
             ctx.globalAlpha = this.alpha;
+            ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(this.x + dx, this.y + dy, this.size, 0, Math.PI * 2);
             ctx.fill();
+
+            if (this.layer === 2) {
+                ctx.globalAlpha = this.alpha * 0.4;
+                ctx.beginPath();
+                ctx.arc(this.x + dx, this.y + dy, this.size * 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
     }
 
     class Comet {
         constructor() {
             this.active = false;
-            this.timer = Math.random() * 1200 + 600;
+            this.timer = Math.random() * 600 + 300;
             /** @type {number} */
             this.life = 0;
             /** @type {number} */
@@ -185,30 +211,21 @@
         spawn(w, h) {
             this.active = true;
             this.life = 0;
-            this.maxLife = 200 + Math.random() * 300;
+            this.maxLife = 120 + Math.random() * 200;
 
-            // Randomly start from an edge or inside
-            if (Math.random() < 0.5) {
-                // From edges
-                const side = Math.floor(Math.random() * 4);
-                if (side === 0) { this.x = -100; this.y = Math.random() * h; this.angle = (Math.random() - 0.5) * Math.PI / 2; }
-                else if (side === 1) { this.x = w + 100; this.y = Math.random() * h; this.angle = Math.PI + (Math.random() - 0.5) * Math.PI / 2; }
-                else if (side === 2) { this.x = Math.random() * w; this.y = -100; this.angle = Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 2; }
-                else { this.x = Math.random() * w; this.y = h + 100; this.angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 2; }
-            } else {
-                // Inside screen
-                this.x = Math.random() * w;
-                this.y = Math.random() * h;
-                this.angle = Math.random() * Math.PI * 2;
-            }
+            const side = Math.floor(Math.random() * 4);
+            if (side === 0) { this.x = -100; this.y = Math.random() * h; this.angle = (Math.random() - 0.5) * Math.PI / 3; }
+            else if (side === 1) { this.x = w + 100; this.y = Math.random() * h; this.angle = Math.PI + (Math.random() - 0.5) * Math.PI / 3; }
+            else if (side === 2) { this.x = Math.random() * w; this.y = -100; this.angle = Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 3; }
+            else { this.x = Math.random() * w; this.y = h + 100; this.angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI / 3; }
 
-            this.speed = 2 + Math.random() * 4;
+            this.speed = 5 + Math.random() * 7;
             this.vx = Math.cos(this.angle) * this.speed;
             this.vy = Math.sin(this.angle) * this.speed;
             this.opacity = 0;
-            this.scale = 0.1;
+            this.scale = 0.25;
             this.fadingIn = true;
-            this.length = 80 + Math.random() * 100;
+            this.length = 180 + Math.random() * 250;
         }
         /**
          * @param {number} w
@@ -222,20 +239,22 @@
             }
             this.x += this.vx;
             this.y += this.vy;
-            this.scale += 0.002;
+            this.scale += 0.0015;
             this.life++;
 
+            this.length += Math.sin(this.life * 0.08) * 8;
+
             if (this.fadingIn) {
-                this.opacity += 0.01;
-                if (this.opacity >= 0.8) { this.opacity = 0.8; this.fadingIn = false; }
-            } else if (this.life > this.maxLife * 0.5) {
-                this.opacity -= 0.008;
-                if (this.opacity <= 0) { this.active = false; this.timer = Math.random() * 3000 + 1500; }
+                this.opacity += 0.03;
+                if (this.opacity >= 0.95) { this.opacity = 0.95; this.fadingIn = false; }
+            } else if (this.life > this.maxLife * 0.6) {
+                this.opacity -= 0.015;
+                if (this.opacity <= 0) { this.active = false; this.timer = Math.random() * 1500 + 500; }
             }
 
-            if (this.x < -300 || this.x > w + 300 || this.y < -300 || this.y > h + 300) {
+            if (this.x < -500 || this.x > w + 500 || this.y < -500 || this.y > h + 500) {
                 this.active = false;
-                this.timer = Math.random() * 3000 + 1500;
+                this.timer = Math.random() * 1500 + 500;
             }
         }
         /**
@@ -247,25 +266,24 @@
             ctx.translate(this.x, this.y);
             ctx.rotate(this.angle);
             ctx.scale(this.scale, this.scale);
+
             const grad = ctx.createLinearGradient(0, 0, -this.length, 0);
             grad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
-            grad.addColorStop(0.2, `rgba(150, 200, 255, ${this.opacity * 0.6})`);
+            grad.addColorStop(0.1, `rgba(200, 230, 255, ${this.opacity * 0.85})`);
+            grad.addColorStop(0.4, `rgba(120, 180, 255, ${this.opacity * 0.4})`);
             grad.addColorStop(1, 'transparent');
+
             ctx.strokeStyle = grad;
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 5;
             ctx.lineCap = 'round';
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(-this.length, 0);
             ctx.stroke();
 
-            // Head glow
-            const headGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 5);
-            headGrad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
-            headGrad.addColorStop(1, 'transparent');
-            ctx.fillStyle = headGrad;
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
             ctx.beginPath();
-            ctx.arc(0, 0, 5, 0, Math.PI * 2);
+            ctx.arc(0, 0, 4, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.restore();
@@ -302,17 +320,18 @@
         function initElements() {
             stars = [];
             for(let i=0; i<3; i++) {
-                const count = [60, 40, 20][i] || 20;
+                const count = [40, 25, 12][i] || 12;
                 for(let j=0; j<count; j++) stars.push(new Star(width, height, i));
             }
             clouds = [];
-            for(let i=0; i<8; i++) clouds.push(new NebulaCloud(width, height));
+            for(let i=0; i<6; i++) clouds.push(new NebulaCloud(width, height));
             comets = [new Comet(), new Comet()];
         }
 
         function animateFrame() {
             if (!ctxNebula || !ctxStar) return;
             const time = Date.now();
+
             ctxNebula.clearRect(0, 0, width, height);
             ctxNebula.globalCompositeOperation = 'screen';
             clouds.forEach(cloud => {
@@ -321,7 +340,6 @@
             });
 
             ctxStar.clearRect(0, 0, width, height);
-            ctxStar.fillStyle = "white";
             stars.forEach(star => {
                 star.update(height);
                 star.draw(ctxStar, mouseX, mouseY, width, height);
@@ -358,8 +376,8 @@
 
 <style>
     .canvas-layer { position: absolute; inset: 0; pointer-events: none; }
-    #nebula-canvas { z-index: -3; opacity: 0.7; mix-blend-mode: screen; }
-    #starfield { z-index: -2; opacity: 1; }
+    #nebula-canvas { z-index: 4; opacity: 0.9; mix-blend-mode: screen; }
+    #starfield { z-index: 30; opacity: 1; mix-blend-mode: exclusion; }
 
     .vignette-overlay {
         position: absolute; inset: 0; pointer-events: none; z-index: -1;

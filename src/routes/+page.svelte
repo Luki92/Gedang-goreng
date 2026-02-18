@@ -31,11 +31,11 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
     // --- Debris Logic ---
     let debrisContainer;
     const allItems = [
-        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1, color: '#a8a' },
-        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#8aa' },
-        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1, color: '#aa8' },
-        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2, color: '#88c' },
-        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5, color: '#c88' },
+        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1, color: '#ff00ff' },
+        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#00ffff' },
+        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1, color: '#ffff00' },
+        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2, color: '#8888ff' },
+        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5, color: '#ff8888' },
     ];
     let actors = [];
     let mouseX = 0, mouseY = 0;
