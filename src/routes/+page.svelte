@@ -31,11 +31,11 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
     // --- Debris Logic ---
     let debrisContainer;
     const allItems = [
-        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1 },
-        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2 },
-        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1 },
-        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2 },
-        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5 },
+        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1, color: '#a8a' },
+        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#8aa' },
+        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1, color: '#aa8' },
+        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2, color: '#88c' },
+        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5, color: '#c88' },
     ];
     let actors = [];
     let mouseX = 0, mouseY = 0;
@@ -46,6 +46,7 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
             this.element.innerHTML = data.char;
             this.element.className = 'debris-item';
             this.element.style.fontSize = `${2 * data.scale}rem`;
+            this.element.style.color = data.color;
             this.x = Math.random() * window.innerWidth;
             this.y = Math.random() * window.innerHeight;
             this.vx = (Math.random() - 0.5) * 1;

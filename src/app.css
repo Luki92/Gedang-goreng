@@ -46,7 +46,7 @@ body {
 .debris-item {
     position: absolute; font-size: 2rem; pointer-events: auto; cursor: grab;
     will-change: transform; transition: filter 0.3s;
-    display: flex; align-items: center; justify-content: center; color: #666;
+    display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.5);
 }
 .debris-item:hover { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); color: #fff; z-index: 100; }
 .debris-item:active { cursor: grabbing; }
@@ -184,7 +184,7 @@ body {
 
 .sys-header {
     display: flex; justify-content: space-between; border-bottom: 1px solid #333;
-    padding-bottom: 10px; margin-bottom: 10px; font-family: 'VT323'; color: #666; font-size: 1.2rem;
+    padding-bottom: 10px; margin-bottom: 10px; font-family: 'VT323'; color: rgba(255, 255, 255, 0.5); font-size: 1.2rem;
 }
 .close-btn { cursor: pointer; } .close-btn:hover { color: red; }
 
