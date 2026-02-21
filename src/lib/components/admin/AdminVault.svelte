@@ -6,7 +6,7 @@
     import EditorLayout from '$lib/components/editor/EditorLayout.svelte';
     import ContentSettings from '$lib/components/editor/ContentSettings.svelte';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
-    import LukiEditor from '$lib/components/editor/LukiEditor.svelte';
+    import TiptapEditor from '$lib/components/editor/TiptapEditor.svelte';
 
     /** @type {{initialWork?: any}} */
     let { initialWork = null } = $props();
@@ -184,7 +184,7 @@
     <div class="flex h-full gap-4 p-4 overflow-hidden">
         <!-- Editor -->
         <div class="flex-1 flex flex-col min-w-0">
-            <LukiEditor bind:content={work.content} />
+            <TiptapEditor bind:content={work.content} />
         </div>
 
         <!-- Settings Panel -->
