@@ -1,0 +1,775 @@
+
+> app@0.0.1 dev
+> vite dev
+
+8:18:13 PM [vite] (client) Forced re-optimization of dependencies
+
+  VITE v7.3.1  ready in 1993 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+8:18:58 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:18:58 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:18:58 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:18:58 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:18:58 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:12 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:20:15 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:21:21 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:22:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:23:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:24:21 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:25:19 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:26:16 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:49 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:69 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:99 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:28:18 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:13:3 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:19:2 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:26:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:38:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:50:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:73:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:18:59 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:91:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:18:59 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/lib/components/admin/LukiEditor.svelte:77:38 Expected token >
+https://svelte.dev/e/expected_token
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/lib/components/admin/LukiEditor.svelte:77:38
+   75 |              <button
+   76 |                  onclick={() => activeTab = 'edit'}
+   77 |                  class:bg-transparent\/10={activeTab === 'edit'}
+                                               ^
+   78 |                  class:text-white={activeTab === 'edit'}
+   79 |                  class="px-2 py-1 text-xs rounded transition-colors text-white/50 hover:text-white"
+
+[1;31m[500] GET /[0m
+
+8:19:19 PM [vite] (client) hmr update /src/app.css
+8:19:19 PM [vite] (ssr) page reload src/lib/components/admin/LukiEditor.svelte
+8:19:33 PM [vite] (client) hmr update /src/app.css
+8:19:33 PM [vite] (ssr) page reload src/lib/components/admin/LukiEditor.svelte
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:11:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:16:12 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:17:15 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:18:13 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:21 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:20:14 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:21:18 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:22:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:23:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:139:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:143:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:147:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:77:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:81:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:89:16 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:95:16 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:104:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:108:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:11:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:16:12 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:17:15 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:18:16 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:20:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:21:24 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:129:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:133:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:137:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:141:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:44 PM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:104:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:12 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:20:15 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:21:21 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:22:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:23:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:24:21 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:25:19 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:26:16 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:14 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:49 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:69 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:27:99 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:28:18 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:11:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:16:12 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:17:15 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:18:13 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:21 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:20:14 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:21:18 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:22:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:23:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:139:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:143:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:147:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:77:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:81:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:89:16 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:95:16 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:104:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:108:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:11:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:16:12 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:17:15 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:18:16 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:20:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:21:24 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:129:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:133:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:137:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:141:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:104:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:26:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:38:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:50:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:73:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:91:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:13:3 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:19:2 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+8:19:45 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+8:19:59 PM [vite] (client) hmr update /src/app.css
+8:19:59 PM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+8:23:07 PM [vite] (ssr) page reload src/routes/+page.svelte
+8:23:07 PM [vite] (ssr) page reload src/routes/+page.svelte
+8:23:18 PM [vite] (client) hmr update /src/lib/components/AdminPanel.svelte, /src/app.css
+8:23:18 PM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+8:23:43 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/ProfileList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+8:23:43 PM [vite] (ssr) page reload src/lib/stores.js
+8:23:44 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/routes/+page.svelte:304:6 `$isAdmin` is an illegal variable name. To reference a global variable called `$isAdmin`, use `globalThis.$isAdmin`
+https://svelte.dev/e/global_reference_invalid
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/routes/+page.svelte:304:6
+   302 |
+   303 |  <TilingWindowManager />
+   304 |  n{#if $isAdmin}
+                        ^
+   305 |      <AdminPanel />
+   306 |  {/if}
+
+[1;31m[500] GET /[0m
+
+8:24:54 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/routes/+page.svelte:304:6 `$isAdmin` is an illegal variable name. To reference a global variable called `$isAdmin`, use `globalThis.$isAdmin`
+https://svelte.dev/e/global_reference_invalid
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/routes/+page.svelte:304:6
+   302 |
+   303 |  <TilingWindowManager />
+   304 |  n{#if $isAdmin}
+                        ^
+   305 |      <AdminPanel />
+   306 |  {/if}
+
+[1;31m[500] GET /[0m
+
+8:25:10 PM [vite] (ssr) page reload src/routes/+page.svelte
+8:25:27 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/routes/+page.svelte:304:5 `$isAdmin` is an illegal variable name. To reference a global variable called `$isAdmin`, use `globalThis.$isAdmin`
+https://svelte.dev/e/global_reference_invalid
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/routes/+page.svelte:304:5
+   302 |
+   303 |  <TilingWindowManager />
+   304 |  {#if $isAdmin}
+                       ^
+   305 |      <AdminPanel />
+   306 |  {/if}
+
+[1;31m[500] GET /[0m
+
+8:25:44 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+8:25:44 PM [vite] (ssr) page reload src/routes/+page.svelte
+5:10:27 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/ProfileList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:10:27 AM [vite] (ssr) page reload src/lib/stores.js
+5:10:38 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/ProfileList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:10:38 AM [vite] (ssr) page reload src/lib/stores.js
+5:16:10 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/ProfileList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:16:10 AM [vite] (ssr) page reload src/lib/stores.js
+5:17:21 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:26:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:21 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:38:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:21 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:50:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:21 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:73:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:21 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:91:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+5:17:21 AM [vite] (client) hmr update /src/lib/components/editor/ContentSettings.svelte, /src/app.css
+5:17:21 AM [vite] (ssr) page reload src/lib/components/editor/ContentSettings.svelte
+5:17:38 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:38 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:38 AM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+5:17:38 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:26:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:38 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:38:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:38 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:50:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:38 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:73:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:17:38 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:91:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:16:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:138:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:142:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:146:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:12:29 This reference only captures the initial value of `initialProfile`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:16:20 This reference only captures the initial value of `initialProfile`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:129:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:133:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:16:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:137:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:141:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:145:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:149:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:18:17 AM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+5:18:17 AM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+5:18:17 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+5:18:17 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+5:18:17 AM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+5:18:17 AM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:78:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:75:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:76:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+5:18:45 AM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:78:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:18:45 AM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+5:18:45 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+5:18:45 AM [vite] (client) hmr update /src/lib/components/admin/ProfileList.svelte, /src/app.css
+5:18:45 AM [vite] (ssr) page reload src/lib/components/admin/ProfileList.svelte
+5:18:45 AM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+5:18:45 AM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+5:20:33 AM [vite] (client) hmr update /src/app.css
+5:20:33 AM [vite] (ssr) page reload src/lib/components/admin/LukiEditor.svelte
+5:20:33 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:33 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:33 AM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte
+5:20:46 AM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+5:20:46 AM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:76:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:77:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:139:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:143:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:147:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:12:29 This reference only captures the initial value of `initialProfile`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:17:20 This reference only captures the initial value of `initialProfile`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:130:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:134:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:138:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:142:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:146:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:150:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:20:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:105:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/ProfileList.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/ProfileList.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+5:20:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+5:20:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+5:21:03 AM [vite] (client) hmr update /src/app.css
+5:21:03 AM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+5:21:49 AM [vite] (client) hmr update /app/src/lib/components/editor/LukiEditor.svelte
+5:22:06 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:06 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:06 AM [vite] (client) hmr update /src/app.css
+5:22:06 AM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+5:22:06 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+5:22:06 AM [vite] (ssr) page reload src/lib/components/admin/ProfileList.svelte
+5:22:07 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:22:07 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:22:07 AM [vite] (client) hmr update /src/app.css
+5:22:07 AM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+5:22:35 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:35 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:35 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:76:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:35 AM [vite-plugin-svelte] src/lib/components/admin/ProfileList.svelte:77:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:22:35 AM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+5:22:35 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+5:22:35 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:30:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:22:35 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:42:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:22:35 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:54:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:22:35 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:77:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:22:35 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:95:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+5:22:36 AM [vite] (client) hmr update /src/lib/components/admin/ProfileList.svelte, /src/app.css
+5:22:36 AM [vite] (ssr) page reload src/lib/components/admin/ProfileList.svelte
+5:22:36 AM [vite] (client) hmr update /src/lib/components/editor/ContentSettings.svelte, /src/app.css
+5:22:36 AM [vite] (ssr) page reload src/lib/components/editor/ContentSettings.svelte
+5:47:25 AM [vite] (client) hmr update /src/lib/components/AdminPanel.svelte, /src/app.css
+5:47:25 AM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+5:47:53 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:30:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:47:53 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:42:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:47:53 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:54:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:47:53 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:77:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:47:53 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:95:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+5:47:53 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+5:47:53 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+5:48:08 AM [vite] (ssr) page reload src/lib/components/admin/ProfileList.svelte
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:139:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:143:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:147:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:138:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:142:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:146:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:08 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:150:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:09 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:09 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:09 AM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:105:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:09 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+5:48:09 AM [vite] (ssr) page reload src/routes/+page.svelte
+5:48:09 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+5:48:09 AM [vite] (ssr) page reload src/routes/+page.svelte
+5:48:52 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:48:52 AM [vite] (ssr) page reload src/lib/stores.js
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:30:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:42:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:54:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:77:9 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/editor/ContentSettings.svelte:95:1 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
+https://svelte.dev/e/slot_element_deprecated
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:139:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:143:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:147:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:12:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:17:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:138:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:142:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:146:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:150:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/PortalList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:79:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/PlaylistList.svelte:80:24 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:48:56 AM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:105:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:49:31 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:49:31 AM [vite] (ssr) page reload src/lib/stores.js
+5:50:08 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+5:50:08 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+5:50:26 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:50:26 AM [vite] (ssr) page reload src/lib/stores.js
+5:51:31 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+5:51:31 AM [vite] (ssr) page reload src/lib/stores.js
+5:52:16 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+5:52:16 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+5:53:09 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+5:53:09 AM [vite] (client) page reload .svelte-kit/generated/root.js
+5:53:09 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+5:53:09 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+5:53:49 AM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+5:53:49 AM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+8:27:28 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+8:27:28 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+8:27:57 AM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+8:27:57 AM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+8:30:23 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+8:30:23 AM [vite] (ssr) page reload src/lib/stores.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:30:25 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:30:25 AM [vite] (client) page reload .svelte-kit/generated/root.js
+8:30:25 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:30:25 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:34:15 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+8:34:15 AM [vite] (ssr) page reload src/lib/stores.js
+11:24:33 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:24:33 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:24:33 AM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+11:24:33 AM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+11:25:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:13:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:25:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:18:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:25:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:161:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:165:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:17 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:169:20 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:17 AM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+11:25:17 AM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+11:25:41 AM [vite] (client) hmr update /src/lib/components/Portal.svelte, /src/app.css
+11:25:41 AM [vite] (ssr) page reload src/lib/components/Portal.svelte
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:13:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:18:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:158:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:162:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:166:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:59 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:170:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:25:59 AM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+11:25:59 AM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:13:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:18:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:158:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:162:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:166:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:26:27 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:170:24 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+11:26:27 AM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+11:26:27 AM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+11:26:56 AM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+11:26:56 AM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+11:27:45 AM [vite] (client) hmr update /src/lib/components/FileViewer.svelte, /src/app.css
+11:27:45 AM [vite] (ssr) page reload src/lib/components/FileViewer.svelte
+11:28:05 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:28:05 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:28:05 AM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+11:28:05 AM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+11:29:43 AM [vite] (client) hmr update /src/lib/components/Portal.svelte, /src/app.css
+11:29:43 AM [vite] (ssr) page reload src/lib/components/Portal.svelte
+11:31:30 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+11:31:30 AM [vite] (ssr) page reload src/lib/stores.js
+11:32:25 AM [vite-plugin-svelte] src/lib/components/admin/AdminGuestbook.svelte:110:28 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+11:32:25 AM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+11:32:25 AM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+11:32:25 AM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+11:32:25 AM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+11:32:25 AM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+11:32:25 AM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+11:32:39 AM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+11:32:39 AM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+11:33:14 AM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+11:33:14 AM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+11:33:26 AM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+11:33:26 AM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+11:33:54 AM [vite] (client) hmr update /src/lib/components/editor/ContentSettings.svelte, /src/app.css
+11:33:54 AM [vite] (ssr) page reload src/lib/components/editor/ContentSettings.svelte
+11:34:12 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:12 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:12 AM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+11:34:12 AM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+11:34:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:47 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:47 AM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+11:34:47 AM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+11:35:23 AM [vite] (client) hmr update /src/lib/components/Terminal.svelte, /src/app.css
+11:35:23 AM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+11:35:23 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+11:35:23 AM [vite] (client) hmr update /src/lib/components/editor/SaveAnimation.svelte, /src/app.css
+11:35:23 AM [vite] (ssr) page reload src/lib/components/editor/SaveAnimation.svelte
+11:35:58 AM [vite] (client) hmr update /src/lib/components/Terminal.svelte, /src/app.css
+11:35:58 AM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+11:37:01 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+11:37:01 AM [vite] (client) page reload .svelte-kit/generated/root.js
+11:37:01 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+11:37:01 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+11:39:11 AM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+11:39:11 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+11:40:18 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+11:40:18 AM [vite] (ssr) page reload src/lib/stores.js
+11:42:29 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+11:42:29 AM [vite] (ssr) page reload src/lib/stores.js
+11:44:00 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+11:44:00 AM [vite] (ssr) page reload src/lib/stores.js
