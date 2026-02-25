@@ -34,8 +34,8 @@
             {#each tracks as track}
                 <button
                     onclick={() => playTrack(track)}
-                    class="w-full p-4 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/5 transition-all flex items-center gap-4 group text-left">
-                    <div class="w-12 h-12 bg-white/5 flex items-center justify-center group-hover:bg-pink-500/20 transition-colors">
+                    class="w-full p-4 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/5 transition-all flex items-center gap-4 group text-left rounded-xl">
+                    <div class="w-12 h-12 bg-white/5 flex items-center justify-center rounded-lg group-hover:bg-pink-500/20 transition-colors">
                         <i class="ph ph-play-circle text-2xl text-white/40 group-hover:text-pink-500"></i>
                     </div>
                     <div class="flex-1 min-w-0">

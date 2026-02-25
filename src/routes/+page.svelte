@@ -2,6 +2,7 @@
     // @ts-nocheck
     import { onMount, onDestroy } from 'svelte';
     import SpaceBackground from '$lib/components/SpaceBackground.svelte';
+import WindowDock from '$lib/components/WindowDock.svelte';
     import LukiPersona from '$lib/components/LukiPersona.svelte';
     import HUDCorner from '$lib/components/HUDCorner.svelte';
     import Identity from '$lib/components/Identity.svelte';
@@ -11,7 +12,6 @@
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import FileViewer from '$lib/components/FileViewer.svelte';
     import Terminal from '$lib/components/Terminal.svelte';
-import AdminPanel from '$lib/components/AdminPanel.svelte';
 
     // Admin Components
     import ControlCenter from '$lib/components/admin/ControlCenter.svelte';
@@ -300,8 +300,8 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
 <TilingWindowManager />
+<WindowDock />
 {#if $isAdmin}
-    <AdminPanel />
 {/if}
 
 <main class="header-container">

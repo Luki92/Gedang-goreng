@@ -67,7 +67,7 @@
 </script>
 
 <div class="h-full flex flex-col bg-transparent text-white overflow-hidden">
-    <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 shrink-0">
+    <div class="flex items-center justify-between px-4 py-2 border-b border-white/10 shrink-0">
         <div class="flex items-center gap-4">
             <div class="flex items-center gap-1 bg-white/5 p-1 rounded-lg">
                 <button
@@ -110,13 +110,13 @@
     <div class="flex-1 overflow-y-auto custom-scrollbar relative">
         {#if currentView.type === 'SELECTOR'}
             <div class="h-full flex flex-col items-center justify-center gap-16 py-10 px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-5xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 w-full max-w-5xl">
                     <button
                         type="button"
                         onclick={() => selectCategory('WRITING')}
-                        class="group relative flex flex-col items-center gap-8 p-12 border border-white/5 bg-white/[0.02] rounded-[2rem] hover:border-blue-500/50 hover:bg-blue-500/[0.03] transition-all duration-700 hover:-translate-y-2"
+                        class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-blue-500/50 hover:bg-blue-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
-                        <div class="w-24 h-24 rounded-3xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-blue-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-blue-500/40">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-blue-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-blue-500/40">
                             <i class="ph ph-quill-light"></i>
                         </div>
                         <div class="text-center">
@@ -128,9 +128,9 @@
                     <button
                         type="button"
                         onclick={() => selectCategory('ART')}
-                        class="group relative flex flex-col items-center gap-8 p-12 border border-white/5 bg-white/[0.02] rounded-[2rem] hover:border-purple-500/50 hover:bg-purple-500/[0.03] transition-all duration-700 hover:-translate-y-2"
+                        class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-purple-500/50 hover:bg-purple-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
-                        <div class="w-24 h-24 rounded-3xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-purple-500/40">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-purple-500/40">
                             <i class="ph ph-palette-light"></i>
                         </div>
                         <div class="text-center">
@@ -142,9 +142,9 @@
                     <button
                         type="button"
                         onclick={() => selectCategory('POST')}
-                        class="group relative flex flex-col items-center gap-8 p-12 border border-white/5 bg-white/[0.02] rounded-[2rem] hover:border-green-500/50 hover:bg-green-500/[0.03] transition-all duration-700 hover:-translate-y-2"
+                        class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-green-500/50 hover:bg-green-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
-                        <div class="w-24 h-24 rounded-3xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-green-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-green-500/40">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-green-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-green-500/40">
                             <i class="ph ph-chat-centered-text-light"></i>
                         </div>
                         <div class="text-center">
@@ -157,7 +157,7 @@
                 <button
                     type="button"
                     onclick={() => selectCategory('ALL')}
-                    class="text-[10px] text-gray-600 hover:text-white font-mono tracking-[0.4em] uppercase transition-all hover:tracking-[0.6em] py-4"
+                    class="text-[10px] text-gray-600 hover:text-white font-mono tracking-[0.2em] uppercase transition-all  py-4"
                 >
                     [ ACCESS_ALL_DATA_NODES ]
                 </button>

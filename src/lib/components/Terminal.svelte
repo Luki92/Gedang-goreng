@@ -206,7 +206,7 @@
                 break;
 
             case 'logout':
-                await supabase.auth.signOut();
+                await supabase.auth.signOut(); isAdmin.set(false);
                 print('Logged out.', 'warn');
                 break;
 
