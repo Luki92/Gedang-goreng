@@ -1,39 +1,26 @@
 <script>
     import { windowManager } from '$lib/windowManager.svelte.js';
-    import { flip } from 'svelte/animate';
-    import { fade, fly } from 'svelte/transition';
+    import { fade, fly, scale } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
 
     let minimizedWindows = $derived(windowManager.windows.filter(w => w.minimized));
-
-    const iconMap = {
-        'terminal': 'ph-terminal-window',
-        'c-tr': 'ph-safe',
-        'c-tl': 'ph-fingerprint',
-        'c-bl': 'ph-vinyl-record',
-        'c-br': 'ph-planet',
-        'admin-guestbook': 'ph-envelope-open',
-        'control-center': 'ph-gear-six',
-        'file-viewer': 'ph-file-text'
-    };
-
-    /** @param {string} id */
-    function getIcon(id) {
-        return iconMap[id] || (id.startsWith('admin-') ? 'ph-shield-check' : 'ph-app-window');
-    }
 </script>
 
 {#if minimizedWindows.length > 0}
-    <div class="dock-container" transition:fly={{ y: 50, duration: 500 }}>
+    <div class="dock-container" transition:fly={{ y: 50, duration: 500, easing: quintOut }}>
         <div class="dock-bar">
             {#each minimizedWindows as win (win.id)}
                 <button
+                    id="dock-item-${win.id}"
                     class="dock-item"
                     onclick={() => windowManager.restore(win.id)}
-                    transition:fade={{ duration: 200 }}
+                    transition:scale={{ duration: 300, start: 0.5, easing: quintOut }}
                     title={win.title}
                 >
-                    <i class="ph {getIcon(win.id)}"></i>
-                    <span class="dock-label">{win.title}</span>
+                    <div class="icon-wrapper">
+                        <i class="ph ${windowManager.getIcon(win.id)}"></i>
+                    </div>
+                    <div class="active-indicator"></div>
                 </button>
             {/each}
         </div>
@@ -43,7 +30,7 @@
 <style>
     .dock-container {
         position: fixed;
-        bottom: 20px;
+        bottom: 25px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 1000;
@@ -51,52 +38,62 @@
     }
 
     .dock-bar {
-        background: rgba(10, 10, 15, 0.8);
-        backdrop-filter: blur(12px);
+        background: rgba(10, 10, 15, 0.7);
+        backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 6px;
+        border-radius: 24px;
+        padding: 8px;
         display: flex;
-        gap: 8px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        gap: 12px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.05);
         min-width: 60px;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .dock-item {
         background: transparent;
         border: none;
         color: white;
-        padding: 8px 16px;
-        border-radius: 14px;
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
         cursor: pointer;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
-        transition: all 0.2s;
-        white-space: nowrap;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
     }
 
     .dock-item:hover {
         background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-4px);
+        transform: translateY(-8px) scale(1.1);
     }
 
-    .dock-item i {
-        font-size: 20px;
+    .icon-wrapper {
+        font-size: 24px;
         opacity: 0.8;
+        transition: opacity 0.3s;
     }
 
-    .dock-label {
-        font-family: 'Space Mono', monospace;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        opacity: 0.6;
+    .dock-item:hover .icon-wrapper {
+        opacity: 1;
+    }
+
+    .active-indicator {
+        width: 4px;
+        height: 4px;
+        background: var(--accent-color, #fff);
+        border-radius: 50%;
+        margin-top: 4px;
+        box-shadow: 0 0 8px var(--accent-color, #fff);
+        position: absolute;
+        bottom: 4px;
     }
 
     @media (max-width: 768px) {
-        .dock-label { display: none; }
-        .dock-item { padding: 8px; }
+        .dock-bar { gap: 8px; padding: 6px; }
+        .dock-item { width: 44px; height: 44px; }
     }
 </style>

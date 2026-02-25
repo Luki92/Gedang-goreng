@@ -1,6 +1,6 @@
 <script>
     import { windowManager } from '$lib/windowManager.svelte.js';
-    import { onMount } from 'svelte';
+    import { onMount, tick } from 'svelte';
 
     /** @type {{ win: any }} */
     let { win } = $props();
@@ -15,7 +15,25 @@
     let dropZone = $state(null);
 
     let currentStyle = $derived.by(() => {
-        if (win.minimized) return 'display: none;';
+        const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
+        const screenH = typeof window !== 'undefined' ? window.innerHeight : 720;
+
+        if (win.minimized) {
+            // Find dock position if possible, otherwise default to bottom center
+            const dockEl = typeof document !== 'undefined' ? document.getElementById(`dock-item-${win.id}`) : null;
+            const rect = dockEl ? dockEl.getBoundingClientRect() : { left: screenW / 2, top: screenH, width: 0, height: 0 };
+
+            return [
+                `left: ${rect.left}px`,
+                `top: ${rect.top}px`,
+                `width: 0px`,
+                `height: 0px`,
+                `opacity: 0`,
+                `transform: scale(0) rotate(10deg)`,
+                `pointer-events: none`,
+                `z-index: 0`
+            ].join('; ');
+        }
 
         const style = [
             `left: ${win.x}px`,
@@ -23,11 +41,22 @@
             `width: ${win.width}px`,
             `height: ${win.height}px`,
             `z-index: ${win.zIndex}`,
-            `border-radius: ${win.isTiled ? '4px' : '12px'}`
+            `border-radius: ${win.isTiled ? '4px' : '16px'}`,
+            `opacity: 1`,
+            `transform: scale(1) rotate(0deg)`
         ];
 
         if (win.state === 'opening' && win.originRect) {
-            // Animation from origin logic (simplified for now)
+            // When opening, start from origin
+            return [
+                `left: ${win.originRect.left}px`,
+                `top: ${win.originRect.top}px`,
+                `width: ${win.originRect.width}px`,
+                `height: ${win.originRect.height}px`,
+                `opacity: 0`,
+                `transform: scale(0.2)`,
+                `z-index: ${win.zIndex}`
+            ].join('; ');
         }
 
         return style.join('; ');
@@ -35,7 +64,7 @@
 
     /** @param {MouseEvent} e */
     function handleMouseDown(e) {
-        if (win.isMaximized) return; // Prevent dragging maximized windows
+        if (win.isMaximized) return;
 
         const target = /** @type {HTMLElement} */ (e.target);
         const ignoreTags = ['INPUT', 'TEXTAREA', 'SELECT', 'A', 'I'];
@@ -176,6 +205,7 @@
     class:dragging={isDragging}
     class:resizing={isResizing}
     class:maximized={win.isMaximized}
+    class:minimized={win.minimized}
     style={currentStyle}
     onmousedown={handleMouseDown}
 >
@@ -186,7 +216,10 @@
             <button class="control-dot minimize" onclick={() => windowManager.minimize(win.id)} aria-label="Minimize"></button>
             <button class="control-dot maximize" onclick={() => windowManager.maximize(win.id)} aria-label="Maximize"></button>
         </div>
-        <div class="window-title">{win.title}</div>
+        <div class="window-title">
+            <i class="ph {windowManager.getIcon(win.id)} mr-2 opacity-50"></i>
+            {win.title}
+        </div>
     </div>
 
     <!-- Content -->
@@ -200,7 +233,7 @@
     </div>
 
     <!-- Resize Handles -->
-    {#if !win.isMaximized}
+    {#if !win.isMaximized && !win.minimized}
         <div class="resize-handle n" onmousedown={(e) => initResize(e, 'n')} role="button" tabindex="0"></div>
         <div class="resize-handle s" onmousedown={(e) => initResize(e, 's')} role="button" tabindex="0"></div>
         <div class="resize-handle e" onmousedown={(e) => initResize(e, 'e')} role="button" tabindex="0"></div>
@@ -217,18 +250,20 @@
         position: absolute;
         background: rgba(10, 10, 15, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(16px);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
         display: flex;
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
-        transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    border-radius 0.3s ease,
-                    box-shadow 0.3s ease;
+        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.5s ease,
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-radius 0.3s ease;
+        transform-origin: center center;
     }
 
     .window-frame.maximized {
@@ -236,11 +271,16 @@
         border: none;
     }
 
+    .window-frame.minimized {
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: blur(10px);
+    }
+
     .window-frame.dragging,
     .window-frame.resizing {
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
         z-index: 1000 !important;
-        transition: none; /* Smooth dragging */
+        transition: opacity 0.3s ease; /* Don't animate pos while dragging */
     }
 
     .window-header {
@@ -286,7 +326,10 @@
         letter-spacing: 2px;
         color: rgba(255, 255, 255, 0.4);
         pointer-events: none;
-        margin-right: 60px; /* Offset to center title relative to window, not just available space */
+        margin-right: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .content-wrapper {
@@ -304,7 +347,6 @@
         padding: 0;
     }
 
-    /* Resize handles stay the same but cleaner */
     .resize-handle { position: absolute; z-index: 100; }
     .n { top: 0; left: 0; right: 0; height: 4px; cursor: ns-resize; }
     .s { bottom: 0; left: 0; right: 0; height: 4px; cursor: ns-resize; }

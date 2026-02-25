@@ -2,77 +2,76 @@
 > app@0.0.1 dev
 > vite dev
 
-9:29:27 PM [vite] (client) Forced re-optimization of dependencies
 
-  VITE v7.3.1  ready in 1949 ms
+  VITE v7.3.1  ready in 4542 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-9:30:08 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
+9:55:49 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
 https://svelte.dev/e/block_empty
-9:30:09 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+9:55:50 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-9:30:09 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:173:0 `<div>` with a mousedown handler must have an ARIA role
+9:55:50 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:202:0 `<div>` with a mousedown handler must have an ARIA role
 https://svelte.dev/e/a11y_no_static_element_interactions
-9:30:09 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+9:55:50 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:09 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+9:55:50 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:09 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+9:55:51 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-9:30:09 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+9:55:51 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:09 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+9:55:51 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:10 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+9:55:51 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:10 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+9:55:51 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
 https://svelte.dev/e/a11y_missing_attribute
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:10 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+9:55:52 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
+9:55:53 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
 https://svelte.dev/e/block_empty
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+9:55:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+9:55:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+9:55:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+9:55:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+9:55:54 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:12 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+9:55:54 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-9:30:13 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+9:55:54 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-9:30:13 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:173:0 `<div>` with a mousedown handler must have an ARIA role
+9:55:54 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:202:0 `<div>` with a mousedown handler must have an ARIA role
 https://svelte.dev/e/a11y_no_static_element_interactions
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
 https://svelte.dev/e/a11y_missing_attribute
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:13 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+9:55:54 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-9:30:13 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+9:55:54 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally

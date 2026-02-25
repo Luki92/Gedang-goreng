@@ -14,6 +14,17 @@ class WindowManager {
 
     registry = new Map();
 
+    iconMap = {
+        'terminal': 'ph-terminal-window',
+        'c-tr': 'ph-safe',
+        'c-tl': 'ph-fingerprint',
+        'c-bl': 'ph-vinyl-record',
+        'c-br': 'ph-planet',
+        'admin-guestbook': 'ph-envelope-open',
+        'control-center': 'ph-gear-six',
+        'file-viewer': 'ph-file-text'
+    };
+
     constructor() {
         if (typeof window !== 'undefined') {
             window.addEventListener('resize', () => {
@@ -24,6 +35,10 @@ class WindowManager {
 
     register(id, component) {
         this.registry.set(id, component);
+    }
+
+    getIcon(id) {
+        return this.iconMap[id] || (id.startsWith('admin-') ? 'ph-shield-check' : 'ph-app-window');
     }
 
     /**
@@ -43,7 +58,9 @@ class WindowManager {
 
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
-            if (existing.minimized) existing.minimized = false;
+            if (existing.minimized) {
+                existing.minimized = false;
+            }
             if (Object.keys(props).length > 0) {
                 existing.props = props;
             }

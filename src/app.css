@@ -135,6 +135,8 @@ body {
     display: flex; flex-direction: column; align-items: flex-start;
     padding: 30px;
     pointer-events: auto;
+    position: relative;
+    z-index: 2;
 }
 
 .hud-btn i { font-size: 1.2rem; margin-bottom: 4px; transition: transform 0.3s; }
@@ -144,11 +146,38 @@ body {
 .hud-btn span.label { font-weight: bold; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
 .hud-btn span.code { font-size: 0.6rem; opacity: 0.4; font-family: 'VT323', monospace; color: var(--accent-color); margin-bottom: 2px; }
 
+/* Corner Brackets & Lines */
+.hud-corner::before {
+    content: ''; position: absolute; width: 30px; height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.1); transition: all 0.6s ease; pointer-events: none;
+    z-index: 1;
+}
+.hud-corner::after {
+    content: ''; position: absolute; width: 15vw; height: 1px;
+    background: linear-gradient(90deg, var(--accent-color), transparent);
+    opacity: 0.1; pointer-events: none; transition: width 0.4s ease, opacity 0.4s ease;
+    z-index: 1;
+}
+
+.hud-corner:has(.hud-btn:hover)::before { border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+.hud-corner:has(.hud-btn:hover)::after { width: 25vw; opacity: 0.4; }
+
 /* Positions */
 .tl { top: 10px; left: 10px; }
+.tl::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.tl::after { top: 0; left: 0; transform: rotate(45deg); transform-origin: 0 0; }
+
 .tr { top: 10px; right: 10px; align-items: flex-end; } .tr .hud-btn { align-items: flex-end; text-align: right; }
+.tr::before { top: 0; right: 0; border-left: none; border-bottom: none; }
+.tr::after { top: 0; right: 0; transform: rotate(-45deg); transform-origin: 100% 0; background: linear-gradient(-90deg, var(--accent-color), transparent); }
+
 .bl { bottom: 10px; left: 10px; justify-content: flex-end; }
+.bl::before { bottom: 0; left: 0; border-right: none; border-top: none; }
+.bl::after { bottom: 0; left: 0; transform: rotate(-45deg); transform-origin: 0 100%; }
+
 .br { bottom: 10px; right: 10px; align-items: flex-end; justify-content: flex-end; } .br .hud-btn { align-items: flex-end; text-align: right; }
+.br::before { bottom: 0; right: 0; border-left: none; border-top: none; }
+.br::after { bottom: 0; right: 0; transform: rotate(45deg); transform-origin: 100% 100%; background: linear-gradient(-90deg, var(--accent-color), transparent); }
 
 @media (max-width: 768px) {
     .hud-corner { display: none; }
