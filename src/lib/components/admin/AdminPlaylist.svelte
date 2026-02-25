@@ -33,30 +33,25 @@
      * @param {string[]} commands
      */
     function showSaveAnimation(isSuccess, message, commands) {
-        saveState = {
-            isVisible: true,
-            isSuccess,
-            message,
-            sqlCommands: commands
-        };
-        setTimeout(() => {
-            saveState.isVisible = false;
-        }, 4000);
+        saveState = { isVisible: true, isSuccess, message, sqlCommands: commands };
+        setTimeout(() => saveState.isVisible = false, 4000);
     }
 
     async function save() {
-        if (!$isAdmin) return;
+        if (!isAdmin) return;
         if (!form.title || !form.youtube_id) return alert('Title and YouTube ID required');
 
         const payload = { ...form };
+        const id = payload.id;
         delete payload.id;
 
         let error;
+        /** @type {string[]} */
         let sqlCommands = [];
 
         if (isEditing && form.id) {
             const updateFields = Object.entries(payload)
-                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v}`)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'" + v.replace(/'/g, "''") + "'" : v}`)
                 .join(', ');
             sqlCommands = [`UPDATE playlist SET ${updateFields} WHERE id = ${form.id};`];
             const res = await supabase.from('playlist').update(payload).eq('id', form.id);
@@ -64,7 +59,7 @@
         } else {
             const columns = Object.keys(payload).join(', ');
             const values = Object.values(payload)
-                .map(v => typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v)
+                .map(v => typeof v === 'string' ? "'" + String(v).replace(/'/g, "''") + "'" : v)
                 .join(', ');
             sqlCommands = [`INSERT INTO playlist (${columns}) VALUES (${values});`];
             const res = await supabase.from('playlist').insert(payload).select().single();
@@ -84,7 +79,7 @@
     }
 
     async function remove() {
-        if (!form.id || !$isAdmin) return;
+        if (!form.id || !isAdmin) return;
         if (!confirm('Delete this track?')) return;
         const sqlCommands = [`DELETE FROM playlist WHERE id = ${form.id};`];
         const { error } = await supabase.from('playlist').delete().eq('id', form.id);
@@ -127,12 +122,13 @@
 </script>
 
 <EditorLayout title={isEditing ? `EDITING: ${form.title}` : 'NEW_AUDIO_TRACK'}>
-    <svelte:fragment slot="toolbar">
-        <button onclick={openPreview} class="editor-toolbar-button">
+    {#snippet toolbar()}
+        <button type="button" onclick={openPreview} class="editor-toolbar-button">
             <i class="ph ph-eye"></i> Preview
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button
+            type="button"
             onclick={() => showSettings = !showSettings}
             class="editor-toolbar-button"
             class:active={showSettings}
@@ -140,18 +136,17 @@
             <i class="ph ph-gear"></i> Settings
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
-        <button onclick={save} class="px-4 py-2 bg-pink-600 text-white rounded font-medium hover:bg-pink-700 transition-colors">
+        <button type="button" onclick={save} class="px-4 py-2 bg-pink-600 text-white rounded font-medium hover:bg-pink-700 transition-colors">
             <i class="ph ph-check-circle"></i> Save
         </button>
         {#if isEditing}
-            <button onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
+            <button type="button" onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
                 <i class="ph ph-trash"></i> Delete
             </button>
         {/if}
-    </svelte:fragment>
+    {/snippet}
 
     <div class="flex h-full gap-4 p-4 overflow-hidden">
-        <!-- Main Form -->
         <div class="flex-1 flex flex-col gap-4 overflow-hidden">
             <div class="bg-black/20 border border-white/10 rounded p-6 flex-1 overflow-y-auto">
                 <div class="space-y-4 max-w-xl">
@@ -175,13 +170,8 @@
             </div>
         </div>
 
-        <!-- Settings Panel -->
         {#if showSettings}
-            <ContentSettings
-                bind:data={form}
-                sections={settingsSections}
-                onChange={() => {}}
-            />
+            <ContentSettings bind:data={form} sections={settingsSections} onChange={() => {}} />
         {/if}
     </div>
 </EditorLayout>
