@@ -152,7 +152,7 @@ class WindowManager {
             }
 
             this.recalculateLayout();
-        }, 400);
+        }, 600);
     }
 
     focus(id) {
@@ -169,6 +169,9 @@ class WindowManager {
     toggle(id, options = {}) {
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
+            if (options.originRect) existing.originRect = options.originRect;
+            if (options.originType) existing.originType = options.originType;
+
             if (existing.minimized) {
                 existing.minimized = false;
                 this.focus(id);

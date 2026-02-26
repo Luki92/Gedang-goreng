@@ -14,52 +14,64 @@
     let frameEl = $state();
     let dropZone = $state(null);
 
+        let transformOrigin = $derived.by(() => {
+        if (!win.originRect) return 'center center';
+        if (win.originType === 'tl') return 'top left';
+        if (win.originType === 'tr') return 'top right';
+        if (win.originType === 'bl') return 'bottom left';
+        if (win.originType === 'br') return 'bottom right';
+        if (win.originType === 'bc') return 'bottom center';
+        return 'center center';
+    });
+
     let currentStyle = $derived.by(() => {
         const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
         const screenH = typeof window !== 'undefined' ? window.innerHeight : 720;
+        const origin = win.originRect || { left: screenW / 2, top: screenH, width: 100, height: 100 };
+
+        const baseStyles = [
+            `z-index: ${win.zIndex}`,
+            `transform-origin: ${transformOrigin}`
+        ];
 
         if (win.minimized) {
-            // Find dock position if possible, otherwise default to bottom center
-            const dockEl = typeof document !== 'undefined' ? document.getElementById(`dock-item-${win.id}`) : null;
-            const rect = dockEl ? dockEl.getBoundingClientRect() : { left: screenW / 2, top: screenH, width: 0, height: 0 };
-
-            return [
-                `left: ${rect.left}px`,
-                `top: ${rect.top}px`,
-                `width: 0px`,
-                `height: 0px`,
-                `opacity: 0`,
-                `transform: scale(0) rotate(10deg)`,
-                `pointer-events: none`,
-                `z-index: 0`
-            ].join('; ');
+             const dockEl = typeof document !== 'undefined' ? document.getElementById(`dock-item-${win.id}`) : null;
+             const dockRect = dockEl ? dockEl.getBoundingClientRect() : { left: screenW/2, top: screenH, width: 50, height: 50 };
+             return [
+                 ...baseStyles,
+                 `left: ${dockRect.left}px`,
+                 `top: ${dockRect.top}px`,
+                 `width: ${dockRect.width}px`,
+                 `height: ${dockRect.height}px`,
+                 `opacity: 0`,
+                 `transform: scale(0.1) rotate(-5deg) skewX(10deg)`,
+                 `pointer-events: none`
+             ].join('; ');
         }
 
-        const style = [
+        if (win.state === 'opening' || win.state === 'closing') {
+             return [
+                 ...baseStyles,
+                 `left: ${origin.left}px`,
+                 `top: ${origin.top}px`,
+                 `width: ${origin.width}px`,
+                 `height: ${origin.height}px`,
+                 `opacity: 0`,
+                 `transform: scale(0.1) rotate(5deg) skewX(-10deg)`,
+                 `pointer-events: none`
+             ].join('; ');
+        }
+
+        return [
+            ...baseStyles,
             `left: ${win.x}px`,
             `top: ${win.y}px`,
             `width: ${win.width}px`,
             `height: ${win.height}px`,
-            `z-index: ${win.zIndex}`,
-            `border-radius: ${win.isTiled ? '4px' : '16px'}`,
             `opacity: 1`,
-            `transform: scale(1) rotate(0deg)`
-        ];
-
-        if (win.state === 'opening' && win.originRect) {
-            // When opening, start from origin
-            return [
-                `left: ${win.originRect.left}px`,
-                `top: ${win.originRect.top}px`,
-                `width: ${win.originRect.width}px`,
-                `height: ${win.originRect.height}px`,
-                `opacity: 0`,
-                `transform: scale(0.2)`,
-                `z-index: ${win.zIndex}`
-            ].join('; ');
-        }
-
-        return style.join('; ');
+            `transform: scale(1) rotate(0deg) skewX(0deg)`,
+            `border-radius: ${win.isTiled ? '4px' : '16px'}`
+        ].join('; ');
     });
 
     /** @param {MouseEvent} e */
@@ -246,7 +258,7 @@
 </div>
 
 <style>
-    .window-frame {
+            .window-frame {
         position: absolute;
         background: rgba(10, 10, 15, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -256,12 +268,12 @@
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
-        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    top 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                     opacity 0.5s ease,
-                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                     border-radius 0.3s ease;
         transform-origin: center center;
     }

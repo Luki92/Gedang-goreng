@@ -13,7 +13,13 @@
                 <button
                     id="dock-item-${win.id}"
                     class="dock-item"
-                    onclick={() => windowManager.restore(win.id)}
+                    onclick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    windowManager.toggle(win.id, {
+                        originRect: { left: rect.left, top: rect.top, width: rect.width, height: rect.height },
+                        originType: 'bc'
+                    });
+                }}
                     transition:scale={{ duration: 300, start: 0.5, easing: quintOut }}
                     title={win.title}
                 >
