@@ -75,10 +75,27 @@
     });
 
     /** @param {MouseEvent} e */
+        /** @param {MouseEvent} e */
     function handleMouseDown(e) {
         if (win.isMaximized) return;
 
         const target = /** @type {HTMLElement} */ (e.target);
+
+        // If clicking a control dot, don't start drag
+        if (target.closest('.window-controls')) return;
+
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startLeft = win.x;
+        startTop = win.y;
+
+        windowManager.focus(win.id);
+        windowManager.untile(win.id);
+
+        window.addEventListener('mousemove', handleDrag);
+        window.addEventListener('mouseup', stopDrag);
+    } */ (e.target);
         const ignoreTags = ['INPUT', 'TEXTAREA', 'SELECT', 'A', 'I'];
         const isText = target.matches('p, p *, span, span *, h1, h2, h3, h4, h5, h6, li, li *, .selectable-text, .selectable-text *');
 
@@ -231,10 +248,10 @@
     class:maximized={win.isMaximized}
     class:minimized={win.minimized}
     style={currentStyle}
-    onmousedown={handleMouseDown}
+
 >
     <!-- Window Controls (Mac Style Dots) -->
-    <div class="window-header">
+    <div class="window-header" onmousedown={handleMouseDown}>
         <div class="window-controls">
             <button class="control-dot close" onclick={() => windowManager.close(win.id)} aria-label="Close"></button>
             <button class="control-dot minimize" onclick={() => windowManager.minimize(win.id)} aria-label="Minimize"></button>
@@ -307,7 +324,7 @@
         transition: opacity 0.3s ease; /* Don't animate pos while dragging */
     }
 
-    .window-header {
+    .window-header { cursor: grab;
         height: 38px;
         display: flex;
         align-items: center;
