@@ -90,3 +90,51 @@ https://svelte.dev/e/svelte_self_deprecated
 12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
 6:24:16 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:26:28 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:233:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:26:28 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
+7:26:28 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:26:57 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:26:57 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:26:57 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:26:57 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:26:57 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:26:58 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:26:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:26:58 PM [vite] (client) Pre-transform error: /app/src/lib/components/Guestbook.svelte:86:16 Attributes need to be unique
+https://svelte.dev/e/attribute_duplicate
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/lib/components/Guestbook.svelte:86:16
+   84 |                  bind:value={name}
+   85 |                  disabled={hasSigned}
+   86 |                  id="callsign-input" placeholder="CALLSIGN"
+                                            ^
+   87 |                  maxlength="20"
+   88 |                  class="w-full bg-transparent border border-white/10 rounded-lg text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+7:26:58 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:233:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:26:59 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:26:59 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:27:41 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:27:57 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:27:57 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte

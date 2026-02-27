@@ -75,7 +75,6 @@
     });
 
     /** @param {MouseEvent} e */
-        /** @param {MouseEvent} e */
     function handleMouseDown(e) {
         if (win.isMaximized) return;
 
@@ -83,25 +82,6 @@
 
         // If clicking a control dot, don't start drag
         if (target.closest('.window-controls')) return;
-
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        startLeft = win.x;
-        startTop = win.y;
-
-        windowManager.focus(win.id);
-        windowManager.untile(win.id);
-
-        window.addEventListener('mousemove', handleDrag);
-        window.addEventListener('mouseup', stopDrag);
-    } */ (e.target);
-        const ignoreTags = ['INPUT', 'TEXTAREA', 'SELECT', 'A', 'I'];
-        const isText = target.matches('p, p *, span, span *, h1, h2, h3, h4, h5, h6, li, li *, .selectable-text, .selectable-text *');
-
-        if (target.closest('button') || target.closest('.resize-handle') || ignoreTags.includes(target.tagName) || target.closest('.selectable') || target.closest('.no-drag') || target.tagName === 'path' || isText) {
-            return;
-        }
 
         isDragging = true;
         startX = e.clientX;
@@ -248,7 +228,6 @@
     class:maximized={win.isMaximized}
     class:minimized={win.minimized}
     style={currentStyle}
-
 >
     <!-- Window Controls (Mac Style Dots) -->
     <div class="window-header" onmousedown={handleMouseDown}>
@@ -297,8 +276,8 @@
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
-        transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                    top 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transition: left 0.8s cubic-bezier(0.25, 1.25, 0.5, 1),
+                    top 0.8s cubic-bezier(0.25, 1.25, 0.5, 1),
                     width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                     height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
                     opacity 0.5s ease,
@@ -321,10 +300,11 @@
     .window-frame.resizing {
         box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
         z-index: 1000 !important;
-        transition: opacity 0.3s ease; /* Don't animate pos while dragging */
+        transition: opacity 0.3s ease;
     }
 
-    .window-header { cursor: grab;
+    .window-header {
+        cursor: grab;
         height: 38px;
         display: flex;
         align-items: center;
@@ -334,6 +314,8 @@
         flex-shrink: 0;
         gap: 12px;
     }
+
+    .window-header:active { cursor: grabbing; }
 
     .window-controls {
         display: flex;

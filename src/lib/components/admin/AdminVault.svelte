@@ -10,7 +10,8 @@
     /** @type {{initialWork?: any}} */
     let { initialWork = null } = $props();
 
-    let isEditing = $state(!!initialWork);
+    let isEditing = $state(false);
+    $effect(() => { if (initialWork) isEditing = true; });
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 

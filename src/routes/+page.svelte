@@ -301,8 +301,7 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 
 <TilingWindowManager />
 <WindowDock />
-{#if $isAdmin}
-{/if}
+
 
 <main class="header-container">
     <!-- svelte-ignore a11y_missing_content -->
