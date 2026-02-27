@@ -14,7 +14,7 @@
     let frameEl = $state();
     let dropZone = $state(null);
 
-        let transformOrigin = $derived.by(() => {
+    let transformOrigin = $derived.by(() => {
         if (!win.originRect) return 'center center';
         if (win.originType === 'tl') return 'top left';
         if (win.originType === 'tr') return 'top right';
@@ -111,15 +111,16 @@
         let newX = startLeft + dx;
         let newY = startTop + dy;
 
-        newX = Math.max(0, Math.min(newX, screenW - win.width));
-        newY = Math.max(0, Math.min(newY, screenH - win.height));
+        const minVisible = 40;
+        newX = Math.max(minVisible - win.width, Math.min(newX, screenW - minVisible));
+        newY = Math.max(0, Math.min(newY, screenH - minVisible));
 
         win.x = newX;
         win.y = newY;
 
         const mouseX = e.clientX;
-        if (mouseX < 50) dropZone = 'master';
-        else if (mouseX > screenW - 50) dropZone = 'stack';
+        if (mouseX < 20) dropZone = 'master';
+        else if (mouseX > screenW - 20) dropZone = 'stack';
         else dropZone = null;
     }
 
@@ -128,6 +129,17 @@
         window.removeEventListener('mousemove', handleDrag);
         window.removeEventListener('mouseup', stopDrag);
         windowManager.stopDrag();
+
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        const clampedX = Math.max(0, Math.min(win.x, screenW - win.width));
+        const clampedY = Math.max(0, Math.min(win.y, screenH - win.height));
+
+        if (win.x !== clampedX || win.y !== clampedY) {
+            win.x = clampedX;
+            win.y = clampedY;
+        }
 
         if (dropZone) {
             windowManager.snap(win.id, dropZone);
@@ -258,7 +270,7 @@
 </div>
 
 <style>
-            .window-frame {
+    .window-frame {
         position: absolute;
         background: rgba(10, 10, 15, 0.85);
         border: 1px solid rgba(255, 255, 255, 0.1);
