@@ -159,7 +159,7 @@ body {
     z-index: 1;
 }
 
-.hud-corner:has(.hud-btn:hover)::before { border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+.hud-corner:has(.hud-btn:hover)::before { border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
 .hud-corner:has(.hud-btn:hover)::after { width: 25vw; opacity: 0.4; }
 
 /* Positions */

@@ -148,3 +148,5 @@ https://svelte.dev/e/a11y_no_static_element_interactions
 1:19:29 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
 1:21:06 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
 1:21:06 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+1:58:38 PM [vite] (client) hmr update /src/app.css
+1:58:38 PM [vite] (ssr) page reload src/app.css
