@@ -70,7 +70,7 @@
                 <div class="flex items-center justify-between p-4 bg-black/40 border border-white/10 rounded hover:border-pink-500/50 transition-all">
                     <div class="flex items-center gap-4">
                         <div class="w-10 h-10 bg-white/5 flex items-center justify-center rounded">
-                            <i class="ph ph-music-notes-fill text-xl text-pink-400"></i>
+                            <i class="ph-fill ph-text-pink-400"></i>
                         </div>
                         <div>
                             <h3 class="font-semibold">{track.title}</h3>
@@ -79,10 +79,10 @@
                     </div>
                     <div class="flex gap-2">
                         <button onclick={() => openEditor(track)} class="p-2 hover:bg-white/10 rounded" title="Edit" aria-label="Edit">
-                            <i class="ph ph-pencil-simple-fill"></i>
+                            <i class="ph-fill ph-pencil-simple"></i>
                         </button>
                         <button onclick={() => remove(track.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded" title="Delete" aria-label="Delete">
-                            <i class="ph ph-trash-fill"></i>
+                            <i class="ph-fill ph-trash"></i>
                         </button>
                     </div>
                 </div>

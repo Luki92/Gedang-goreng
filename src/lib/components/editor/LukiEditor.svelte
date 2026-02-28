@@ -47,19 +47,19 @@
     <!-- Toolbar -->
     <div class="flex items-center justify-between px-3 py-2 border-b border-white/10 bg-white/5">
         <div class="flex items-center gap-1">
-            <button onclick={() => insertTag('B')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Bold"><i class="ph ph-text-b-fill"></i></button>
-            <button onclick={() => insertTag('I')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Italic"><i class="ph ph-text-italic-fill"></i></button>
-            <button onclick={() => insertTag('DIV')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Strike"><i class="ph ph-text-strikethrough-fill"></i></button>
+            <button onclick={() => insertTag('B')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Bold"><i class="ph-fill ph-text-b"></i></button>
+            <button onclick={() => insertTag('I')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Italic"><i class="ph-fill ph-text-italic"></i></button>
+            <button onclick={() => insertTag('DIV')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Strike"><i class="ph-fill ph-text-strikethrough"></i></button>
             <div class="w-px h-4 bg-white/10 mx-1"></div>
-            <button onclick={() => insertTag('H1')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="H1"><i class="ph ph-text-h-one-fill"></i></button>
-            <button onclick={() => insertTag('H2')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="H2"><i class="ph ph-text-h-two-fill"></i></button>
+            <button onclick={() => insertTag('H1')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="H1"><i class="ph-fill ph-text-h-one"></i></button>
+            <button onclick={() => insertTag('H2')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="H2"><i class="ph-fill ph-text-h-two"></i></button>
             <div class="w-px h-4 bg-white/10 mx-1"></div>
-            <button onclick={() => insertTag('UL')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="List"><i class="ph ph-list-bullets-fill"></i></button>
-            <button onclick={() => insertTag('CODE')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Code"><i class="ph ph-code-fill"></i></button>
-            <button onclick={() => insertTag('DIV')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Container"><i class="ph ph-bounding-box-fill"></i></button>
+            <button onclick={() => insertTag('UL')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="List"><i class="ph-fill ph-list-bullets"></i></button>
+            <button onclick={() => insertTag('CODE')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Code"><i class="ph-fill ph-code"></i></button>
+            <button onclick={() => insertTag('DIV')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Container"><i class="ph-fill ph-bounding-box"></i></button>
             <div class="w-px h-4 bg-white/10 mx-1"></div>
-            <button onclick={() => insertTag('LINK')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Link"><i class="ph ph-link-simple-horizontal-fill"></i></button>
-            <button onclick={() => insertTag('IMG')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Image"><i class="ph ph-image-fill"></i></button>
+            <button onclick={() => insertTag('LINK')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Link"><i class="ph-fill ph-link-simple-horizontal"></i></button>
+            <button onclick={() => insertTag('IMG')} class="p-1.5 hover:bg-white/10 rounded transition-colors text-white/70" title="Image"><i class="ph-fill ph-image"></i></button>
         </div>
 
         <div class="flex items-center gap-2">

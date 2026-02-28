@@ -65,7 +65,7 @@
 
 <div class="mt-8 border-t border-[#333] pt-4">
     <h3 class="text-white font-bold mb-4 flex items-center gap-2">
-        <i class="ph ph-broadcast-fill text-green-500 animate-pulse"></i>
+        <i class="ph-fill ph-animate-pulse"></i>
         SIGNAL_LOG
     </h3>
 

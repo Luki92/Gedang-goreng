@@ -239,7 +239,7 @@
             <button class="control-dot maximize" onclick={() => windowManager.maximize(win.id)} aria-label="Maximize"></button>
         </div>
         <div class="window-title">
-            <i class="ph {windowManager.getIcon(win.id)} mr-2 opacity-50"></i>
+            <i class="ph-fill {windowManager.getIcon(win.id)} mr-2 opacity-50"></i>
             {win.title}
         </div>
     </div>

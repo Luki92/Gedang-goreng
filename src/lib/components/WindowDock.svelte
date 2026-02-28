@@ -24,7 +24,7 @@
                     title={win.title}
                 >
                     <div class="icon-wrapper">
-                        <i class="ph {windowManager.getIcon(win.id)}"></i>
+                        <i class="ph-fill {windowManager.getIcon(win.id)}"></i>
                     </div>
                     <div class="active-indicator"></div>
                 </button>

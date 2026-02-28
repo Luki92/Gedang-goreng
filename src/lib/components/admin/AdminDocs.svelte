@@ -19,7 +19,7 @@
     <!-- Header -->
     <div class="border-b border-[#333] p-4 flex justify-between items-center bg-[rgba(20,20,30,0.4)]">
         <h2 class="text-white font-bold flex items-center gap-2 uppercase tracking-wider">
-            <i class="ph ph-bookmarks-fill text-red-500 text-lg"></i>
+            <i class="ph-fill ph-text-lg"></i>
             Luki_Script_Docs
         </h2>
         <div class="flex gap-1 bg-[rgba(0,0,0,0.3)] p-1 rounded border border-[#222]">

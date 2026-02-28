@@ -22,7 +22,7 @@
         id: initial.id || null,
         label: initial.label || '',
         url: initial.url || '',
-        icon: initial.icon || 'ph-link-simple-horizontal-fill',
+        icon: initial.icon || 'ph-link-simple-horizontal',
         description: initial.description || '',
         category: initial.category || 'SOCIAL',
         is_visible: initial.is_visible !== undefined ? initial.is_visible : true,
@@ -97,7 +97,7 @@
         {
             title: 'Visual',
             fields: [
-                { key: 'icon', label: 'Phosphor Icon Class', type: 'text', placeholder: 'ph-link-simple-horizontal-fill' },
+                { key: 'icon', label: 'Phosphor Icon Class', type: 'text', placeholder: 'ph-link-simple-horizontal' },
                 { key: 'color', label: 'Accent Color', type: 'color' },
                 { key: 'category', label: 'Category', type: 'select', options: [
                     { value: 'SOCIAL', label: 'Social' },
@@ -125,15 +125,15 @@
             class="editor-toolbar-button"
             class:active={showSettings}
         >
-            <i class="ph ph-gear-six-fill"></i> Settings
+            <i class="ph-fill ph-gear-six"></i> Settings
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button type="button" onclick={save} class="px-4 py-2 bg-indigo-600 text-white rounded font-medium hover:bg-indigo-700 transition-colors">
-            <i class="ph ph-check-circle-fill"></i> Save
+            <i class="ph-fill ph-check-circle"></i> Save
         </button>
         {#if isEditing}
             <button type="button" onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
-                <i class="ph ph-trash-fill"></i> Delete
+                <i class="ph-fill ph-trash"></i> Delete
             </button>
         {/if}
     {/snippet}

@@ -31,11 +31,11 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
     // --- Debris Logic ---
     let debrisContainer;
     const allItems = [
-        { char: '<i class="ph ph-cube-fill"></i>', id: 'cube', scale: 1, color: '#a8a' },
-        { char: '<i class="ph ph-game-controller-fill"></i>', id: 'game', scale: 1.2, color: '#8aa' },
-        { char: '<i class="ph ph-floppy-disk-back-fill"></i>', id: 'disk', scale: 1, color: '#aa8' },
-        { char: '<i class="ph ph-alien-fill"></i>', id: 'alien', scale: 1.2, color: '#88c' },
-        { char: '<i class="ph ph-globe-hemisphere-east-fill"></i>', id: 'planet', scale: 1.5, color: '#c88' },
+        { char: '<i class="ph-fill ph-cube"></i>', id: 'cube', scale: 1, color: '#a8a' },
+        { char: '<i class="ph-fill ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#8aa' },
+        { char: '<i class="ph-fill ph-floppy-disk-back"></i>', id: 'disk', scale: 1, color: '#aa8' },
+        { char: '<i class="ph-fill ph-alien"></i>', id: 'alien', scale: 1.2, color: '#88c' },
+        { char: '<i class="ph-fill ph-globe-hemisphere-east"></i>', id: 'planet', scale: 1.5, color: '#c88' },
     ];
     let actors = [];
     let mouseX = 0, mouseY = 0;
@@ -316,24 +316,24 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 
 <HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph ph-user-focus-fill"></i> IDENTITY</span>
+        <span class="label"><i class="ph-fill ph-user-focus"></i> IDENTITY</span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
     {#snippet buttonContent()}
-        <span class="label">WORKS <i class="ph ph-archive-tray-fill"></i></span>
+        <span class="label">WORKS <i class="ph-fill ph-archive-tray"></i></span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph ph-music-notes-fill"></i> PLAYLIST</span>
+        <span class="label"><i class="ph-fill ph-music-notes"></i> PLAYLIST</span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
     {#snippet buttonContent()}
-        <span class="label">PORTAL <i class="ph ph-globe-hemisphere-east-fill"></i></span>
+        <span class="label">PORTAL <i class="ph-fill ph-globe-hemisphere-east"></i></span>
     {/snippet}
 </HUDCorner>

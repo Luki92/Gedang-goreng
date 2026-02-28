@@ -124,7 +124,7 @@
 <EditorLayout title={isEditing ? `EDITING: ${form.title}` : 'NEW_AUDIO_TRACK'}>
     {#snippet toolbar()}
         <button type="button" onclick={openPreview} class="editor-toolbar-button">
-            <i class="ph ph-eye-fill"></i> Preview
+            <i class="ph-fill ph-eye"></i> Preview
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button
@@ -133,15 +133,15 @@
             class="editor-toolbar-button"
             class:active={showSettings}
         >
-            <i class="ph ph-gear-six-fill"></i> Settings
+            <i class="ph-fill ph-gear-six"></i> Settings
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button type="button" onclick={save} class="px-4 py-2 bg-pink-600 text-white rounded font-medium hover:bg-pink-700 transition-colors">
-            <i class="ph ph-check-circle-fill"></i> Save
+            <i class="ph-fill ph-check-circle"></i> Save
         </button>
         {#if isEditing}
             <button type="button" onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
-                <i class="ph ph-trash-fill"></i> Delete
+                <i class="ph-fill ph-trash"></i> Delete
             </button>
         {/if}
     {/snippet}
