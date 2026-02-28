@@ -138,3 +138,13 @@ https://svelte.dev/e/a11y_no_static_element_interactions
 7:28:03 PM [vite] (client) page reload .svelte-kit/generated/root.js
 7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
 7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+1:18:50 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+1:18:50 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+1:19:08 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+1:19:09 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+1:19:09 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:19:29 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+1:19:29 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+1:21:06 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+1:21:06 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte

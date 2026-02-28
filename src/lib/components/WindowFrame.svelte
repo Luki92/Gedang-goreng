@@ -14,20 +14,20 @@
     let frameEl = $state();
     let dropZone = $state(null);
 
-    let transformOrigin = $derived.by(() => {
-        if (!win.originRect) return 'center center';
-        if (win.originType === 'tl') return 'top left';
-        if (win.originType === 'tr') return 'top right';
-        if (win.originType === 'bl') return 'bottom left';
-        if (win.originType === 'br') return 'bottom right';
-        if (win.originType === 'bc') return 'bottom center';
+        let transformOrigin = $derived.by(() => {
+        const type = win.state === 'closing' ? win.birthOriginType : win.originType;
+        if (!type) return 'center center';
+        if (type === 'tl') return 'top left';
+        if (type === 'tr') return 'top right';
+        if (type === 'bl') return 'bottom left';
+        if (type === 'br') return 'bottom right';
+        if (type === 'bc') return 'bottom center';
         return 'center center';
     });
 
-    let currentStyle = $derived.by(() => {
+        let currentStyle = $derived.by(() => {
         const screenW = typeof window !== 'undefined' ? window.innerWidth : 1280;
         const screenH = typeof window !== 'undefined' ? window.innerHeight : 720;
-        const origin = win.originRect || { left: screenW / 2, top: screenH, width: 100, height: 100 };
 
         const baseStyles = [
             `z-index: ${win.zIndex}`,
@@ -50,12 +50,14 @@
         }
 
         if (win.state === 'opening' || win.state === 'closing') {
+             const origin = win.state === 'closing' ? win.birthOriginRect : win.originRect;
+             const actualOrigin = origin || { left: screenW / 2, top: screenH, width: 100, height: 100 };
              return [
                  ...baseStyles,
-                 `left: ${origin.left}px`,
-                 `top: ${origin.top}px`,
-                 `width: ${origin.width}px`,
-                 `height: ${origin.height}px`,
+                 `left: ${actualOrigin.left}px`,
+                 `top: ${actualOrigin.top}px`,
+                 `width: ${actualOrigin.width}px`,
+                 `height: ${actualOrigin.height}px`,
                  `opacity: 0`,
                  `transform: scale(0.1) rotate(5deg) skewX(-10deg)`,
                  `pointer-events: none`

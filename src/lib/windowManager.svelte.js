@@ -92,12 +92,14 @@ class WindowManager {
              }
         }
 
-        const newWindow = {
+                const newWindow = {
             id,
             component,
             props,
             originRect: originRect || null,
             originType,
+            birthOriginRect: originRect || null,
+            birthOriginType: originType,
             title: options.title || "",
             x,
             y,
