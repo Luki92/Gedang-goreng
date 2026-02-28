@@ -56,7 +56,7 @@
     >
         <div class="p-6 border-b border-white/5 flex justify-between items-center">
             <h3 class="text-white font-bold tracking-widest uppercase text-sm">Upload_Media</h3>
-            <button type="button" onclick={onClose} class="text-gray-500 hover:text-white transition-colors"><i class="ph ph-x"></i></button>
+            <button type="button" onclick={onClose} class="text-gray-500 hover:text-white transition-colors"><i class="ph-fill ph-x"></i></button>
         </div>
 
         <div class="p-8 space-y-8">
@@ -69,7 +69,7 @@
             >
                 <input type="file" class="hidden" accept="image/*,video/*" onchange={onSelect} />
                 <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <i class="ph ph-cloud-arrow-up text-3xl text-gray-400 group-hover:text-blue-400"></i>
+                    <i class="ph-fill ph-group-hover:text-blue-400"></i>
                 </div>
                 <span class="text-xs font-mono text-gray-500 group-hover:text-gray-300">DRAG_DROP_FILE</span>
                 <span class="text-[9px] text-gray-600 mt-1">or click to browse</span>

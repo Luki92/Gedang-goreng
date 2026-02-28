@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import '@phosphor-icons/web/regular';
+	import '@phosphor-icons/web/fill';
 	import PortalRenderer from '$lib/components/PortalRenderer.svelte';
 
 	let { children } = $props();

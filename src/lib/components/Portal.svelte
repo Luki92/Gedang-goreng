@@ -27,8 +27,8 @@
             {#each socialItems as item}
                 <a href={item.url} target="_blank" rel="noopener noreferrer"
                    style="border-color: {item.color}33; --hover-color: {item.color}"
-                   class="p-6 border hover:border-[var(--hover-color)] hover:bg-[var(--hover-color)]/5 transition-all group flex flex-col items-center gap-2">
-                    <i class="ph {item.icon} text-3xl transition-colors" style="color: {item.color}"></i>
+                   class="p-6 border rounded-2xl bg-white/[0.02] hover:border-[var(--hover-color)] hover:bg-[var(--hover-color)]/5 transition-all group flex flex-col items-center gap-2">
+                    <i class="{item.icon} text-3xl transition-colors" style="color: {item.color}"></i>
                     <span class="text-xs uppercase text-white/80 group-hover:text-white transition-colors">{item.label}</span>
                 </a>
             {/each}

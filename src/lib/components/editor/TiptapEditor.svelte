@@ -143,8 +143,8 @@
     <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-white/5 shrink-0">
         <div class="flex items-center gap-6">
             <div class="flex items-center gap-1">
-                <button type="button" onclick={() => editor?.chain().focus().undo().run()} class="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white" title="Undo"><i class="ph ph-arrow-u-up-left"></i></button>
-                <button type="button" onclick={() => editor?.chain().focus().redo().run()} class="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white" title="Redo"><i class="ph ph-arrow-u-up-right"></i></button>
+                <button type="button" onclick={() => editor?.chain().focus().undo().run()} class="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white" title="Undo"><i class="ph-fill ph-arrow-u-up-left"></i></button>
+                <button type="button" onclick={() => editor?.chain().focus().redo().run()} class="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/50 hover:text-white" title="Redo"><i class="ph-fill ph-arrow-u-up-right"></i></button>
             </div>
         </div>
 
@@ -180,24 +180,24 @@
             <div class="text-[9px] text-gray-500 mb-2 px-3 pt-1 uppercase tracking-[0.2em] font-bold">Commands</div>
             <div class="space-y-0.5">
                 <button type="button" onclick={() => insertCommand('h1')} class="w-full text-left px-3 py-2 hover:bg-blue-600 rounded-lg flex items-center gap-3 transition-all group">
-                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph ph-text-h-one"></i></div>
+                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph-fill ph-text-h-one"></i></div>
                     <span class="text-xs font-medium">Heading 1</span>
                 </button>
                 <button type="button" onclick={() => insertCommand('h2')} class="w-full text-left px-3 py-2 hover:bg-blue-600 rounded-lg flex items-center gap-3 transition-all group">
-                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph ph-text-h-two"></i></div>
+                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph-fill ph-text-h-two"></i></div>
                     <span class="text-xs font-medium">Heading 2</span>
                 </button>
                 <button type="button" onclick={() => insertCommand('bullet')} class="w-full text-left px-3 py-2 hover:bg-blue-600 rounded-lg flex items-center gap-3 transition-all group">
-                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph ph-list-bullets"></i></div>
+                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph-fill ph-list-bullets"></i></div>
                     <span class="text-xs font-medium">Bullet List</span>
                 </button>
                 <button type="button" onclick={() => insertCommand('code')} class="w-full text-left px-3 py-2 hover:bg-blue-600 rounded-lg flex items-center gap-3 transition-all group">
-                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph ph-code"></i></div>
+                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph-fill ph-code"></i></div>
                     <span class="text-xs font-medium">Code Block</span>
                 </button>
                 <div class="h-px bg-white/5 my-1 mx-2"></div>
                 <button type="button" onclick={() => insertCommand('image')} class="w-full text-left px-3 py-2 hover:bg-blue-600 rounded-lg flex items-center gap-3 transition-all group">
-                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph ph-image"></i></div>
+                    <div class="w-8 h-8 rounded bg-white/5 flex items-center justify-center group-hover:bg-white/10"><i class="ph-fill ph-image"></i></div>
                     <div class="flex flex-col">
                         <span class="text-xs font-medium">Upload Media</span>
                         <span class="text-[8px] text-gray-500 group-hover:text-white/70">Images, Videos...</span>

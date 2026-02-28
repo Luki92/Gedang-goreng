@@ -10,7 +10,8 @@
     /** @type {{initialWork?: any}} */
     let { initialWork = null } = $props();
 
-    let isEditing = $state(!!initialWork);
+    let isEditing = $state(false);
+    $effect(() => { if (initialWork) isEditing = true; });
     /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
@@ -98,15 +99,15 @@
 
         <div class="flex items-center gap-2">
             <button type="button" onclick={openPreview} class="editor-toolbar-button">
-                <i class="ph ph-eye"></i> Preview
+                <i class="ph-fill ph-eye"></i> Preview
             </button>
             <div class="h-6 w-px bg-white/10 mx-2"></div>
             <button type="button" onclick={save} class="px-6 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20 active:scale-95">
-                <i class="ph ph-check-circle"></i> SAVE
+                <i class="ph-fill ph-check-circle"></i> SAVE
             </button>
             {#if isEditing}
                 <button type="button" onclick={remove} class="p-2 text-red-400 hover:bg-red-500/10 rounded-full transition-colors" title="Delete">
-                    <i class="ph ph-trash"></i>
+                    <i class="ph-fill ph-trash"></i>
                 </button>
             {/if}
         </div>

@@ -2,6 +2,7 @@
     // @ts-nocheck
     import { onMount, onDestroy } from 'svelte';
     import SpaceBackground from '$lib/components/SpaceBackground.svelte';
+import WindowDock from '$lib/components/WindowDock.svelte';
     import LukiPersona from '$lib/components/LukiPersona.svelte';
     import HUDCorner from '$lib/components/HUDCorner.svelte';
     import Identity from '$lib/components/Identity.svelte';
@@ -11,7 +12,6 @@
     import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
     import FileViewer from '$lib/components/FileViewer.svelte';
     import Terminal from '$lib/components/Terminal.svelte';
-import AdminPanel from '$lib/components/AdminPanel.svelte';
 
     // Admin Components
     import ControlCenter from '$lib/components/admin/ControlCenter.svelte';
@@ -31,11 +31,11 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
     // --- Debris Logic ---
     let debrisContainer;
     const allItems = [
-        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1, color: '#a8a' },
-        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#8aa' },
-        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1, color: '#aa8' },
-        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2, color: '#88c' },
-        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5, color: '#c88' },
+        { char: '<i class="ph-fill ph-cube"></i>', id: 'cube', scale: 1, color: '#a8a' },
+        { char: '<i class="ph-fill ph-game-controller"></i>', id: 'game', scale: 1.2, color: '#8aa' },
+        { char: '<i class="ph-fill ph-floppy-disk-back"></i>', id: 'disk', scale: 1, color: '#aa8' },
+        { char: '<i class="ph-fill ph-alien"></i>', id: 'alien', scale: 1.2, color: '#88c' },
+        { char: '<i class="ph-fill ph-globe-hemisphere-east"></i>', id: 'planet', scale: 1.5, color: '#c88' },
     ];
     let actors = [];
     let mouseX = 0, mouseY = 0;
@@ -300,9 +300,8 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
 <TilingWindowManager />
-{#if $isAdmin}
-    <AdminPanel />
-{/if}
+<WindowDock />
+
 
 <main class="header-container">
     <!-- svelte-ignore a11y_missing_content -->
@@ -317,24 +316,24 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 
 <HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
+        <span class="label"><i class="ph-fill ph-user-focus"></i> IDENTITY</span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
     {#snippet buttonContent()}
-        <span class="label">WORKS <i class="ph ph-safe"></i></span>
+        <span class="label">WORKS <i class="ph-fill ph-archive-tray"></i></span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
+        <span class="label"><i class="ph-fill ph-music-notes"></i> PLAYLIST</span>
     {/snippet}
 </HUDCorner>
 
 <HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
     {#snippet buttonContent()}
-        <span class="label">PORTAL <i class="ph ph-planet"></i></span>
+        <span class="label">PORTAL <i class="ph-fill ph-globe-hemisphere-east"></i></span>
     {/snippet}
 </HUDCorner>

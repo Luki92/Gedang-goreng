@@ -2,94 +2,712 @@
 > app@0.0.1 dev
 > vite dev
 
-Port 5173 is in use, trying another one...
 
-  VITE v7.3.1  ready in 2125 ms
+  VITE v7.3.1  ready in 4618 ms
 
-  ➜  Local:   http://localhost:5174/
+  ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-11:38:38 AM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+12:17:00 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
+https://svelte.dev/e/block_empty
+12:17:01 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
-https://svelte.dev/e/a11y_consider_explicit_label
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
-https://svelte.dev/e/a11y_missing_attribute
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:38:38 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:13:3 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
-https://svelte.dev/e/slot_element_deprecated
-11:38:39 AM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:19:2 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
-https://svelte.dev/e/slot_element_deprecated
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:38:39 AM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/lib/components/admin/PortalList.svelte:79:171 `</i>` attempted to close an element that was not open
-https://svelte.dev/e/element_invalid_closing_tag
+12:17:01 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: /app/src/lib/components/WindowFrame.svelte:160:4 Unexpected token
+https://svelte.dev/e/js_parse_error
   Plugin: vite-plugin-svelte:compile
-  File: /app/src/lib/components/admin/PortalList.svelte:79:171
-   77 |                      </div>
-   78 |                      <div class="flex gap-2">
-   79 |                          <button onclick={() => openEditor(item)} class="p-2 hover:bg-white/10 rounded" title="Edit" aria-label="Edit"><i class="ph ph-pencil"></i></button></i></button>
-                                                                                                                                                                                    ^
-   80 |                          <button onclick={() => remove(item.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded" title="Delete" aria-label="Delete"><i class="ph ph-trash"></i></button></i></button>
-   81 |                      </div>
+  File: /app/src/lib/components/WindowFrame.svelte:160:4
+   158 |              dropZone = null;
+   159 |          }
+   160 |      }
+              ^
+   161 |      }
+   162 |
 
 [1;31m[500] GET /[0m
 
-11:39:11 AM [vite] (client) hmr update /src/app.css
-11:39:11 AM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:14:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+12:18:36 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+12:18:57 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:226:0 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:19:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-11:39:46 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
-https://svelte.dev/e/state_referenced_locally
-11:39:47 AM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:18:58 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
-https://svelte.dev/e/a11y_missing_attribute
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:13:3 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
-https://svelte.dev/e/slot_element_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/editor/EditorLayout.svelte:19:2 Using `<slot>` to render parent content is deprecated. Use `{@render ...}` tags instead
-https://svelte.dev/e/slot_element_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
-https://svelte.dev/e/svelte_self_deprecated
-11:39:47 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
 https://svelte.dev/e/state_referenced_locally
-11:40:18 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
-11:40:18 AM [vite] (ssr) page reload src/lib/stores.js
-11:42:29 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
-11:42:29 AM [vite] (ssr) page reload src/lib/stores.js
-11:44:00 AM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
-11:44:00 AM [vite] (ssr) page reload src/lib/stores.js
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:18:59 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:59 PM [vite-plugin-svelte] src/routes/+page.svelte:304:14 Empty block
+https://svelte.dev/e/block_empty
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:13:29 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:17:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:19:00 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+12:19:00 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:226:0 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:19:00 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+12:19:00 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+6:24:16 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:26:28 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:233:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:26:28 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
+7:26:28 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:26:57 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:26:57 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:26:57 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:26:57 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:26:57 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:26:58 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:26:58 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:26:58 PM [vite] (client) Pre-transform error: /app/src/lib/components/Guestbook.svelte:86:16 Attributes need to be unique
+https://svelte.dev/e/attribute_duplicate
+  Plugin: vite-plugin-svelte:compile
+  File: /app/src/lib/components/Guestbook.svelte:86:16
+   84 |                  bind:value={name}
+   85 |                  disabled={hasSigned}
+   86 |                  id="callsign-input" placeholder="CALLSIGN"
+                                            ^
+   87 |                  maxlength="20"
+   88 |                  class="w-full bg-transparent border border-white/10 rounded-lg text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+7:26:58 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:233:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:26:59 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:26:59 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:27:19 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:27:19 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:27:41 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:27:57 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:27:57 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:28:03 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:28:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+1:18:50 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+1:18:50 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+1:19:08 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+1:19:09 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+1:19:09 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+1:19:29 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+1:19:29 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+1:21:06 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+1:21:06 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+1:58:38 PM [vite] (client) hmr update /src/app.css
+1:58:38 PM [vite] (ssr) page reload src/app.css
+7:12:19 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:12:19 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:13:19 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:13:19 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:13:19 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:13:19 PM [vite] (client) hmr update /src/lib/components/WindowDock.svelte, /src/app.css
+7:13:19 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:14:19 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:14:19 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:14:19 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:14:19 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:14:19 PM [vite] (client) hmr update /src/app.css
+7:14:19 PM [vite] (ssr) page reload src/lib/components/FileViewer.svelte
+7:14:19 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:14:19 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:14:57 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:14:57 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:15:55 PM [vite] (client) hmr update /src/routes/+layout.svelte, /src/app.css
+7:15:55 PM [vite] (ssr) page reload src/routes/+layout.svelte
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:16:18 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:16:18 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:16:18 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:16:18 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:17:14 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/renderer/nodes/ContainerNode.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ContainerNode.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:17:14 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:17:14 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:17:37 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:17:37 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:17:37 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:17:38 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:18:39 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:18:39 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:18:39 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:18:39 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:18:39 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:18:39 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:18:39 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:18:39 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:18:39 PM [vite] (client) hmr update /src/lib/components/admin/AdminDocs.svelte, /src/app.css
+7:18:39 PM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+7:18:39 PM [vite] (client) hmr update /src/lib/components/editor/MediaUpload.svelte, /src/app.css
+7:18:39 PM [vite] (ssr) page reload src/lib/components/editor/MediaUpload.svelte
+7:18:39 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:18:39 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:18:39 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:26:59 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:00 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:27:01 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:27:01 PM [vite] (client) hmr update /src/lib/components/WindowDock.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+7:27:01 PM [vite] (client) hmr update /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/renderer/nodes/ContainerNode.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ContainerNode.svelte
+7:27:01 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:27:01 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:27:01 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:27:26 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:27:26 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:27:26 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/Portal.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/Portal.svelte
+7:27:26 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:27:26 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/admin/AdminDocs.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/editor/MediaUpload.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/editor/MediaUpload.svelte
+7:27:26 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:27:26 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Terminal.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Portal.svelte, /src/lib/components/Guestbook.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/supabaseClient.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/stores.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Terminal.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/stores/terminal.svelte.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Portal.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/stores/data.svelte.js
+7:28:45 PM [vite] (client) hmr update /src/lib/components/PortalRenderer.svelte, /src/lib/components/Identity.svelte, /src/lib/components/FileViewer.svelte, /src/app.css
+7:28:45 PM [vite] (ssr) page reload src/lib/stores/portal.svelte.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+7:28:45 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+7:28:45 PM [vite] (ssr) page reload src/lib/components/admin/docs/content.js
+7:28:45 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:47 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+7:28:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:28:47 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/SpaceBackground.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Identity.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/Portal.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Portal.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/TilingWindowManager.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/FileViewer.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminDocs.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/PortalRenderer.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/AvatarFrame.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/terminal/TerminalBoot.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/terminal/TerminalNeofetch.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/InlineRenderer.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/TableNode.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/renderer/nodes/ContainerNode.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ContainerNode.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/CodeBlock.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/TooltipNode.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ObfuscatedNode.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/LukiRenderer.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/SpoilerNode.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/editor/SaveAnimation.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/editor/ContentSettings.svelte
+7:28:47 PM [vite] (client) hmr update /src/lib/components/editor/MediaUpload.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/editor/MediaUpload.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/lib/components/editor/EditorLayout.svelte
+7:28:47 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:28:47 PM [vite] (client) hmr update /src/app.css
+7:28:47 PM [vite] (ssr) page reload src/routes/+layout.svelte
+7:29:42 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:29:42 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Terminal.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Portal.svelte, /src/lib/components/Guestbook.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/supabaseClient.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Portal.svelte, /src/lib/components/terminal/TerminalNeofetch.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/stores.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Terminal.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/stores/terminal.svelte.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/lib/components/LukiPersona.svelte, /src/lib/components/Identity.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Portal.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/AdminGuestbook.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/stores/data.svelte.js
+7:31:02 PM [vite] (client) hmr update /src/lib/components/PortalRenderer.svelte, /src/lib/components/Identity.svelte, /src/lib/components/FileViewer.svelte, /src/app.css
+7:31:02 PM [vite] (ssr) page reload src/lib/stores/portal.svelte.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+7:31:02 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+7:31:02 PM [vite] (ssr) page reload src/lib/components/admin/docs/content.js
+7:31:02 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:02 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:02 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:02 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:02 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+7:31:03 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+7:31:03 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/SpaceBackground.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/WindowDock.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Identity.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Portal.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/TilingWindowManager.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/FileViewer.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminVault.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminVault.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminPortal.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminPortal.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminProfile.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminProfile.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminPlaylist.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminPlaylist.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/PortalList.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/PortalList.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminGuestbook.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminGuestbook.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/admin/AdminDocs.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/PortalRenderer.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/AvatarFrame.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/terminal/TerminalBoot.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/terminal/TerminalNeofetch.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/InlineRenderer.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/renderer/nodes/ContainerNode.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ContainerNode.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/CodeBlock.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/TableNode.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/TooltipNode.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/SpoilerNode.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/ObfuscatedNode.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/renderer/LukiRenderer.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/editor/SaveAnimation.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/editor/EditorLayout.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/editor/TiptapEditor.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/editor/TiptapEditor.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/editor/ContentSettings.svelte
+7:31:03 PM [vite] (client) hmr update /src/lib/components/editor/MediaUpload.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/lib/components/editor/MediaUpload.svelte
+7:31:03 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:31:03 PM [vite] (client) hmr update /src/app.css
+7:31:03 PM [vite] (ssr) page reload src/routes/+layout.svelte
+7:31:31 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:31:31 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:31:59 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/WindowFrame.svelte
+7:31:59 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+7:31:59 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:31:59 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:31:59 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/WindowDock.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/Guestbook.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/Guestbook.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/admin/PlaylistList.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/admin/PlaylistList.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/admin/ControlCenter.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/admin/ControlCenter.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/admin/AdminDocs.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/admin/AdminDocs.svelte
+7:31:59 PM [vite] (client) hmr update /src/lib/components/editor/MediaUpload.svelte, /src/app.css
+7:31:59 PM [vite] (ssr) page reload src/lib/components/editor/MediaUpload.svelte
+7:32:53 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:32:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:32:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:32:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:32:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:32:53 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+7:32:53 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+7:32:53 PM [vite] (client) hmr update /src/app.css
+7:32:53 PM [vite] (ssr) page reload src/routes/+page.svelte
+7:32:53 PM [vite] (client) hmr update /src/lib/components/WindowDock.svelte, /src/app.css
+7:32:53 PM [vite] (ssr) page reload src/lib/components/WindowDock.svelte
+7:32:53 PM [vite] (client) hmr update /src/app.css
+7:32:53 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+7:32:53 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+7:33:48 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:33:48 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:33:48 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:33:49 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:33:49 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:33:49 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:33:49 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:33:49 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:33:49 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:35:21 PM [vite] (client) hmr update /src/lib/components/Playlist.svelte, /src/app.css
+7:35:21 PM [vite] (ssr) page reload src/lib/components/Playlist.svelte
+7:36:52 PM [vite] (client) hmr update /src/lib/components/admin/VaultList.svelte, /src/app.css
+7:36:52 PM [vite] (ssr) page reload src/lib/components/admin/VaultList.svelte

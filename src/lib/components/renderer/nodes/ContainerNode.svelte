@@ -42,7 +42,7 @@
 
 {:else if variant === 'file'}
     <div class="border border-[#333] bg-[#0a0a0a] p-3 my-4 flex items-center gap-3 hover:border-gray-500 transition-colors group rounded cursor-pointer">
-         <div class="text-2xl text-gray-500 group-hover:text-white transition-colors"><i class="ph ph-file"></i></div>
+         <div class="text-2xl text-gray-500 group-hover:text-white transition-colors"><i class="ph-fill ph-file"></i></div>
          <div class="flex-1 overflow-hidden">
              <div class="text-xs font-bold text-gray-300 truncate">{title || 'Attachment'}</div>
              <!-- Try to find filename or description from first child paragraph -->

@@ -69,7 +69,7 @@
             {#each dataStore.portalItems as item}
                 <div class="flex items-center justify-between p-4 bg-black/40 border border-white/10 rounded hover:border-blue-500/50 transition-all">
                     <div class="flex items-center gap-4">
-                        <i class="ph {item.icon} text-2xl text-blue-400"></i>
+                        <i class="{item.icon} text-2xl text-blue-400"></i>
                         <div>
                             <h3 class="font-semibold">{item.label}</h3>
                             <p class="text-xs text-white/40">{item.url}</p>
@@ -77,10 +77,10 @@
                     </div>
                     <div class="flex gap-2">
                         <button onclick={() => openEditor(item)} class="p-2 hover:bg-white/10 rounded" title="Edit" aria-label="Edit">
-                            <i class="ph ph-pencil"></i>
+                            <i class="ph-fill ph-pencil-simple"></i>
                         </button>
                         <button onclick={() => remove(item.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded" title="Delete" aria-label="Delete">
-                            <i class="ph ph-trash"></i>
+                            <i class="ph-fill ph-trash"></i>
                         </button>
                     </div>
                 </div>

@@ -65,12 +65,12 @@
 
 <div class="mt-8 border-t border-[#333] pt-4">
     <h3 class="text-white font-bold mb-4 flex items-center gap-2">
-        <i class="ph ph-broadcast text-green-500 animate-pulse"></i>
+        <i class="ph-fill ph-animate-pulse"></i>
         SIGNAL_LOG
     </h3>
 
     <!-- Form -->
-    <div class="bg-transparent p-4 border border-[#333] mb-6 relative overflow-hidden group">
+    <div class="bg-transparent p-4 border border-white/10 rounded-xl mb-6 relative overflow-hidden group">
         {#if sending}
             <div class="absolute inset-0 bg-transparent/80 flex items-center justify-center z-10">
                 <span class="text-green-500 font-mono animate-pulse">UPLOADING...</span>
@@ -78,14 +78,13 @@
         {/if}
 
         <div class="mb-2">
-            <label class="block text-[10px] text-gray-500 mb-1">IDENTITY_SIGNATURE</label>
-            <input
+            <label for="callsign-input" class="block text-[10px] text-gray-500 mb-1">IDENTITY_SIGNATURE</label>
                 type="text"
                 bind:value={name}
                 disabled={hasSigned}
-                placeholder="CALLSIGN"
+                id="callsign-input" placeholder="CALLSIGN"
                 maxlength="20"
-                class="w-full bg-transparent border border-[#333] text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                class="w-full bg-transparent border border-white/10 rounded-lg text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
             >
         </div>
         <div class="mb-2">
@@ -94,11 +93,11 @@
                 placeholder="TRANSMIT MESSAGE..."
                 rows="2"
                 maxlength="140"
-                class="w-full bg-transparent border border-[#333] text-gray-300 p-2 font-mono focus:border-green-500 outline-none resize-none"
+                class="w-full bg-transparent border border-white/10 rounded-lg text-gray-300 p-2 font-mono focus:border-green-500 outline-none resize-none"
             ></textarea>
         </div>
-        <button onclick={signGuestbook} disabled={!name || !message} class="w-full bg-white/5 text-gray-400 py-2 text-xs hover:bg-green-900 hover:text-green-400 transition-colors disabled:opacity-30">
-            [SEND_TRANSMISSION]
+        <button onclick={signGuestbook} disabled={!name || !message} class="w-full bg-white/5 text-gray-400 py-2 text-xs hover:bg-green-900/20 hover:text-green-400 border border-white/10 rounded-lg transition-colors disabled:opacity-30">
+            SEND_TRANSMISSION
         </button>
     </div>
 
