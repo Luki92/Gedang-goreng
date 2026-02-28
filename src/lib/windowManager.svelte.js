@@ -14,15 +14,15 @@ class WindowManager {
 
     registry = new Map();
 
-    iconMap = {
-        'terminal': 'ph-terminal-window',
-        'c-tr': 'ph-safe',
-        'c-tl': 'ph-fingerprint',
-        'c-bl': 'ph-vinyl-record',
-        'c-br': 'ph-planet',
-        'admin-guestbook': 'ph-envelope-open',
-        'control-center': 'ph-gear-six',
-        'file-viewer': 'ph-file-text'
+        iconMap = {
+        'terminal': 'ph-terminal-window-fill',
+        'c-tr': 'ph-archive-tray-fill',
+        'c-tl': 'ph-user-focus-fill',
+        'c-bl': 'ph-music-notes-fill',
+        'c-br': 'ph-globe-hemisphere-east-fill',
+        'admin-guestbook': 'ph-chat-circle-dots-fill',
+        'control-center': 'ph-command-fill',
+        'file-viewer': 'ph-file-text-fill'
     };
 
     constructor() {
@@ -38,7 +38,7 @@ class WindowManager {
     }
 
     getIcon(id) {
-        return this.iconMap[id] || (id.startsWith('admin-') ? 'ph-shield-check' : 'ph-app-window');
+        return this.iconMap[id] || (id.startsWith('admin-') ? 'ph-shield-check-fill' : 'ph-app-window-fill');
     }
 
     /**

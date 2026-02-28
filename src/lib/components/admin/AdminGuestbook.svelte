@@ -67,11 +67,11 @@
                         <div class="flex gap-2">
                             {#if !msg.is_approved}
                                 <button onclick={() => approve(msg.id)} class="p-1.5 bg-green-600/20 text-green-400 border border-green-500/30 rounded hover:bg-green-600/40 transition-colors" title="Approve">
-                                    <i class="ph ph-check-circle"></i>
+                                    <i class="ph ph-check-circle-fill"></i>
                                 </button>
                             {/if}
                             <button onclick={() => remove(msg.id)} class="p-1.5 bg-red-600/20 text-red-400 border border-red-500/30 rounded hover:bg-red-600/40 transition-colors" title="Delete">
-                                <i class="ph ph-trash"></i>
+                                <i class="ph ph-trash-fill"></i>
                             </button>
                         </div>
                     </div>

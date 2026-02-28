@@ -77,10 +77,10 @@
                     </div>
                     <div class="flex gap-2">
                         <button onclick={() => openEditor(item)} class="p-2 hover:bg-white/10 rounded" title="Edit" aria-label="Edit">
-                            <i class="ph ph-pencil"></i>
+                            <i class="ph ph-pencil-simple-fill"></i>
                         </button>
                         <button onclick={() => remove(item.id)} class="p-2 hover:bg-red-500/20 text-red-400 rounded" title="Delete" aria-label="Delete">
-                            <i class="ph ph-trash"></i>
+                            <i class="ph ph-trash-fill"></i>
                         </button>
                     </div>
                 </div>

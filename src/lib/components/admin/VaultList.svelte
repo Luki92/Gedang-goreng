@@ -64,10 +64,10 @@
         </div>
         <div class="flex items-center gap-2">
             <button onclick={() => dataStore.fetchWorks()} class="p-2 hover:bg-white/10 rounded transition-colors" title="Refresh" aria-label="Refresh">
-                <i class="ph ph-arrows-clockwise"></i>
+                <i class="ph ph-arrows-clockwise-fill"></i>
             </button>
             <button onclick={() => openEditor()} class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-medium transition-colors flex items-center gap-2">
-                <i class="ph ph-plus-circle"></i> NEW_FILE
+                <i class="ph ph-plus-circle-fill"></i> NEW_FILE
             </button>
         </div>
     </div>
@@ -81,7 +81,7 @@
                             <img src={w.image_url} alt={w.title} class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
                         {:else}
                             <div class="w-full h-full flex items-center justify-center text-white/10">
-                                <i class="ph ph-image text-4xl"></i>
+                                <i class="ph ph-image-fill text-4xl"></i>
                             </div>
                         {/if}
                         <div class="absolute top-2 left-2 flex gap-1">
@@ -98,10 +98,10 @@
                             <span class="text-[10px] font-mono text-white/20">ID: {w.id}</span>
                             <div class="flex gap-2">
                                 <button onclick={() => openEditor(w)} class="p-1.5 hover:bg-blue-500/20 text-blue-400 rounded transition-colors" title="Edit" aria-label="Edit">
-                                    <i class="ph ph-pencil-simple text-lg"></i>
+                                    <i class="ph ph-pencil-simple-fill-simple text-lg"></i>
                                 </button>
                                 <button onclick={() => deleteWork(w.id)} class="p-1.5 hover:bg-red-500/20 text-red-400 rounded transition-colors" title="Delete" aria-label="Delete">
-                                    <i class="ph ph-trash text-lg"></i>
+                                    <i class="ph ph-trash-fill text-lg"></i>
                                 </button>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
 
         {#if dataStore.works.length === 0}
             <div class="h-full flex flex-col items-center justify-center text-white/20 py-20">
-                <i class="ph ph-folder-open text-6xl mb-4"></i>
+                <i class="ph ph-folder-open-fill text-6xl mb-4"></i>
                 <p class="font-mono">NO_FILES_FOUND</p>
             </div>
         {/if}

@@ -91,11 +91,11 @@
 
         <div class="flex items-center gap-2">
             <button type="button" onclick={openPreview} class="editor-toolbar-button">
-                <i class="ph ph-eye"></i> Preview
+                <i class="ph ph-eye-fill"></i> Preview
             </button>
             <div class="h-6 w-px bg-white/10 mx-2"></div>
             <button type="button" onclick={save} class="px-6 py-2 bg-green-600 text-white rounded-full font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-500/20 active:scale-95">
-                <i class="ph ph-check-circle"></i> SAVE_PROFILE
+                <i class="ph ph-check-circle-fill"></i> SAVE_PROFILE
             </button>
         </div>
     {/snippet}

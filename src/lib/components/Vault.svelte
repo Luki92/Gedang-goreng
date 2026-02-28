@@ -77,7 +77,7 @@
                     class="p-1.5 hover:bg-white/10 rounded-md disabled:opacity-20 transition-all active:scale-90"
                     title="Back"
                 >
-                    <i class="ph ph-arrow-left"></i>
+                    <i class="ph ph-arrow-circle-left-fill"></i>
                 </button>
                 <button
                     type="button"
@@ -86,7 +86,7 @@
                     class="p-1.5 hover:bg-white/10 rounded-md disabled:opacity-20 transition-all active:scale-90"
                     title="Forward"
                 >
-                    <i class="ph ph-arrow-right"></i>
+                    <i class="ph ph-arrow-circle-right-fill"></i>
                 </button>
             </div>
 
@@ -94,7 +94,7 @@
                 <span class="text-blue-500">SYSTEM:</span>
                 <button type="button" onclick={() => currentIndex = 0} class="hover:text-white transition-colors">VAULT</button>
                 {#if currentView.type !== 'SELECTOR'}
-                    <i class="ph ph-caret-right text-[8px]"></i>
+                    <i class="ph ph-caret-circle-right-fill text-[8px]"></i>
                     <button type="button" onclick={() => { if(currentView.type === 'VIEWER') goBack(); }} class="hover:text-white transition-colors">{currentView.filter || 'FILE'}</button>
                 {/if}
             </div>
@@ -117,7 +117,7 @@
                         class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-blue-500/50 hover:bg-blue-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
                         <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-blue-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-blue-500/40">
-                            <i class="ph ph-quill-light"></i>
+                            <i class="ph ph-pen-nib-fill"></i>
                         </div>
                         <div class="text-center">
                             <span class="block text-xl font-bold tracking-[0.2em] uppercase mb-2">Writing</span>
@@ -131,7 +131,7 @@
                         class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-purple-500/50 hover:bg-purple-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
                         <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-purple-500/40">
-                            <i class="ph ph-palette-light"></i>
+                            <i class="ph ph-palette-fill"></i>
                         </div>
                         <div class="text-center">
                             <span class="block text-xl font-bold tracking-[0.2em] uppercase mb-2">Art</span>
@@ -145,7 +145,7 @@
                         class="group relative flex flex-col items-center gap-8 p-6 sm:p-10 border border-white/5 bg-white/[0.02] rounded-[1.5rem] hover:border-green-500/50 hover:bg-green-500/[0.03] transition-all duration-700 hover:-translate-y-2"
                     >
                         <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/5 flex items-center justify-center text-4xl group-hover:bg-green-500 group-hover:text-white transition-all duration-700 shadow-2xl group-hover:shadow-green-500/40">
-                            <i class="ph ph-chat-centered-text-light"></i>
+                            <i class="ph ph-chat-circle-dots-fill"></i>
                         </div>
                         <div class="text-center">
                             <span class="block text-xl font-bold tracking-[0.2em] uppercase mb-2">Post</span>
@@ -194,7 +194,7 @@
 
                 {#if filteredWorks.length === 0}
                     <div class="flex flex-col items-center justify-center py-32 text-gray-600 font-mono text-xs uppercase tracking-widest opacity-40">
-                        <i class="ph ph-warning-circle text-2xl mb-4"></i>
+                        <i class="ph ph-warning-circle-fill text-2xl mb-4"></i>
                         <span>// NULL_SET: NO_RECORDS_FOUND</span>
                     </div>
                 {/if}
