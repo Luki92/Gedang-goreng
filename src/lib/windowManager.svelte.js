@@ -1,158 +1,81 @@
-import { tick } from 'svelte';
+import { personaStore } from './stores/persona.svelte.js';
 
 class WindowManager {
     windows = $state([]);
     activeWindowId = $state(null);
     masterWindowId = $state(null);
-
-    // Layout Configuration
     innerGap = $state(15);
     outerGap = $derived(this.windows.filter(w => !w.minimized).length > 1 ? 100 : 40);
-
-    // Global Drag State
     isDragging = $state(false);
 
     registry = new Map();
-
-                    iconMap = {
+    iconMap = {
         'terminal': 'ph-terminal-window',
         'c-tr': 'ph-archive-tray',
         'c-tl': 'ph-user-focus',
         'c-bl': 'ph-music-notes',
-        'c-br': 'ph-globe-hemisphere-east',
-        'admin-guestbook': 'ph-chat-circle-dots',
-        'control-center': 'ph-command',
-        'file-viewer': 'ph-file-text'
+        'c-br': 'ph-globe-hemisphere-east'
     };
 
     constructor() {
         if (typeof window !== 'undefined') {
-            window.addEventListener('resize', () => {
-                this.recalculateLayout();
-            });
+            window.addEventListener('resize', () => this.recalculateLayout());
+            window.windowManager = this; // Explicit global exposure
         }
     }
 
-    register(id, component) {
-        this.registry.set(id, component);
-    }
+    register(id, component) { this.registry.set(id, component); }
 
-    getIcon(id) {
-        return this.iconMap[id] || (id.startsWith('admin-') ? 'ph-shield-check' : 'ph-app-window');
-    }
-
-    /**
-     * @param {string} id
-     * @param {Object} [options]
-     */
     open(id, options = {}) {
         const component = this.registry.get(options.componentId || id);
-        if (!component) {
-            console.error(`Component for ${id} not found.`);
-            return;
-        }
-
-        let originRect = options.originRect;
-        let props = options.props || {};
-        let originType = options.originType || 'bc';
+        if (!component) return;
 
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
-            if (existing.minimized) {
-                existing.minimized = false;
-            }
-            if (Object.keys(props).length > 0) {
-                existing.props = props;
-            }
+            existing.minimized = false;
             this.focus(id);
-            this.recalculateLayout();
             return;
         }
 
-        const defaultWidth = id === 'terminal' ? 950 : 600;
-        const defaultHeight = id === 'terminal' ? 650 : 450;
+        const width = options.width || (id === 'terminal' ? 950 : 600);
+        const height = options.height || (id === 'terminal' ? 650 : 450);
 
-        let width = options.width || originRect?.width || Math.min(window.innerWidth * 0.9, defaultWidth);
-        let height = options.height || originRect?.height || Math.min(window.innerHeight * 0.9, defaultHeight);
-        let x = originRect?.left || 0;
-        let y = originRect?.top || 0;
-        let isTiled = options.isTiled !== undefined ? options.isTiled : true;
-
-        if (!isTiled && !originRect && typeof window !== 'undefined') {
-             const floatingWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing' && !w.minimized);
-             if (floatingWindows.length > 0) {
-                 const last = floatingWindows[floatingWindows.length - 1];
-                 x = last.x + 40;
-                 y = last.y + 40;
-                 if (x + width > window.innerWidth - 20) x = 40;
-                 if (y + height > window.innerHeight - 20) y = 40;
-             } else {
-                 x = (window.innerWidth - width) / 2;
-                 y = (window.innerHeight - height) / 2;
-             }
-        }
-
-                const newWindow = {
+        const newWindow = $state({
             id,
             component,
-            props,
-            originRect: originRect || null,
-            originType,
-            birthOriginRect: originRect || null,
-            birthOriginType: originType,
-            title: options.title || "",
-            x,
-            y,
+            props: options.props || {},
+            title: options.title || id.toUpperCase(),
+            x: (window.innerWidth - width) / 2,
+            y: (window.innerHeight - height) / 2,
             width,
             height,
             zIndex: 10,
             state: 'opening',
-            isTiled,
+            isTiled: options.isTiled !== undefined ? options.isTiled : true,
             isMaximized: false,
-            minimized: false,
-            preMaximizedRect: null
-        };
+            minimized: false
+        });
 
         this.windows.push(newWindow);
-
-        if (!this.masterWindowId && isTiled) {
-            this.masterWindowId = id;
-        }
+        if (!this.masterWindowId && newWindow.isTiled) this.masterWindowId = id;
 
         this.focus(id);
+        this.recalculateLayout();
 
-        if (isTiled) {
-            this.resolveCollisions(id);
-            this.recalculateLayout();
-        }
-
-        setTimeout(() => {
-            const w = this.windows.find(w => w.id === id);
-            if (w) w.state = 'open';
-        }, 50);
+        setTimeout(() => { newWindow.state = 'open'; }, 50);
+        personaStore.triggerRandom('WINDOW_OPEN', id);
     }
 
     close(id) {
-        const index = this.windows.findIndex(w => w.id === id);
-        if (index === -1) return;
-
-        const w = this.windows[index];
+        const w = this.windows.find(w => w.id === id);
+        if (!w) return;
         w.state = 'closing';
-
         setTimeout(() => {
-            const wasMaster = (this.masterWindowId === id);
             this.windows = this.windows.filter(win => win.id !== id);
-
-            if (wasMaster) {
-                if (this.windows.length > 0) {
-                    const nextMaster = this.windows.find(win => win.isTiled);
-                    if (nextMaster) this.masterWindowId = nextMaster.id;
-                    else this.masterWindowId = null;
-                } else {
-                    this.masterWindowId = null;
-                }
+            if (this.masterWindowId === id) {
+                const next = this.windows.find(win => win.isTiled);
+                this.masterWindowId = next ? next.id : null;
             }
-
             this.recalculateLayout();
         }, 600);
     }
@@ -161,210 +84,50 @@ class WindowManager {
         this.activeWindowId = id;
         const w = this.windows.find(w => w.id === id);
         if (w) {
-            if (w.minimized) w.minimized = false;
-            const maxZ = this.windows.reduce((max, win) => Math.max(max, win.zIndex), 10);
-            w.zIndex = maxZ + 1;
+            w.minimized = false;
+            w.zIndex = Math.max(...this.windows.map(win => win.zIndex), 10) + 1;
             this.recalculateLayout();
         }
     }
 
     toggle(id, options = {}) {
-        const existing = this.windows.find(w => w.id === id);
-        if (existing) {
-            if (options.originRect) existing.originRect = options.originRect;
-            if (options.originType) existing.originType = options.originType;
-
-            if (existing.minimized) {
-                existing.minimized = false;
-                this.focus(id);
-            } else {
-                this.close(id);
-            }
-        } else {
-            this.open(id, options);
-        }
-    }
-
-    maximize(id) {
-        const w = this.windows.find(win => win.id === id);
-        if (!w) return;
-
-        if (w.isMaximized) {
-            this.restore(id);
-        } else {
-            w.preMaximizedRect = { x: w.x, y: w.y, width: w.width, height: w.height, isTiled: w.isTiled };
-            w.isMaximized = true;
-            w.isTiled = false;
-            w.x = 0;
-            w.y = 0;
-            w.width = window.innerWidth;
-            w.height = window.innerHeight;
-            this.recalculateLayout();
-        }
-    }
-
-    minimize(id) {
-        const w = this.windows.find(win => win.id === id);
-        if (!w) return;
-
-        if (w.isMaximized) {
-            this.restore(id);
-            return;
-        }
-
-        w.minimized = true;
-        this.recalculateLayout();
-    }
-
-    restore(id) {
-        const w = this.windows.find(win => win.id === id);
-        if (!w) return;
-
-        if (w.minimized) {
-            w.minimized = false;
-        } else if (w.isMaximized) {
-            w.isMaximized = false;
-            if (w.preMaximizedRect) {
-                w.x = w.preMaximizedRect.x;
-                w.y = w.preMaximizedRect.y;
-                w.width = w.preMaximizedRect.width;
-                w.height = w.preMaximizedRect.height;
-                w.isTiled = w.preMaximizedRect.isTiled;
-            }
-        }
-        this.recalculateLayout();
-    }
-
-    untile(id) {
-        const w = this.windows.find(w => w.id === id);
-        if (w && w.isTiled) {
-             w.isTiled = false;
-        }
-        this.isDragging = true;
-        this.recalculateLayout();
-    }
-
-    stopDrag() {
-        this.isDragging = false;
-    }
-
-    resolveCollisions(newId) {
-        if (typeof window === 'undefined') return;
-        const screenW = window.innerWidth;
-        const untiled = this.windows.filter(w => !w.isTiled && w.id !== newId && w.state !== 'closing' && !w.minimized);
-        if (untiled.length === 0) return;
-
-        const gap = 100;
-        untiled.forEach(w => {
-            const cx = w.x + w.width / 2;
-            const screenMid = screenW / 2;
-            if (Math.abs(cx - screenMid) < screenW * 0.15) {
-                const distLeft = w.x;
-                const distRight = screenW - (w.x + w.width);
-                if (distLeft < distRight) w.x = gap;
-                else w.x = screenW - w.width - gap;
-            }
-        });
-    }
-
-    snap(id, zone) {
-        const w = this.windows.find(w => w.id === id);
-        if (!w) return;
-        w.isTiled = true;
-        if (zone === 'master') this.masterWindowId = id;
-        else if (zone === 'stack') {
-            if (this.masterWindowId === id) {
-                const other = this.windows.find(win => win.id !== id && win.isTiled && !win.minimized);
-                if (other) this.masterWindowId = other.id;
-            }
-        }
-        this.recalculateLayout();
-    }
-
-    retileAll() {
-        this.windows.forEach(w => w.isTiled = true);
-        this.recalculateLayout();
+        if (this.windows.find(w => w.id === id)) this.close(id);
+        else this.open(id, options);
     }
 
     recalculateLayout() {
-        if (typeof window === 'undefined') return;
-        if (this.windows.length === 0) return;
+        const tiled = this.windows.filter(w => w.isTiled && w.state !== 'closing' && !w.minimized);
+        if (tiled.length === 0) return;
 
         const screenW = window.innerWidth;
         const screenH = window.innerHeight;
+        const gap = this.outerGap;
 
-        const tiledWindows = this.windows.filter(w => w.isTiled && w.state !== 'closing' && !w.minimized);
-        if (tiledWindows.length === 0) return;
-
-        const untiledWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing' && !w.minimized);
-        const hasUntiled = untiledWindows.length > 0;
-        const currentOuterGap = this.outerGap;
-
-        if (tiledWindows.length === 1) {
-            const w = tiledWindows[0];
-            if (hasUntiled) {
-                let leftOccupied = false;
-                const masterLimit = screenW * 0.6;
-                untiledWindows.forEach(u => {
-                    if ((u.x + u.width / 2) < masterLimit) leftOccupied = true;
-                });
-
-                const totalGapW = currentOuterGap * 2 + this.innerGap;
-                const availableW = screenW - totalGapW;
-                const masterWidth = availableW * 0.6;
-                const stackWidth = availableW * 0.4;
-                const h = screenH - (currentOuterGap * 2);
-
-                if (leftOccupied) {
-                    w.x = currentOuterGap + masterWidth + this.innerGap;
-                    w.y = currentOuterGap;
-                    w.width = stackWidth;
-                    w.height = h;
-                } else {
-                    w.x = currentOuterGap;
-                    w.y = currentOuterGap;
-                    w.width = masterWidth;
-                    w.height = h;
-                }
-            } else {
-                const targetW = Math.min(screenW * 0.8, 1400);
-                const targetH = Math.min(screenH * 0.8, 1000);
-                w.x = (screenW - targetW) / 2;
-                w.y = (screenH - targetH) / 2;
-                w.width = targetW;
-                w.height = targetH;
-            }
+        if (tiled.length === 1) {
+            const w = tiled[0];
+            w.width = Math.min(screenW * 0.8, 1400);
+            w.height = Math.min(screenH * 0.8, 1000);
+            w.x = (screenW - w.width) / 2;
+            w.y = (screenH - w.height) / 2;
             return;
         }
 
-        let masterW = tiledWindows.find(w => w.id === this.masterWindowId);
-        if (!masterW) {
-             masterW = tiledWindows[0];
-             this.masterWindowId = masterW.id;
-        }
-        const stackWs = tiledWindows.filter(w => w.id !== masterW.id);
-        const totalGapW = currentOuterGap * 2 + (stackWs.length > 0 ? this.innerGap : 0);
-        const availableW = screenW - totalGapW;
-        const masterWidth = stackWs.length > 0 ? availableW * 0.6 : availableW;
-        const stackWidth = stackWs.length > 0 ? availableW * 0.4 : 0;
-        const masterH = screenH - (currentOuterGap * 2);
+        const master = tiled.find(w => w.id === this.masterWindowId) || tiled[0];
+        const stacks = tiled.filter(w => w.id !== master.id);
+        const availW = screenW - (gap * 2) - (stacks.length > 0 ? this.innerGap : 0);
 
-        masterW.x = currentOuterGap;
-        masterW.y = currentOuterGap;
-        masterW.width = masterWidth;
-        masterW.height = masterH;
+        master.x = gap;
+        master.y = gap;
+        master.width = stacks.length > 0 ? availW * 0.6 : availW;
+        master.height = screenH - (gap * 2);
 
-        if (stackWs.length > 0) {
-            const stackX = currentOuterGap + masterWidth + this.innerGap;
-            const totalStackGapH = (stackWs.length - 1) * this.innerGap;
-            const availableStackH = (screenH - (currentOuterGap * 2)) - totalStackGapH;
-            const stackItemH = Math.max(availableStackH / stackWs.length, 150);
-
-            stackWs.forEach((sw, i) => {
-                sw.x = stackX;
-                sw.y = currentOuterGap + (i * (stackItemH + this.innerGap));
-                sw.width = stackWidth;
-                sw.height = stackItemH;
+        if (stacks.length > 0) {
+            const sH = (screenH - (gap * 2) - (stacks.length - 1) * this.innerGap) / stacks.length;
+            stacks.forEach((s, i) => {
+                s.x = gap + master.width + this.innerGap;
+                s.y = gap + i * (sH + this.innerGap);
+                s.width = availW * 0.4;
+                s.height = sH;
             });
         }
     }

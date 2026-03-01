@@ -1,40 +1,34 @@
 <script>
     import { personaStore } from '$lib/stores/persona.svelte.js';
     import { onMount } from 'svelte';
-    import InlineRenderer from './InlineRenderer.svelte';
 
-    let { attribution, message, children } = $props();
-    let element = $state();
-
-    function trigger() {
-        personaStore.say(message, attribution.expression || 'idle');
-    }
+    let { message, expression, trigger = 'scroll' } = $props();
+    let observer;
+    let containerEl;
 
     onMount(() => {
-        if (attribution.cause === 'scroll') {
-            const observer = new IntersectionObserver((entries) => {
+        if (trigger === 'scroll' && containerEl) {
+            observer = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting) {
-                    trigger();
-                    observer.disconnect();
+                    personaStore.say(message, expression);
                 }
             }, { threshold: 0.5 });
-            if (element) observer.observe(element);
-            return () => observer.disconnect();
+            observer.observe(containerEl);
         }
     });
 
     function handleMouseEnter() {
-        if (attribution.cause === 'hover') {
-            trigger();
+        if (trigger === 'hover') {
+            personaStore.say(message, expression);
         }
     }
 </script>
 
-<span
-    bind:this={element}
-    class="persona-say-target border-b border-dashed border-red-500/50 hover:border-red-500 cursor-help transition-colors"
+<div
+    bind:this={containerEl}
     onmouseenter={handleMouseEnter}
-    role="status"
+    class="my-4 border-l-2 border-red-500/30 pl-4 py-2 italic text-white/40 text-sm cursor-help hover:text-red-400 hover:border-red-500 transition-all group"
 >
-    <InlineRenderer nodes={children} />
-</span>
+    <i class="ph-fill ph-chat-circle-dots opacity-0 group-hover:opacity-100 mr-2"></i>
+    <span>[Interaction Trigger]</span>
+</div>

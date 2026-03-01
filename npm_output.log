@@ -122,3 +122,312 @@ https://svelte.dev/e/state_referenced_locally
 1:53:40 PM [vite] (ssr) page reload src/lib/components/AvatarFrame.svelte
 1:54:21 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
 1:54:21 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+2:10:01 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+2:10:01 PM [vite] (client) page reload .svelte-kit/generated/root.js
+2:10:01 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+2:10:01 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+2:11:08 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+2:11:08 PM [vite] (ssr) page reload src/routes/+page.svelte
+2:15:47 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+2:15:47 PM [vite] (ssr) page reload src/routes/+page.svelte
+2:16:09 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+2:16:09 PM [vite] (ssr) page reload src/routes/+page.svelte
+2:18:29 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/lib/components/LukiPersona.svelte?svelte&type=style&lang.css, /src/app.css
+2:18:29 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:20:06 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/lib/components/LukiPersona.svelte?svelte&type=style&lang.css, /src/app.css
+2:20:06 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:20:57 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/lib/components/LukiPersona.svelte?svelte&type=style&lang.css, /src/app.css
+2:20:57 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:22:26 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/WindowFrame.svelte
+2:22:26 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+2:22:26 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/app.css
+2:22:26 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:23:46 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/WindowFrame.svelte
+2:23:46 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+2:23:46 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte
+2:23:46 PM [vite] (ssr) page reload src/lib/utils/persona-detect.js
+2:23:46 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:23:46 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/app.css
+2:23:46 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:23:47 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+
+[1;31m[500] GET /[0m
+
+2:24:49 PM [vite-plugin-svelte] src/routes/+page.svelte:251:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:49 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+2:24:49 PM [vite] (ssr) page reload src/routes/+page.svelte
+2:24:49 PM [vite] (client) Pre-transform error: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+2:24:50 PM [vite-plugin-svelte] src/routes/+page.svelte:251:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+2:24:50 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: src/lib/windowManager.svelte.js:99:15 `$state(...)` can only be used as a variable declaration initializer, a class field declaration, or the first assignment to a class field at the top level of the constructor.
+https://svelte.dev/e/state_invalid_placement
+  Plugin: vite-plugin-svelte:compile-module
+  File: src/lib/windowManager.svelte.js:99:15
+    97 |              birthOriginType: originType,
+    98 |              title: options.title || id.toUpperCase(),
+    99 |              x: $state(x),
+                                  ^
+   100 |              y: $state(y),
+   101 |              width: $state(width),
+
+[1;31m[500] GET /[0m
+
+2:25:41 PM [vite] (client) hmr update /src/app.css, /src/routes/+page.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/WindowFrame.svelte
+2:25:41 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
+2:25:41 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/app.css
+2:25:41 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:25:43 PM [vite-plugin-svelte] src/routes/+page.svelte:251:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+2:26:25 PM [vite] (client) hmr update /src/app.css, /src/lib/components/LukiPersona.svelte, /src/lib/components/AvatarFrame.svelte, /src/lib/components/renderer/nodes/SayNode.svelte, /src/routes/+page.svelte, /src/lib/components/admin/AdminPersona.svelte, /src/lib/components/WindowDock.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/admin/AdminVault.svelte, /src/lib/components/admin/AdminPortal.svelte, /src/lib/components/admin/AdminProfile.svelte, /src/lib/components/admin/AdminPlaylist.svelte, /src/lib/components/admin/VaultList.svelte, /src/lib/components/admin/PortalList.svelte, /src/lib/components/admin/PlaylistList.svelte, /src/lib/components/WindowFrame.svelte
+2:26:25 PM [vite] (ssr) page reload src/lib/stores/persona.svelte.js
+2:26:25 PM [vite] (client) hmr update /src/app.css
+2:26:25 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:27:25 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+2:27:25 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+2:27:25 PM [vite-plugin-svelte] src/lib/components/admin/AdminPersona.svelte:103:32 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:27:25 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/app.css
+2:27:25 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:27:25 PM [vite-plugin-svelte] src/lib/components/admin/AdminPersona.svelte:103:32 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:27:25 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/SayNode.svelte:27:0 `<div>` with a mouseenter handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+2:27:25 PM [vite] (client) hmr update /src/lib/components/renderer/nodes/SayNode.svelte, /src/app.css
+2:27:25 PM [vite] (ssr) page reload src/lib/components/renderer/nodes/SayNode.svelte
+2:27:25 PM [vite-plugin-svelte] src/lib/components/admin/AdminPersona.svelte:103:32 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:27:25 PM [vite] (client) hmr update /src/lib/components/admin/AdminPersona.svelte, /src/app.css
+2:27:25 PM [vite] (ssr) page reload src/lib/components/admin/AdminPersona.svelte
+2:27:25 PM [vite] (client) hmr update /src/lib/components/admin/AdminPersona.svelte, /src/app.css
+2:27:25 PM [vite] (ssr) page reload src/lib/components/admin/AdminPersona.svelte
+2:27:26 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/SayNode.svelte:27:0 `<div>` with a mouseenter handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+2:27:26 PM [vite-plugin-svelte] src/lib/components/admin/AdminPersona.svelte:103:32 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:27:27 PM [vite-plugin-svelte] src/lib/components/admin/AdminPersona.svelte:103:32 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:27:27 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/SayNode.svelte:27:0 `<div>` with a mouseenter handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+2:29:29 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+2:29:29 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+2:30:47 PM [vite] (client) hmr update /src/lib/components/LukiPersona.svelte, /src/app.css
+2:30:47 PM [vite] (ssr) page reload src/lib/components/LukiPersona.svelte
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:56:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+2:32:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:56:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+2:32:39 PM [vite] (client) hmr update /src/lib/components/renderer/LukiRenderer.svelte, /src/app.css
+2:32:39 PM [vite] (ssr) page reload src/lib/components/renderer/LukiRenderer.svelte
+2:33:15 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+2:33:15 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+2:34:30 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+2:34:30 PM [vite] (client) page reload .svelte-kit/generated/root.js
+2:34:30 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+2:34:30 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+2:34:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:34:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+2:34:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:56:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+2:34:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+2:34:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:17:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+2:34:39 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:56:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+2:38:03 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+2:38:03 PM [vite] (client) page reload .svelte-kit/generated/root.js
+2:38:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+2:38:03 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte

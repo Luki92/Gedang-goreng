@@ -2,41 +2,26 @@
     import { windowManager } from '$lib/windowManager.svelte.js';
     import { personaStore } from '$lib/stores/persona.svelte.js';
     import AvatarFrame from './AvatarFrame.svelte';
-    import { onMount } from 'svelte';
-    import { quintOut } from 'svelte/easing';
 
-    // State
     let isProfileOpen = $derived(windowManager.windows.some(w => w.id === 'c-tl' && !w.minimized));
     let containerEl = $state();
     let currentPos = $state({ x: 0, y: 0, scale: 1, opacity: 1 });
     let isGliding = $state(false);
+    let isBouncing = $state(false);
 
-    // Watch for profile state change to trigger glide
     $effect(() => {
-        if (isProfileOpen) {
-            glideToIdentity();
-        } else {
-            glideToCorner();
-        }
+        if (isProfileOpen) glideToIdentity();
+        else glideToCorner();
     });
 
     async function glideToIdentity() {
         if (!containerEl) return;
         const target = document.getElementById('persona-identity-target');
         if (!target) return;
-
         isGliding = true;
         const targetRect = target.getBoundingClientRect();
         const startRect = containerEl.getBoundingClientRect();
-
-        // Simple Glide animation
-        currentPos = {
-            x: targetRect.left - startRect.left,
-            y: targetRect.top - startRect.top,
-            scale: targetRect.width / startRect.width,
-            opacity: 0
-        };
-
+        currentPos = { x: targetRect.left - startRect.left, y: targetRect.top - startRect.top, scale: targetRect.width / startRect.width, opacity: 0.2 };
         setTimeout(() => { isGliding = false; }, 800);
     }
 
@@ -48,60 +33,54 @@
 
     function handleClick() {
         personaStore.triggerRandom('CLICK');
-        personaStore.lastInteraction = Date.now();
+        isBouncing = true;
+        setTimeout(() => isBouncing = false, 500);
     }
 
-    // Logic for "pushing" windows
+    // Direct collision check without $effect dependency on rect
+    // We poll briefly when windows move
+    let collisionTimer;
     $effect(() => {
-        if (!isProfileOpen && !isGliding) {
-            const myRect = containerEl?.getBoundingClientRect();
-            if (myRect) {
-                windowManager.windows.forEach(w => {
-                    if (w.minimized || w.state === 'closing') return;
-                    const wx = w.x;
-                    const wy = w.y;
-                    const ww = w.width;
-                    const wh = w.height;
+        // Track windows
+        const winList = windowManager.windows.map(w => ({ id: w.id, x: w.x, y: w.y, w: w.width, h: w.height, m: w.minimized, s: w.state }));
 
-                    if (!(myRect.right < wx ||
-                          myRect.left > wx + ww ||
-                          myRect.bottom < wy ||
-                          myRect.top > wy + wh)) {
-                        // COLLISION! Bounce the window.
-                        if (w.isTiled) {
-                             personaStore.say("HEY! Don't cover me with your workspace!", 'angry');
-                        } else {
-                             w.x -= 50; w.y -= 50;
-                             personaStore.say("Move this thing, I can't see!", 'angry');
-                        }
-                    }
-                });
+        if (isGliding || !containerEl || winList.length === 0) return;
+
+        const myRect = containerEl.getBoundingClientRect();
+
+        winList.forEach(w => {
+            if (w.m || w.s === 'closing' || w.id === 'c-tl') return;
+            const hasCollision = !(myRect.right < w.x || myRect.left > w.x + w.w || myRect.bottom < w.y || myRect.top > w.y + w.h);
+            if (hasCollision) {
+                if (!personaStore.isSpeaking) {
+                    personaStore.triggerRandom('COLLISION') || personaStore.say("HEY! Don't cover me!", 'angry');
+                    isBouncing = true;
+                    setTimeout(() => isBouncing = false, 500);
+                }
             }
-        }
+        });
     });
 </script>
 
 <div
     bind:this={containerEl}
     class="luki-persona-fixed"
-    class:hidden-in-identity={isProfileOpen && !isGliding}
+    class:is-bouncing={isBouncing}
     style="transform: translate({currentPos.x}px, {currentPos.y}px) scale({currentPos.scale}); opacity: {currentPos.opacity}; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;"
 >
     <div class="relative group">
-        <!-- Speech Bubble -->
         {#if personaStore.isSpeaking}
-            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max max-w-[200px] z-50">
-                <div class="bg-black/90 border border-red-500/50 p-3 rounded-lg shadow-[0_0_20px_rgba(255,0,0,0.2)] relative">
-                    <p class="text-red-400 font-mono text-xs leading-relaxed">"{personaStore.currentMessage}"</p>
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max max-w-[200px] z-[2000] pointer-events-none">
+                <div class="bg-black/90 border border-red-500/50 p-3 rounded-lg shadow-[0_0_20px_rgba(255,0,0,0.2)] relative animate-pop-in">
+                    <p class="text-red-400 font-mono text-xs leading-relaxed text-center">"{personaStore.currentMessage}"</p>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/90"></div>
                 </div>
             </div>
         {/if}
 
-        <!-- The Character -->
         <button
             onclick={handleClick}
-            class="cursor-pointer hover:scale-105 transition-transform active:scale-95"
+            class="cursor-pointer hover:scale-110 transition-transform active:scale-90 outline-none"
             aria-label="Persona"
         >
             <AvatarFrame size="sm" customClass="border-none shadow-none" />
@@ -114,16 +93,18 @@
         position: fixed;
         bottom: 2rem;
         right: 10vw;
-        z-index: 100;
+        z-index: 1000;
         pointer-events: auto;
     }
-
-    .hidden-in-identity {
-        opacity: 0 !important;
-        pointer-events: none;
+    .is-bouncing { animation: bounce 0.5s ease; }
+    @keyframes bounce {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(-5px, -10px) scale(1.05); }
+        50% { transform: translate(5px, -5px) scale(0.95); }
+        75% { transform: translate(-2px, -2px) scale(1.02); }
     }
-
-    @media (max-width: 768px) {
-        .luki-persona-fixed { right: 1rem; bottom: 1rem; }
+    @keyframes pop-in {
+        from { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
+        to { opacity: 1; transform: translate(-50%, 0) scale(1); }
     }
 </style>
