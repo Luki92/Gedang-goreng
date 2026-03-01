@@ -14,7 +14,9 @@ class WindowManager {
         'c-tr': 'ph-archive-tray',
         'c-tl': 'ph-user-focus',
         'c-bl': 'ph-music-notes',
-        'c-br': 'ph-globe-hemisphere-east'
+        'c-br': 'ph-globe-hemisphere-east',
+        'file-viewer': 'ph-file-text',
+        'control-center': 'ph-gear-six'
     };
 
     constructor() {
@@ -26,9 +28,17 @@ class WindowManager {
 
     register(id, component) { this.registry.set(id, component); }
 
+    getIcon(id) {
+        if (id.startsWith('admin-')) return 'ph-shield-checkered';
+        return this.iconMap[id] || 'ph-app-window';
+    }
+
     open(id, options = {}) {
         const component = this.registry.get(options.componentId || id);
-        if (!component) return;
+        if (!component) {
+            console.error(`Component not registered for ID: ${id}`);
+            return;
+        }
 
         const existing = this.windows.find(w => w.id === id);
         if (existing) {
@@ -53,7 +63,9 @@ class WindowManager {
             state: 'opening',
             isTiled: options.isTiled !== undefined ? options.isTiled : true,
             isMaximized: false,
-            minimized: false
+            minimized: false,
+            originRect: options.originRect,
+            originType: options.originType
         });
 
         this.windows.push(newWindow);
@@ -69,7 +81,11 @@ class WindowManager {
     close(id) {
         const w = this.windows.find(w => w.id === id);
         if (!w) return;
+
+        w.birthOriginRect = w.originRect;
+        w.birthOriginType = w.originType;
         w.state = 'closing';
+
         setTimeout(() => {
             this.windows = this.windows.filter(win => win.id !== id);
             if (this.masterWindowId === id) {
@@ -86,6 +102,47 @@ class WindowManager {
         if (w) {
             w.minimized = false;
             w.zIndex = Math.max(...this.windows.map(win => win.zIndex), 10) + 1;
+            this.recalculateLayout();
+        }
+    }
+
+    minimize(id) {
+        const w = this.windows.find(w => w.id === id);
+        if (w) {
+            w.minimized = true;
+            this.recalculateLayout();
+        }
+    }
+
+    maximize(id) {
+        const w = this.windows.find(w => w.id === id);
+        if (w) {
+            w.isMaximized = !w.isMaximized;
+            this.recalculateLayout();
+        }
+    }
+
+    untile(id) {
+        const w = this.windows.find(w => w.id === id);
+        if (w && w.isTiled) {
+            w.isTiled = false;
+            if (this.masterWindowId === id) {
+                const next = this.windows.find(win => win.isTiled && win.id !== id);
+                this.masterWindowId = next ? next.id : null;
+            }
+            this.recalculateLayout();
+        }
+    }
+
+    stopDrag() {
+        this.isDragging = false;
+    }
+
+    snap(id, zone) {
+        const w = this.windows.find(w => w.id === id);
+        if (w) {
+            w.isTiled = true;
+            if (zone === 'master') this.masterWindowId = id;
             this.recalculateLayout();
         }
     }

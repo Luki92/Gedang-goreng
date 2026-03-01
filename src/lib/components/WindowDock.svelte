@@ -11,7 +11,7 @@
         <div class="dock-bar">
             {#each minimizedWindows as win (win.id)}
                 <button
-                    id="dock-item-${win.id}"
+                    id="dock-item-{win.id}"
                     class="dock-item"
                     onclick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
