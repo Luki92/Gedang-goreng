@@ -38,7 +38,7 @@
 
         const payload = { ...form };
         const id = payload.id;
-        delete payload.id;
+        payload.id = null;
 
         let error;
         /** @type {string[]} */

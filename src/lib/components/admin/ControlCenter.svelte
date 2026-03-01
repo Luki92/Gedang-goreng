@@ -84,6 +84,16 @@
                 </div>
             </button>
 
+            <!-- Persona Manager -->
+            <button onclick={() => openApp("admin-persona", "PERSONA_CORE")} class="group p-4 border border-white/10 rounded-xl bg-[rgba(20,20,30,0.4)] hover:border-red-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+                <div class="absolute inset-0 bg-red-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <i class="ph-fill ph-mask-happy text-2xl text-gray-400 group-hover:text-red-400 transition-colors"></i>
+                <div class="flex flex-col items-center z-10">
+                    <span class="text-gray-300 group-hover:text-white font-bold">PERSONA</span>
+                    <span class="text-[9px] text-white/50">OC & Expressions</span>
+                </div>
+            </button>
+
              <!-- Docs -->
             <button onclick={() => openApp('admin-docs', 'DOCUMENTATION')} class="group p-4 border border-white/10 rounded-xl bg-[rgba(20,20,30,0.4)] hover:border-purple-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-purple-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>

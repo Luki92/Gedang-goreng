@@ -1,111 +1,110 @@
 <script>
     import { windowManager } from '$lib/windowManager.svelte.js';
-    import { dataStore } from '$lib/stores/data.svelte.js';
-    import { onMount } from 'svelte';
+    import { personaStore } from '$lib/stores/persona.svelte.js';
+    import AvatarFrame from './AvatarFrame.svelte';
 
-    // To prevent hydration mismatches or state flicker, we rely on the windowManager
-    let isProfileOpen = $derived(windowManager.windows.some(w => w.id === 'c-tl'));
+    let isProfileOpen = $derived(windowManager.windows.some(w => w.id === 'c-tl' && !w.minimized));
+    let containerEl = $state();
+    let currentPos = $state({ x: 0, y: 0, scale: 1, opacity: 1 });
+    let isGliding = $state(false);
+    let isBouncing = $state(false);
 
-    onMount(() => {
-        dataStore.fetchProfile();
+    $effect(() => {
+        if (isProfileOpen) glideToIdentity();
+        else glideToCorner();
     });
 
-    let profile = $derived(dataStore.profile || { bio: 'Welcome to the void.' });
+    async function glideToIdentity() {
+        if (!containerEl) return;
+        const target = document.getElementById('persona-identity-target');
+        if (!target) return;
+        isGliding = true;
+        const targetRect = target.getBoundingClientRect();
+        const startRect = containerEl.getBoundingClientRect();
+        currentPos = { x: targetRect.left - startRect.left, y: targetRect.top - startRect.top, scale: targetRect.width / startRect.width, opacity: 0.2 };
+        setTimeout(() => { isGliding = false; }, 800);
+    }
+
+    async function glideToCorner() {
+        isGliding = true;
+        currentPos = { x: 0, y: 0, scale: 1, opacity: 1 };
+        setTimeout(() => { isGliding = false; }, 800);
+    }
+
+    function handleClick() {
+        personaStore.triggerRandom('CLICK');
+        isBouncing = true;
+        setTimeout(() => isBouncing = false, 500);
+    }
+
+    // Direct collision check without $effect dependency on rect
+    // We poll briefly when windows move
+    let collisionTimer;
+    $effect(() => {
+        // Track windows
+        const winList = windowManager.windows.map(w => ({ id: w.id, x: w.x, y: w.y, w: w.width, h: w.height, m: w.minimized, s: w.state }));
+
+        if (isGliding || !containerEl || winList.length === 0) return;
+
+        const myRect = containerEl.getBoundingClientRect();
+
+        winList.forEach(w => {
+            if (w.m || w.s === 'closing' || w.id === 'c-tl') return;
+            const hasCollision = !(myRect.right < w.x || myRect.left > w.x + w.w || myRect.bottom < w.y || myRect.top > w.y + w.h);
+            if (hasCollision) {
+                if (!personaStore.isSpeaking) {
+                    personaStore.triggerRandom('COLLISION') || personaStore.say("HEY! Don't cover me!", 'angry');
+                    isBouncing = true;
+                    setTimeout(() => isBouncing = false, 500);
+                }
+            }
+        });
+    });
 </script>
 
-<div class="luki-container" class:open={isProfileOpen}>
-    <div class="luki-wrapper">
-        <div class="luki-emoji">
-            {#if profile.avatar_url}
-                 <img src={profile.avatar_url} alt="Avatar" class="w-32 h-32 rounded-full border-4 border-[#333] shadow-lg object-cover animate-[breathe_4s_ease-in-out_infinite]" />
-            {:else}
-                 <span class="text-[8rem] filter drop-shadow-[0_0_20px_rgba(0,0,0,0.5)] animate-[slideUp_1s_cubic-bezier(0.16,1,0.3,1)_forwards,breathe_4s_ease-in-out_infinite]">🐺</span>
-            {/if}
-        </div>
-        <div class="luki-bubble">
-            <span class="bubble-text">"{profile.bio}"</span>
-        </div>
+<div
+    bind:this={containerEl}
+    class="luki-persona-fixed"
+    class:is-bouncing={isBouncing}
+    style="transform: translate({currentPos.x}px, {currentPos.y}px) scale({currentPos.scale}); opacity: {currentPos.opacity}; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;"
+>
+    <div class="relative group">
+        {#if personaStore.isSpeaking}
+            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-max max-w-[200px] z-[2000] pointer-events-none">
+                <div class="bg-black/90 border border-red-500/50 p-3 rounded-lg shadow-[0_0_20px_rgba(255,0,0,0.2)] relative animate-pop-in">
+                    <p class="text-red-400 font-mono text-xs leading-relaxed text-center">"{personaStore.currentMessage}"</p>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-black/90"></div>
+                </div>
+            </div>
+        {/if}
+
+        <button
+            onclick={handleClick}
+            class="cursor-pointer hover:scale-110 transition-transform active:scale-90 outline-none"
+            aria-label="Persona"
+        >
+            <AvatarFrame size="sm" customClass="border-none shadow-none" />
+        </button>
     </div>
 </div>
 
 <style>
-    .luki-container {
+    .luki-persona-fixed {
         position: fixed;
-        z-index: 60;
-        pointer-events: none;
-
-        /* DEFAULT STATE: Bottom Right */
-        bottom: 0; right: 10vw;
-        top: auto; left: auto;
-
-        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;
+        bottom: 2rem;
+        right: 10vw;
+        z-index: 1000;
+        pointer-events: auto;
     }
-
-    /* OPEN STATE: Hide it! The internal one takes over. */
-    .luki-container.open {
-        /* Move it down off screen */
-        transform: translateY(100%);
-        opacity: 0;
+    .is-bouncing { animation: bounce 0.5s ease; }
+    @keyframes bounce {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(-5px, -10px) scale(1.05); }
+        50% { transform: translate(5px, -5px) scale(0.95); }
+        75% { transform: translate(-2px, -2px) scale(1.02); }
     }
-
-    .luki-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .luki-emoji img {
-        /* Ensure image behaves similarly to emoji in size */
-        width: 8rem; height: 8rem;
-    }
-
-    .luki-bubble {
-        opacity: 0;
-        transform: scale(0.8) translateX(-20px);
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        background: rgba(0,0,0,0.8);
-        border: 1px solid var(--accent-color);
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        position: absolute;
-        left: 100%;
-        width: max-content;
-        max-width: 200px;
-    }
-
-    .luki-container:not(.open) .luki-bubble {
-        /* Only show bubble occasionally or on hover? */
-    }
-
-    .luki-wrapper:hover .luki-bubble {
-        opacity: 1;
-        transform: scale(1) translateX(0);
-    }
-
-    .luki-bubble::before {
-        content: ''; position: absolute;
-        left: -6px; top: 50%; transform: translateY(-50%);
-        border-top: 6px solid transparent; border-bottom: 6px solid transparent;
-        border-right: 6px solid var(--accent-color);
-    }
-    .bubble-text {
-        font-family: 'VT323', monospace; color: var(--accent-color); font-size: 1.2rem;
-    }
-
-    @keyframes slideUp {
-        0% { transform: translateY(50vh); opacity: 0; }
-        100% { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes breathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
-    }
-
-    @media (max-width: 768px) {
-        .luki-container { right: -20px; bottom: -10px; }
-        .luki-emoji span { font-size: 5rem; }
-        .luki-emoji img { width: 5rem; height: 5rem; }
+    @keyframes pop-in {
+        from { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
+        to { opacity: 1; transform: translate(-50%, 0) scale(1); }
     }
 </style>

@@ -3,6 +3,7 @@
     import ContainerNode from './nodes/ContainerNode.svelte';
     import CodeBlock from './nodes/CodeBlock.svelte';
     import TableNode from './nodes/TableNode.svelte';
+    import SayNode from './nodes/SayNode.svelte';
 
     let { ast } = $props();
 </script>
@@ -34,6 +35,9 @@
             <p class="text-gray-400 leading-relaxed">
                 <InlineRenderer nodes={node.children} />
             </p>
+
+        {:else if node.type === 'say'}
+            <SayNode message={node.message} expression={node.expression} trigger={node.trigger} />
 
         {:else if node.type === 'list'}
             <svelte:element this={node.ordered ? 'ol' : 'ul'} class="space-y-1 ml-4 pl-4 border-l border-[#222]">

@@ -1,17 +1,25 @@
 <script>
-    import { onMount } from 'svelte';
+    import { personaStore } from '$lib/stores/persona.svelte.js';
     import { fly } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
 
+    /**
+     * @typedef {Object} Props
+     * @property {'sm' | 'md' | 'lg' | 'xl' | string} [size]
+     * @property {string} [customClass]
+     * @property {string} [style]
+     * @property {boolean} [isIdentityFrame]
+     */
+
+    /** @type {Props} */
     let {
-        avatarUrl = null,
-        size = 'md', // sm, md, lg, xl or numeric
+        size = 'md',
         customClass = '',
         style = '',
-        expression = 'idle' // idle, blink, speak, etc.
+        isIdentityFrame = false
     } = $props();
 
-    // Mapping size to tailwind or custom
+    /** @type {Record<string, string>} */
     const sizeClasses = {
         sm: 'w-24 h-24',
         md: 'w-32 h-32 md:w-48 md:h-48',
@@ -19,19 +27,27 @@
         xl: 'w-80 h-80'
     };
 
-    let resolvedSizeClass = $derived(/** @type {any} */ (sizeClasses)[size] || (typeof size === 'string' ? size : 'w-48 h-48'));
+    let resolvedSizeClass = $derived(sizeClasses[size] || size);
+
+    // Determine the current image based on store state
+    let currentImage = $derived.by(() => {
+        if (personaStore.isSpeaking) return personaStore.getAsset('speak') || personaStore.getAsset('idle');
+        if (personaStore.isBlinking) return personaStore.getAsset('blink') || personaStore.getAsset('idle');
+        return personaStore.getAsset(personaStore.currentExpression) || personaStore.getAsset('idle');
+    });
 </script>
 
 <div
     class="avatar-frame border border-dashed border-[#444] rounded-xl flex items-center justify-center bg-transparent shrink-0 relative overflow-hidden {resolvedSizeClass} {customClass}"
     {style}
+    id={isIdentityFrame ? 'persona-identity-target' : undefined}
 >
     <div
         class="luki-inner-emoji w-full h-full flex items-center justify-center"
         in:fly={{ y: 50, duration: 800, easing: quintOut }}
     >
-        {#if avatarUrl}
-            <img src={avatarUrl} alt="Avatar" class="w-full h-full object-cover" data-expression={expression} />
+        {#if currentImage}
+            <img src={currentImage} alt="Persona" class="w-full h-full object-contain" />
         {:else}
             <span class="text-6xl filter drop-shadow-[0_0_30px_var(--accent-color)] animate-breathe">🐺</span>
         {/if}
