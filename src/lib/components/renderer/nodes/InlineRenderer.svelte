@@ -2,6 +2,7 @@
     import TooltipNode from './TooltipNode.svelte';
     import SpoilerNode from './SpoilerNode.svelte';
     import ObfuscatedNode from './ObfuscatedNode.svelte';
+    import SayNode from './SayNode.svelte';
 
     let { nodes } = $props();
 </script>
@@ -32,6 +33,8 @@
         <SpoilerNode content={node.content} />
     {:else if node.type === 'obfuscated'}
         <ObfuscatedNode content={node.content} />
+    {:else if node.type === 'say'}
+        <SayNode attribution={node.attribution} message={node.message} children={node.children} />
     {:else if node.type === 'footnote'}
         <sup class="text-[10px] text-gray-500 align-super cursor-help hover:text-white transition-colors" title="Footnote">[{node.content}]</sup>
     {/if}

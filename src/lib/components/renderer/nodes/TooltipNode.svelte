@@ -4,15 +4,18 @@
     let x = $state(0);
     let y = $state(0);
 
+    /** @param {MouseEvent} e */
     function onEnter(e) {
         show = true;
         updatePos(e);
     }
 
+    /** @param {MouseEvent} e */
     function onMove(e) {
         updatePos(e);
     }
 
+    /** @param {MouseEvent} e */
     function updatePos(e) {
         x = e.clientX + 10;
         y = e.clientY + 10;

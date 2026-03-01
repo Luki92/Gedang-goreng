@@ -1,0 +1,124 @@
+
+> app@0.0.1 dev
+> vite dev
+
+1:43:33 PM [vite] (client) Forced re-optimization of dependencies
+
+  VITE v7.3.1  ready in 2011 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+1:44:04 PM [vite] (ssr) Error when evaluating SSR module /src/routes/+page.svelte: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+      at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+
+[1;31m[500] GET /[0m
+Error: Failed to load url /supabaseClient (resolved id: /supabaseClient) in /app/src/lib/stores/persona.svelte.js. Does the file exist?
+    at loadAndTransform (file:///app/node_modules/vite/dist/node/chunks/config.js:22663:33)
+1:45:36 PM [vite] (ssr) page reload src/lib/stores/persona.svelte.js
+1:45:45 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+1:45:45 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:46 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+1:45:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:46 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:14:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:16:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:18:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:46 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/admin/AdminVault.svelte:18:20 This reference only captures the initial value of `initialWork`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:14:29 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:19:20 This reference only captures the initial value of `initialItem`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:45:47 PM [vite-plugin-svelte] src/lib/components/WindowFrame.svelte:235:4 `<div>` with a mousedown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+1:45:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+1:45:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+https://svelte.dev/e/a11y_missing_attribute
+1:45:47 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:48 PM [vite-plugin-svelte] src/lib/components/editor/MediaUpload.svelte:59:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+1:45:48 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:14:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:48 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:16:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:48 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:18:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+https://svelte.dev/e/svelte_self_deprecated
+1:45:48 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+1:49:46 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+1:49:46 PM [vite] (client) page reload .svelte-kit/generated/root.js
+1:49:46 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+1:49:46 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+1:53:19 PM [vite] (client) hmr update /src/app.css, /src/lib/components/LukiPersona.svelte, /src/lib/components/AvatarFrame.svelte, /src/lib/components/renderer/nodes/SayNode.svelte
+1:53:19 PM [vite] (ssr) page reload src/lib/stores/persona.svelte.js
+1:53:40 PM [vite] (client) hmr update /src/lib/components/AvatarFrame.svelte, /src/app.css
+1:53:40 PM [vite] (ssr) page reload src/lib/components/AvatarFrame.svelte
+1:54:21 PM [vite] (client) hmr update /src/app.css, /src/lib/components/admin/AdminDocs.svelte
+1:54:21 PM [vite] (ssr) page reload src/lib/utils/luki-parser.js

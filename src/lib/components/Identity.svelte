@@ -70,7 +70,7 @@
         <div bind:this={contentEl} class="identity-content min-h-full">
             {#if !withinHtml.includes('<luki-avatar-frame')}
                 <div class="flex flex-col md:flex-row gap-8 items-start">
-                    <luki-avatar-frame size="md"></luki-avatar-frame>
+                    <luki-avatar-frame size="md" isIdentityFrame="true"></luki-avatar-frame>
                     <div class="flex-1">
                         {@html withinHtml}
                     </div>

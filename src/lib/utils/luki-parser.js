@@ -1,7 +1,36 @@
+/**
+ * @typedef {Object} ASTNode
+ * @property {string} type
+ * @property {string} [value]
+ * @property {string} [language]
+ * @property {string} [variant]
+ * @property {string} [args]
+ * @property {ASTNode[]} [children]
+ * @property {number} [level]
+ * @property {string|null} [id]
+ * @property {boolean} [ordered]
+ * @property {ASTNode[][]} [items]
+ * @property {ASTNode[]} [head]
+ * @property {ASTNode[][]} [body]
+ * @property {string} [alt]
+ * @property {string} [src]
+ * @property {string} [text]
+ * @property {string} [href]
+ * @property {string} [tip]
+ * @property {string} [content]
+ * @property {Object} [attribution]
+ * @property {string} [message]
+ */
+
 export class LukiParser {
+    /**
+     * @param {string} text
+     * @returns {ASTNode[]}
+     */
     parse(text) {
         if (!text) return [];
         const lines = text.replace(/\r\n/g, '\n').split('\n');
+        /** @type {ASTNode[]} */
         const ast = [];
         let i = 0;
 
@@ -128,9 +157,14 @@ export class LukiParser {
         return ast;
     }
 
+    /**
+     * @param {string[]} rows
+     * @returns {ASTNode}
+     */
     parseTable(rows) {
         if (rows.length === 0) return { type: 'table', head: [], body: [] };
 
+        /** @param {string} row */
         const splitRow = (row) => row.split('|').filter(c => c.trim() !== '');
 
         const head = splitRow(rows[0]).map(c => this.parseInline(c.trim()));
@@ -148,21 +182,60 @@ export class LukiParser {
         return { type: 'table', head, body };
     }
 
+    /**
+     * @param {string} text
+     * @returns {ASTNode[]}
+     */
     parseInline(text) {
         if (!text) return [];
+        /** @type {ASTNode[]} */
         let tokens = [];
 
         // Regex patterns
-        // We use non-greedy matches .*? to ensure we don't eat too much
-        const pattern = /(`[^`]+`|\!\[.*?\]\(.*?\)|\[\[.*?\]\]|\[.*?\]\(.*?\)|\|\|.*?\|\||%%.*?%%|\^\^.*?\^\^\(.*?\)|~{2}.*?~{2}|\*{2}.*?\*{2}|_{2}.*?_{2}|\*.*?\*|_.*?_|\^.*?\^)/g;
+        // Enhanced to include <say> tags
+        const pattern = /(<say\s+[^>]*>.*?<\/say>|`[^`]+`|\!\[.*?\]\(.*?\)|\[\[.*?\]\]|\[.*?\]\(.*?\)|\|\|.*?\|\||%%.*?%%|\^\^.*?\^\^\(.*?\)|~{2}.*?~{2}|\*{2}.*?\*{2}|_{2}.*?_{2}|\*.*?\*|_.*?_|\^.*?\^)/g;
 
         const parts = text.split(pattern);
 
         parts.forEach(part => {
             if (!part) return;
 
+            // Persona Say tag: <say attribution="..." message="...">text</say>
+            if (part.startsWith('<say')) {
+                const attrMatch = part.match(/<say\s+([^>]+)>(.*?)<\/say>/);
+                if (attrMatch) {
+                    const attrsRaw = attrMatch[1];
+                    const content = attrMatch[2];
+
+                    /** @type {Record<string, string>} */
+                    const attrs = {};
+                    attrsRaw.replace(/(\w+)="([^"]*)"/g, (/** @type {string} */ m, /** @type {string} */ key, /** @type {string} */ val) => {
+                        attrs[key] = val;
+                        return m;
+                    });
+
+                    // Parse attribution string like "cause: hover; expression: idle;"
+                    /** @type {Record<string, string>} */
+                    const attribution = {};
+                    if (attrs.attribution) {
+                        attrs.attribution.split(';').forEach(pair => {
+                            const [k, v] = pair.split(':').map(s => s.trim());
+                            if (k && v) attribution[k] = v;
+                        });
+                    }
+
+                    tokens.push({
+                        type: 'say',
+                        attribution,
+                        message: attrs.message,
+                        children: this.parseInline(content)
+                    });
+                } else {
+                    tokens.push({ type: 'text', value: part });
+                }
+            }
             // Image: ![alt](src)
-            if (part.startsWith('![') && part.includes('](')) {
+            else if (part.startsWith('![') && part.includes('](')) {
                 const m = part.match(/\!\[(.*?)\]\((.*?)\)/);
                 if (m) tokens.push({ type: 'image', alt: m[1], src: m[2] });
                 else tokens.push({ type: 'text', value: part });

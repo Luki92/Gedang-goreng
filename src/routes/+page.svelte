@@ -173,6 +173,7 @@ import PlaylistList from '$lib/components/admin/PlaylistList.svelte';
 
         // Init Text Animation
         runAnimationLoop();
+        detectUniversal();
 
         // Init Lyrics subscription
         const unsubMusic = musicState.subscribe(s => {
