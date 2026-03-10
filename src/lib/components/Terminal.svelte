@@ -364,7 +364,7 @@
                  class:text-red-500={line.type === 'error'}
                  class:text-yellow-400={line.type === 'warn'}
                  class:text-blue-400={line.type === 'success'}
-                 class="whitespace-pre-wrap leading-tight selectable">
+                 class="whitespace-pre-wrap leading-tight selectable-text select-text">
                  {#if line.type === 'user'}
                     <span class="opacity-50 mr-2">➜</span>
                  {/if}
