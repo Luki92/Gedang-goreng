@@ -24,7 +24,6 @@
         output = [...output, { type: 'user', text: `> ${displayCmd}` }];
         inputVal = '';
 
-        // Simple parser that respects quotes could be better, but split by space is enough for now
         const args = cmd.split(' ');
         const command = args[0].toLowerCase();
 
@@ -80,7 +79,6 @@
                 output = [...output, { type: 'error', text: `Unknown command: ${command}` }];
         }
 
-        // Scroll to bottom
         setTimeout(() => {
             const t = document.getElementById('term-content');
             if (t) t.scrollTop = t.scrollHeight;
@@ -89,7 +87,6 @@
 
     /** @param {KeyboardEvent} e */
     function handleKeydown(e) {
-        // Toggle: Ctrl + Shift + L
         if (e.ctrlKey && e.shiftKey && (e.key === 'L' || e.key === 'l')) {
             e.preventDefault();
             isVisible = !isVisible;
@@ -98,7 +95,6 @@
             }
         }
 
-        // Close on Escape
         if (isVisible && e.key === 'Escape') {
             isVisible = false;
         }
@@ -107,7 +103,6 @@
     onMount(() => {
         window.addEventListener('keydown', handleKeydown);
 
-        // Check initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             $isAdmin = !!session;
             if (session) {
@@ -115,7 +110,6 @@
             }
         });
 
-        // Listen for changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             $isAdmin = !!session;
         });
@@ -130,34 +124,40 @@
 {#if isVisible}
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-    <div class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick={() => isVisible = false} role="dialog" aria-modal="true">
-        <div class="w-full max-w-2xl bg-[#050505] border border-green-900 shadow-[0_0_30px_rgba(0,255,0,0.2)] font-mono rounded overflow-hidden" onclick={(e) => e.stopPropagation()}>
+    <div
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+        onclick={() => isVisible = false}
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+    >
+        <div class="w-full max-w-2xl bg-[#0a0a0a] border border-gray-800 shadow-xl font-mono rounded-lg overflow-hidden" onclick={(e) => e.stopPropagation()} role="document">
             <!-- Header -->
-            <div class="bg-green-900/20 border-b border-green-900 p-2 flex justify-between items-center text-xs text-green-500">
-                <span>TERMINAL_SESSION_01</span>
-                <button onclick={() => isVisible = false} class="hover:text-green-300">[X]</button>
+            <div class="bg-gray-900 border-b border-gray-800 p-2 flex justify-between items-center text-xs text-gray-400 select-none">
+                <span>TERMINAL_SESSION_01 [Admin]</span>
+                <button onclick={() => isVisible = false} class="hover:text-white transition-colors">[X]</button>
             </div>
 
             <!-- Content -->
-            <div id="term-content" class="h-96 p-4 overflow-y-auto text-sm space-y-1 font-[VT323] text-lg">
+            <div id="term-content" class="h-96 p-4 overflow-y-auto text-sm space-y-1 font-mono text-gray-300">
                 {#each output as line}
-                    <div class:text-green-500={line.type === 'info'}
+                    <div class:text-gray-300={line.type === 'info'}
                          class:text-white={line.type === 'user'}
-                         class:text-red-500={line.type === 'error'}
+                         class:text-red-400={line.type === 'error'}
                          class:text-yellow-400={line.type === 'warn'}
                          class:text-blue-400={line.type === 'success'}>
                         {line.text}
                     </div>
                 {/each}
 
-                <div class="flex items-center text-green-500 mt-2">
-                    <span class="mr-2">{$isAdmin ? 'root@luki:~$' : 'guest@luki:~$'}</span>
+                <div class="flex items-center text-gray-400 mt-2">
+                    <span class="mr-2 text-blue-500">{$isAdmin ? 'root@luki:~$' : 'guest@luki:~$'}</span>
                     <input
                         bind:this={inputRef}
                         type="text"
                         bind:value={inputVal}
                         onkeydown={(e) => e.key === 'Enter' && handleCommand()}
-                        class="bg-transparent border-none outline-none flex-1 text-white caret-green-500"
+                        class="bg-transparent border-none outline-none flex-1 text-white caret-blue-500 placeholder-gray-600"
                         spellcheck="false"
                         autocomplete="off"
                     />
