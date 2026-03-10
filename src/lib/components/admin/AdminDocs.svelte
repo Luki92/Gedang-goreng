@@ -15,28 +15,28 @@
     let ast = $derived(parser.parse(content));
 </script>
 
-<div class="h-full flex flex-col bg-[#0a0a0a] text-xs font-mono overflow-hidden select-text">
+<div class="h-full flex flex-col bg-transparent text-xs font-mono overflow-hidden select-text">
     <!-- Header -->
-    <div class="border-b border-[#333] p-4 flex justify-between items-center bg-[#111]">
+    <div class="border-b border-[#333] p-4 flex justify-between items-center bg-[rgba(20,20,30,0.4)]">
         <h2 class="text-white font-bold flex items-center gap-2 uppercase tracking-wider">
             <i class="ph ph-book-bookmark text-red-500 text-lg"></i>
             Luki_Script_Docs
         </h2>
-        <div class="flex gap-1 bg-[#050505] p-1 rounded border border-[#222]">
+        <div class="flex gap-1 bg-[rgba(0,0,0,0.3)] p-1 rounded border border-[#222]">
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'syntax' ? 'bg-[#222] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'syntax' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
                 onclick={() => activeTab = 'syntax'}
             >
                 SYNTAX
             </button>
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'reference' ? 'bg-[#222] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'reference' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
                 onclick={() => activeTab = 'reference'}
             >
                 REFERENCE
             </button>
             <button
-                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'examples' ? 'bg-[#222] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
+                class="px-3 py-1 text-[10px] rounded transition-all {activeTab === 'examples' ? 'bg-[rgba(85,85,255,0.1)] text-white shadow-sm' : 'text-gray-500 hover:text-gray-300'}"
                 onclick={() => activeTab = 'examples'}
             >
                 EXAMPLES
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Content -->
-    <div class="flex-1 overflow-y-auto p-8 custom-scrollbar bg-[#0a0a0a]">
+    <div class="flex-1 overflow-y-auto p-8 custom-scrollbar bg-transparent">
         <div class="max-w-3xl mx-auto pb-20">
             <LukiRenderer {ast} />
         </div>

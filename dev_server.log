@@ -2,136 +2,136 @@
 > app@0.0.1 dev
 > vite dev
 
-11:35:46 AM [vite] (client) Forced re-optimization of dependencies
 
-  VITE v7.3.1  ready in 2319 ms
+  VITE v7.3.1  ready in 6456 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-11:36:34 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:33 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:34 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:33 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:34 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:33 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:34 AM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
 https://svelte.dev/e/a11y_missing_attribute
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:34 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+3:54:33 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:78:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:82:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:82:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:87:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:87:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:91:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:91:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:101:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:101:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:106:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:106:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:56:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:56:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:60:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:60:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:67:16 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:67:16 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:72:16 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:72:16 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:78:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:82:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:82:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:74:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:74:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:78:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:83:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:83:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:87:24 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:87:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:34 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:92:20 A form label must be associated with a control
+3:54:33 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:92:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:38 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:114:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:36 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:38 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:115:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:36 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:38 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:118:12 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:56:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:60:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:82:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:67:16 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:87:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:72:16 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:91:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:78:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:101:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:82:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:106:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:74:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:56:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:78:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:60:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:83:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:67:16 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:87:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:72:16 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:92:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:78:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminProfile.svelte:82:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:82:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:74:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:87:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:78:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:91:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:83:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:101:20 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:87:24 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/admin/AdminPortal.svelte:106:24 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/admin/AdminPlaylist.svelte:92:20 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:36 AM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
+3:54:38 PM [vite-plugin-svelte] src/lib/components/Guestbook.svelte:81:12 A form label must be associated with a control
 https://svelte.dev/e/a11y_label_has_associated_control
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:16:20 `<a>` element should have an href attribute
 https://svelte.dev/e/a11y_missing_attribute
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/LukiRenderer.svelte:52:17 `<svelte:self>` is deprecated — use self-imports (e.g. `import LukiRenderer from './LukiRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:13:45 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:15:41 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/InlineRenderer.svelte:17:65 `<svelte:self>` is deprecated — use self-imports (e.g. `import InlineRenderer from './InlineRenderer.svelte'`) instead
 https://svelte.dev/e/svelte_self_deprecated
-11:36:37 AM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
+3:54:38 PM [vite-plugin-svelte] src/lib/components/renderer/nodes/ObfuscatedNode.svelte:4:25 This reference only captures the initial value of `content`. Did you mean to reference it inside a closure instead?
 https://svelte.dev/e/state_referenced_locally
-1:02:52 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
-1:02:52 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
-1:03:42 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
-1:03:42 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
-1:04:16 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
-1:04:55 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
-1:05:40 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/lib/components/WindowFrame.svelte?svelte&type=style&lang.css, /src/app.css
-1:05:40 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
-1:09:49 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
-1:10:19 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
-1:10:19 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
-1:10:56 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/Vault.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/TilingWindowManager.svelte, /src/lib/components/Terminal.svelte, /src/lib/components/admin/ControlCenter.svelte, /src/lib/components/WindowFrame.svelte, /src/app.css
-1:10:56 PM [vite] (ssr) page reload src/lib/windowManager.svelte.js
-1:11:34 PM [vite] (client) hmr update /src/lib/components/WindowFrame.svelte, /src/app.css
-1:11:34 PM [vite] (ssr) page reload src/lib/components/WindowFrame.svelte
+3:56:13 PM [vite] (client) hmr update /src/lib/components/Terminal.svelte, /src/app.css
+3:56:13 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:57:09 PM [vite] (client) hmr update /src/app.css
+3:57:09 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:57:09 PM [vite] (client) hmr update /src/app.css
+3:57:09 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:57:20 PM [vite] (client) hmr update /src/app.css
+3:57:20 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:57:43 PM [vite] (client) hmr update /src/app.css
+3:57:43 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:57:52 PM [vite] (client) hmr update /src/app.css
+3:57:52 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:58:17 PM [vite] (client) hmr update /src/app.css
+3:58:17 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte
+3:58:27 PM [vite] (client) hmr update /src/lib/components/Terminal.svelte, /src/app.css
+3:58:27 PM [vite] (ssr) page reload src/lib/components/Terminal.svelte

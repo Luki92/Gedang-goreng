@@ -17,6 +17,7 @@
 
     // Drop Zone Highlighting (Local state)
     let dropZone = $state(null); // 'master', 'stack', or null
+    let borderRadius = $derived(win.isTiled ? "4px" : "12px");
 
         let currentStyle = $derived.by(() => {
         const originMap = {
@@ -33,7 +34,7 @@
                 left: ${win.x}px;
                 top: ${win.y}px;
                 width: ${win.width}px;
-                height: ${win.height}px;
+                height: ${win.height}px; border-radius: ${borderRadius};
                 z-index: ${win.zIndex};
                 opacity: 1 !important;
                 transform: none !important;
@@ -60,7 +61,7 @@
                 left: ${win.x}px;
                 top: ${win.y}px;
                 width: ${win.width}px;
-                height: ${win.height}px;
+                height: ${win.height}px; border-radius: ${borderRadius};
                 z-index: ${win.zIndex};
                 opacity: 0;
                 transform: scale(0.9);
@@ -95,7 +96,7 @@
                     left: ${startX}px;
                     top: ${startY}px;
                     width: ${win.width}px;
-                    height: ${win.height}px;
+                    height: ${win.height}px; border-radius: ${borderRadius};
                     z-index: ${win.zIndex};
                     opacity: 0;
                     transform: scale(0.1);
@@ -109,7 +110,7 @@
             left: ${win.x}px;
             top: ${win.y}px;
             width: ${win.width}px;
-            height: ${win.height}px;
+            height: ${win.height}px; border-radius: ${borderRadius};
             z-index: ${win.zIndex};
             opacity: 1;
             transform: scale(1);
@@ -287,7 +288,9 @@
 {/if}
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div
+
+
+    <div
     bind:this={frameEl}
     class="window-frame {win.state}"
     class:dragging={isDragging}
@@ -295,6 +298,10 @@
     style={currentStyle}
     onmousedown={handleMouseDown}
 >
+    <div class="window-title-bar">
+        {win.title || "SYSTEM_PROCESS"}
+    </div>
+
     <!-- Close Button (Standard X) -->
     <button class="close-btn" onclick={closeWindow} aria-label="Close" type="button">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -327,28 +334,30 @@
 <style>
     .window-frame {
         position: absolute;
-        background: linear-gradient(rgba(10, 10, 12, 0.4), rgba(5, 5, 7, 0.5)) padding-box,
-                    linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)) border-box;
-        border: 1px solid transparent;
-        backdrop-filter: blur(40px);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                    inset 0 0 60px rgba(0, 0, 0, 0.5);
+        background: rgba(10, 10, 15, 0.75);
+        border: 1px solid var(--accent-color);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8);
         display: flex;
         flex-direction: column;
         overflow: hidden;
         pointer-events: auto;
-        border-radius: 12px;
+        transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-radius 0.3s ease;
     }
 
     .window-frame.dragging,
     .window-frame.resizing {
-        box-shadow: 0 20px 50px rgba(85, 85, 255, 0.3);
+        box-shadow: 0 0 20px var(--accent-color);
         z-index: 1000 !important;
     }
 
     .content-wrapper {
         position: absolute;
-        top: 14px; left: 0; right: 0; bottom: 0;
+        top: 20px; left: 0; right: 0; bottom: 0;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -372,34 +381,48 @@
     .se { bottom: 0; right: 0; width: 16px; height: 16px; cursor: se-resize; z-index: 101; }
     .sw { bottom: 0; left: 0; width: 16px; height: 16px; cursor: sw-resize; z-index: 101; }
 
+
+    .window-title-bar {
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        font-family: 'VT323', monospace;
+        font-size: 11px;
+        color: var(--accent-color);
+        opacity: 0.5;
+        pointer-events: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 101;
+    }
+
     .close-btn {
         position: absolute;
-        top: 2px; right: 2px;
-        width: 20px; height: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-        color: rgba(255, 255, 255, 0.2);
+        top: 0px; right: 0px;
+        width: 32px; height: 32px;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.4);
         z-index: 102;
         padding: 0;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
     }
 
     .close-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
     }
 
     .close-btn:hover {
-        background: rgba(255, 50, 50, 0.2);
-        border-color: rgba(255, 50, 50, 0.4);
         color: #ff5555;
-        transform: none;
-        filter: drop-shadow(0 0 8px rgba(255, 85, 85, 0.4));
+        filter: drop-shadow(0 0 5px rgba(255, 85, 85, 0.8));
     }
 
 
@@ -408,8 +431,8 @@
     .edge-glow {
         position: fixed;
         top: 10vh; bottom: 10vh; /* Don't cover full height */
-        width: 100px;
-        background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%);
+        width: 40px;
+        background: radial-gradient(ellipse at center left, rgba(85,85,255,0.1) 0%, transparent 70%);
         z-index: 900;
         pointer-events: none;
         opacity: 0;
@@ -417,8 +440,8 @@
         filter: blur(20px); /* Diffuse it */
     }
 
-    .edge-glow.left { left: 0; background: radial-gradient(ellipse at center left, rgba(85,85,255,0.15) 0%, transparent 70%); }
-    .edge-glow.right { right: 0; background: radial-gradient(ellipse at center right, rgba(85,85,255,0.15) 0%, transparent 70%); }
+    .edge-glow.left { left: 0; background: radial-gradient(ellipse at center left, rgba(85,85,255,0.1) 0%, transparent 70%); }
+    .edge-glow.right { right: 0; background: radial-gradient(ellipse at center right, rgba(85,85,255,0.1) 0%, transparent 70%); }
 
     .edge-glow.active {
         opacity: 1;

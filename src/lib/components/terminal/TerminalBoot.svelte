@@ -40,7 +40,7 @@
     });
 </script>
 
-<div bind:this={container} class="h-full w-full bg-black font-mono text-sm p-4 overflow-y-auto text-gray-300">
+<div bind:this={container} class="h-full w-full bg-transparent font-mono text-sm p-4 overflow-y-auto text-gray-300">
     {#each lines as line}
         <div class="whitespace-pre-wrap">
             {#if line.startsWith('[  OK  ]')}

@@ -63,7 +63,7 @@
     }
 </script>
 
-<div class="h-full flex flex-col bg-[#0a0a0a] text-xs font-mono p-4">
+<div class="h-full flex flex-col bg-transparent text-xs font-mono p-4">
     <div class="border-b border-[#333] pb-2 mb-4 flex justify-between items-center">
         <h2 class="text-blue-400 font-bold">PORTAL_MANAGER</h2>
         <button onclick={() => dataStore.fetchPortal()} class="text-gray-500 hover:text-white">[REFRESH]</button>
@@ -71,7 +71,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full overflow-hidden">
         <!-- Form -->
-        <div class="bg-[#111] p-4 border border-[#333] overflow-y-auto">
+        <div class="bg-[rgba(20,20,30,0.4)] p-4 border border-[#333] overflow-y-auto">
             <h3 class="text-white mb-4 border-b border-[#333] pb-2">{isEditing ? 'EDIT_LINK' : 'NEW_LINK'}</h3>
             <div class="space-y-3">
                 <div>
@@ -126,7 +126,7 @@
         <!-- List -->
         <div class="overflow-y-auto space-y-2 pr-2 custom-scrollbar">
             {#each dataStore.portalItems as item}
-                <div class="flex items-center justify-between p-3 border border-[#222] bg-[#080808] group hover:border-blue-500/30 transition-colors">
+                <div class="flex items-center justify-between p-3 border border-[#222] bg-[rgba(10,10,15,0.2)] group hover:border-blue-500/30 transition-colors">
                     <div class="flex items-center gap-3 overflow-hidden">
                         <div class="text-xl text-gray-500 w-8 text-center">
                             <i class="ph {item.icon}"></i>

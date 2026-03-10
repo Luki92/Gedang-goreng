@@ -19,7 +19,7 @@
 <div class="h-full overflow-y-auto pr-2">
     <div class="flex flex-col md:flex-row gap-6 mt-12 md:mt-0">
         <!-- Placeholder Box for Luki to jump into -->
-        <div class="w-32 h-32 md:w-48 md:h-48 border border-dashed border-[#444] rounded-xl flex items-center justify-center bg-black/50 shrink-0 relative overflow-hidden">
+        <div class="w-32 h-32 md:w-48 md:h-48 border border-dashed border-[#444] rounded-xl flex items-center justify-center bg-transparent shrink-0 relative overflow-hidden">
             <!-- Inner Wolf / Avatar -->
             <div
                 class="luki-inner-emoji"
@@ -46,7 +46,7 @@
                         Based in {profile.location}.
                     </p>
                 {/if}
-                <div class="p-3 border border-[#333] bg-[#050505] rounded-lg">
+                <div class="p-3 border border-[#333] bg-transparent rounded-lg">
                     <span class="text-xs text-gray-500 block mb-1">CONTACT:</span>
                     {profile.email || 'Encrypted Channel Only'}
                 </div>

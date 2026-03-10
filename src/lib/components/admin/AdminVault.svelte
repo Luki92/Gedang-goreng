@@ -122,7 +122,7 @@
     }
 </script>
 
-<div class="h-full flex flex-col bg-[#0a0a0a] text-xs font-mono p-4 overflow-hidden">
+<div class="h-full flex flex-col bg-transparent text-xs font-mono p-4 overflow-hidden">
     <div class="border-b border-[#333] pb-2 mb-4 flex justify-between items-center shrink-0">
         <h2 class="text-white font-bold flex items-center gap-2">
             <i class="ph ph-safe text-red-500"></i> VAULT_MANAGER
@@ -137,8 +137,8 @@
     {:else}
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full overflow-hidden min-h-0">
             <!-- Form -->
-            <div class="flex flex-col bg-[#111] border border-[#333] overflow-hidden">
-                <div class="p-3 border-b border-[#333] bg-[#161616] flex justify-between items-center">
+            <div class="flex flex-col bg-[rgba(20,20,30,0.4)] border border-[#333] overflow-hidden">
+                <div class="p-3 border-b border-[#333] bg-transparent flex justify-between items-center">
                     <span class="text-white font-bold">{isEditing ? 'EDIT_NODE' : 'NEW_NODE'}</span>
                     {#if isEditing}
                         <button onclick={resetForm} class="text-[10px] text-red-400 hover:text-red-300">CANCEL EDIT</button>
@@ -209,7 +209,7 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="pt-4 border-t border-[#333] sticky bottom-0 bg-[#111]">
+                    <div class="pt-4 border-t border-[#333] sticky bottom-0 bg-[rgba(20,20,30,0.4)]">
                         <button onclick={saveWork} class="w-full bg-red-900/20 border border-red-500/50 text-red-500 py-3 font-bold hover:bg-red-500 hover:text-white transition-all">
                             {isEditing ? 'UPDATE SYSTEM NODE' : 'DEPLOY NEW NODE'}
                         </button>
@@ -218,13 +218,13 @@
             </div>
 
             <!-- List -->
-            <div class="bg-[#080808] border border-[#333] flex flex-col overflow-hidden">
-                <div class="p-3 border-b border-[#333] bg-[#111] text-gray-400 font-bold">
+            <div class="bg-[rgba(10,10,15,0.2)] border border-[#333] flex flex-col overflow-hidden">
+                <div class="p-3 border-b border-[#333] bg-[rgba(20,20,30,0.4)] text-gray-400 font-bold">
                     DATABASE_ENTRIES ({dataStore.works.length})
                 </div>
                 <div class="overflow-y-auto p-2 space-y-2 flex-1 custom-scrollbar">
                     {#each dataStore.works as w}
-                        <div class="flex items-start justify-between p-3 border border-[#222] bg-[#0c0c0c] group hover:border-red-500/30 transition-colors">
+                        <div class="flex items-start justify-between p-3 border border-[#222] bg-[rgba(255,255,255,0.03)] group hover:border-red-500/30 transition-colors">
                             <div class="overflow-hidden flex-1 min-w-0 pr-2">
                                 <div class="flex items-center gap-2 mb-1 flex-wrap">
                                     <span class="text-[9px] text-red-400 border border-red-900 px-1">{w.type}</span>

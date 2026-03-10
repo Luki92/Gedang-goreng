@@ -33,14 +33,14 @@
     }
 </script>
 
-<div class="h-full flex flex-col bg-[#0a0a0a] text-xs font-mono p-4 overflow-hidden">
+<div class="h-full flex flex-col bg-transparent text-xs font-mono p-4 overflow-hidden">
     <div class="border-b border-[#333] pb-2 mb-4 flex justify-between items-center">
         <h2 class="text-green-400 font-bold">IDENTITY_MATRIX</h2>
     </div>
 
     <div class="flex gap-6 h-full overflow-hidden">
         <!-- Form -->
-        <div class="flex-1 bg-[#111] p-6 border border-[#333] overflow-y-auto space-y-4 max-w-2xl mx-auto">
+        <div class="flex-1 bg-[rgba(20,20,30,0.4)] p-6 border border-[#333] overflow-y-auto space-y-4 max-w-2xl mx-auto">
             <h3 class="text-white mb-6 border-b border-[#333] pb-2">USER_PROFILE_LUKI</h3>
 
             <div class="flex gap-4">

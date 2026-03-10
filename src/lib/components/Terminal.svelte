@@ -214,16 +214,16 @@
                 const app = args[0]?.toLowerCase();
                 /** @type {Record<string, {id: string, origin: string}>} */
                 const apps = {
-                    'vault': { id: 'c-tr', origin: 'tr' },
-                    'guestbook': { id: 'admin-guestbook', origin: 'bc' },
-                    'portal': { id: 'c-br', origin: 'br' },
-                    'playlist': { id: 'c-bl', origin: 'bl' },
-                    'identity': { id: 'c-tl', origin: 'tl' }
+                    'vault': { id: 'c-tr', origin: 'tr', title: 'ARCHIVE_VAULT' },
+                    'guestbook': { id: 'admin-guestbook', origin: 'bc', title: 'GUESTBOOK_MOD' },
+                    'portal': { id: 'c-br', origin: 'br', title: 'LINK_PORTAL' },
+                    'playlist': { id: 'c-bl', origin: 'bl', title: 'AUDIO_STATION' },
+                    'identity': { id: 'c-tl', origin: 'tl', title: 'USER_IDENTITY' }
                 };
 
                 if (apps[app]) {
                     print(`Launching ${app}...`, 'success');
-                    windowManager.toggle(apps[app].id, { originType: apps[app].origin });
+                    windowManager.toggle(apps[app].id, { originType: apps[app].origin, title: apps[app].title });
                 } else {
                     print(`Application '${app}' not found.`, 'error');
                     print('Available: vault, portal, playlist, identity', 'info');
@@ -238,7 +238,7 @@
                          print('Starting Control Center...', 'success');
                          // Fix: pass width/height inside originRect or correctly as per logic
                          // windowManager.open(id, options) -> options can be originRect
-                         windowManager.open('control-center', { isTiled: false, width: 900, height: 600, originType: 'bc' });
+                         windowManager.open('control-center', { isTiled: false, width: 900, height: 600, originType: 'bc', title: 'SYSTEM_CONTROL' });
                      }
                 } else {
                     print('error: Incorrect password.', 'error');
@@ -323,7 +323,7 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<div class="h-full bg-black font-mono text-sm p-2 flex flex-col overflow-hidden" onclick={() => inputRef?.focus()}>
+<div class="h-full bg-transparent font-mono text-sm p-2 flex flex-col overflow-hidden" onclick={() => inputRef?.focus()}>
     {#if isBooting}
         <TerminalBoot on:complete={handleBootComplete} />
     {:else}
@@ -337,7 +337,7 @@
                          class:text-red-500={line.type === 'error'}
                          class:text-yellow-400={line.type === 'warn'}
                          class:text-blue-400={line.type === 'success'}
-                         class="whitespace-pre-wrap leading-tight selectable-text select-text">
+                         class="whitespace-pre-wrap selectable-text select-text" style="line-height: 1.1">
                          {#if line.type === 'user'}
                             <span class="opacity-50 mr-2">➜</span>
                          {/if}

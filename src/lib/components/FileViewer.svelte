@@ -9,7 +9,7 @@
     let ast = $derived(item ? parser.parse(item.description) : []);
 </script>
 
-<div class="file-viewer h-full w-full bg-[#050505] text-white flex flex-col p-6 overflow-hidden">
+<div class="file-viewer h-full w-full bg-transparent text-white flex flex-col p-6 overflow-hidden">
     {#if !item}
         <div class="flex items-center justify-center h-full text-gray-500 font-mono animate-pulse">
             <p>// NULL_POINTER: NO_FILE_SELECTED</p>
