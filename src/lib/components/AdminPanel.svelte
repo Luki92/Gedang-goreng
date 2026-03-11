@@ -36,22 +36,22 @@
 
         <!-- Content -->
         <div class="p-6 grid grid-cols-2 gap-4">
-            <button onclick={() => open('admin-vault', 'VAULT_MANAGER')} class="group relative p-6 border border-[#333] hover:border-red-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-vault-list', 'VAULT_MANAGER')} class="group relative p-6 border border-[#333] hover:border-red-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-safe text-3xl text-gray-500 group-hover:text-red-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">VAULT_MANAGER</span>
             </button>
 
-            <button onclick={() => open('admin-portal', 'PORTAL_MANAGER')} class="group relative p-6 border border-[#333] hover:border-blue-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-portal-list', 'PORTAL_MANAGER')} class="group relative p-6 border border-[#333] hover:border-blue-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-planet text-3xl text-gray-500 group-hover:text-blue-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">PORTAL_MANAGER</span>
             </button>
 
-            <button onclick={() => open('admin-profile', 'IDENTITY_MANAGER')} class="group relative p-6 border border-[#333] hover:border-green-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-profile', 'IDENTITY_MATRIX')} class="group relative p-6 border border-[#333] hover:border-green-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-fingerprint text-3xl text-gray-500 group-hover:text-green-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">IDENTITY_MATRIX</span>
             </button>
 
-            <button onclick={() => open('admin-playlist', 'AUDIO_MANAGER')} class="group relative p-6 border border-[#333] hover:border-pink-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
+            <button onclick={() => open('admin-playlist-list', 'AUDIO_MANAGER')} class="group relative p-6 border border-[#333] hover:border-pink-500 bg-[rgba(20,20,30,0.4)] transition-all flex flex-col items-center gap-2">
                 <i class="ph ph-vinyl-record text-3xl text-gray-500 group-hover:text-pink-500 transition-colors"></i>
                 <span class="text-xs text-gray-400 group-hover:text-white">AUDIO_DB</span>
             </button>

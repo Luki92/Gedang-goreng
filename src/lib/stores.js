@@ -6,5 +6,6 @@ export const musicState = writable({
     isPlaying: false,
     currentTrack: 0,
     title: 'LOFI_STATION_1',
-    artist: 'BUFFERING...'
+    artist: 'BUFFERING...',
+    youtube_id: null
 });

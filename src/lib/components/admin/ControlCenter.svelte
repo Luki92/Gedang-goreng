@@ -35,62 +35,62 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 overflow-y-auto custom-scrollbar">
             <!-- Vault Manager -->
-            <button onclick={() => openApp('admin-vault', 'VAULT_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-red-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+            <button onclick={() => openApp('admin-vault-list', 'VAULT_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-red-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-red-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-safe text-3xl text-gray-500 group-hover:text-red-500 z-10 transition-colors"></i>
+                <i class="ph ph-safe text-3xl text-white/40 group-hover:text-red-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">VAULT</span>
-                    <span class="text-[9px] text-gray-600">Content Database</span>
+                    <span class="text-[9px] text-white/50">Content Database</span>
                 </div>
             </button>
 
             <!-- Portal Manager -->
-            <button onclick={() => openApp('admin-portal', 'PORTAL_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-blue-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+            <button onclick={() => openApp('admin-portal-list', 'PORTAL_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-blue-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-blue-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-planet text-3xl text-gray-500 group-hover:text-blue-500 z-10 transition-colors"></i>
+                <i class="ph ph-planet text-3xl text-white/40 group-hover:text-blue-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">PORTAL</span>
-                    <span class="text-[9px] text-gray-600">Link Array</span>
+                    <span class="text-[9px] text-white/50">Link Array</span>
                 </div>
             </button>
 
             <!-- Playlist Manager -->
-            <button onclick={() => openApp('admin-playlist', 'AUDIO_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-pink-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+            <button onclick={() => openApp('admin-playlist-list', 'AUDIO_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-pink-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-pink-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-vinyl-record text-3xl text-gray-500 group-hover:text-pink-500 z-10 transition-colors"></i>
+                <i class="ph ph-vinyl-record text-3xl text-white/40 group-hover:text-pink-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">AUDIO</span>
-                    <span class="text-[9px] text-gray-600">Sonic Emitter</span>
+                    <span class="text-[9px] text-white/50">Sonic Emitter</span>
                 </div>
             </button>
 
             <!-- Identity Manager -->
-            <button onclick={() => openApp('admin-profile', 'IDENTITY_MANAGER')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-green-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
+            <button onclick={() => openApp('admin-profile', 'IDENTITY_MATRIX')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-green-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-green-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-fingerprint text-3xl text-gray-500 group-hover:text-green-500 z-10 transition-colors"></i>
+                <i class="ph ph-fingerprint text-3xl text-white/40 group-hover:text-green-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">IDENTITY</span>
-                    <span class="text-[9px] text-gray-600">Profile Data</span>
+                    <span class="text-[9px] text-white/50">Profile Data</span>
                 </div>
             </button>
 
             <!-- Guestbook Manager -->
             <button onclick={() => openApp('admin-guestbook', 'MODERATION_QUEUE')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-yellow-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-yellow-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-envelope-open text-3xl text-gray-500 group-hover:text-yellow-500 z-10 transition-colors"></i>
+                <i class="ph ph-envelope-open text-3xl text-white/40 group-hover:text-yellow-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">MODERATION</span>
-                    <span class="text-[9px] text-gray-600">Guestbook Queue</span>
+                    <span class="text-[9px] text-white/50">Guestbook Queue</span>
                 </div>
             </button>
 
              <!-- Docs -->
             <button onclick={() => openApp('admin-docs', 'DOCUMENTATION')} class="group p-4 border border-[#222] bg-[rgba(20,20,30,0.4)] hover:border-purple-500 transition-all flex flex-col items-center gap-3 relative overflow-hidden">
                 <div class="absolute inset-0 bg-purple-900/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="ph ph-book-bookmark text-3xl text-gray-500 group-hover:text-purple-500 z-10 transition-colors"></i>
+                <i class="ph ph-book-bookmark text-3xl text-white/40 group-hover:text-purple-500 z-10 transition-colors"></i>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-gray-300 group-hover:text-white font-bold">DOCS</span>
-                    <span class="text-[9px] text-gray-600">Manual & Specs</span>
+                    <span class="text-[9px] text-white/50">Manual & Specs</span>
                 </div>
             </button>
         </div>

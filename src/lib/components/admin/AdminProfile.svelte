@@ -1,29 +1,48 @@
 <script>
-    import { dataStore } from '$lib/stores/data.svelte.js';
+    import { onMount, untrack } from 'svelte';
+    import { isAdmin } from '$lib/stores';
     import { supabase } from '$lib/supabaseClient';
-    import { onMount } from 'svelte';
+    import { dataStore } from '$lib/stores/data.svelte.js';
+    import { windowManager } from '$lib/windowManager.svelte.js';
     import EditorLayout from '$lib/components/editor/EditorLayout.svelte';
+    import ContentSettings from '$lib/components/editor/ContentSettings.svelte';
     import SaveAnimation from '$lib/components/editor/SaveAnimation.svelte';
 
+    /** @type {{isVisible: boolean, isSuccess: boolean, message: string, sqlCommands: string[]}} */
     let saveState = $state({ isVisible: false, isSuccess: false, message: '', sqlCommands: [] });
 
+    // Local state for the form, initialized from dataStore
+    /** @type {{id: number | null, full_name: string, bio: string, status: string, location: string, email: string, avatar_url: string}} */
     let form = $state({
-        id: 1,
+        id: null,
         full_name: '',
         bio: '',
-        avatar_url: '',
         status: '',
         location: '',
-        email: ''
+        email: '',
+        avatar_url: ''
     });
 
     onMount(async () => {
         await dataStore.fetchProfile();
+        // Initialize form from store
         if (dataStore.profile) {
-            form = { ...dataStore.profile };
+            Object.assign(form, dataStore.profile);
         }
     });
 
+    // Real-time sync to dataStore.profile for preview
+    $effect(() => {
+        // We want to update the store whenever the form changes
+        // so that any preview window (Identity.svelte) reacts immediately
+        dataStore.profile = { ...untrack(() => dataStore.profile), ...form };
+    });
+
+    /**
+     * @param {boolean} isSuccess
+     * @param {string} message
+     * @param {string[]} commands
+     */
     function showSaveAnimation(isSuccess, message, commands) {
         saveState = {
             isVisible: true,
@@ -37,13 +56,36 @@
     }
 
     async function save() {
-        const payload = { ...form };
-        const updateFields = Object.entries(payload)
-            .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${v}'` : v}`)
-            .join(', ');
-        const sqlCommands = [`UPDATE profile SET ${updateFields} WHERE id = 1;`];
+        if (!$isAdmin) return;
 
-        const { error } = await supabase.from('profile').upsert(payload);
+        /** @type {any} */
+        const payload = { ...form };
+        const id = payload.id;
+        delete payload.id;
+
+        let error;
+        /** @type {string[]} */
+        let sqlCommands = [];
+
+        if (id) {
+            const updateFields = Object.entries(payload)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? `'${String(v).replace(/'/g, "''")}'` : v}`)
+                .join(', ');
+            sqlCommands = [`UPDATE profile SET ${updateFields} WHERE id = ${id};`];
+            const res = await supabase.from('profile').update(payload).eq('id', id);
+            error = res.error;
+        } else {
+            const columns = Object.keys(payload).join(', ');
+            const values = Object.values(payload)
+                .map(v => typeof v === 'string' ? `'${String(v).replace(/'/g, "''")}'` : v)
+                .join(', ');
+            sqlCommands = [`INSERT INTO profile (${columns}) VALUES (${values});`];
+            const res = await supabase.from('profile').insert(payload).select().single();
+            error = res.error;
+            if (!error && res.data) {
+                form.id = res.data.id;
+            }
+        }
 
         if (error) {
             showSaveAnimation(false, `Error: ${error.message}`, sqlCommands);
@@ -52,65 +94,78 @@
             dataStore.fetchProfile();
         }
     }
+
+    function openPreview() {
+        windowManager.open('profile-preview', {
+            componentId: 'c-tl', title: 'IDENTITY_PREVIEW',
+            width: 800,
+            height: 600,
+            originType: 'bc'
+        });
+    }
+
+    const settingsSections = [
+        {
+            title: 'Appearance',
+            fields: [
+                { key: 'avatar_url', label: 'Avatar URL', type: 'text' },
+                { key: 'status', label: 'Online Status', type: 'text' }
+            ]
+        },
+        {
+            title: 'Contact',
+            fields: [
+                { key: 'location', label: 'Location', type: 'text' },
+                { key: 'email', label: 'Email', type: 'text' }
+            ]
+        }
+    ];
 </script>
 
-<EditorLayout title="Identity Profile">
+<EditorLayout title="IDENTITY_MATRIX_EDITOR">
     <svelte:fragment slot="toolbar">
+        <button onclick={openPreview} class="editor-toolbar-button">
+            <i class="ph ph-eye"></i> Preview
+        </button>
+        <div class="h-6 w-px bg-white/10 mx-2"></div>
         <button onclick={save} class="px-4 py-2 bg-green-600 text-white rounded font-medium hover:bg-green-700 transition-colors">
-            <i class="ph ph-check-circle"></i> Save
+            <i class="ph ph-check-circle"></i> Save Profile
         </button>
     </svelte:fragment>
 
-    <div class="flex-1 overflow-y-auto p-6">
-        <div class="max-w-2xl mx-auto bg-white rounded-lg border border-gray-300 p-8 space-y-8">
-            <!-- Avatar Section -->
-            <div class="flex gap-6">
-                <div class="w-32 h-32 rounded-lg border-2 border-gray-300 bg-gray-100 flex items-center justify-center overflow-hidden shrink-0">
-                    {#if form.avatar_url}
-                        <img src={form.avatar_url} alt="Avatar" class="w-full h-full object-cover" />
-                    {:else}
-                        <span class="text-5xl text-gray-400">?</span>
-                    {/if}
+    <div class="flex h-full gap-4 p-4 overflow-hidden">
+        <!-- Main Form -->
+        <div class="flex-1 bg-black/20 border border-white/10 rounded p-6 overflow-y-auto">
+            <div class="max-w-2xl space-y-6">
+                <div>
+                    <label for="full_name" class="editor-label">Full Name</label>
+                    <input id="full_name" type="text" bind:value={form.full_name} class="editor-input text-xl font-bold" />
                 </div>
-                <div class="flex-1 space-y-4">
-                    <div>
-                        <label class="editor-label">Full Name</label>
-                        <input type="text" bind:value={form.full_name} class="editor-input" placeholder="Your name" />
-                    </div>
-                    <div>
-                        <label class="editor-label">Avatar URL</label>
-                        <input type="text" bind:value={form.avatar_url} class="editor-input" placeholder="https://..." />
-                    </div>
+
+                <div>
+                    <label for="bio" class="editor-label">Bio / Description</label>
+                    <textarea id="bio" bind:value={form.bio} class="editor-textarea text-base" rows="8" placeholder="Tell your story..."></textarea>
                 </div>
-            </div>
 
-            <!-- Status -->
-            <div class="editor-section">
-                <label class="editor-label">Status</label>
-                <input type="text" bind:value={form.status} class="editor-input" placeholder="e.g., Building interesting things..." />
-            </div>
-
-            <!-- Bio -->
-            <div class="editor-section">
-                <label class="editor-label">Bio</label>
-                <textarea bind:value={form.bio} rows="6" class="editor-textarea" placeholder="Tell your story..."></textarea>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="editor-section">
-                <h3 class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-4">Contact</h3>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="editor-label">Location</label>
-                        <input type="text" bind:value={form.location} class="editor-input" placeholder="City, Country" />
+                        <label for="status" class="editor-label">Status</label>
+                        <input id="status" type="text" bind:value={form.status} class="editor-input" />
                     </div>
                     <div>
-                        <label class="editor-label">Email (Public)</label>
-                        <input type="email" bind:value={form.email} class="editor-input" placeholder="you@example.com" />
+                        <label for="location" class="editor-label">Location</label>
+                        <input id="location" type="text" bind:value={form.location} class="editor-input" />
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Settings Panel -->
+        <ContentSettings
+            bind:data={form}
+            sections={settingsSections}
+            onChange={() => {}}
+        />
     </div>
 </EditorLayout>
 
