@@ -1,40 +1,47 @@
 <script>
-    import { activeCorner } from '$lib/stores';
+    import { windowManager } from '$lib/windowManager.svelte.js';
 
-    let { id, position, code, headerTitle, buttonContent, children } = $props();
+    let { id, position, code, buttonContent, headerTitle } = $props();
+    let btnEl;
+    let containerEl;
 
-    function toggle() {
-        if ($activeCorner === id) {
-            $activeCorner = null;
-        } else {
-            $activeCorner = id;
-        }
-    }
+    // Check if window is active to hide the button?
+    // "The original 'origin' corner buttons should transition to an inactive or hidden state once their respective window is active"
+    let isActive = $derived(windowManager.windows.some(w => w.id === id));
 
-    function close(e) {
-        e.stopPropagation();
-        $activeCorner = null;
-    }
+    function handleClick() {
+        if (!containerEl) return;
+        const rect = containerEl.getBoundingClientRect();
 
-    function stopProp(e) {
-        e.stopPropagation();
+        const originRect = {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height
+        };
+
+        windowManager.toggle(id, originRect);
     }
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_interactive_supports_focus -->
-<nav id={id} class="hud-corner {position}" class:expanded={$activeCorner === id} onclick={toggle} role="button">
-    <button class="hud-btn">
+<div class="hud-corner {position}" class:active={isActive} bind:this={containerEl}>
+    <button class="hud-btn" bind:this={btnEl} onclick={handleClick}>
         <span class="code">{code}</span>
         {@render buttonContent()}
     </button>
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
-    <div class="win-content" onclick={stopProp}>
-        <div class="sys-header">
-            <span>// {headerTitle}</span>
-            <span class="close-btn" onclick={close} role="button" tabindex="0">[X]</span>
-        </div>
-        {@render children()}
-    </div>
-</nav>
+</div>
+
+<style>
+    /* Inherit styles from app.css for .hud-corner and .hud-btn */
+    /* Add specific styles for active state */
+
+    .hud-corner {
+        transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .hud-corner.active {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.8);
+    }
+</style>

@@ -1,4 +1,5 @@
 <script>
+    // @ts-nocheck
     import { onMount, onDestroy } from 'svelte';
     import SpaceBackground from '$lib/components/SpaceBackground.svelte';
     import LukiPersona from '$lib/components/LukiPersona.svelte';
@@ -9,6 +10,8 @@
     import Portal from '$lib/components/Portal.svelte';
     import TerminalAuth from '$lib/components/TerminalAuth.svelte';
     import AdminPanel from '$lib/components/AdminPanel.svelte';
+    import TilingWindowManager from '$lib/components/TilingWindowManager.svelte';
+    import { windowManager } from '$lib/windowManager.svelte.js';
     import { musicState } from '$lib/stores';
 
     // --- Debris Logic ---
@@ -98,6 +101,14 @@
         mobileMenuActive = !mobileMenuActive;
         if (mobileMenuActive) document.body.classList.add('mobile-menu-active');
         else document.body.classList.remove('mobile-menu-active');
+    }
+
+    // Register Components
+    if (typeof window !== 'undefined') {
+        windowManager.register('c-tl', Identity);
+        windowManager.register('c-tr', Vault);
+        windowManager.register('c-bl', Playlist);
+        windowManager.register('c-br', Portal);
     }
 
     onMount(() => {
@@ -240,6 +251,8 @@
 <div bind:this={debrisContainer} id="debris-layer" class="debris-container"></div>
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
+<TilingWindowManager />
+
 <main class="header-container">
     <div bind:this={welcomeContainer} id="welcome-target" class="welcome-line">Welcome<span class="cursor-marker cursor-active"></span></div>
     <h1 bind:this={titleEl} id="title-target" class="main-title"></h1>
@@ -253,28 +266,24 @@
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
     {/snippet}
-    <Identity />
 </HUDCorner>
 
 <HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
     {#snippet buttonContent()}
         <span class="label">WORKS <i class="ph ph-safe"></i></span>
     {/snippet}
-    <Vault />
 </HUDCorner>
 
 <HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
     {/snippet}
-    <Playlist />
 </HUDCorner>
 
 <HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
     {#snippet buttonContent()}
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
-    <Portal />
 </HUDCorner>
 
 <TerminalAuth />
