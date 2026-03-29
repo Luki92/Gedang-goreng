@@ -7,47 +7,11 @@
     import Vault from '$lib/components/Vault.svelte';
     import Playlist from '$lib/components/Playlist.svelte';
     import Portal from '$lib/components/Portal.svelte';
-    import { musicState } from '$lib/stores';
-
-    // --- Debris Logic ---
-    let debrisContainer;
-    const allItems = [
-        { char: '<i class="ph ph-cube"></i>', id: 'cube', scale: 1 },
-        { char: '<i class="ph ph-game-controller"></i>', id: 'game', scale: 1.2 },
-        { char: '<i class="ph ph-floppy-disk"></i>', id: 'disk', scale: 1 },
-        { char: '<i class="ph ph-alien"></i>', id: 'alien', scale: 1.2 },
-        { char: '<i class="ph ph-planet"></i>', id: 'planet', scale: 1.5 },
-    ];
-    let actors = [];
-    let mouseX = 0, mouseY = 0;
-
-    class Actor {
-        constructor(data) {
-            this.element = document.createElement('div');
-            this.element.innerHTML = data.char;
-            this.element.className = 'debris-item';
-            this.element.style.fontSize = `${2 * data.scale}rem`;
-            this.x = Math.random() * window.innerWidth;
-            this.y = Math.random() * window.innerHeight;
-            this.vx = (Math.random() - 0.5) * 1;
-            this.vy = (Math.random() - 0.5) * 1;
-            this.rotation = Math.random() * 360;
-            this.rotSpeed = (Math.random() - 0.5) * 2;
-            if (debrisContainer) debrisContainer.appendChild(this.element);
-        }
-        update(mX, mY) {
-            this.x += this.vx; this.y += this.vy; this.rotation += this.rotSpeed;
-            if (this.x > window.innerWidth + 50) this.x = -50;
-            if (this.x < -50) this.x = window.innerWidth + 50;
-            if (this.y > window.innerHeight + 50) this.y = -50;
-            if (this.y < -50) this.y = window.innerHeight + 50;
-
-            const dx = (mX - window.innerWidth/2) / window.innerWidth;
-            const dy = (mY - window.innerHeight/2) / window.innerHeight;
-
-            this.element.style.transform = `translate(${this.x + dx * -30}px, ${this.y + dy * -30}px) rotate(${this.rotation}deg)`;
-        }
-    }
+    import Window from '$lib/components/Window.svelte';
+    import DebrisLayer from '$lib/components/DebrisLayer.svelte';
+    import TerminalAuth from '$lib/components/TerminalAuth.svelte';
+    import AdminPanel from '$lib/components/AdminPanel.svelte'; // New Import
+    import { musicState, windows, isAdmin, openWindow, adminContent } from '$lib/stores';
 
     // --- Text Animation ---
     let welcomeContainer;
@@ -99,18 +63,6 @@
     }
 
     onMount(() => {
-        // Init Debris
-        actors = allItems.map(item => new Actor(item));
-
-        const loop = () => {
-             actors.forEach(obj => obj.update(mouseX, mouseY));
-             requestAnimationFrame(loop);
-        };
-        const animFrame = requestAnimationFrame(loop);
-
-        const mm = (e) => { mouseX = e.clientX; mouseY = e.clientY; };
-        window.addEventListener('mousemove', mm);
-
         // Init Text Animation
         runAnimationLoop();
 
@@ -124,8 +76,6 @@
         });
 
         return () => {
-            cancelAnimationFrame(animFrame);
-            window.removeEventListener('mousemove', mm);
             unsubMusic();
             clearInterval(lyricInterval);
             if (mobileMenuActive) document.body.classList.remove('mobile-menu-active');
@@ -165,7 +115,7 @@
             if (Math.random() < 0.4) {
                 titleEl.innerHTML = 'TS<span class="split-cursor"></span>';
                 const eggCursor = titleEl.querySelector('.split-cursor');
-                const eggText = " PMO ICL🥀";
+                const eggText = " " + $adminContent.easterEggText + "🥀";
 
                 for(let char of eggText) {
                     eggCursor.insertAdjacentText('beforebegin', char);
@@ -173,7 +123,7 @@
                 }
                 await sleep(300);
 
-                titleEl.innerHTML = 'TS<span class="glitch-selection"> PMO ICL🥀</span><span class="split-cursor"></span>';
+                titleEl.innerHTML = `TS<span class="glitch-selection"> ${$adminContent.easterEggText}🥀</span><span class="split-cursor"></span>`;
                 await sleep(500);
 
                 titleEl.innerHTML = 'TS<span class="split-cursor"></span>';
@@ -193,8 +143,19 @@
             const left = document.getElementById('ts-left');
             const right = document.getElementById('ts-right');
 
-            const word1 = "hinking";
-            const word2 = "pace";
+            // Dynamic Text Logic
+            // We assume Title is 2 words for the split effect "T... S..."
+            // If not, we just show the full text.
+            const fullTitle = $adminContent.welcomeTitle;
+            const parts = fullTitle.split(' ');
+            let word1 = "hinking";
+            let word2 = "pace";
+
+            if (parts.length >= 2) {
+                word1 = parts[0].substring(1); // Remove first char "T"
+                word2 = parts[1].substring(1); // Remove first char "S"
+            }
+
             const maxLen = Math.max(word1.length, word2.length);
 
             setTimeout(() => { if (wrapper) wrapper.classList.add('expanded'); }, 50);
@@ -202,16 +163,16 @@
             for (let i = 1; i <= maxLen; i++) {
                 const sub1 = i <= word1.length ? word1.substring(0, i) : word1;
                 const sub2 = i <= word2.length ? word2.substring(0, i) : word2;
-                if (left) left.innerHTML = `T${sub1}<span class="split-cursor"></span>`;
-                if (right) right.innerHTML = `S${sub2}<span class="split-cursor"></span>`;
+                if (left) left.innerHTML = `${parts[0][0] || 'T'}${sub1}<span class="split-cursor"></span>`;
+                if (right) right.innerHTML = `${parts[1] ? parts[1][0] : 'S'}${sub2}<span class="split-cursor"></span>`;
                 await sleep(80);
             }
 
             await sleep(500);
-            titleEl.innerHTML = 'Thinking Space<span class="split-cursor"></span>';
+            titleEl.innerHTML = `${fullTitle}<span class="split-cursor"></span>`;
             await sleep(5000);
 
-            const tsText = "Thinking Space";
+            const tsText = fullTitle;
             for(let i=0; i<tsText.length; i++) {
                 titleEl.innerHTML = tsText.substring(0, tsText.length - 1 - i) + '<span class="split-cursor"></span>';
                 await sleep(20);
@@ -234,8 +195,8 @@
 </script>
 
 <SpaceBackground />
+<DebrisLayer />
 
-<div bind:this={debrisContainer} id="debris-layer" class="debris-container"></div>
 <div bind:this={lyricsContainer} id="lyrics-layer" class="absolute inset-0 pointer-events-none overflow-hidden z-30"></div>
 
 <main class="header-container">
@@ -251,26 +212,42 @@
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-fingerprint"></i> IDENTITY</span>
     {/snippet}
-    <Identity />
 </HUDCorner>
 
 <HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
     {#snippet buttonContent()}
         <span class="label">WORKS <i class="ph ph-safe"></i></span>
     {/snippet}
-    <Vault />
 </HUDCorner>
 
 <HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
     {#snippet buttonContent()}
         <span class="label"><i class="ph ph-vinyl-record"></i> PLAYLIST</span>
     {/snippet}
-    <Playlist />
 </HUDCorner>
 
 <HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
     {#snippet buttonContent()}
         <span class="label">PORTAL <i class="ph ph-planet"></i></span>
     {/snippet}
-    <Portal />
 </HUDCorner>
+
+<TerminalAuth />
+
+{#each $windows as win (win.id)}
+    <Window
+        id={win.id}
+        title={win.title}
+        origin={win.origin}
+        x={win.x} y={win.y}
+        w={win.w} h={win.h}
+        z={win.z}
+    >
+        {#if win.id === 'c-tl'} <Identity /> {/if}
+        {#if win.id === 'c-tr'} <Vault /> {/if}
+        {#if win.id === 'c-bl'} <Playlist /> {/if}
+        {#if win.id === 'c-br'} <Portal /> {/if}
+
+        {#if win.id === 'admin-panel'} <AdminPanel /> {/if}
+    </Window>
+{/each}

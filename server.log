@@ -1,112 +1,395 @@
 
 > app@0.0.1 dev
-> vite dev --open=false --port=5173
+> vite dev
 
-6:20:21 PM [vite] (client) Forced re-optimization of dependencies
 
-  VITE v7.3.1  ready in 1603 ms
+  VITE v7.3.1  ready in 1921 ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
-
-[1;31m[404] GET /false[0m
-6:20:54 PM [vite-plugin-svelte] src/routes/+page.svelte:243:4 `<h1>` element should contain text
+11:01:48 AM [vite-plugin-svelte] src/routes/+page.svelte:192:4 `<h1>` element should contain text
 https://svelte.dev/e/a11y_missing_content
-6:20:54 PM [vite-plugin-svelte] src/routes/+page.svelte:248:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:48 AM [vite-plugin-svelte] src/routes/+page.svelte:197:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:54 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+11:01:48 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:37:0 Non-interactive element `<nav>` cannot have interactive role 'button'
 https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:55 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:56 PM [vite-plugin-svelte] src/routes/+page.svelte:243:4 `<h1>` element should contain text
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Window.svelte:18:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:48 AM [vite-plugin-svelte] src/lib/components/Window.svelte:19:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:48 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:9:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:01:49 AM [vite-plugin-svelte] src/routes/+page.svelte:192:4 `<h1>` element should contain text
 https://svelte.dev/e/a11y_missing_content
-6:20:56 PM [vite-plugin-svelte] src/routes/+page.svelte:248:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:49 AM [vite-plugin-svelte] src/routes/+page.svelte:197:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:56 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+11:01:49 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:37:0 Non-interactive element `<nav>` cannot have interactive role 'button'
 https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:20:56 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
 https://svelte.dev/e/a11y_invalid_attribute
-6:22:35 PM [vite] (client) hmr update /src/app.css
-6:22:35 PM [vite] (ssr) page reload src/app.css
-7:02:36 PM [vite] (client) hmr update /src/app.css
-7:02:36 PM [vite] (ssr) page reload package.json
-svelte config changed, restarting vite dev-server. changed file: /app/svelte.config.js
-7:02:48 PM [vite] (client) hmr update /src/app.css
-7:02:48 PM [vite] (ssr) page reload svelte.config.js
-7:02:49 PM [vite] (client) Re-optimizing dependencies because lockfile has changed
-7:02:49 PM [vite] server restarted.
-7:03:46 PM [vite-plugin-svelte] src/routes/+page.svelte:243:4 `<h1>` element should contain text
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Window.svelte:18:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:49 AM [vite-plugin-svelte] src/lib/components/Window.svelte:19:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:01:49 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:9:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:02:11 AM [vite] (client) hmr update /src/app.css
+11:02:11 AM [vite] (ssr) page reload verify.py
+11:02:41 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:37:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:02:41 AM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/app.css
+11:02:41 AM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+11:02:46 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:37:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:02:46 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:37:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:04:26 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
+11:04:26 AM [vite] (ssr) page reload src/lib/stores.js
+11:05:00 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
+11:05:00 AM [vite] (ssr) page reload src/lib/stores.js
+11:31:07 AM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
+11:31:07 AM [vite] (ssr) page reload src/lib/stores.js
+11:31:22 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:31:22 AM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/app.css
+11:31:22 AM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:32:02 AM [vite] (client) hmr update /src/lib/components/Window.svelte, /src/lib/components/Window.svelte?svelte&type=style&lang.css, /src/app.css
+11:32:02 AM [vite] (ssr) page reload src/lib/components/Window.svelte
+11:32:50 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:32:50 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:32:50 AM [vite] (client) hmr update /src/lib/components/TerminalAuth.svelte, /src/lib/components/TerminalAuth.svelte?svelte&type=style&lang.css, /src/app.css
+11:32:50 AM [vite] (ssr) page reload src/lib/components/TerminalAuth.svelte
+11:33:45 AM [vite] (client) hmr update /src/app.css
+11:33:45 AM [vite] (ssr) page reload src/app.css
+11:34:22 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:24 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:24 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+11:34:25 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:13:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:14:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:16:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+11:34:25 AM [vite-plugin-svelte] src/lib/components/Window.svelte:17:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:15:54 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Vault.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/app.css
+12:15:54 PM [vite] (ssr) page reload src/lib/stores.js
+12:16:25 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:25 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:25 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:25 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:25 PM [vite] (client) hmr update /src/lib/components/Window.svelte, /src/lib/components/Window.svelte?svelte&type=style&lang.css, /src/app.css
+12:16:25 PM [vite] (ssr) page reload src/lib/components/Window.svelte
+12:16:45 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:45 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:23:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:16:45 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+12:16:45 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:16:45 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+12:16:45 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+12:17:00 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+12:17:00 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+12:17:57 PM [vite-plugin-svelte] src/routes/+page.svelte:193:4 `<h1>` element should contain text
 https://svelte.dev/e/a11y_missing_content
-7:03:46 PM [vite-plugin-svelte] src/routes/+page.svelte:248:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:17:57 PM [vite-plugin-svelte] src/routes/+page.svelte:198:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-7:03:46 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+12:17:57 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:23:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:0 Non-interactive element `<nav>` cannot have interactive role 'button'
 https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
-https://svelte.dev/e/a11y_consider_explicit_label
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
-https://svelte.dev/e/a11y_consider_explicit_label
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
-https://svelte.dev/e/a11y_consider_explicit_label
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:46 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:47 PM [vite-plugin-svelte] src/routes/+page.svelte:243:4 `<h1>` element should contain text
+12:17:57 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:17:57 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:17:57 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+12:17:57 PM [vite] (ssr) page reload src/routes/+page.svelte
+12:18:17 PM [vite-plugin-svelte] src/routes/+page.svelte:193:4 `<h1>` element should contain text
 https://svelte.dev/e/a11y_missing_content
-7:03:47 PM [vite-plugin-svelte] src/routes/+page.svelte:248:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:18:17 PM [vite-plugin-svelte] src/routes/+page.svelte:198:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-7:03:47 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+12:18:17 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:17 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:23:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:17 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:0 Non-interactive element `<nav>` cannot have interactive role 'button'
 https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:94:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:18:17 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:18:17 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:17 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:17 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:17 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+12:18:19 PM [vite-plugin-svelte] src/routes/+page.svelte:193:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:18:19 PM [vite-plugin-svelte] src/routes/+page.svelte:198:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:95:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:20:53 PM [vite-plugin-svelte] src/routes/+page.svelte:208:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:20:53 PM [vite-plugin-svelte] src/routes/+page.svelte:213:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Playlist.svelte:98:8 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+12:20:53 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:20:53 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+12:20:53 PM [vite] (ssr) page reload src/routes/+page.svelte
+12:21:02 PM [vite] (client) hmr update /src/lib/components/AdminPanel.svelte, /src/app.css
+12:21:02 PM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+12:21:07 PM [vite-plugin-svelte] src/routes/+page.svelte:208:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:21:07 PM [vite-plugin-svelte] src/routes/+page.svelte:213:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
 https://svelte.dev/e/a11y_consider_explicit_label
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:3:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:7:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:11:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:03:47 PM [vite-plugin-svelte] src/lib/components/Portal.svelte:15:11 '#' is not a valid href attribute
-https://svelte.dev/e/a11y_invalid_attribute
-7:22:07 PM [vite] (client) hmr update /src/app.css, /src/lib/components/Vault.svelte
-7:22:07 PM [vite] (ssr) page reload src/lib/supabaseClient.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
-7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
-7:22:26 PM [vite] (client) page reload .svelte-kit/generated/root.js
-7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
-7:22:26 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+12:21:07 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:21:08 PM [vite-plugin-svelte] src/routes/+page.svelte:208:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:21:08 PM [vite-plugin-svelte] src/routes/+page.svelte:213:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:21:08 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:23:30 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/lib/components/AdminPanel.svelte, /src/app.css
+12:23:30 PM [vite] (ssr) page reload src/lib/stores.js
+12:24:04 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:24:04 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:24:04 PM [vite] (client) hmr update /src/lib/components/TerminalAuth.svelte, /src/app.css
+12:24:04 PM [vite] (ssr) page reload src/lib/components/TerminalAuth.svelte
+12:24:33 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/lib/components/Vault.svelte?svelte&type=style&lang.css, /src/app.css
+12:24:33 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+12:24:43 PM [vite] (client) hmr update /src/lib/components/AdminPanel.svelte, /src/app.css
+12:24:43 PM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+12:24:59 PM [vite-plugin-svelte] src/routes/+page.svelte:219:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:24:59 PM [vite-plugin-svelte] src/routes/+page.svelte:224:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:24:59 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:24:59 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:24:59 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:24:59 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+12:24:59 PM [vite] (ssr) page reload src/routes/+page.svelte
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:219:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:224:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:25:06 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:14:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:25:06 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:219:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:224:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+12:25:06 PM [vite-plugin-svelte] src/routes/+page.svelte:73:8 `mobileMenuActive` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+12:25:38 PM [vite] (client) hmr update /src/app.css
+12:25:38 PM [vite] (ssr) page reload verify.py
+12:25:42 PM [vite] (client) hmr update /src/app.css
+12:25:42 PM [vite] (ssr) page reload verify_admin.py
+5:15:01 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/lib/components/AdminPanel.svelte, /src/app.css
+5:15:01 PM [vite] (ssr) page reload src/lib/stores.js
+5:15:14 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+5:15:14 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+5:15:30 PM [vite] (client) hmr update /src/lib/components/AdminPanel.svelte, /src/lib/components/AdminPanel.svelte?svelte&type=style&lang.css, /src/app.css
+5:15:30 PM [vite] (ssr) page reload src/lib/components/AdminPanel.svelte
+5:15:35 PM [vite-plugin-svelte] src/routes/+page.svelte:204:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+5:15:35 PM [vite-plugin-svelte] src/routes/+page.svelte:209:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:15:36 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/app.css
+5:15:36 PM [vite] (ssr) page reload src/routes/+page.svelte
+5:15:47 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:15:47 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:16:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:15:47 PM [vite] (client) hmr update /src/lib/components/TerminalAuth.svelte, /src/app.css
+5:15:47 PM [vite] (ssr) page reload src/lib/components/TerminalAuth.svelte
+5:16:26 PM [vite] (client) hmr update /src/routes/+page.svelte, /src/lib/components/LukiPersona.svelte, /src/lib/components/HUDCorner.svelte, /src/lib/components/Playlist.svelte, /src/lib/components/Window.svelte, /src/lib/components/TerminalAuth.svelte, /src/lib/components/AdminPanel.svelte, /src/lib/components/Vault.svelte, /src/app.css
+5:16:26 PM [vite] (ssr) page reload src/lib/stores.js
+5:16:39 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:16:39 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:16:39 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:16:39 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:16:39 PM [vite] (client) hmr update /src/lib/components/Window.svelte, /src/app.css
+5:16:39 PM [vite] (ssr) page reload src/lib/components/Window.svelte
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:25:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:27:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:33:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:17:04 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 `flyX` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:17:04 PM [vite] (client) hmr update /src/lib/components/HUDCorner.svelte, /src/lib/components/HUDCorner.svelte?svelte&type=style&lang.css, /src/app.css
+5:17:04 PM [vite] (ssr) page reload src/lib/components/HUDCorner.svelte
+5:17:29 PM [vite] (client) hmr update /src/app.css
+5:17:29 PM [vite] (ssr) page reload src/app.css
+5:17:54 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:54 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:54 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:54 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:17:54 PM [vite] (client) hmr update /src/lib/components/Window.svelte, /src/app.css
+5:17:54 PM [vite] (ssr) page reload src/lib/components/Window.svelte
+5:18:43 PM [vite] (client) hmr update /src/lib/components/Vault.svelte, /src/app.css
+5:18:43 PM [vite] (ssr) page reload src/lib/components/Vault.svelte
+5:19:22 PM [vite-plugin-svelte] src/routes/+page.svelte:204:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+5:19:22 PM [vite-plugin-svelte] src/routes/+page.svelte:209:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:25:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:27:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:33:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:22 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 `flyX` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:23 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:23 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:23 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:23 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:23 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:23 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:16:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:24 PM [vite-plugin-svelte] src/routes/+page.svelte:204:4 `<h1>` element should contain text
+https://svelte.dev/e/a11y_missing_content
+5:19:24 PM [vite-plugin-svelte] src/routes/+page.svelte:209:0 Buttons and links should either contain text or have an `aria-label`, `aria-labelledby` or `title` attribute
+https://svelte.dev/e/a11y_consider_explicit_label
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:25:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:26:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:27:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:28:8 This reference only captures the initial value of `position`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:33:0 Non-interactive element `<nav>` cannot have interactive role 'button'
+https://svelte.dev/e/a11y_no_noninteractive_element_to_interactive_role
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:21:8 `flyY` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:24 PM [vite-plugin-svelte] src/lib/components/HUDCorner.svelte:22:8 `flyX` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:24 PM [vite-plugin-svelte] src/lib/components/Window.svelte:15:22 This reference only captures the initial value of `x`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/Window.svelte:16:22 This reference only captures the initial value of `y`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/Window.svelte:17:23 This reference only captures the initial value of `w`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/Window.svelte:18:24 This reference only captures the initial value of `h`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+5:19:24 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:15:8 `inputRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:19:24 PM [vite-plugin-svelte] src/lib/components/TerminalAuth.svelte:16:8 `contentRef` is updated, but is not declared with `$state(...)`. Changing its value will not correctly trigger updates
+https://svelte.dev/e/non_reactive_update
+5:20:01 PM [vite] (client) hmr update /src/app.css
+5:20:01 PM [vite] (ssr) page reload verify_layout_admin.py
+5:20:54 PM [vite] (client) hmr update /src/app.css
+5:20:54 PM [vite] (ssr) page reload verify_layout_admin.py
