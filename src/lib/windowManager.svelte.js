@@ -6,8 +6,8 @@ class WindowManager {
     masterWindowId = $state(null);
 
     // Layout Configuration
-    innerGap = $state(16);
-    outerGap = $state(32);
+    innerGap = $state(0);
+    outerGap = $state(0);
 
     // Global Drag State
     isDragging = $state(false);
@@ -28,10 +28,13 @@ class WindowManager {
 
     /**
      * @param {string} id
-     * @param {Object} options
-     * @param {Object} [options.originRect]
-     * @param {Object} [options.props]
+     * @param {Object} [options]
      * @param {boolean} [options.isTiled]
+     * @param {number} [options.width]
+     * @param {number} [options.height]
+     * @param {Object} [options.props]
+     * @param {Object} [options.originRect]
+     * @param {string} [options.originType]
      */
     open(id, options = {}) {
         const component = this.registry.get(id);
@@ -43,6 +46,7 @@ class WindowManager {
         // Handle legacy usage: open(id, originRect) where originRect has 'left' property
         let originRect = options.originRect;
         let props = options.props || {};
+        let originType = options.originType || 'bc'; // Default to bottom-center
 
         if (!originRect && options.left !== undefined) {
             originRect = options;
@@ -58,8 +62,12 @@ class WindowManager {
             return;
         }
 
-        let width = originRect?.width || Math.min(window.innerWidth * 0.8, 600); // Default size for floating
-        let height = originRect?.height || Math.min(window.innerHeight * 0.8, 450);
+        // Increased default sizes for specific windows like Terminal
+        const defaultWidth = id === 'terminal' ? 950 : 600;
+        const defaultHeight = id === 'terminal' ? 650 : 450;
+
+        let width = options.width || originRect?.width || Math.min(window.innerWidth * 0.9, defaultWidth);
+        let height = options.height || originRect?.height || Math.min(window.innerHeight * 0.9, defaultHeight);
         let x = originRect?.left || 0;
         let y = originRect?.top || 0;
         let isTiled = options.isTiled !== undefined ? options.isTiled : true;
@@ -88,6 +96,7 @@ class WindowManager {
             component,
             props,
             originRect: originRect || null,
+            originType,
             x,
             y,
             width,
@@ -159,7 +168,13 @@ class WindowManager {
 
     /**
      * @param {string} id
-     * @param {Object} options
+     * @param {Object} [options]
+     * @param {boolean} [options.isTiled]
+     * @param {number} [options.width]
+     * @param {number} [options.height]
+     * @param {Object} [options.props]
+     * @param {Object} [options.originRect]
+     * @param {string} [options.originType]
      */
     toggle(id, options = {}) {
         const existing = this.windows.find(w => w.id === id);
@@ -259,7 +274,7 @@ class WindowManager {
         const untiledWindows = this.windows.filter(w => !w.isTiled && w.state !== 'closing');
         const hasUntiled = untiledWindows.length > 0;
         const totalWindows = tiledWindows.length + untiledWindows.length; // Approximate "density"
-        const currentOuterGap = (tiledWindows.length > 1 || hasUntiled) ? 60 : this.outerGap;
+        const currentOuterGap = this.outerGap;
 
         // 1. Single Tiled Window (Hybrid Check)
         if (tiledWindows.length === 1) {

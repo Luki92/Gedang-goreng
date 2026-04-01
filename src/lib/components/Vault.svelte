@@ -36,7 +36,7 @@
 
     /** @param {any} item */
     function openFile(item) {
-        windowManager.open('file-viewer', { props: { item } });
+        windowManager.open('file-viewer', { props: { item }, originType: 'bc' });
     }
 </script>
 
@@ -62,7 +62,7 @@
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <!-- svelte-ignore a11y_interactive_supports_focus -->
             <div
-                class="relative mb-4 break-inside-avoid group cursor-pointer overflow-hidden border border-[#333] bg-[#080808] hover:border-white transition-all duration-300 shadow-lg"
+                class="relative mb-4 break-inside-avoid group cursor-pointer overflow-hidden border border-[#333] rounded-lg bg-[#080808] rounded-lg hover:border-white transition-all duration-300 shadow-lg"
                 onclick={() => openFile(item)}
                 onkeydown={(e) => e.key === 'Enter' && openFile(item)}
                 role="button"

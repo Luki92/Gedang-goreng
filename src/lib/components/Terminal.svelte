@@ -212,18 +212,18 @@
 
             case 'open':
                 const app = args[0]?.toLowerCase();
-                /** @type {Record<string, string>} */
+                /** @type {Record<string, {id: string, origin: string}>} */
                 const apps = {
-                    'vault': 'c-tr',
-                    'guestbook': 'admin-guestbook',
-                    'portal': 'c-br',
-                    'playlist': 'c-bl',
-                    'identity': 'c-tl'
+                    'vault': { id: 'c-tr', origin: 'tr' },
+                    'guestbook': { id: 'admin-guestbook', origin: 'bc' },
+                    'portal': { id: 'c-br', origin: 'br' },
+                    'playlist': { id: 'c-bl', origin: 'bl' },
+                    'identity': { id: 'c-tl', origin: 'tl' }
                 };
 
                 if (apps[app]) {
                     print(`Launching ${app}...`, 'success');
-                    windowManager.toggle(apps[app]);
+                    windowManager.toggle(apps[app].id, { originType: apps[app].origin });
                 } else {
                     print(`Application '${app}' not found.`, 'error');
                     print('Available: vault, portal, playlist, identity', 'info');
@@ -238,7 +238,7 @@
                          print('Starting Control Center...', 'success');
                          // Fix: pass width/height inside originRect or correctly as per logic
                          // windowManager.open(id, options) -> options can be originRect
-                         windowManager.open('control-center', { isTiled: false, originRect: { width: 900, height: 600, top: 100, left: 100 } });
+                         windowManager.open('control-center', { isTiled: false, width: 900, height: 600, originType: 'bc' });
                      }
                 } else {
                     print('error: Incorrect password.', 'error');
