@@ -1,5 +1,9 @@
-<div class="h-full flex flex-col justify-center">
-    <div class="grid grid-cols-2 gap-4">
+<script>
+    import Guestbook from './Guestbook.svelte';
+</script>
+
+<div class="h-full flex flex-col overflow-y-auto pr-2 custom-scrollbar">
+    <div class="grid grid-cols-2 gap-4 mb-8">
         <a href="#" class="p-6 border border-[#333] hover:border-green-500 hover:bg-[#0a0a0a] transition-all group flex flex-col items-center gap-2">
             <i class="ph ph-instagram-logo text-3xl group-hover:text-pink-500"></i>
             <span class="text-xs">INSTAGRAM</span>
@@ -17,4 +21,6 @@
             <span class="text-xs">KO-FI</span>
         </a>
     </div>
+
+    <Guestbook />
 </div>
