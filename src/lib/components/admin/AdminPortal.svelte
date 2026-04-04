@@ -24,9 +24,10 @@
         url: initial.url || '',
         icon: initial.icon || 'ph-link',
         description: initial.description || '',
+        category: initial.category || 'SOCIAL',
+        is_visible: initial.is_visible !== undefined ? initial.is_visible : true,
         sort_order: initial.sort_order || 0,
-        color: initial.color || '#ffffff',
-        is_visible: initial.is_visible ?? true
+        color: initial.color || '#ffffff'
     });
 
     /**
@@ -35,30 +36,24 @@
      * @param {string[]} commands
      */
     function showSaveAnimation(isSuccess, message, commands) {
-        saveState = {
-            isVisible: true,
-            isSuccess,
-            message,
-            sqlCommands: commands
-        };
-        setTimeout(() => {
-            saveState.isVisible = false;
-        }, 4000);
+        saveState = { isVisible: true, isSuccess, message, sqlCommands: commands };
+        setTimeout(() => saveState.isVisible = false, 4000);
     }
 
     async function save() {
-        if (!$isAdmin) return;
+        if (!isAdmin) return;
         if (!form.label || !form.url) return alert('Label and URL required');
 
         const payload = { ...form };
         delete payload.id;
 
         let error;
+        /** @type {string[]} */
         let sqlCommands = [];
 
         if (isEditing && form.id) {
             const updateFields = Object.entries(payload)
-                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v}`)
+                .map(([k, v]) => `${k} = ${typeof v === 'string' ? "'" + v.replace(/'/g, "''") + "'" : v}`)
                 .join(', ');
             sqlCommands = [`UPDATE portal SET ${updateFields} WHERE id = ${form.id};`];
             const res = await supabase.from('portal').update(payload).eq('id', form.id);
@@ -66,7 +61,7 @@
         } else {
             const columns = Object.keys(payload).join(', ');
             const values = Object.values(payload)
-                .map(v => typeof v === 'string' ? "'"+v.replace(/'/g, "''")+"'" : v)
+                .map(v => typeof v === 'string' ? "'" + String(v).replace(/'/g, "''") + "'" : v)
                 .join(', ');
             sqlCommands = [`INSERT INTO portal (${columns}) VALUES (${values});`];
             const res = await supabase.from('portal').insert(payload).select().single();
@@ -80,64 +75,52 @@
         if (error) {
             showSaveAnimation(false, `Error: ${error.message}`, sqlCommands);
         } else {
-            showSaveAnimation(true, 'Portal item saved successfully', sqlCommands);
+            showSaveAnimation(true, 'Link saved successfully', sqlCommands);
             dataStore.fetchPortal();
         }
     }
 
     async function remove() {
-        if (!form.id || !$isAdmin) return;
-        if (!confirm('Delete this portal item?')) return;
+        if (!form.id || !isAdmin) return;
+        if (!confirm('Delete this portal link?')) return;
         const sqlCommands = [`DELETE FROM portal WHERE id = ${form.id};`];
         const { error } = await supabase.from('portal').delete().eq('id', form.id);
         if (error) {
             showSaveAnimation(false, `Delete failed: ${error.message}`, sqlCommands);
         } else {
-            showSaveAnimation(true, 'Portal item deleted successfully', sqlCommands);
+            showSaveAnimation(true, 'Link deleted successfully', sqlCommands);
             dataStore.fetchPortal();
         }
     }
 
-    function openPreview() {
-        const previewId = `portal-preview-${form.id || 'new'}`;
-        windowManager.open(previewId, {
-            componentId: 'c-br',
-            title: `PREVIEW: ${form.label || 'Portal Item'}`,
-            props: { previewItem: form },
-            width: 450,
-            height: 600,
-            originType: 'br'
-        });
-    }
-
     const settingsSections = [
         {
-            title: 'Basic Info',
+            title: 'Visual',
             fields: [
-                { key: 'label', label: 'Label', type: 'text' },
-                { key: 'url', label: 'URL', type: 'text' },
-                { key: 'icon', label: 'Icon class (Phosphor)', type: 'text' }
+                { key: 'icon', label: 'Phosphor Icon Class', type: 'text', placeholder: 'ph-link' },
+                { key: 'color', label: 'Accent Color', type: 'color' },
+                { key: 'category', label: 'Category', type: 'select', options: [
+                    { value: 'SOCIAL', label: 'Social' },
+                    { value: 'PROJECT', label: 'Project' },
+                    { value: 'TOOL', label: 'Tool' },
+                    { value: 'OTHER', label: 'Other' }
+                ]}
             ]
         },
         {
-            title: 'Display',
+            title: 'Meta',
             fields: [
-                { key: 'description', label: 'Description', type: 'textarea' },
-                { key: 'color', label: 'Accent Color', type: 'text' },
                 { key: 'sort_order', label: 'Order', type: 'number' },
-                { key: 'is_visible', label: 'Visible in HUD', type: 'checkbox' }
+                { key: 'is_visible', label: 'Visible', type: 'checkbox' }
             ]
         }
     ];
 </script>
 
-<EditorLayout title={isEditing ? `EDITING: ${form.label}` : 'NEW_PORTAL_ITEM'}>
-    <svelte:fragment slot="toolbar">
-        <button onclick={openPreview} class="editor-toolbar-button">
-            <i class="ph ph-eye"></i> Preview
-        </button>
-        <div class="h-6 w-px bg-white/10 mx-2"></div>
+<EditorLayout title={isEditing ? `EDITING: ${form.label}` : 'NEW_PORTAL_LINK'}>
+    {#snippet toolbar()}
         <button
+            type="button"
             onclick={() => showSettings = !showSettings}
             class="editor-toolbar-button"
             class:active={showSettings}
@@ -145,40 +128,36 @@
             <i class="ph ph-gear"></i> Settings
         </button>
         <div class="h-6 w-px bg-white/10 mx-2"></div>
-        <button onclick={save} class="px-4 py-2 bg-blue-600 text-white rounded font-medium hover:bg-blue-700 transition-colors">
+        <button type="button" onclick={save} class="px-4 py-2 bg-indigo-600 text-white rounded font-medium hover:bg-indigo-700 transition-colors">
             <i class="ph ph-check-circle"></i> Save
         </button>
         {#if isEditing}
-            <button onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
+            <button type="button" onclick={remove} class="px-4 py-2 border border-red-500/30 text-red-400 rounded hover:bg-red-500/10 transition-colors">
                 <i class="ph ph-trash"></i> Delete
             </button>
         {/if}
-    </svelte:fragment>
+    {/snippet}
 
     <div class="flex h-full gap-4 p-4 overflow-hidden">
         <div class="flex-1 bg-black/20 border border-white/10 rounded p-6 overflow-y-auto">
             <div class="space-y-4 max-w-xl">
                 <div>
                     <label class="editor-label" for="label-{instanceId}">Label</label>
-                    <input id="label-{instanceId}" type="text" bind:value={form.label} class="editor-input" />
+                    <input id="label-{instanceId}" type="text" bind:value={form.label} class="editor-input" placeholder="Display name" />
                 </div>
                 <div>
                     <label class="editor-label" for="url-{instanceId}">URL</label>
-                    <input id="url-{instanceId}" type="text" bind:value={form.url} class="editor-input" />
+                    <input id="url-{instanceId}" type="text" bind:value={form.url} class="editor-input" placeholder="https://..." />
                 </div>
                 <div>
                     <label class="editor-label" for="desc-{instanceId}">Description</label>
-                    <textarea id="desc-{instanceId}" bind:value={form.description} class="editor-textarea" rows="4"></textarea>
+                    <textarea id="desc-{instanceId}" bind:value={form.description} rows="4" class="editor-textarea" placeholder="Short description..."></textarea>
                 </div>
             </div>
         </div>
 
         {#if showSettings}
-            <ContentSettings
-                bind:data={form}
-                sections={settingsSections}
-                onChange={() => {}}
-            />
+            <ContentSettings bind:data={form} sections={settingsSections} onChange={() => {}} />
         {/if}
     </div>
 </EditorLayout>

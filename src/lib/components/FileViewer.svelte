@@ -1,62 +1,105 @@
 <script>
-    import LukiRenderer from '$lib/components/renderer/LukiRenderer.svelte';
-    import { parser } from '$lib/utils/luki-parser.js';
+    import { portalStore } from '$lib/stores/portal.svelte.js';
+    import AvatarFrame from './AvatarFrame.svelte';
+    import { mount } from 'svelte';
 
-    /** @type {{ item?: any }} */
-    let { item = undefined } = $props();
+    /** @type {{ item?: any, embed?: boolean }} */
+    let { item = undefined, embed = false } = $props();
 
-    // Prioritize 'content' for rich text, fallback to 'description'
-    let ast = $derived(item ? parser.parse(item.content || item.description || '') : []);
+    /** @type {HTMLElement | undefined} */
+    let contentEl = $state();
+
+    // Date formatting logic
+    let formattedDate = $derived.by(() => {
+        if (!item || !item.created_at) return '';
+        try {
+            return new Intl.DateTimeFormat(navigator.language, {
+                dateStyle: 'long'
+            }).format(new Date(item.created_at));
+        } catch (e) {
+            return item.date || '';
+        }
+    });
+
+    let withinHtml = $derived.by(() => {
+        const raw = item?.content || item?.description || '';
+        const match = raw.match(/<within>([\s\S]*?)<\/within>/);
+        return match ? match[1] : raw;
+    });
+
+    let outsideHtml = $derived.by(() => {
+        const raw = item?.content || '';
+        const match = raw.match(/<outside>([\s\S]*?)<\/outside>/);
+        return match ? match[1] : '';
+    });
+
+    $effect(() => {
+        if (item) {
+            portalStore.register(`item-${item.id}`, outsideHtml);
+            setTimeout(() => {
+                if (contentEl) processContent(contentEl);
+            }, 50);
+        }
+        return () => {
+            if (item) portalStore.unregister(`item-${item.id}`);
+        };
+    });
+
+    /** @param {HTMLElement} container */
+    function processContent(container) {
+        // 1. Handle scripts
+        const scripts = container.querySelectorAll('script');
+        scripts.forEach((/** @type {HTMLScriptElement} */ oldScript) => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            if (oldScript.parentNode) oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+
+        // 2. Handle styles
+        const styles = container.querySelectorAll('style');
+        styles.forEach(style => {
+            document.head.appendChild(style.cloneNode(true));
+        });
+
+        // 3. Mount Svelte Components
+        const avatarPlaceholders = container.querySelectorAll('luki-avatar-frame');
+        avatarPlaceholders.forEach((/** @type {Element} */ el) => {
+            /** @type {Record<string, any>} */
+            const props = {};
+            Array.from(el.attributes).forEach(attr => { props[attr.name] = attr.value; });
+            mount(AvatarFrame, { target: el, props });
+        });
+    }
 </script>
 
-<div class="file-viewer h-full w-full bg-transparent text-white flex flex-col p-6 overflow-hidden">
+<div id={item ? `window-${item.id}` : ''} class="file-viewer h-full w-full bg-transparent text-white flex flex-col overflow-hidden" class:p-6={!embed}>
     {#if !item}
         <div class="flex items-center justify-center h-full text-gray-500 font-mono animate-pulse">
-            <p>// NULL_POINTER: NO_FILE_SELECTED</p>
+            <p>// NULL_POINTER: NO_DATA</p>
         </div>
     {:else}
-        <div class="mb-6 border-b border-white/10 pb-4 shrink-0">
-             <div class="flex items-center gap-3 mb-2">
-                 <span class="px-2 py-0.5 border border-white/20 text-[10px] text-gray-400 font-mono tracking-widest uppercase">{item.type}</span>
-                 <span class="text-xs text-gray-500 font-mono tracking-wider">DATE: {item.date}</span>
+        <div class="mb-8 shrink-0">
+             <h1 class="text-4xl md:text-6xl font-bold mb-2 leading-tight tracking-tight text-white selectable">{item.title}</h1>
+             <div class="text-sm text-gray-500 font-mono tracking-wider opacity-60">
+                 {formattedDate}
              </div>
-             <h1 class="text-3xl md:text-5xl font-bold mb-2 leading-tight tracking-tight text-white selectable">{item.title}</h1>
         </div>
 
         <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-2 selectable">
-             {#if ['ART', 'SKETCH'].includes(item.type)}
-                 <div class="w-full flex flex-col items-center gap-6">
-                     <div class="w-full flex items-center justify-center bg-black/40 border border-white/5 p-2 md:p-8 relative group">
-                         <!-- Subtle grid background for art viewer -->
-                         <div class="absolute inset-0 opacity-10 pointer-events-none"
-                              style="background-image: linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px); background-size: 20px 20px;">
-                         </div>
-
-                         {#if item.image_url && item.image_url.startsWith('http')}
-                             <img src={item.image_url} alt={item.title} class="max-w-full max-h-[60vh] object-contain shadow-2xl relative z-10" />
-                         {:else if item.image_url}
-                             <div class="text-9xl opacity-50 relative z-10">{item.image_url}</div>
-                         {:else}
-                             <div class="p-20 text-white/20 font-mono uppercase tracking-widest border border-dashed border-white/10">No_Media_Payload</div>
-                         {/if}
-                     </div>
-                     {#if item.description}
-                         <div class="text-sm md:text-base text-gray-400 max-w-3xl leading-relaxed text-center font-serif italic border-l-2 border-white/20 pl-4 selectable">
-                             {item.description}
-                         </div>
-                     {/if}
-                 </div>
-             {:else}
-                 <!-- Text Content (Essay/Post) -->
-                 <div class="prose prose-invert prose-sm md:prose-lg max-w-3xl mx-auto py-4 font-serif selectable">
-                     <LukiRenderer {ast} />
-
-                     <div class="mt-12 pt-8 border-t border-white/10 flex justify-between items-center text-xs text-gray-600 font-mono">
-                         <span>END_OF_FILE</span>
-                         <span>NODE: LUKI_V4_SECURE</span>
-                     </div>
-                 </div>
-             {/if}
+             <div bind:this={contentEl} class="luki-free-content min-h-full">
+                 {@html withinHtml}
+             </div>
         </div>
     {/if}
 </div>
+
+<style>
+    .luki-free-content :global(h1) { font-size: 3rem; font-weight: 800; margin-top: 2rem; margin-bottom: 1.5rem; }
+    .luki-free-content :global(h2) { font-size: 2rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 1rem; }
+    .luki-free-content :global(p) { margin-bottom: 1.25rem; line-height: 1.8; color: rgba(255, 255, 255, 0.8); }
+    .luki-free-content :global(style) { display: none; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+</style>
