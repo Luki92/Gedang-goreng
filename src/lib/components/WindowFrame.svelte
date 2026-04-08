@@ -23,8 +23,8 @@
             return `
                 left: ${win.x}px;
                 top: ${win.y}px;
-                width: {win.width}px;
-                height: {win.height}px;
+                width: ${win.width}px;
+                height: ${win.height}px;
                 z-index: ${win.zIndex};
                 opacity: 1 !important;
                 transform: none !important;
