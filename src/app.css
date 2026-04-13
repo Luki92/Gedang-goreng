@@ -119,9 +119,9 @@ body {
 
 /* --- 4. HUD CORNERS --- */
 @keyframes btn-breathe {
-    0% { transform: scale(1); filter: brightness(1); }
-    50% { transform: scale(1.1); filter: brightness(1.5); }
-    100% { transform: scale(1); filter: brightness(1); }
+    0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 0 transparent); }
+    50% { transform: scale(1.05); filter: brightness(1.5) drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)); }
+    100% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 0 transparent); }
 }
 
 .hud-corner {
@@ -146,7 +146,7 @@ body {
 }
 
 .hud-btn i { font-size: 1.2rem; margin-bottom: 4px; transition: transform 0.3s; }
-.hud-btn:hover, .hud-corner.cycle-highlight .hud-btn { color: #fff; animation: btn-breathe 0.6s ease-in-out; }
+.hud-btn:hover, .hud-corner.cycle-highlight .hud-btn { color: #fff; animation: btn-breathe 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
 .hud-btn:hover i { transform: scale(1.2); }
 
 .hud-btn span.label { font-weight: bold; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
@@ -165,19 +165,17 @@ body {
     z-index: 1;
 }
 
-.hud-corner:has(.hud-btn:hover)::before,
-.hud-corner.cycle-highlight::before {
+.hud-corner:has(.hud-btn:hover)::before {
     border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
 /* Position-specific 180deg transforms with outward translation */
-.tl:has(.hud-btn:hover)::before, .tl.cycle-highlight::before { transform: translate(-10px, -10px) rotate(180deg); }
-.tr:has(.hud-btn:hover)::before, .tr.cycle-highlight::before { transform: translate(10px, -10px) rotate(180deg); }
-.bl:has(.hud-btn:hover)::before, .bl.cycle-highlight::before { transform: translate(-10px, 10px) rotate(180deg); }
-.br:has(.hud-btn:hover)::before, .br.cycle-highlight::before { transform: translate(10px, 10px) rotate(180deg); }
+.tl:has(.hud-btn:hover)::before { transform: translate(120px, 60px) rotate(180deg); }
+.tr:has(.hud-btn:hover)::before { transform: translate(-120px, 60px) rotate(180deg); }
+.bl:has(.hud-btn:hover)::before { transform: translate(120px, -60px) rotate(180deg); }
+.br:has(.hud-btn:hover)::before { transform: translate(-120px, -60px) rotate(180deg); }
 
-.hud-corner:has(.hud-btn:hover)::after,
-.hud-corner.cycle-highlight::after { width: 25vw; opacity: 0.4; }
+.hud-corner:has(.hud-btn:hover)::after { width: 25vw; opacity: 0.4; }
 
 /* Positions */
 .tl { top: 10px; left: 10px; }

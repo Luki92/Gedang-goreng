@@ -12,16 +12,16 @@
     $effect(() => {
         const checkCycle = () => {
             if (windowManager.windows.length === 0) {
-                // Cycle length: 6000ms total
-                // 0ms -> 300ms: tl & tr
-                // 300ms -> 600ms: bl & br
-                // 600ms -> 6000ms: sleep
+                // Dreamy sequence: 8s cycle
+                // Top pulse: 1.5s
+                // Bottom pulse: 1.5s
+                // Sleep: 5s
                 const now = Date.now();
-                const cyclePos = now % 6000;
+                const cyclePos = now % 8000;
 
-                if (cyclePos < 300) {
+                if (cyclePos < 1500) {
                     isHighlighted = (position === 'tl' || position === 'tr');
-                } else if (cyclePos >= 300 && cyclePos < 600) {
+                } else if (cyclePos >= 1500 && cyclePos < 3000) {
                     isHighlighted = (position === 'bl' || position === 'br');
                 } else {
                     isHighlighted = false;
