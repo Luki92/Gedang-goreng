@@ -158,12 +158,8 @@
              actors.forEach(obj => obj.update(mouseX, mouseY));
              currentParallaxX += (targetParallaxX - currentParallaxX) * 0.1;
              currentParallaxY += (targetParallaxY - currentParallaxY) * 0.1;
-             if (welcomeContainer) {
-                 welcomeContainer.style.transform = `translateY(50%) translate(${currentParallaxX}px, ${currentParallaxY}px)`;
-             }
-             if (titleEl && !titleEl.classList.contains('shrunk')) {
-                 titleEl.style.transform = `translateY(50%) translate(${currentParallaxX}px, ${currentParallaxY}px)`;
-             }
+             document.documentElement.style.setProperty('--px', `${currentParallaxX}px`);
+             document.documentElement.style.setProperty('--py', `${currentParallaxY}px`);
              requestAnimationFrame(loop);
         };
         const animFrame = requestAnimationFrame(loop);

@@ -401,29 +401,5 @@
     .edge-glow.right { right: 0; background: linear-gradient(to left, rgba(39, 201, 63, 0.1), transparent); }
     .edge-glow.active { opacity: 1; }
 
-    /* Base custom scrollbar */
-    .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 
-    /* Terminal */
-    .custom-scrollbar.terminal::-webkit-scrollbar-thumb { background: rgba(39, 201, 63, 0.3); border-radius: 0; }
-    .custom-scrollbar.terminal::-webkit-scrollbar-thumb:hover { background: rgba(39, 201, 63, 0.6); }
-
-    /* Identity / Profile (c-tl) */
-    .custom-scrollbar.c-tl::-webkit-scrollbar-thumb { background: rgba(85, 85, 255, 0.3); border-radius: 8px; }
-    .custom-scrollbar.c-tl::-webkit-scrollbar-thumb:hover { background: rgba(85, 85, 255, 0.6); }
-
-    /* Vault (c-tr) */
-    .custom-scrollbar.c-tr::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 2px; }
-    .custom-scrollbar.c-tr::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
-
-    /* Portal (c-br) */
-    .custom-scrollbar.c-br::-webkit-scrollbar-thumb { background: rgba(167, 139, 250, 0.3); border-radius: 4px; }
-    .custom-scrollbar.c-br::-webkit-scrollbar-thumb:hover { background: rgba(167, 139, 250, 0.6); }
-
-    /* Playlist (c-bl) */
-    .custom-scrollbar.c-bl::-webkit-scrollbar-thumb { background: rgba(255, 189, 46, 0.3); border-radius: 8px; }
-    .custom-scrollbar.c-bl::-webkit-scrollbar-thumb:hover { background: rgba(255, 189, 46, 0.6); }
 </style>
