@@ -11,21 +11,21 @@
 
     $effect(() => {
         const checkCycle = () => {
-            // Only cycle if no windows are open
             if (windowManager.windows.length === 0) {
-                // Determine order: tl -> tr -> br -> bl
-                const order = ['tl', 'tr', 'br', 'bl'];
+                // Cycle length: 6000ms total
+                // 0ms -> 300ms: tl & tr
+                // 300ms -> 600ms: bl & br
+                // 600ms -> 6000ms: sleep
                 const now = Date.now();
-                // 10s total cycle length: each gets 2s, 2s pause
-                const cyclePos = (now % 10000) / 10000;
+                const cyclePos = now % 6000;
 
-                let activeIndex = -1;
-                if (cyclePos < 0.2) activeIndex = 0;
-                else if (cyclePos < 0.4) activeIndex = 1;
-                else if (cyclePos < 0.6) activeIndex = 2;
-                else if (cyclePos < 0.8) activeIndex = 3;
-
-                isHighlighted = order[activeIndex] === position;
+                if (cyclePos < 300) {
+                    isHighlighted = (position === 'tl' || position === 'tr');
+                } else if (cyclePos >= 300 && cyclePos < 600) {
+                    isHighlighted = (position === 'bl' || position === 'br');
+                } else {
+                    isHighlighted = false;
+                }
             } else {
                 isHighlighted = false;
             }
