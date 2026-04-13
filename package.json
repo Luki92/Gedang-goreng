@@ -30,6 +30,8 @@
 	"dependencies": {
 		"@phosphor-icons/web": "^2.1.2",
 		"@supabase/supabase-js": "^2.90.1",
+		"@threlte/core": "^8.5.9",
+		"@threlte/extras": "^9.14.5",
 		"@tiptap/core": "^3.20.0",
 		"@tiptap/extension-code-block-lowlight": "^3.20.0",
 		"@tiptap/extension-image": "^3.20.0",
@@ -39,6 +41,7 @@
 		"@tiptap/starter-kit": "^3.20.0",
 		"highlight.js": "^11.11.1",
 		"lodash": "^4.17.23",
-		"lowlight": "^3.3.0"
+		"lowlight": "^3.3.0",
+		"three": "^0.183.2"
 	}
 }
