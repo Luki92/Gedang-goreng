@@ -156,10 +156,24 @@
         actors = allItems.map(item => new Actor(item));
         const loop = () => {
              actors.forEach(obj => obj.update(mouseX, mouseY));
+             currentParallaxX += (targetParallaxX - currentParallaxX) * 0.1;
+             currentParallaxY += (targetParallaxY - currentParallaxY) * 0.1;
+             if (welcomeContainer) {
+                 welcomeContainer.style.transform = `translateY(50%) translate(${currentParallaxX}px, ${currentParallaxY}px)`;
+             }
+             if (titleEl && !titleEl.classList.contains('shrunk')) {
+                 titleEl.style.transform = `translateY(50%) translate(${currentParallaxX}px, ${currentParallaxY}px)`;
+             }
              requestAnimationFrame(loop);
         };
         const animFrame = requestAnimationFrame(loop);
-        const mm = (e) => { mouseX = e.clientX; mouseY = e.clientY; };
+        let targetParallaxX = 0; let targetParallaxY = 0; let currentParallaxX = 0; let currentParallaxY = 0;
+        const mm = (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            targetParallaxX = (mouseX - window.innerWidth / 2) * 0.05;
+            targetParallaxY = (mouseY - window.innerHeight / 2) * 0.05;
+        };
         window.addEventListener('mousemove', mm);
         runAnimationLoop();
         detectUniversal();

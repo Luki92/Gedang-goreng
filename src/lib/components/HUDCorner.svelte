@@ -6,6 +6,35 @@
 
     let isActive = $derived(windowManager.windows.some(w => w.id === id));
 
+    // Cycle highlight logic
+    let isHighlighted = $state(false);
+
+    $effect(() => {
+        const checkCycle = () => {
+            // Only cycle if no windows are open
+            if (windowManager.windows.length === 0) {
+                // Determine order: tl -> tr -> br -> bl
+                const order = ['tl', 'tr', 'br', 'bl'];
+                const now = Date.now();
+                // 10s total cycle length: each gets 2s, 2s pause
+                const cyclePos = (now % 10000) / 10000;
+
+                let activeIndex = -1;
+                if (cyclePos < 0.2) activeIndex = 0;
+                else if (cyclePos < 0.4) activeIndex = 1;
+                else if (cyclePos < 0.6) activeIndex = 2;
+                else if (cyclePos < 0.8) activeIndex = 3;
+
+                isHighlighted = order[activeIndex] === position;
+            } else {
+                isHighlighted = false;
+            }
+            requestAnimationFrame(checkCycle);
+        };
+        const frame = requestAnimationFrame(checkCycle);
+        return () => cancelAnimationFrame(frame);
+    });
+
     function handleClick() {
         if (!containerEl) return;
         const rect = containerEl.getBoundingClientRect();
@@ -21,7 +50,7 @@
     }
 </script>
 
-<div id={id} class="hud-corner {position}" class:active={isActive} bind:this={containerEl}>
+<div id={id} class="hud-corner {position}" class:active={isActive} class:cycle-highlight={isHighlighted} bind:this={containerEl}>
     <button class="hud-btn" onclick={handleClick}>
         <span class="code">{code}</span>
         {@render buttonContent()}

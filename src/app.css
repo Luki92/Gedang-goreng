@@ -118,7 +118,14 @@ body {
 }
 
 /* --- 4. HUD CORNERS --- */
+@keyframes hud-breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
 .hud-corner {
+    animation: hud-breathe 8s ease-in-out infinite;
     position: fixed; z-index: 50;
     width: auto; height: auto;
     background: transparent;
@@ -140,7 +147,7 @@ body {
 }
 
 .hud-btn i { font-size: 1.2rem; margin-bottom: 4px; transition: transform 0.3s; }
-.hud-btn:hover { color: #fff; }
+.hud-btn:hover, .hud-corner.cycle-highlight .hud-btn { color: #fff; }
 .hud-btn:hover i { transform: scale(1.2); }
 
 .hud-btn span.label { font-weight: bold; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
@@ -159,45 +166,34 @@ body {
     z-index: 1;
 }
 
-.hud-corner:has(.hud-btn:hover)::before { border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
-.hud-corner:has(.hud-btn:hover)::after { width: 25vw; opacity: 0.4; }
+.hud-corner:has(.hud-btn:hover)::before,
+.hud-corner.cycle-highlight::before {
+    transform: rotate(180deg);  border-color: rgba(255, 255, 255, 0.8); width: 40px; height: 40px; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
+.hud-corner:has(.hud-btn:hover)::after,
+.hud-corner.cycle-highlight::after { width: 25vw; opacity: 0.4; }
 
 /* Positions */
 .tl { top: 10px; left: 10px; }
-.tl::before { top: 0; left: 0; border-right: none; border-bottom: none; }
-.tl::after { top: 0; left: 0; transform: rotate(45deg); transform-origin: 0 0; }
+.tl::before { top: 0; left: 0; border-right: none; border-bottom: none; transform-origin: top left; }
+.tl::after { top: 50%; left: 30px; transform: translateY(-50%); transform-origin: left center; }
 
 .tr { top: 10px; right: 10px; align-items: flex-end; } .tr .hud-btn { align-items: flex-end; text-align: right; }
-.tr::before { top: 0; right: 0; border-left: none; border-bottom: none; }
-.tr::after { top: 0; right: 0; transform: rotate(-45deg); transform-origin: 100% 0; background: linear-gradient(-90deg, var(--accent-color), transparent); }
+.tr::before { top: 0; right: 0; border-left: none; border-bottom: none; transform-origin: top right; }
+.tr::after { top: 50%; right: 30px; transform: translateY(-50%); transform-origin: right center; background: linear-gradient(-90deg, var(--accent-color), transparent); }
 
 .bl { bottom: 10px; left: 10px; justify-content: flex-end; }
-.bl::before { bottom: 0; left: 0; border-right: none; border-top: none; }
-.bl::after { bottom: 0; left: 0; transform: rotate(-45deg); transform-origin: 0 100%; }
+.bl::before { bottom: 0; left: 0; border-right: none; border-top: none; transform-origin: bottom left; }
+.bl::after { top: 50%; left: 30px; transform: translateY(-50%); transform-origin: left center; }
 
 .br { bottom: 10px; right: 10px; align-items: flex-end; justify-content: flex-end; } .br .hud-btn { align-items: flex-end; text-align: right; }
-.br::before { bottom: 0; right: 0; border-left: none; border-top: none; }
-.br::after { bottom: 0; right: 0; transform: rotate(45deg); transform-origin: 100% 100%; background: linear-gradient(-90deg, var(--accent-color), transparent); }
+.br::before { bottom: 0; right: 0; border-left: none; border-top: none; transform-origin: bottom right; }
+.br::after { top: 50%; right: 30px; transform: translateY(-50%); transform-origin: right center; background: linear-gradient(-90deg, var(--accent-color), transparent); }
 
 @media (max-width: 768px) {
     .hud-corner { display: none; }
 }
 
-/* Custom Scrollbar */
-*::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-*::-webkit-scrollbar-track {
-    background: #000;
-}
-*::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
-}
-*::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-color);
-}
+/* Unique Scrollbars via WindowFrame component */
 
 /* Editor Styles */
 .editor-toolbar-button {

@@ -246,7 +246,7 @@
 
     <!-- Content -->
     <div class="content-wrapper">
-        <div class="window-content custom-scrollbar">
+        <div class="window-content custom-scrollbar {win.id}">
             {#if win.component}
                 {@const Component = win.component}
                 <Component win={win} {...(win.props || {})} />
@@ -270,9 +270,9 @@
 <style>
     .window-frame {
         position: absolute;
-        background: rgba(10, 10, 15, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(16px);
+        background: rgba(10, 10, 15, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(24px) saturate(150%);
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
         display: flex;
         flex-direction: column;
@@ -289,6 +289,12 @@
     }
 
     .window-frame.maximized {
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
         border-radius: 0 !important;
         border: none;
     }
@@ -395,8 +401,29 @@
     .edge-glow.right { right: 0; background: linear-gradient(to left, rgba(39, 201, 63, 0.1), transparent); }
     .edge-glow.active { opacity: 1; }
 
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    /* Base custom scrollbar */
+    .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* Terminal */
+    .custom-scrollbar.terminal::-webkit-scrollbar-thumb { background: rgba(39, 201, 63, 0.3); border-radius: 0; }
+    .custom-scrollbar.terminal::-webkit-scrollbar-thumb:hover { background: rgba(39, 201, 63, 0.6); }
+
+    /* Identity / Profile (c-tl) */
+    .custom-scrollbar.c-tl::-webkit-scrollbar-thumb { background: rgba(85, 85, 255, 0.3); border-radius: 8px; }
+    .custom-scrollbar.c-tl::-webkit-scrollbar-thumb:hover { background: rgba(85, 85, 255, 0.6); }
+
+    /* Vault (c-tr) */
+    .custom-scrollbar.c-tr::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 2px; }
+    .custom-scrollbar.c-tr::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+
+    /* Portal (c-br) */
+    .custom-scrollbar.c-br::-webkit-scrollbar-thumb { background: rgba(167, 139, 250, 0.3); border-radius: 4px; }
+    .custom-scrollbar.c-br::-webkit-scrollbar-thumb:hover { background: rgba(167, 139, 250, 0.6); }
+
+    /* Playlist (c-bl) */
+    .custom-scrollbar.c-bl::-webkit-scrollbar-thumb { background: rgba(255, 189, 46, 0.3); border-radius: 8px; }
+    .custom-scrollbar.c-bl::-webkit-scrollbar-thumb:hover { background: rgba(255, 189, 46, 0.6); }
 </style>
