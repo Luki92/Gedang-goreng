@@ -79,13 +79,15 @@
 
         <div class="mb-2">
             <label for="callsign-input" class="block text-[10px] text-gray-500 mb-1">IDENTITY_SIGNATURE</label>
+            <input
                 type="text"
                 bind:value={name}
                 disabled={hasSigned}
-                id="callsign-input" placeholder="CALLSIGN"
+                id="callsign-input"
+                placeholder="CALLSIGN"
                 maxlength="20"
                 class="w-full bg-transparent border border-white/10 rounded-lg text-green-400 p-2 font-mono focus:border-green-500 outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+            />
         </div>
         <div class="mb-2">
             <textarea

@@ -336,12 +336,36 @@
         border-radius: 50%;
         border: none;
         cursor: pointer;
-        transition: filter 0.2s;
+        transition: filter 0.2s, transform 0.15s;
         padding: 0;
+        position: relative;
+    }
+
+    /* Invisible hit zone — 32px on desktop, 44px on touch */
+    .control-dot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    @media (pointer: coarse) {
+        .control-dot::before {
+            width: 44px;
+            height: 44px;
+        }
     }
 
     .control-dot:hover {
         filter: brightness(1.2);
+    }
+
+    .control-dot:active {
+        transform: scale(0.85);
     }
 
     .control-dot.close { background-color: #ff5f56; }

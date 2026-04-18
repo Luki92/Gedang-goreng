@@ -44,11 +44,13 @@
     let mouseX = 0, mouseY = 0;
 
     class Actor {
-        constructor(data) {
+        constructor(data, index) {
             this.element = document.createElement('div');
             this.element.innerHTML = data.char;
             this.element.className = 'debris-item';
-            this.element.style.fontSize = `${2 * data.scale}rem`;
+            this.depth = 0.3 + Math.random() * 0.7; // 0.3 = far, 1.0 = near
+            this.element.style.fontSize = `${2 * data.scale * this.depth}rem`;
+            this.element.style.opacity = (0.3 + this.depth * 0.5).toString();
             this.element.style.color = data.color;
             this.x = Math.random() * window.innerWidth;
             this.y = Math.random() * window.innerHeight;
@@ -59,14 +61,17 @@
             if (debrisContainer) debrisContainer.appendChild(this.element);
         }
         update(mX, mY) {
-            this.x += this.vx; this.y += this.vy; this.rotation += this.rotSpeed;
+            this.x += this.vx * this.depth;
+            this.y += this.vy * this.depth;
+            this.rotation += this.rotSpeed;
             if (this.x > window.innerWidth + 50) this.x = -50;
             if (this.x < -50) this.x = window.innerWidth + 50;
             if (this.y > window.innerHeight + 50) this.y = -50;
             if (this.y < -50) this.y = window.innerHeight + 50;
             const dx = (mX - window.innerWidth/2) / window.innerWidth;
             const dy = (mY - window.innerHeight/2) / window.innerHeight;
-            this.element.style.transform = `translate(${this.x + dx * -30}px, ${this.y + dy * -30}px) rotate(${this.rotation}deg)`;
+            const parallax = this.depth * -50; // depth-scaled parallax
+            this.element.style.transform = `translate(${this.x + dx * parallax}px, ${this.y + dy * parallax}px) rotate(${this.rotation}deg)`;
         }
     }
 
@@ -153,7 +158,7 @@
 
     onMount(() => {
         window.addEventListener('keydown', handleGlobalKeydown);
-        actors = allItems.map(item => new Actor(item));
+        actors = allItems.map((item, i) => new Actor(item, i));
         const loop = () => {
              actors.forEach(obj => obj.update(mouseX, mouseY));
              currentParallaxX += (targetParallaxX - currentParallaxX) * 0.1;
@@ -262,23 +267,23 @@
 </main>
 <LukiPersona />
 <button id="mobile-reactor" onclick={toggleMobileMenu} aria-label="Toggle Mobile Menu" style:transform={mobileMenuActive ? 'translateX(-50%) scale(0.8)' : 'translateX(-50%) scale(1)'}></button>
-<HUDCorner id="c-tl" position="tl" code="> 001_SYS" headerTitle="USER_PROFILE_LUKI">
+<HUDCorner id="c-tl" position="tl" code="who I am" headerTitle="ABOUT_ME">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph-fill ph-user-focus"></i> IDENTITY</span>
+        <span class="label"><i class="ph-fill ph-user-focus"></i> ABOUT ME</span>
     {/snippet}
 </HUDCorner>
-<HUDCorner id="c-tr" position="tr" code="> 002_VAULT" headerTitle="ARCHIVE_DATABASE">
+<HUDCorner id="c-tr" position="tr" code="what I've made" headerTitle="PORTFOLIO">
     {#snippet buttonContent()}
-        <span class="label">WORKS <i class="ph-fill ph-archive-tray"></i></span>
+        <span class="label">PORTFOLIO <i class="ph-fill ph-archive-tray"></i></span>
     {/snippet}
 </HUDCorner>
-<HUDCorner id="c-bl" position="bl" code="> 003_AUDIO" headerTitle="SONIC_EMITTER">
+<HUDCorner id="c-bl" position="bl" code="what I hear" headerTitle="LISTENING">
     {#snippet buttonContent()}
-        <span class="label"><i class="ph-fill ph-music-notes"></i> PLAYLIST</span>
+        <span class="label"><i class="ph-fill ph-music-notes"></i> LISTENING</span>
     {/snippet}
 </HUDCorner>
-<HUDCorner id="c-br" position="br" code="> 004_LINK" headerTitle="COMM_CHANNELS">
+<HUDCorner id="c-br" position="br" code="where to find me" headerTitle="CONNECT">
     {#snippet buttonContent()}
-        <span class="label">PORTAL <i class="ph-fill ph-globe-hemisphere-east"></i></span>
+        <span class="label">CONNECT <i class="ph-fill ph-globe-hemisphere-east"></i></span>
     {/snippet}
 </HUDCorner>
