@@ -228,6 +228,7 @@
         attribute float aOrbitAngle;
         attribute float aOrbitSpeed;
         attribute float aShape;
+        attribute vec3 color;
 
         varying vec3 vColor;
         varying float vShape;
